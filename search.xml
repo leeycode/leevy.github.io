@@ -54,6 +54,58 @@
     
     
     <entry>
+      <title>当CORS遇到SameSite</title>
+      <link href="2020/09/11/dang-cors-yu-dao-samesite-md/"/>
+      <url>2020/09/11/dang-cors-yu-dao-samesite-md/</url>
+      
+        <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><blockquote><p>A cookie associated with a cross-site resource at <a href="http://a.com/">http://a.com/</a> was set without the ‘SameSite’ attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with ‘SameSite=None’ and ‘Secure’. You can review cookies in developer tools under Application&gt;Storage&gt;Cookies and see more details at <a href="https://www.chromestatus.com/feature/5088147346030592">https://www.chromestatus.com/feature/5088147346030592</a> and <a href="https://www.chromestatus.com/feature/5633521622188032">https://www.chromestatus.com/feature/5633521622188032</a>.</p></blockquote><p>于是发现是 Chrome 升级 80 导致未设置 SameSite 的 Cookie 默认值是Lax。</p><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="1-紧急处理"><a href="#1-紧急处理" class="headerlink" title="1.紧急处理"></a>1.紧急处理</h2><p>其实是在服务方解决问题之前让用户先稍微兼容一下。方案很简单：</p><p>换个浏览器<br>or</p><p>打开 chrome://flags/#same-site-by-default-cookies，关掉 SameSite by default cookies 然后重启浏览器</p><h2 id="2-方法一：跨域-Set-Cookie"><a href="#2-方法一：跨域-Set-Cookie" class="headerlink" title="2. 方法一：跨域 + Set-Cookie"></a>2. 方法一：跨域 + Set-Cookie</h2><p>首先就是报错信息里提到的，让服务端同学在 Set-Cookie 的时候加上 SameSite=None; Secure。但是我们的后台系统都是对内使用的，很多域名都没有申请证书。而 “Secure” 属性却表示 Cookie 只能随 HTTPS 请求发送。<br>这就很尴尬。<br>要不申请证书，要不换域名。<br>但是长远来看，https是大趋势，趁着这个机会升级成 HTTPS 也是可取的。<br>然而有些版本的浏览器并不识别 SameSite=None，需要特殊处理。</p><h2 id="3-方法二：改成同域请求"><a href="#3-方法二：改成同域请求" class="headerlink" title="3. 方法二：改成同域请求"></a>3. 方法二：改成同域请求</h2><p>既然 SameSite=Lax 限制的是跨域 Cookie 携带，那么改成同域自然没有问题了。<br>但因为现在项目都是前后端分离部署的，所以请运维同学配了一下匹配到 ^/api/ 开头的请求都转发到服务端的地址。前端请求接口时直接用相对路径请求。<br>问题解决</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 踩的坑 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hooks入门教程</title>
+      <link href="2019/09/16/hooks-ru-men-jiao-cheng/"/>
+      <url>2019/09/16/hooks-ru-men-jiao-cheng/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Hooks的含义"><a href="#Hooks的含义" class="headerlink" title="Hooks的含义:"></a>Hooks的含义:</h1><p>React Hooks 的意思是，组件尽量写成<strong>纯函数</strong>，如果需要外部功能和副作用，就用钩子把外部代码”钩”进来。 React Hooks 就是那些钩子。</p><p>React默认提供了一些常用的钩子函数，你也可以自己定义钩子函数。</p><p>React 团队希望，组件不要变成复杂的容器，最好只是数据流的管道。开发者根据需要，组合管道即可。 <strong>组件的最佳写法应该是函数</strong>，而不是类。</p><p>React 约定，钩子一律使用<strong>use</strong>前缀命名，便于识别。</p><h1 id="常见的钩子函数"><a href="#常见的钩子函数" class="headerlink" title="常见的钩子函数"></a>常见的钩子函数</h1><h2 id="1-useState-状态钩子"><a href="#1-useState-状态钩子" class="headerlink" title="1. useState():状态钩子"></a>1. useState():状态钩子</h2><pre><code>useState用于为函数组件引入状态（state）。纯函数不能有状态，所以把状态放在钩子里面useState()这个函数接受状态的初始值，作为参数，返回一个数组，数组第一个成员是一个变量，指向状态的当前值。第二个成员是函数，用来更新状态，约定用set前缀加上状态的变量名。const [buttonText, setButtonText] = useState("Click me, please");</code></pre><h2 id="2-useContext-共享状态钩子"><a href="#2-useContext-共享状态钩子" class="headerlink" title="2. useContext()共享状态钩子"></a>2. useContext()共享状态钩子</h2><pre><code>如果组件之间需要共享状态，可以使用useContext()。&lt;div className="App"&gt;  &lt;Navbar/&gt;  &lt;Messages/&gt;&lt;/div&gt;如果Navbar跟Messages实现通信，第一步在组件外部建立一个context:const AppContext = React.creatContext({})组件封装的代码如下：&lt;AppContext.Provider value={{  username: 'superawesome'}}&gt;  &lt;div className="App"&gt;    &lt;Navbar/&gt;    &lt;Messages/&gt;  &lt;/div&gt;&lt;/AppContext.Provider&gt;在组件中的使用如下：const Navbar = () =&gt; {  const { username } = useContext(AppContext);  return (    &lt;div className="navbar"&gt;      &lt;p&gt;AwesomeSite&lt;/p&gt;      &lt;p&gt;{username}&lt;/p&gt;    &lt;/div&gt;  );}</code></pre><h2 id="3-useReducer-action钩子"><a href="#3-useReducer-action钩子" class="headerlink" title="3. useReducer():action钩子"></a>3. useReducer():action钩子</h2><pre><code>React 本身不提供状态管理功能，通常需要使用外部库。这方面最常用的库是 Redux。Redux 的核心概念是，组件发出 action 与状态管理器通信。状态管理器收到 action 以后，使用 Reducer 函数算出新的状态，Reducer 函数的形式是(state, action) =&gt; newState。useReducers()钩子用来引入 Reducer 功能。const [state, dispatch] = useReducer(reducer, initialState);</code></pre><h2 id="4-useEffect-副作用钩子"><a href="#4-useEffect-副作用钩子" class="headerlink" title="4. useEffect():副作用钩子"></a>4. useEffect():副作用钩子</h2><pre><code>useEffect()用来引入具有副作用的操作，最常见的就是向服务器请求数据。以前，放在componentDidMount里面的代码，现在可以放在useEffect()。useEffect()的用法如下。useEffect(()  =&gt;  {  // Async Action}, [dependencies])useEffect()接受两个参数。第一个参数是函数，异步操作的代码放里面，第二个参数是一个数组，用于给出Effect的依赖，只要这个数组发生变化，useEffect()就会执行。第二个参数可以省略，这时每次组件渲染时，就会执行useEffect()。</code></pre><p>React首次渲染和之后的每次渲染都会调用一遍useEffect函数，而之前我们要用两个生命周期函数分别表示首次渲染(componentDidMonut)和更新导致的重新渲染(componentDidUpdate)。</p><p>useEffect中定义的函数的执行不会阻碍浏览器更新视图，也就是说这些函数时异步执行的，而componentDidMonut和componentDidUpdate中的代码都是同步执行的。个人认为这个有好处也有坏处吧，比如我们要根据页面的大小，然后绘制当前弹出窗口的大小，如果时异步的就不好操作了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 新鲜技能 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+            <tag> hooks </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>简单的在线数据mock</title>
       <link href="2019/08/30/jian-dan-de-zai-xian-shu-ju-mock/"/>
       <url>2019/08/30/jian-dan-de-zai-xian-shu-ju-mock/</url>
@@ -71,6 +123,85 @@
         <tags>
             
             <tag> 项目总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vue组件编码规范</title>
+      <link href="2019/08/13/vue-zu-jian-bian-ma-gui-fan/"/>
+      <url>2019/08/13/vue-zu-jian-bian-ma-gui-fan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><blockquote><p>本规范提供了一种统一的编码规范来编写 Vue.js 代码。这使得代码具有如下的特性：</p></blockquote><ul><li>其它开发者或是团队成员更容易阅读和理解。</li><li>IDEs 更容易理解代码，从而提供高亮、格式化等辅助功能</li><li>更容易使用现有的工具</li><li>更容易实现缓存以及代码包的分拆</li></ul><h1 id="基于模块开发"><a href="#基于模块开发" class="headerlink" title="基于模块开发"></a>基于模块开发</h1><p>始终基于模块的方式来构建你的 app，每一个子模块只做一件事情。</p><p>Vue.js 的设计初衷就是帮助开发者更好的开发界面模块。一个模块是应用程序中独立的一个部分。</p><h2 id="怎么做？"><a href="#怎么做？" class="headerlink" title="怎么做？"></a>怎么做？</h2><blockquote><p>每一个 Vue 组件（等同于模块）首先必须专注于解决一个单一的问题，独立的、可复用的、微小的 和 可测试的。</p></blockquote><p>如果你的组件做了太多的事或是变得臃肿，请将其拆分成更小的组件并保持单一的原则。一般来说，尽量保证每一个文件的代码行数不要超过 100 行。也请保证组件可独立的运行。</p><h1 id="vue-组件命名"><a href="#vue-组件命名" class="headerlink" title="vue 组件命名"></a>vue 组件命名</h1><p>组件的命名需遵从以下原则：</p><ul><li><p><strong>有意义的</strong>: 不过于具体，也不过于抽象</p></li><li><p><strong>简短</strong>: 2 到 3 个单词</p></li><li><p><strong>具有可读性</strong>: 以便于沟通交流<br>同时还需要注意：</p></li><li><p>必须符合<strong>自定义元素规范</strong>: 使用连字符分隔单词，切勿使用保留字。</p></li><li><p>app- 前缀作为命名空间:</p></li></ul><p>如果非常通用的话可使用一个单词来命名，这样可以方便于其它项目里复用。</p><h2 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h2><ul><li>组件是通过组件名来调用的。所以组件名必须简短、富有含义并且具有可读性。</li></ul><h2 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h2><pre><code>!-- 推荐 --&gt;&lt;app-header&gt;&lt;/app-header&gt;&lt;user-list&gt;&lt;/user-list&gt;&lt;range-slider&gt;&lt;/range-slider&gt;&lt;!-- 避免 --&gt;&lt;btn-group&gt;&lt;/btn-group&gt; &lt;!-- 虽然简短但是可读性差. 使用 `button-group` 替代 --&gt;&lt;ui-slider&gt;&lt;/ui-slider&gt; &lt;!-- ui 前缀太过于宽泛，在这里意义不明确 --&gt;&lt;slider&gt;&lt;/slider&gt; &lt;!-- 与自定义元素规范不兼容 --&gt;</code></pre><h1 id="组件表达式简单化"><a href="#组件表达式简单化" class="headerlink" title="组件表达式简单化"></a>组件表达式简单化</h1><p>Vue.js 的表达式是 100% 的 Javascript 表达式。这使得其功能性很强大，但也带来潜在的复杂性。因此，你应该尽量保持表达式的简单化。</p><h2 id="为什么？-1"><a href="#为什么？-1" class="headerlink" title="为什么？"></a>为什么？</h2><ul><li>复杂的行内表达式难以阅读。</li><li>行内表达式是不能够通用的，这可能会导致重复编码的问题。</li><li>IDE 基本上不能识别行内表达式语法，所以使用行内表达式 IDE 不能提供自动补全和语法校验功能。</li></ul><h2 id="怎么做？-1"><a href="#怎么做？-1" class="headerlink" title="怎么做？"></a>怎么做？</h2><p>如果你发现写了太多复杂并难以阅读的行内表达式，那么可以使用 method 或是 computed 属性来替代其功能。</p><pre><code>&lt;!-- 推荐 --&gt;&lt;template&gt;  &lt;h1&gt;    {{ `${year}-${month}` }}  &lt;/h1&gt;&lt;/template&gt;&lt;script type="text/javascript"&gt;  export default {    computed: {      month() {        return this.twoDigits((new Date()).getUTCMonth() + 1);      },      year() {        return (new Date()).getUTCFullYear();      }    },    methods: {      twoDigits(num) {        return ('0' + num).slice(-2);      }    },  };&lt;/script&gt;&lt;!-- 避免 --&gt;&lt;template&gt;  &lt;h1&gt;    {{ `${(new Date()).getUTCFullYear()}-${('0' + ((new Date()).getUTCMonth()+1)).slice(-2)}` }}  &lt;/h1&gt;&lt;/template&gt;</code></pre><h1 id="组件-props-原子化"><a href="#组件-props-原子化" class="headerlink" title="组件 props 原子化"></a>组件 props 原子化</h1><p>虽然 Vue.js 支持传递复杂的 JavaScript 对象通过 props 属性，但是你应该尽可能的使用原始类型的数据。尽量只使用 JavaScript 原始类型（字符串、数字、布尔值）和函数。尽量避免复杂的对象。</p><h2 id="为什么？-2"><a href="#为什么？-2" class="headerlink" title="为什么？"></a>为什么？</h2><ul><li>使得组件 API 清晰直观。</li><li>只使用原始类型和函数作为 props 使得组件的 API 更接近于 HTML(5) 原生元素。</li><li>其它开发者更好的理解每一个 prop 的含义、作用。</li><li>传递过于复杂的对象使得我们不能够清楚的知道哪些属性或方法被自定义组件使用，这使得代码难以重构和维护。</li></ul><h2 id="怎么做？-2"><a href="#怎么做？-2" class="headerlink" title="怎么做？"></a>怎么做？</h2><p>组件的每一个属性单独使用一个 props，并且使用函数或是原始类型的值。</p><pre><code>&lt;!-- 推荐 --&gt;&lt;range-slider  :values="[10, 20]"  :min="0"  :max="100"  :step="5"  @on-slide="updateInputs"  @on-end="updateResults"&gt;&lt;/range-slider&gt;&lt;!-- 避免 --&gt;&lt;range-slider :config="complexConfigObject"&gt;&lt;/range-slider&gt;</code></pre><h1 id="验证组件的-props"><a href="#验证组件的-props" class="headerlink" title="验证组件的 props"></a>验证组件的 props</h1><p>在 Vue.js 中，组件的 props 即 API，一个稳定并可预测的 API 会使得你的组件更容易被其他开发者使用。</p><p>组件 props 通过自定义标签的属性来传递。属性的值可以是 Vue.js 字符串(:attr=”value” 或 v-bind:attr=”value”)或是不传。你需要保证组件的 props 能应对不同的情况。</p><h2 id="为什么？-3"><a href="#为什么？-3" class="headerlink" title="为什么？"></a>为什么？</h2><p>验证组件 props 可以保证你的组件永远是可用的（防御性编程）。即使其他开发者并未按照你预想的方法使用时也不会出错。</p><h2 id="怎么做？-3"><a href="#怎么做？-3" class="headerlink" title="怎么做？"></a>怎么做？</h2><ul><li>提供默认值。</li><li>使用 type 属性校验类型。</li><li>使用 props 之前先检查该 prop 是否存在。</li></ul><pre><code>&lt;template&gt;  &lt;input type="range" v-model="value" :max="max" :min="min"&gt;&lt;/template&gt;&lt;script type="text/javascript"&gt;  export default {    props: {      max: {        type: Number, // 这里添加了数字类型的校验        default() { return 10; },      },      min: {        type: Number,        default() { return 0; },      },      value: {        type: Number,        default() { return 4; },      },    },  };&lt;/script&gt;</code></pre><h1 id="将-this-赋值给-component-变量"><a href="#将-this-赋值给-component-变量" class="headerlink" title="将 this 赋值给 component 变量"></a>将 this 赋值给 component 变量</h1><p>在 Vue.js 组件上下文中，this指向了组件实例。因此当你切换到了不同的上下文时，要确保 this 指向一个可用的 component 变量。</p><p>换句话说，如果你正在使用 ES6 的话，就不要再编写 var self = this; 这样的代码了，您可以安全地使用 Vue 组件。</p><h2 id="为什么？-4"><a href="#为什么？-4" class="headerlink" title="为什么？"></a>为什么？</h2><ul><li>使用 ES6，就不再需要将 this 保存到一个变量中了。</li><li>一般来说，当你使用箭头函数时，会保留 this 的作用域。（译者注：箭头函数没有它自己的 this 值，箭头函数内的 this 值继承自外围作用域。）</li><li>如果你没有使用 ES6，当然也就不会使用 箭头函数 啦，那你必须将 “this” 保存到到某个变量中。这是唯一的例外。</li></ul><h2 id="怎么做？-4"><a href="#怎么做？-4" class="headerlink" title="怎么做？"></a>怎么做？</h2><pre><code>&lt;script type="text/javascript"&gt;export default {  methods: {    hello() {      return 'hello';    },    printHello() {      console.log(this.hello());    },  },};&lt;/script&gt;&lt;!-- 避免 --&gt;&lt;script type="text/javascript"&gt;export default {  methods: {    hello() {      return 'hello';    },    printHello() {      const self = this; // 没有必要      console.log(self.hello());    },  },};&lt;/script&gt;</code></pre><h1 id="组件结构化"><a href="#组件结构化" class="headerlink" title="组件结构化"></a>组件结构化</h1><p>按照一定的结构组织，使得组件便于理解。</p><h2 id="为什么？-5"><a href="#为什么？-5" class="headerlink" title="为什么？"></a>为什么？</h2><ul><li>导出一个清晰、组织有序的组件，使得代码易于阅读和理解。同时也便于标准化。</li><li>按首字母排序 properties、data、computed、watches 和 methods 使得这些对象内的属性便于查找。</li><li>合理组织，使得组件易于阅读。（name; extends; props, data 和 computed; components; watch 和 methods; lifecycle methods 等）。</li><li>使用 name 属性。借助于 vue devtools 可以让你更方便的测试。</li><li>合理的 CSS 结构，如 BEM 或 rscss - 详情？。</li><li>使用单文件 .vue 文件格式来组件代码。</li></ul><h2 id="怎么做？-5"><a href="#怎么做？-5" class="headerlink" title="怎么做？"></a>怎么做？</h2><p>组件结构化</p><pre><code>&lt;template lang="html"&gt;  &lt;div class="Ranger__Wrapper"&gt;    &lt;!-- ... --&gt;  &lt;/div&gt;&lt;/template&gt;&lt;script type="text/javascript"&gt;  export default {    // 不要忘记了 name 属性    name: 'RangeSlider',    // 使用组件 mixins 共享通用功能    mixins: [],    // 组成新的组件    extends: {},    // 组件属性、变量    props: {      bar: {}, // 按字母顺序      foo: {},      fooBar: {},    },    // 变量    data() {},    computed: {},    // 使用其它组件    components: {},    // 方法    watch: {},    methods: {},    // 生命周期函数    beforeCreate() {},    mounted() {},  };&lt;/script&gt;&lt;style scoped&gt;  .Ranger__Wrapper { /* ... */ }&lt;/style&gt;</code></pre><h1 id="避免-this-parent"><a href="#避免-this-parent" class="headerlink" title="避免 this.$parent"></a>避免 this.$parent</h1><p>Vue.js 支持组件嵌套，并且子组件可访问父组件的上下文。访问组件之外的上下文违反了基于模块开发的第一原则。因此你应该尽量避免使用 this.$parent。</p><h2 id="为什么？-6"><a href="#为什么？-6" class="headerlink" title="为什么？"></a>为什么？</h2><ul><li>组件必须相互保持独立，Vue 组件也是。如果组件需要访问其父层的上下文就违反了该原则。</li><li>如果一个组件需要访问其父组件的上下文，那么该组件将不能在其它上下文中复用。</li></ul><h2 id="怎么做？-6"><a href="#怎么做？-6" class="headerlink" title="怎么做？"></a>怎么做？</h2><ul><li>通过 props 将值传递给子组件。</li><li>通过 props 传递回调函数给子组件来达到调用父组件方法的目的。</li><li>通过在子组件触发事件来通知父组件。</li></ul><h1 id="谨慎使用-this-refs"><a href="#谨慎使用-this-refs" class="headerlink" title="谨慎使用 this.$refs"></a>谨慎使用 this.$refs</h1><p>Vue.js 支持通过 ref 属性来访问其它组件和 HTML 元素。并通过 this.$refs 可以得到组件或 HTML 元素的上下文。在大多数情况下，通过 this.$refs来访问其它组件的上下文是可以避免的。在使用的的时候你需要注意避免调用了不恰当的组件 API，所以应该尽量避免使用 this.$refs。</p><h2 id="为什么？-7"><a href="#为什么？-7" class="headerlink" title="为什么？"></a>为什么？</h2><ul><li>组件必须是保持独立的，如果一个组件的 API 不能够提供所需的功能，那么这个组件在设计、实现上是有问题的。</li><li>组件的属性和事件必须足够的给大多数的组件使用。</li></ul><h2 id="怎么做？-7"><a href="#怎么做？-7" class="headerlink" title="怎么做？"></a>怎么做？</h2><ul><li>提供良好的组件 API。</li><li>总是关注于组件本身的目的。</li><li>拒绝定制代码。如果你在一个通用的组件内部编写特定需求的代码，那么代表这个组件的 API 不够通用，或者你可能需要一个新的组件来应对该需求。</li><li>检查所有的 props 是否有缺失的，如果有提一个 issue 或是完善这个组件。</li><li>检查所有的事件。子组件向父组件通信一般是通过事件来实现的，但是大多数的开发者更多的关注于 props 从忽视了这点。</li><li>Props向下传递，事件向上传递！。以此为目标升级你的组件，提供良好的 API 和 独立性。</li><li>当遇到 props 和 events 难以实现的功能时，通过 this.$refs来实现。</li><li>当需要操作 DOM 无法通过指令来做的时候可使用 this.$ref 而不是 JQuery、document.getElement*、document.queryElement。</li></ul><pre><code>&lt;!-- 推荐，并未使用 this.$refs --&gt;&lt;range :max="max"  :min="min"  @current-value="currentValue"  :step="1"&gt;&lt;/range&gt;</code></pre><pre><code>&lt;!-- 使用 this.$refs 的适用情况--&gt;&lt;modal ref="basicModal"&gt;  &lt;h4&gt;Basic Modal&lt;/h4&gt;  &lt;button class="primary" @click="$refs.basicModal.hide()"&gt;Close&lt;/button&gt;&lt;/modal&gt;&lt;button @click="$refs.basicModal.open()"&gt;Open modal&lt;/button&gt;&lt;!-- Modal component --&gt;&lt;template&gt;  &lt;div v-show="active"&gt;    &lt;!-- ... --&gt;  &lt;/div&gt;&lt;/template&gt;&lt;script&gt;  export default {    // ...    data() {      return {        active: false,      };    },    methods: {      open() {        this.active = true;      },      hide() {        this.active = false;      },    },    // ...  };&lt;/script&gt;</code></pre><pre><code>&lt;!-- 如果可通过 emited 来做则避免通过 this.$refs 直接访问 --&gt;&lt;template&gt;  &lt;range :max="max"    :min="min"    ref="range"    :step="1"&gt;&lt;/range&gt;&lt;/template&gt;&lt;script&gt;  export default {    // ...    methods: {      getRangeCurrentValue() {        return this.$refs.range.currentValue;      },    },    // ...  };&lt;/script&gt;</code></pre><h1 id="使用组件名作为样式作用域空间"><a href="#使用组件名作为样式作用域空间" class="headerlink" title="使用组件名作为样式作用域空间"></a>使用组件名作为样式作用域空间</h1><p>Vue.js 的组件是自定义元素，这非常适合用来作为样式的根作用域空间。可以将组件名作为 CSS 类的命名空间。</p><h2 id="为什么？-8"><a href="#为什么？-8" class="headerlink" title="为什么？"></a>为什么？</h2><ul><li>给样式加上作用域空间可以避免组件样式影响外部的样式。</li><li>保持模块名、目录名、样式根作用域名一样，可以很好的将其关联起来，便于开发者理解。</li></ul><h2 id="怎么做？-8"><a href="#怎么做？-8" class="headerlink" title="怎么做？"></a>怎么做？</h2><p>使用组件名作为样式命名的前缀，可基于 BEM 或 OOCSS 范式。同时给 style 标签加上 scoped 属性。加上 scoped 属性编译后会给组件的 class 自动加上唯一的前缀从而避免样式的冲突。</p><pre><code>&lt;style scoped&gt;  /* 推荐 */  .MyExample { }  .MyExample li { }  .MyExample__item { }  /* 避免 */  .My-Example { } /* 没有用组件名或模块名限制作用域, 不符合 BEM 规范 */&lt;/style&gt;</code></pre><h1 id="尽可能使用-mixins"><a href="#尽可能使用-mixins" class="headerlink" title="尽可能使用 mixins"></a>尽可能使用 mixins</h1><h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么?"></a>为什么?</h2><p>Mixins 封装可重用的代码，避免了重复。如果两个组件共享有相同的功能，则可以使用 mixin。通过 mixin，你可以专注于单个组件的任务和抽象的通用代码。这有助于更好地维护你的应用程序。</p><h2 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做?"></a>怎么做?</h2><p>假设你有一个移动端和桌面端的菜单组件，它们共享一些功能。我们可以抽象出这两个组件的核心功能到一个 mixin 中，例如：</p><pre><code>const MenuMixin = {  data () {    return {      language: 'EN'    }  },  methods: {    changeLanguage () {      if (this.language === 'DE') this.$set(this, 'language', 'EN')      if (this.language === 'EN') this.$set(this, 'language', 'DE')    }  }}export default MenuMixin</code></pre><p>要使用 mixin，只需将其导入到两个组件中（我只展示移动组件）。</p><pre><code>&lt;template&gt;  &lt;ul class="mobile"&gt;    &lt;li @click="changeLanguage"&gt;Change language&lt;/li&gt;  &lt;/ul&gt;&lt;/template&gt;&lt;script&gt;  import MenuMixin from './MenuMixin'  export default {    mixins: [MenuMixin]  }&lt;/script&gt;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端规范 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 前端规范 </tag>
+            
+            <tag> vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>前端命名规范</title>
+      <link href="2019/08/13/qian-duan-ming-ming-gui-fan/"/>
+      <url>2019/08/13/qian-duan-ming-ming-gui-fan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="驼峰式命名法介绍"><a href="#驼峰式命名法介绍" class="headerlink" title="驼峰式命名法介绍"></a>驼峰式命名法介绍</h1><ul><li>Pascal Case 大驼峰式命名法：首字母大写。eg：StudentInfo、UserInfo、ProductInfo</li><li>Camel Case 小驼峰式命名法：首字母小写。eg：studentInfo、userInfo、productInfo</li></ul><h1 id="文件资源命名"><a href="#文件资源命名" class="headerlink" title="文件资源命名"></a>文件资源命名</h1><ul><li>文件名不得含有空格</li><li>文件名建议只使用小写字母，不使用大写字母。( 为了醒目，某些说明文件的文件名，可以使用大写字母，比如README、LICENSE。 )</li><li>文件名包含多个单词时，单词之间建议使用半角的连词线 ( - ) 分隔。</li><li>引入资源使用相对路径，不要指定资源所带的具体协议 ( http:,https: ) ，除非这两者协议都不可用。</li></ul><h1 id="变量命名"><a href="#变量命名" class="headerlink" title="变量命名"></a>变量命名</h1><ul><li>命名方式 : 小驼峰式命名方法</li><li>命名规范 : 类型+对象描述的方式，如果没有明确的类型，就可以使前缀为名词</li></ul><table><thead><tr><th>类型</th><th>小写字母</th></tr></thead><tbody><tr><td>array</td><td>a</td></tr><tr><td>boolean</td><td>b</td></tr><tr><td>function</td><td>fn</td></tr><tr><td>int</td><td>i</td></tr><tr><td>object</td><td>o</td></tr><tr><td>string</td><td>s</td></tr></tbody></table><h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><ul><li>命名方式 : 小驼峰方式 ( 构造函数使用大驼峰命名法 )</li><li>命名规则 : 前缀为动词</li></ul><table><thead><tr><th>动词</th><th>含义</th><th>返回值</th></tr></thead><tbody><tr><td>can</td><td>判断是否可执行某个动作 ( 权限 )</td><td>函数返回一个布尔值。true：可执行；false：不可执行</td></tr><tr><td>has</td><td>判断是否含有某个值</td><td>函数返回一个布尔值。true：含有此值；false：不含有此值</td></tr><tr><td>is</td><td>判断是否为某个值</td><td>函数返回一个布尔值。true：为某个值；false：不为某个值</td></tr><tr><td>get</td><td>获取某个值</td><td>函数返回一个非布尔值</td></tr><tr><td>set</td><td>设置某个值</td><td>无返回值、返回是否设置成功或者返回链式对象</td></tr></tbody></table><h1 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h1><ul><li>命名方法 : 全部大写</li><li>命名规范 : 使用大写字母和下划线来组合命名，下划线用以分割单词。<br>推荐：</li></ul><pre><code> var MAX_COUNT = 10; var URL = 'http://www.baidu.com';</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端规范 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 前端规范 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>css编写规范</title>
+      <link href="2019/08/13/css-bian-xie-gui-fan/"/>
+      <url>2019/08/13/css-bian-xie-gui-fan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="id和class的命名"><a href="#id和class的命名" class="headerlink" title="id和class的命名"></a>id和class的命名</h1><p>ID和class的名称总是使用可以反应元素目的和用途的名称，或其他通用的名称，代替表象和晦涩难懂的名称</p><p>不推荐 :</p><pre><code>.fw-800 {  font-weight: 800;}.red {  color: red;}</code></pre><p>推荐 :</p><pre><code>.heavy {  font-weight: 800;}.important {  color: red;}</code></pre><h1 id="合理的使用ID"><a href="#合理的使用ID" class="headerlink" title="合理的使用ID"></a>合理的使用ID</h1><p>一般情况下ID不应该被用于样式，并且ID的权重很高，所以不使用ID解决样式的问题，而是使用class</p><p>不推荐：</p><pre><code>#content .title {  font-size: 2em;}</code></pre><p>推荐：</p><pre><code>.content .title {  font-size: 2em;}</code></pre><h1 id="css选择器中避免使用标签名"><a href="#css选择器中避免使用标签名" class="headerlink" title="css选择器中避免使用标签名"></a>css选择器中避免使用标签名</h1><p>从结构、表现、行为分离的原则来看，应该尽量避免css中出现HTML标签，并且在css选择器中出现标签名会存在潜在的问题。</p><h1 id="使用子选择器"><a href="#使用子选择器" class="headerlink" title="使用子选择器"></a>使用子选择器</h1><p>很多前端开发人员写选择器链的时候不使用 直接子选择器（注：直接子选择器和后代选择器的区别）。<br>有时，这可能会导致疼痛的设计问题并且有时候可能会很耗性能。然而，在任何情况下，这是一个非常不好的做法。<br>如果你不写很通用的，需要匹配到DOM末端的选择器， 你应该总是考虑直接子选择器。不推荐:</p><pre><code>.content .title {  font-size: 2rem;}</code></pre><p>推荐</p><pre><code>.content &gt; .title {  font-size: 2rem;}</code></pre><h1 id="尽量使用缩写属性"><a href="#尽量使用缩写属性" class="headerlink" title="尽量使用缩写属性"></a>尽量使用缩写属性</h1><p>尽量使用缩写属性对于代码效率和可读性是很有用的，比如font属性。不推荐：</p><pre><code>border-top-style: none;font-family: palatino, georgia, serif;font-size: 100%;line-height: 1.6;padding-bottom: 2em;padding-left: 1em;padding-right: 1em;padding-top: 0;</code></pre><p>推荐：</p><pre><code>border-top: 0;font: 100%/1.6 palatino, georgia, serif;padding: 0 1em 2em;</code></pre><h1 id="0后面不带单位"><a href="#0后面不带单位" class="headerlink" title="0后面不带单位"></a>0后面不带单位</h1><p>省略0后面的单位，</p><p>不推荐：</p><pre><code>padding-bottom: 0px;margin: 0em;</code></pre><p>推荐：</p><pre><code>padding-bottom: 0;margin: 0;</code></pre><h1 id="属性格式"><a href="#属性格式" class="headerlink" title="属性格式"></a>属性格式</h1><ul><li>为了保证一致性和可扩展性，每个声明应该用分号结束，每个声明换行。</li><li>属性名的冒号后使用一个空格。出于一致性的原因，属性和值（但属性和冒号之间没有空格）的之间始终使用一个空格。</li><li>每个选择器和属性声明总是使用新的一行。</li><li>属性选择器或属性值用双引号（””），而不是单引号（”）括起来。</li><li>URL值（url()）不要使用引号。</li></ul><p>作为最佳实践，我们应该遵循以下顺序（应该按照下表的顺序）：<br>结构性属性：</p><ul><li>display</li><li>position, left, top, right etc.</li><li>overflow, float, clear etc.</li><li>margin, padding</li></ul><p>表现性属性：</p><ul><li>background, border etc.</li><li>font, text</li></ul><p>不推荐：</p><pre><code> .box {  font-family: 'Arial', sans-serif;  border: 3px solid #ddd;  left: 30%;  position: absolute;  text-transform: uppercase;  background-color: #eee;  right: 30%;  isplay: block;  font-size: 1.5rem;  overflow: hidden;  padding: 1em;  margin: 1em;}</code></pre><p>推荐：</p><pre><code>.box {  display: block;  position: absolute;  left: 30%;  right: 30%;  overflow: hidden;  margin: 1em;  padding: 1em;  background-color: #eee;  border: 3px solid #ddd;  font-family: 'Arial', sans-serif;  font-size: 1.5rem;  text-transform: uppercase;}</code></pre><h1 id="ID-和-Class（类）-名的分隔符"><a href="#ID-和-Class（类）-名的分隔符" class="headerlink" title="ID 和 Class（类） 名的分隔符"></a>ID 和 Class（类） 名的分隔符</h1><p>使用连字符（中划线）分隔ID和Class（类）名中的单词。为了增强课理解性，在选择器中不要使用除了连字符（中划线）以为的任何字符（包括没有）来连接单词和缩写。</p><p>另外，作为该标准，预设属性选择器能识别连字符（中划线）作为单词[attribute|=value]的分隔符，<br>所以最好的坚持使用连字符作为分隔符。</p><p>不推荐</p><pre><code>.demoimage {}.error_status {}</code></pre><p>推荐</p><pre><code>#video-id {}.ads-sample {}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端规范 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+            <tag> 前端规范 </tag>
             
         </tags>
       
