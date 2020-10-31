@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="简单的在线数据mock, 大脸猫">
+    <meta name="keywords" content="前端请求方式：xhr、ajax、axios与fetch的区别比较, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>简单的在线数据mock | 大脸猫</title>
+    <title>前端请求方式：xhr、ajax、axios与fetch的区别比较 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">简单的在线数据mock</h1>
+                    <h1 class="description center-align post-title">前端请求方式：xhr、ajax、axios与fetch的区别比较</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
-                                <span class="chip bg-color">项目总结</span>
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82/">
+                                <span class="chip bg-color">数据请求</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">前端基础</span>
                             </a>
                         
                     </div>
@@ -425,8 +429,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                开发工具
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                前端基础
                             </a>
                         
                     </div>
@@ -438,7 +442,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-08-30
+                    2017-06-13
                 </div>
                 
 
@@ -447,7 +451,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    742
+                    844
                 </div>
                 
 
@@ -469,205 +473,190 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h1><p>在接口调试前，前端根据定义好的接口文档，模拟数据，发起请求，编写完整的页面逻辑，等真正开始调试的时候，将请求地址更换即可。</p>
-<p>本文只介绍在线 mock 数据的方式，在线 mock 跟本地 mock 比较，可以省去安装配置，运行服务，多人协作数据不通的多种问题。</p>
-<h1 id="一个简单的列子"><a href="#一个简单的列子" class="headerlink" title="一个简单的列子"></a>一个简单的列子</h1><p><img src="http://qj245iy9p.hn-bkt.clouddn.com/1569382088%281%29.png" alt="image"></p>
-<p>返回结果：</p>
-<p><img src="http://qj245iy9p.hn-bkt.clouddn.com/1569382282%281%29.png" alt="image"></p>
-<h1 id="Mock-语法简介"><a href="#Mock-语法简介" class="headerlink" title="Mock 语法简介"></a>Mock 语法简介</h1><h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><pre><code>{
-    "base": {
-    "range": "@range(3, 7)",
-    "string": "@string(7, 20)",
-    "character": "@character(\"abcde\")",
-    "float": "@float(60, 100)",
-    "integer": "@integer(60, 100)",
-    "natural": "@natural(60, 100)",
-    "boolean": "@boolean"
-  },
+                <p>这些都是异步请求数据的方法。在不重新刷新页面的情况下与服务器通信，交换数据，或更新页面。</p>
+<h1 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h1><p>优点：</p>
+<ul>
+<li>不重新加载页面的情况下更新网页</li>
+<li>在页面已加载后从服务器请求/接收数据</li>
+<li>在后台向服务器发送数据</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>使用起来也比较繁琐，需要设置很多值。</li>
+<li>早期的IE浏览器有自己的实现，这样需要写兼容代码。</li>
+</ul>
+<p>示例：</p>
+<pre><code>if (window.XMLHttpRequest) { // model browser
+  xhr = new XMLHttpRequest()
+} else if (window.ActiveXObject) { // IE 6 and older
+  xhr = new ActiveXObject('Microsoft.XMLHTTP')
 }
-</code></pre>
-<p>预览：</p>
-<pre><code>"base": {
-    "range": [3,4,5,6],
-    "string": "qg3)zBWiLlbrsisX",
-    "character": "c",
-    "float": 66.87535733306,
-    "integer": 66,
-    "natural": 71,
-    "boolean": false
-  },</code></pre>
-<h2 id="date"><a href="#date" class="headerlink" title="date"></a>date</h2><pre><code>"date": {
-    "date": "@date",
-    "time": "@time",
-    "datetime": "@datetime",
-    "now": "@now"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"date": {
-    "date": "1971-10-18",
-    "time": "02:04:17",
-    "datetime": "1985-03-10 22:47:49",
-    "now": "2019-09-25 13:56:44"
-    }</code></pre>
-<h2 id="image"><a href="#image" class="headerlink" title="image"></a>image</h2><pre><code> "image": {
-    "image": "@image(\"200x200\", \"#50B347\", \"#FFF\", \"FastMock\")"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"image": {
-    "image": "http://dummyimage.com/200x200/50B347/FFF&amp;text=FastMock"
-  },</code></pre>
-<h2 id="text"><a href="#text" class="headerlink" title="text"></a>text</h2><pre><code>"text": {
-    "paragraph": "@paragraph(1, 3)",
-    "sentence": "@sentence(3, 5)",
-    "word": "@word(3, 5)",
-    "title": "@title(3, 5)",
-    "cparagraph": "@cparagraph(1, 3)",
-    "csentence": "@csentence(3, 5)",
-    "cword": "@cword(\"零一二三四五六七八九十\", 5, 7)",
-    "ctitle": "@ctitle(3, 5)"
-  },
-</code></pre>
-<p>预览：</p>
-<pre><code> "text": {
-    "paragraph": "Gifp ifnk hrreyi foajbgielv doijqrd ffaooi hlwstfcfw nrgsioum wtgashcoiy sintskl hnjk ebcsec. Bhlhghu embjvvs bckwkibqhs qgqz psu mjsodprwf exidxyqnq cdyqoatr xkezagaqu ijrcqrj vvxwdwgq ivv jxcpeybpus sojcn cscdlnmi kopzvuqfin.",
-    "sentence": "Xuqxp qvek ttgiq.",
-    "word": "ynug",
-    "title": "Cdnsxa Yjhrlbb Rmofrixln Jubgpxm Gjpdujgryi",
-    "cparagraph": "装增克体都月每手物即用周几想军点程。将角权响金华生候社根利情也龙。化必去边织众东位史回际平马至。",
-    "csentence": "存断实。",
-    "cword": "三七九六六",
-    "ctitle": "油眼采小"
-  },</code></pre>
-<h2 id="name"><a href="#name" class="headerlink" title="name"></a>name</h2><pre><code>"name": {
-    "first": "@first",
-    "last": "@last",
-    "name": "@name",
-    "cfirst": "@cfirst",
-    "clast": "@clast",
-    "cname": "@cname"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"name": {
-    "first": "Jennifer",
-    "last": "Anderson",
-    "name": "Laura Moore",
-    "cfirst": "胡",
-    "clast": "秀兰",
-    "cname": "姜敏"
-  },</code></pre>
-<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><pre><code>"web": {
-    "url": "@url",
-    "domain": "@domain",
-    "protocol": "@protocol",
-    "tld": "@tld",
-    "email": "@email",
-    "ip": "@ip"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"web": {
-    "url": "mid://nypjj.kr/mizdvfhl",
-    "domain": "jbgmh.cn",
-    "protocol": "ftp",
-    "tld": "fj",
-    "email": "r.bdwejkiuy@ltatgpp.an",
-    "ip": "175.52.62.226"
-  },</code></pre>
-<h2 id="address"><a href="#address" class="headerlink" title="address"></a>address</h2><pre><code>"address": {
-    "region": "@region",
-    "province": "@province",
-    "city": "@city(true)",
-    "county": "@county(true)",
-    "zip": "@zip"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"address": {
-    "region": "华中",
-    "province": "云南省",
-    "city": "天津 天津市",
-    "county": "台湾 金门县 金宁乡",
-    "zip": "539375"
-  },</code></pre>
-<h2 id="miscellaneous"><a href="#miscellaneous" class="headerlink" title="miscellaneous"></a>miscellaneous</h2><pre><code> "miscellaneous": {
-    "id": "@id",
-    "guid": "@guid",
-    "increment": "@increment(1000)"
-  }</code></pre>
-<p>预览：</p>
-<pre><code> "miscellaneous": {
-    "id": "370000201504299208",
-    "guid": "6E6155c0-f5b5-F3F6-5F0D-23EB44C21313",
-    "increment": 253109
-  }</code></pre>
-<h1 id="Mock-高阶用法"><a href="#Mock-高阶用法" class="headerlink" title="Mock 高阶用法"></a>Mock 高阶用法</h1><blockquote>
-<p>Mock 能支持 function，function 中不能用上面的@XX,用 Mock.mock(“@xxx”)替代。function 中还能获取全部请求头和参数。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>对象</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Mock</td>
-<td>Mock 对象</td>
-</tr>
-<tr>
-<td>_req.url</td>
-<td>获得请求 url 地址</td>
-</tr>
-<tr>
-<td>_req.method</td>
-<td>获取请求方法</td>
-</tr>
-<tr>
-<td>_req.params</td>
-<td>获取 url 参数对象</td>
-</tr>
-<tr>
-<td>_req.querystring</td>
-<td>获取查询参数字符串(url 中?后面的部分)，不包含 ?</td>
-</tr>
-<tr>
-<td>_req.query</td>
-<td>将查询参数字符串进行解析并以对象的形式返回，如果没有查询参数字字符串则返回一个空对象</td>
-</tr>
-<tr>
-<td>_req.body</td>
-<td>当 post 请求以 x-www-form-urlencoded 方式提交时，我们可以拿到请求的参数对象</td>
-</tr>
-</tbody></table>
-<h2 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h2><pre><code>{
-  code: function({
-    _req
-  }) {
-    const userName = _req.query.userName;
-    return userName ? 0 : -1;
-  },
-  data: function({
-    _req,
-    Mock
-  }) {
-    const userName = _req.query.userName;
-    return userName ? {
-      token: Mock.mock("@guid()"),
-      userId: Mock.mock("@id(5)"),
-      name: userName,
-      avatar: Mock.mock("@image(200x100, #FF6600)"),
-      message: "登录成功"
-    } : {
-      message: "登录失败"
+xhr.open('POST', url, true)
+xhr.send(data)
+xhr.onreadystatechange = function () {
+if (request.readyState === 4) { // 成功完成
+        // 判断响应状态码
+        if (request.status === 200) {
+            // 成功，通过responseText拿到响应的文本:
+            return success(request.responseText);
+        } else {
+            // 失败，根据响应码判断失败原因:
+            return fail(request.status);
+        }
+    } else {
+        // HTTP请求还在继续...
+    }
+}</code></pre>
+<h1 id="jQuery-ajax"><a href="#jQuery-ajax" class="headerlink" title="jQuery ajax"></a>jQuery ajax</h1><p>AJAX请求也兼容了各浏览器，对XMLHttpRequest对象的封装。</p>
+<p>优点：</p>
+<ul>
+<li>对原生XHR的封装，做了兼容处理，简化了使用。</li>
+<li>增加了对JSONP的支持，可以简单处理部分跨域。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>如果有多个请求，并且有依赖关系的话，容易形成回调地狱。</li>
+<li>本身是针对MVC的编程，不符合现在前端MVVM的浪潮。</li>
+<li>ajax是jQuery中的一个方法。如果只是要使用ajax却要引入整个jQuery非常的不合理。</li>
+</ul>
+<p>示例：</p>
+<pre><code>$.ajax({
+  type: 'POST',
+  url: url, 
+  data: data,
+  dataType: dataType,
+  success: function () {},
+  error: function () {}
+})</code></pre>
+<h1 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h1><p>Axios是一个基于promise的HTTP库，可以用在浏览器和 node.js 中。它本质也是对原生XMLHttpRequest的封装，只不过它是Promise的实现版本，符合最新的ES规范。</p>
+<p>优点：</p>
+<ul>
+<li>从浏览器中创建XMLHttpRequests</li>
+<li>从 node.js 创建 http 请求</li>
+<li>支持 Promise API</li>
+<li>拦截请求和响应</li>
+<li>转换请求数据和响应数据</li>
+<li>取消请求</li>
+<li>自动转换 JSON 数据</li>
+<li>客户端支持防御 XSRF</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>只持现代代浏览器。</li>
+</ul>
+<pre><code>axios({
+    method: 'post',
+    url: '/user/12345',
+    data: {
+      firstName: 'liu',
+      lastName: 'weiqin'
+    }
+  })
+  .then(res =&gt; console.log(res))
+  .catch(err =&gt; console.log(err))</code></pre>
+<h1 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h1><p>优点：</p>
+<ul>
+<li>语法简洁，更加语义化</li>
+<li>基于标准 Promise 实现，支持 async/await</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>Fetch 请求默认是不带 cookie 的，需要设置 fetch(url, {credentials: ‘include’})</li>
+<li>服务器返回 400，500 错误码时并不会 reject，只有网络错误这些导致请求不能完成时，fetch 才会被 reject。</li>
+</ul>
+<p>示例：</p>
+<pre><code>fetch('http://example.com/movies.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(myJson);
+  });</code></pre>
+<p>ts对fetch简单封装下：</p>
+<pre><code>import _ from 'lodash';
+import 'whatwg-fetch';
+
+interface ReqInit extends RequestInit {
+  headers?: Record&lt;string, string&gt;;
+  /** eg. ?a=1 */
+  params?: { [key: string]: any };
+  /** eg. /:id/.. */
+  router?: { [key: string]: any };
+  /** 超时时间，默认3000 */
+  timeout?: number;
+}
+
+async function request&lt;T = any&gt;(path: string, init: ReqInit = {}): Promise&lt;T&gt; {
+  const mergeInit = {
+    ...request.default,
+    ...init,
+    headers: { ...request.default.headers, ...init.headers },
+  };
+  const { params, router, body, timeout, headers } = mergeInit;
+  let url = path;
+
+  if (router) {
+    url = path.replace(/:([A-Za-z]+)/g, (substring, p1: string) =&gt; router[p1]);
+  }
+  if (params) {
+    url += _(
+      _.reduce(params, (prev, val, key) =&gt; `${prev}${key}=${val}&amp;`, '?'),
+    ).trimEnd('&amp;');
+  }
+
+  if (!Reflect.get(headers, 'Content-Type')) {
+    if (typeof body === 'string') {
+      Reflect.set(headers, 'Content-Type', 'application/json');
     }
   }
-}</code></pre>
-<p>预览：</p>
-<p><img src="https://note.youdao.com/yws/public/resource/633e9bc706a3a274d9926f95b1806671/xmlnote/1C6017CB352F41DD9B758D064EBCFD4B/15016" alt="image"></p>
-<h1 id="常用的在线-mock-工具"><a href="#常用的在线-mock-工具" class="headerlink" title="常用的在线 mock 工具"></a>常用的在线 mock 工具</h1><ul>
-<li><p>💛 <a target="_blank" rel="noopener" href="https://www.fastmock.site/">fast-mock</a></p>
-</li>
-<li><p>💗 <a target="_blank" rel="noopener" href="https://easy-mock.com/">easy-mock</a></p>
-</li>
-</ul>
+
+  try {
+    const response: Response = await Promise.race([
+      fetch(url, mergeInit),
+      new Promise&lt;any&gt;((resolve, reject) =&gt; {
+        setTimeout(
+          () =&gt; reject({ status: 408, statusText: 'TIME_OUT_ERR', url }),
+          timeout,
+        );
+      }),
+    ]);
+
+    if (response.ok) {
+      if (request.interceptors.response) {
+        return await request.interceptors.response(response);
+      }
+      return await response.json();
+    }
+    throw response;
+  } catch (error) {
+    if (request.interceptors.catch) {
+      request.interceptors.catch(error);
+    }
+
+    throw error;
+  }
+}
+
+request.default = {
+  method: 'GET',
+  headers: {
+    Accept: '*/*',
+  },
+  mode: 'cors',
+  timeout: 3000,
+  // credentials: 'include' // send cookies
+} as ReqInit;
+
+request.interceptors = {
+  response: null,
+  catch: null,
+} as {
+  response: ((response: Response) =&gt; Promise&lt;any&gt;) | null;
+  catch: ((error: Partial&lt;Response&gt;) =&gt; void) | null;
+};
+
+export default request;
+</code></pre>
 
             </div>
             <hr/>
@@ -693,7 +682,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2019/08/30/jian-dan-de-zai-xian-shu-ju-mock/">https://leeycode.github.io/2019/08/30/jian-dan-de-zai-xian-shu-ju-mock/</a>
+                    <a href="https://leeycode.github.io/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/">https://leeycode.github.io/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -731,8 +720,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
-                                    <span class="chip bg-color">项目总结</span>
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82/">
+                                    <span class="chip bg-color">数据请求</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">前端基础</span>
                                 </a>
                             
                         </div>
@@ -904,13 +897,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/">
+                <a href="/2019/08/30/jian-dan-de-zai-xian-shu-ju-mock/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="TypeScript在vue项目中的应用">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="简单的在线数据mock">
                         
-                        <span class="card-title">TypeScript在vue项目中的应用</span>
+                        <span class="card-title">简单的在线数据mock</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -921,14 +914,14 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-30
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-30
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/" class="post-category">
-                                    新鲜技能
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    开发工具
                                 </a>
                             
                             
@@ -938,8 +931,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">项目总结</span>
                     </a>
                     
                 </div>
@@ -950,7 +943,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
                 <a href="/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/">
@@ -984,6 +977,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
