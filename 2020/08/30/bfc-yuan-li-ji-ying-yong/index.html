@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="TypeScript在vue项目中的应用, 大脸猫">
+    <meta name="keywords" content="BFC原理及应用, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>TypeScript在vue项目中的应用 | 大脸猫</title>
+    <title>BFC原理及应用 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://qj245iy9p.hn-bkt.clouddn.com/1_9eMyWLYOqU5aqBtVoFoi3Q.jpeg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://qj245iy9p.hn-bkt.clouddn.com/css.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">TypeScript在vue项目中的应用</h1>
+                    <h1 class="description center-align post-title">BFC原理及应用</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/vue/">
-                                <span class="chip bg-color">vue</span>
+                            <a href="/tags/css/">
+                                <span class="chip bg-color">css</span>
                             </a>
                         
                     </div>
@@ -425,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/" class="post-category">
-                                新鲜技能
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                前端基础
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-30
+                    2020-08-30
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.5k
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    16 分
+                    4 分
                 </div>
                 
 
@@ -469,822 +469,83 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1 引言"></a>1 引言</h1><p>TypeScript 是一种由微软开发的自由和开源的编程语言。它是 JavaScript 的一个超集，而且本质上向这个语言添加了可选的静态类型和基于类的面向对象编程。</p>
-<p>TypeScript 优势：</p>
+                <h1 id="一、常见定位方案"><a href="#一、常见定位方案" class="headerlink" title="一、常见定位方案"></a>一、常见定位方案</h1><p>在讲 BFC 之前，我们先来了解一下常见的定位方案，定位方案是控制元素的布局，有三种常见方案:</p>
 <ul>
-<li>静态类型检查与代码提示</li>
-<li>适用大型项目开发，如代码重构等</li>
-<li>更好的协作</li>
-<li>更强的生产力</li>
+<li>普通流 (normal flow)<br>在普通流中，元素按照其在 HTML 中的先后位置至上而下布局，在这个过程中，行内元素水平排列，直到当行被占满然后换行，块级元素则会被渲染为完整的一个新行，除非另外指定，否则所有元素默认都是普通流定位，也可以说，普通流中元素的位置由该元素在 HTML 文档中的位置决定。</li>
+<li>浮动 (float)<br>在浮动布局中，元素首先按照普通流的位置出现，然后根据浮动的方向尽可能的向左边或右边偏移，其效果与印刷排版中的文本环绕相似。</li>
+<li>绝对定位 (absolute positioning)<br>在绝对定位布局中，元素会整体脱离普通流，因此绝对定位元素不会对其兄弟元素造成影响，而元素具体的位置由绝对定位的坐标决定。</li>
 </ul>
-<h1 id="2-ts语法知识"><a href="#2-ts语法知识" class="headerlink" title="2 ts语法知识"></a>2 ts语法知识</h1><h2 id="2-1类型系统"><a href="#2-1类型系统" class="headerlink" title="2.1类型系统"></a>2.1类型系统</h2><p><img src="http://qj245iy9p.hn-bkt.clouddn.com/%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3.mindmap.png" alt="image"></p>
-<h2 id="2-2类型保护"><a href="#2-2类型保护" class="headerlink" title="2.2类型保护"></a>2.2类型保护</h2><blockquote>
-<p>类型保护是可执行运行时检查的一种表达式，用于确保该类型在一定的范围内。</p>
+<h1 id="二、BFC-概念"><a href="#二、BFC-概念" class="headerlink" title="二、BFC 概念"></a>二、BFC 概念</h1><blockquote>
+<p>Formatting context(格式化上下文) 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。</p>
 </blockquote>
-<ol>
-<li>as 操作符（类型断言）<br>当你比 ts 更确定其数据类型，你能使用 as 语法确定其类型，但需要遵守类型兼容转换。 另外一种写法：<typename>varName，但不建议使用</typename></li>
-</ol>
-<pre><code>function getDynamicValue(): number | string | undefined {
-  ...
+<p>那么 BFC 是什么呢？</p>
+<p>BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述定位方案的普通流。<br>具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。<br>通俗一点来讲，可以把 BFC 理解为一个封闭的大箱子，箱子内部的元素无论如何翻江倒海，都不会影响到外部。</p>
+<h1 id="三、触发-BFC"><a href="#三、触发-BFC" class="headerlink" title="三、触发 BFC"></a>三、触发 BFC</h1><p>只要元素满足下面任一条件即可触发 BFC 特性：</p>
+<ul>
+<li>body 根元素</li>
+<li>浮动元素：float 除 none 以外的值</li>
+<li>绝对定位元素：position (absolute、fixed)</li>
+<li>display 为 inline-block、table-cells、flex</li>
+<li>overflow 除了 visible 以外的值 (hidden、auto、scroll)</li>
+</ul>
+<h1 id="四、BFC-特性及应用"><a href="#四、BFC-特性及应用" class="headerlink" title="四、BFC 特性及应用"></a>四、BFC 特性及应用</h1><h2 id="1-同一个-BFC-下外边距会发生折叠"><a href="#1-同一个-BFC-下外边距会发生折叠" class="headerlink" title="1. 同一个 BFC 下外边距会发生折叠"></a>1. 同一个 BFC 下外边距会发生折叠</h2><pre><code>&lt;head&gt;
+div{
+    width: 100px;
+    height: 100px;
+    background: lightblue;
+    margin: 100px;
 }
-
-const v = getDynamicValue(); // v:number|string|undefined，联合类型变量只允许访问所有类型共有的属性
-
-// 确定返回 string
-(v as string).trim();</code></pre>
-<ol start="2">
-<li>typeof 操作符</li>
-</ol>
-<pre><code>function isNumber(val: any): val is number {
-  return typeof val === 'number';
-}
-
-const a: any = 1;
-
-if (isNumber(a)) {
-  // a:number
-}</code></pre>
-<ol start="3">
-<li>instanceof 操作符</li>
-</ol>
-<pre><code>class Base {
-  ...
-}
-
-class A extends Base {
-  ...
-}
-
-const inst: Base = new A();
-
-if (inst instanceof A) {
-  // inst:A
-}</code></pre>
-<ol start="4">
-<li>函数或变量后面添加 !</li>
-</ol>
-<p>当要去掉联合类型的可空类型（null | undefined）,可以使用 js if 语句或短路运算符实现类型保护，也可以使用 Typescript 2.0+ !语法</p>
-<pre><code>const x: string | null = getDynamicValue();
-
-// if判断
-if (x) {
-  // x:string
-}
-// 短路运算符
-function f(sn: string | null) {
-  return sn || '';
-}
-// !语法
-x!.trim();
-// or
-const r = [1, 2, 3, 4].find(x =&gt; x === 3)!; // r:number
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+&lt;/body&gt;
 </code></pre>
-<h1 id="3-开发环境准备"><a href="#3-开发环境准备" class="headerlink" title="3 开发环境准备"></a>3 开发环境准备</h1><h2 id="3-1-插件安装"><a href="#3-1-插件安装" class="headerlink" title="3.1 插件安装"></a>3.1 插件安装</h2><h3 id="3-1-1-Webpack-转译-Typescript-现有方案"><a href="#3-1-1-Webpack-转译-Typescript-现有方案" class="headerlink" title="3.1.1 Webpack 转译 Typescript 现有方案"></a>3.1.1 Webpack 转译 Typescript 现有方案</h3><h4 id="1-ts-loader-babel-loader-fork-ts-checker-webpack-plugin"><a href="#1-ts-loader-babel-loader-fork-ts-checker-webpack-plugin" class="headerlink" title="1.ts-loader + babel-loader + fork-ts-checker-webpack-plugin"></a>1.ts-loader + babel-loader + fork-ts-checker-webpack-plugin</h4><p>修改 webpack.config.js 的配置：</p>
-<pre><code>{ 
-    test: /\.ts?$/, 
-    loader: "ts-loader",
-    options: {
-        // .vue文件必须加
-        appendTsSuffixTo: [/\.vue$/]
-    },
-    exclude:/node_modules/
+<p>从效果上看，因为两个 div 元素都处于同一个 BFC 容器下 (这里指 body 元素) 所以第一个 div 的下边距和第二个 div 的上边距发生了重叠，所以两个盒子之间距离只有 100px，而不是 200px。<br><img src="http://qj245iy9p.hn-bkt.clouddn.com/1.png" alt="image"></p>
+<p>首先这不是 CSS 的 bug，我们可以理解为一种规范，如果想要避免外边距的重叠，可以将其放在不同的 BFC 容器中。</p>
+<pre><code>
+&lt;div class="container"&gt;
+    &lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="container"&gt;
+    &lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+.container {
+    overflow: hidden;
+}
+p {
+    width: 100px;
+    height: 100px;
+    background: lightblue;
+    margin: 100px;
 }
 </code></pre>
-<p>每次重建时，类型脚本的语义检查器必须检查所有文件,随着项目变得越来越大，编译时间线性增加。这时我们使用 fork-ts-checker-webpack-plugin 另外开一个线程来进行类型检查，安装依赖：</p>
-<pre><code>npm install -D fork-ts-checker-webpack-plugin
-//使用：
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-plugins:[
-    new ForkTsCheckerWebpackPlugin()
-]
-</code></pre>
-<ul>
-<li>这种方案，当 webpack 编译的时候，ts-loader 会调用 typescript（所以本地项目需要安装 typescript），然后 typescript 运行的时候会去读取本地的 tsconfig.json 文件。</li>
-<li>默认情况下，ts-loader 会进行 转译 和 类型检查，每当文件改动时，都会重新去 转译 和 类型检查，当文件很多的时候，就会特别慢，影响开发速度。所以需要使用 fork-ts-checker-webpack-plugin ，开辟一个单独的线程去执行类型检查的任务，这样就不会影响 webpack 重新编译的速度。</li>
-<li>fork-ts-checker-webpack-plugin  这个插件要求最低 Node.js 6.11.5，webpack 4，TypeScript 2.1 和可选的 ESLint 6（其本身要求最低 Node.js 8.10.0）。</li>
-</ul>
-<h4 id="2-babel-loader-babel-preset-typescript"><a href="#2-babel-loader-babel-preset-typescript" class="headerlink" title="2. babel-loader + @babel/preset-typescript"></a>2. babel-loader + @babel/preset-typescript</h4><p>修改webpack.config.js</p>
-<pre><code>rules: [
-        {
-          test:/\.(tsx?|jsx?)$/,
-          // 默认会调用 @babel/core 
-          use:'babel-loader'
-        }
-]</code></pre>
-<p>.babelrc</p>
-<pre><code>{
-    "presets": [
-        "@babel/env"
-        "@vue/babel-preset-jsx",
-        "@babel/preset-typescript"
-    ]
-}</code></pre>
-<ul>
-<li>这种方案，当 webpack 编译的时候，babel-loader 会读取 .babelrc 里的配置，不会调用 typescript（所以本地项目无需安装 typescript），不会去检查类型</li>
-<li> 需要配置tsconfig.json的，因为需要在开发代码时，让 idea 提示错误信息</li>
-</ul>
-<h2 id="3-2-ts项目基本构成"><a href="#3-2-ts项目基本构成" class="headerlink" title="3.2 ts项目基本构成"></a>3.2 ts项目基本构成</h2><p>一个vue+ts项目的目录结构（<a target="_blank" rel="noopener" href="https://github.com/leeycode/typeScript-vue-starter/">typeScript-vue-starter</a>）：</p>
-<pre><code>├── /@types/                     # 全局类型声明
-├── /build/                      # webpack配置文件
-├── /src/                        # 源码目录
-│ ├── /assets/                   # 静态资源目录
-│ ├── /components/               # 公共组件目录
-│ ├── /constants/                # 项目constants目录
-│ │ ├── _const.less              # less常量
-│ ├── /pages/                    # UI组件目录
-│ ├── /services/                 # 请求服务目录
-│ ├── /router/                   # 路由目录
-│ ├── /store/                    # 存放store文件目录
-│ ├── /style/                    # 全局样式
-│ ├── /utils/                    # utils目录
-│ │ ├── request.ts               # 基于fetch封装的API请求工具
-│ │ ├── global.ts                # 公共方法库
-│ └── main.ts                    # 项目入口
-|——tsconfig.json                 # ts配置
-|——...</code></pre>
-<h2 id="3-3-tsconfig-json"><a href="#3-3-tsconfig-json" class="headerlink" title="3.3 tsconfig.json"></a>3.3 tsconfig.json</h2><p>在项目根目录下，这个json文件规定了ts的编译选项，相见的编译选项配置：</p>
-<pre><code>{
-  "compilerOptions": {
-    "baseUrl": ".",                             // 用于解析非相对模块名称的基目录
-    "outDir": "build/dist",                     // 指定输出目录
-    "module": "esnext",                         // 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
-    "target": "es5",                            // 指定 ECMAScript 目标版本:
-    "lib": ["dom", "esnext"],                   // 指定要包含在编译中的库文件
-    "sourceMap": true,                          // 生成相应的 '.map' 文件
-    "allowJs": true,                            // 允许编译 javascript 文件
-    "jsx": "preserve",                          // 指定 jsx 代码的生成: 'preserve', 'react-native'等
-    "moduleResolution": "node",                 // 选择模块解析策略： 'node' (Node.js) or 'classic'
-    "strict": true                              // 启用所有严格类型检查选项
-    ...
-
-  },
-  "include": ["src/**/*", "@types/**/*"],       // 编译包含的文件   
-  "exclude": [                                  // 排除的文件                
-    "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts",
-    "config"
-  ]
-}
-</code></pre>
-<h2 id="3-4-声明文件"><a href="#3-4-声明文件" class="headerlink" title="3.4 声明文件"></a>3.4 声明文件</h2><h3 id="types"><a href="#types" class="headerlink" title="@types"></a>@types</h3><p>安装第三方库之前，我们可以<a target="_blank" rel="noopener" href="https://microsoft.github.io/TypeSearch//">搜索DefinitelyTyped</a>，查看是否有第三方在维护类型声明。通过@types安装，就能在项目中使用它的类型声明。</p>
-<pre><code>- Partial :把 interface 所有属性变成可选
-// node_modules/typescript/lib/lib.es5.d.ts,安装ts的时候生成
-type Partial&lt;T&gt; = {
-    [P in keyof T]?: T[P];
-};
-
-changeFilter: (filter: Partial&lt;IRequsetParams&gt;) =&gt; void;
-
-- Event
-// node_modules/@types/react/index.d.ts,通过@types安装react的时候生成
-  handleClick = (e: React.MouseEvent&lt;HTMLDivElement, MouseEvent&gt;) =&gt; {
-    e.stopPropagation();
-  };
-
-- RouteComponentProps:提供了 location、history 的类型定义
-// node_modules/@types/react-router/index.d.ts
-export interface ILoginProps extends RouteComponentProps {
-  login: (values: IUser, history: H.History) =&gt; void;
-}</code></pre>
-<h3 id="自定义声明文件"><a href="#自定义声明文件" class="headerlink" title="自定义声明文件"></a>自定义声明文件</h3><p>扩展名.d.ts 结尾就是项目中的声明文件。在上面的项目中，我们创建了一个名为@types的文件夹，用来维护项目中需要的变量声明。</p>
-<ol>
-<li>全局变量声明<pre><code>// config
-declare const config: {
-version: string;
-systemName: string;
-debug: boolean;
-...
-}
-// 约束后台返回的数据 
-declare interface IResponseBody&lt;T&gt; {
-data: T;
-code: number;
-total: number;
-}
-...</code></pre>
-</li>
-<li>非js资源</li>
-</ol>
-<pre><code>declare module '*.svg';
-declare module '*.png';
-declare module '*.jpg';
-
-declare module '*.module.css';
-declare module '*.module.scss' </code></pre>
-<h1 id="4-组件编写的几种方法"><a href="#4-组件编写的几种方法" class="headerlink" title="4 组件编写的几种方法"></a>4 组件编写的几种方法</h1><h2 id="4-1-Vue-extend"><a href="#4-1-Vue-extend" class="headerlink" title="4.1 Vue.extend()"></a>4.1 Vue.extend()</h2><blockquote>
-<p>Vue.extend():使用基础 Vue 构造器，创建一个“子类”。 这种方式最接近 Vue 的单文件组件的写法，如果一个完善 Vue 项目从 JS 改成 TS，用这种方法很快，只要加上 lang=ts和一些必要的变量类型就好了，然后用Vue.extend()包裹就好。</p>
-</blockquote>
-<p>main.js 改为 main.ts 内容改成：</p>
-<pre><code>import Vue from "vue";
-import App from "./App.vue";
-
-new Vue({
-    el:"#app",
-    render:h=&gt;h(App)
-});
-</code></pre>
-<p>组件写法：</p>
-<pre><code>&lt;template&gt;
-    &lt;h1&gt;{{name}}&lt;/h1&gt;
-&lt;/template&gt;
-&lt;script lang="ts"&gt;
-//也执行tsx,也就是jsx语法
-import Vue from "vue";
-
-export default Vue.extend({
-    data(){
-        return {
-            name:'liwu'
-        }
-    }
-})
-&lt;/script&gt;
-&lt;style scoped&gt;
-h1{
-    color: rgb(55, 142, 230);
-}
-&lt;/style&gt;
-</code></pre>
-<h2 id="4-2-vue-class-component"><a href="#4-2-vue-class-component" class="headerlink" title="4.2 vue-class-component"></a>4.2 vue-class-component</h2><blockquote>
-<p>通常和vue-property-decorator一起搭配使用，，vue-property-decorator是在vue-class-component上扩展来的，并且提供了很多修饰器比如 @Prop和@Watch等等，使用这个可以编写类式组件。</p>
-</blockquote>
-<p>1.组件写法：</p>
-<pre><code>&lt;template&gt;
-    &lt;h1&gt;{{name}}&lt;/h1&gt;
-&lt;/template&gt;
-&lt;script lang="ts"&gt;
-
-import Vue from "vue";
-import Component from 'vue-class-component';
-
-// @Component 装饰器使你的类成为Vue组件
-@Component
-
-export default class App extends Vue {
-    private name:string = 'liwu';
-}
-
-&lt;/script&gt;
-&lt;style scoped&gt;
-h1{
-    color: rgb(55, 142, 230);
-}
-&lt;/style&gt;</code></pre>
-<p>修改tsconfig.js，支持装饰器语法</p>
-<pre><code>"experimentalDecorators": true,</code></pre>
-<h2 id="4-3-jsx"><a href="#4-3-jsx" class="headerlink" title="4.3 jsx"></a>4.3 jsx</h2><blockquote>
-<p>JSX is an XML-like syntax extension to ECMAScript without any defined semantics. It’s NOT intended to be implemented by engines or browsers.</p>
-</blockquote>
-<p>1.jsx语法简介（写react的同学跳过）</p>
-<ul>
-<li>严格的标签闭合</li>
-<li>组件名要大写，否则解析成html标签</li>
-<li>变量用{}</li>
-</ul>
-<pre><code>let name = 'xxx';
-&lt;div&gt;{ name }&lt;/div&gt;</code></pre>
-<ul>
-<li>遍历用map</li>
-</ul>
-<pre><code>let list = ['李一','李二','李三'];
-
-&lt;div&gt;
-    {list.map((item, index) =&gt; {
-    return &lt;p key={index}&gt;this is {item}&lt;/p&gt; 
-    })} 
-&lt;/div&gt; </code></pre>
-<ul>
-<li>条件判断</li>
-</ul>
-<pre><code>&lt;div className={styles.wrapper}&gt;
-    {_.isEmpty(currRecord) ? null : (
-      &lt;Graph
-        graph={{ nodes, edges }}
-        options={this.options}
-        events={this.events}
-      /&gt;
-    )}
-&lt;/div&gt; </code></pre>
-<ul>
-<li>事件要用驼峰写法，传参要用bind</li>
-</ul>
-<pre><code>&lt;div
-    className={styles.content}
-    onMouseEnter={this.showSwitch}
-    onMouseLeave={this.hideSwitch}
-    onClick={this.handleClick.bind(this,params)}
-&gt;
+<p>这时候，两个盒子边距就变成了 200px </p>
+<p><img src="http://qj245iy9p.hn-bkt.clouddn.com/2.png" alt="image"></p>
+<h2 id="2-BFC-可以包含浮动的元素（清除浮动）"><a href="#2-BFC-可以包含浮动的元素（清除浮动）" class="headerlink" title="2. BFC 可以包含浮动的元素（清除浮动）"></a>2. BFC 可以包含浮动的元素（清除浮动）</h2><p>我们都知道，浮动的元素会脱离普通文档流，来看下下面一个例子</p>
+<pre><code>&lt;div style="border: 1px solid #000;"&gt;
+    &lt;div style="width: 100px;height: 100px;background: #eee;float: left;"&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-<ul>
-<li>使用domPropsInnerHTML来替代v-html</li>
-</ul>
-<pre><code>&lt;div
-    domPropsInnerHTML={this.htmlContent}
-&gt;
+<p><img src="http://qj245iy9p.hn-bkt.clouddn.com/3.png" alt="image"></p>
+<p>由于容器内元素浮动，脱离了文档流，所以容器只剩下 2px 的边距高度。如果使触发容器的 BFC，那么容器将会包裹着浮动元素。</p>
+<pre><code>&lt;div style="border: 1px solid #000;overflow: hidden"&gt;
+    &lt;div style="width: 100px;height: 100px;background: #eee;float: left;"&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-<p>2.组件写法</p>
-<pre><code>import { Vue, Component } from 'vue-property-decorator';
-import { CreateElement } from 'vue';
-@Component
-export default class JSX extends Vue {
-  private count: number = 0;
-  private showInfo() {
-    this.count++;
-  }
-
-  protected render(h: CreateElement) {
-    return &lt;h2 onMouseenter={this.showInfo}&gt;JSX Test{this.count}&lt;/h2&gt;;
-  }
-}
+<p>效果如图：</p>
+<p><img src="http://qj245iy9p.hn-bkt.clouddn.com/4.png" alt="image"></p>
+<h2 id="3-BFC-可以阻止元素被浮动元素覆盖"><a href="#3-BFC-可以阻止元素被浮动元素覆盖" class="headerlink" title="3. BFC 可以阻止元素被浮动元素覆盖"></a>3. BFC 可以阻止元素被浮动元素覆盖</h2><p>先来看一个文字环绕效果：</p>
+<pre><code>&lt;div style="height: 100px;width: 100px;float: left;background: lightblue"&gt;
+    我是一个左浮动的元素
+&lt;/div&gt;
+&lt;div style="width: 200px; height: 200px;background: #eee"&gt;
+    我是一个没有设置浮动, 也没有触发 BFC 元素, width: 200px; height:200px; background: #eee;
+&lt;/div&gt;
 </code></pre>
-<h1 id="5-class组件详细用法"><a href="#5-class组件详细用法" class="headerlink" title="5 class组件详细用法"></a>5 class组件详细用法</h1><h2 id="使用Data"><a href="#使用Data" class="headerlink" title="使用Data"></a>使用Data</h2><pre><code>@Component
-export default class HelloWorld extends Vue {
-  private msg: string = "welcome to my app"
-  private list: Array&lt;object&gt; = [
-    {
-        name: 'Melody',
-        age: '20'
-    },
-    {
-        name: 'James',
-        age: '20'
-    }
-  ]
-}
-</code></pre>
-<p>与ts等效的js代码</p>
-<pre><code>export default {
-  data() {
-    return {
-      msg: "welcome to my app",
-      list: [
-        {
-          name: 'Melody',
-          age: '20'
-        },
-        {
-          name: 'James',
-          age: '20'
-        }
-      ]
-    }
-}
-</code></pre>
-<h2 id="使用props"><a href="#使用props" class="headerlink" title="使用props"></a>使用props</h2><p>可以添加 required, default, type 为props指定验证要求，同样也可以使用 readonly 禁止操作props</p>
-<pre><code>import { Component, Prop, Vue } from 'vue-property-decorator'
-@Component
-export default class HelloWorld extends Vue {
-  @Prop() readonly msg!: string
-  @Prop({default: 'Joy Melody'}) readonly name: string
-  @Prop({required: true}) readonly age: number
-  @Prop({required: false, type: String, default: 'Developer'}) readonly job: string
-}
-</code></pre>
-<p>与ts等效的js代码如下</p>
-<pre><code>export default {
-  props: {
-    msg,
-    name: {
-      default: 'Joy Melody'
-    },
-    age: {
-      required: true,
-    },
-    address: {
-      type: String
-    },
-    job: {
-      required: false,
-      type: string,
-      default: 'Developer'
-    }
-  }
-}
-
-</code></pre>
-<h2 id="Computed-属性"><a href="#Computed-属性" class="headerlink" title="Computed 属性"></a>Computed 属性</h2><pre><code>export default class HelloWorld extends Vue {
-  get fullName(): string {
-    return this.first+ ' '+ this.last
-  }
-}</code></pre>
-<p>与ts等效的js代码如下</p>
-<pre><code>export default {
-  fullName() {
-    return this.first + ' ' + this.last
-  }
-}
-</code></pre>
-<p>复杂点的涉及到setter和getter的 computed属性，在ts中写法如下：</p>
-<pre><code>export default class HelloWorld extends Vue {
-  get fullName(): string {
-    return this.first+ ' '+ this.last
-  }
-  set fullName(newValue: string) {
-    let names = newValue.split(' ')
-    this.first = names[0]
-    this.last = names[names.length - 1]
-  }
-}
-</code></pre>
-<p>与ts等效的js写法如下</p>
-<pre><code>fullName: {
-  get: function () {
-    return this.first + ' ' + this.last
-  },
-  set: function (newValue) {
-    let names = newValue.split(' ')
-    this.first = names[0]
-    this.last = names[names.length - 1]
-  }
-}
-</code></pre>
-<h2 id="使用Watch"><a href="#使用Watch" class="headerlink" title="使用Watch"></a>使用Watch</h2><p>@Watch(path: string, options: WatchOptions = {}) </p>
-<ul>
-<li><p>@Watch 装饰器接收两个参数：path: string 被侦听的属性名<br>options?: WatchOptions={} options可以包含两个属性</p>
-</li>
-<li><p>immediate?:boolean 侦听开始之后是否立即调用该回调函数<br>deep?:boolean 被侦听的对象的属性被改变时，是否调用该回调函数</p>
-</li>
-</ul>
-<pre><code>@Watch('child')
-onChildChanged (val: string, oldVal: string) {
-    if (val !== oldVal) {
-      window.console.log(val)
-    }
-}
-</code></pre>
-<p>与ts等效的js代码如下</p>
-<pre><code>watch: {
-    'child': {
-        handler: 'onChildChanged',
-        immediate: false,
-        deep: false 
-    }
-},
-method: {
-    onChildChanged(val, oldVal) {
-        if (val !== oldVal) {
-          console.log(val)
-        }
-    }
-}
-
-</code></pre>
-<p>也可以写成: @Watch(‘child’, { immediate: true, deep: true }), 等价于:</p>
-<pre><code>watch: {
-    'child': {
-        handler: 'onChildChanged',
-        immediate: true,
-        deep: true 
-    }
-},
-method: {
-    onChildChanged(val, oldVal) {
-        if (val !== oldVal) {
-          window.console.log(val)
-        }
-    }
-}
-
-</code></pre>
-<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><pre><code>export default class HelloWorld extends Vue {
-  public clickMe(): void {
-    console.log('clicked')
-    console.log(this.addNum(4, 2))
-  }
-  public addNum(num1: number, num2: number): number {
-    return num1 + num2
-  }
-}
-</code></pre>
-<p>与ts等效的js代码如下</p>
-<pre><code>export default {
-  methods: {
-    clickMe() {
-      console.log('clicked')
-      console.log(this.addNum(4, 2))
-    }
-    addNum(num1, num2) {
-      return num1 + num2
-    }
-  }
-}
-</code></pre>
-<h2 id="Emit"><a href="#Emit" class="headerlink" title="Emit"></a>Emit</h2><p>子组件触发父组件的自定义事件并传递数据，在TypeScript中使用@Emit 装饰器</p>
-<pre><code>import { Vue, Component, Emit } from 'vue-property-decorator'
-
-@Component
-export default class YourComponent extends Vue {
-  count = 0
-
-  @Emit()
-  addToCount(n: number) {
-    this.count += n
-  }
-}
-</code></pre>
-<p>与ts等效的js代码如下</p>
-<pre><code>export default {
-  data() {
-    return {
-      count: 0
-    }
-  },
-  methods: {
-    addToCount(n) {
-      this.count += n
-      this.$emit('add-to-count', n)
-    }
-  }
-}
-</code></pre>
-<h2 id="Mixins"><a href="#Mixins" class="headerlink" title="Mixins"></a>Mixins</h2><p>假设当前已经有一个mixins/ProjectMixin文件 如何在其他组件里面使用方式如下</p>
-<pre><code>&lt;template&gt;
-  &lt;div class="project-detail"&gt;
-    {{ projectDetail }}
-  &lt;/div&gt;
-&lt;/template&gt;
-&lt;script lang="ts"&gt;
-import { Component, Vue, Mixins } from 'vue-property-decorator'
-import ProjectMixin from '@/mixins/ProjectMixin'
-@Component
-export default class Project extends Mixins(ProjectMixin) {
-  get projectDetail(): string {
-    return this.projName + ' ' + 'HS'
-  }
-}
-&lt;/script&gt;
-</code></pre>
-<p>与ts等效的js代码如下</p>
-<pre><code>&lt;template&gt;
-  &lt;div class="project-detail"&gt;
-    {{ projectDetail }}
-  &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
-import ProjectMixin from '@/mixins/ProjectMixin'
-export default {
-  mixins: [ ProjectMixin ],
-  computed: {
-    projectDetail() {
-      return this.projName + ' ' + 'HS'
-    }
-  }
-}
-&lt;/script&gt;</code></pre>
-<p>多个混入的情况</p>
-<pre><code>import { Component, Mixins } from 'vue-property-decorator'
-
-export default class Test extends Mixins(Mixin1, Mixin2) {
-    test() {
-      this.methodFromMixin2()
-      console.log(this.valFromMixin1)
-    }
-}
-</code></pre>
-<h2 id="refs"><a href="#refs" class="headerlink" title="refs"></a>refs</h2><p>ts无法识别vue中的$refs,需要手动指定其类型：</p>
-<pre><code>&lt;template&gt;
-  &lt;loading ref="loading"/&gt;
-  &lt;input type="text" ref="inputRef"&gt;
-&lt;/template&gt;
-
-&lt;script lang="ts"&gt;
-import { Component } from 'vue-property-decorator'
-import Loading from "@/components/Loading.vue";
-
-@Component({
-  components: { Loading }
-})
-
-export default class Project extends Vue {
- $refs!: {
-    loading: Loading;
-    inputRef: HTMLInputElement;
-  };
-
- public mounted() {
-    this.$refs.loading.showLoading();
-    // (this.$refs.loading as Loading).showLoading();
-    this.$refs.inputRef.focus();
-  }
-}
-&lt;/script&gt;</code></pre>
-<h1 id="6-路由"><a href="#6-路由" class="headerlink" title="6 路由"></a>6 路由</h1><h2 id="路由创建"><a href="#路由创建" class="headerlink" title="路由创建"></a>路由创建</h2><pre><code>import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '@/pages/home/Home.vue';
-
-Vue.use(VueRouter);
-
-const routes: Array&lt;RouteConfig&gt; = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () =&gt; import(/* webpackChunkName: "about" */ '@/pages/about/About.vue')
-  }
-];
-
-const router = new VueRouter({
-  routes
-});
-
-export default router;
-</code></pre>
-<h2 id="组件中监听路由"><a href="#组件中监听路由" class="headerlink" title="组件中监听路由"></a>组件中监听路由</h2><pre><code>&lt;script lang="ts"&gt;
-import { Component, Vue, Watch } from 'vue-property-decorator';
-import { Route } from 'vue-router';
-
-@Component
-export default class About extends Vue {
-  @Watch('$route', { immediate: true })
-  private changeRouter(route: Route) {
-    console.log('route', route);
-  }
-}
-</code></pre>
-<h2 id="组件中使用路由勾子函数"><a href="#组件中使用路由勾子函数" class="headerlink" title="组件中使用路由勾子函数"></a>组件中使用路由勾子函数</h2><p>main.ts中：</p>
-<pre><code>import { Component } from 'vue-property-decorator';
-
-Component.registerHooks([
-  'beforeRouteEnter',
-  'beforeRouteLeave',
-  'beforeRouteUpdate'
-]);
-</code></pre>
-<p>组件中：</p>
-<pre><code>&lt;script lang="ts"&gt;
-import { Component, Vue, Watch } from 'vue-property-decorator';
-import { Route } from 'vue-router';
-
-@Component
-export default class About extends Vue {
-
-  private beforeRouteEnter(to: Route, from: Route, next: () =&gt; void): void {
-    console.log('beforeRouteEnter', to, from, next);
-    next(); 
-  }
-
-  private beforeRouteUpdate(to: Route, from: Route, next: () =&gt; void): void {
-    console.log('beforeRouteUpdate'); // 暂时不生效，版本问题
-    next();
-  }
-
-  private beforeRouteLeave(to: Route, from: Route, next: () =&gt; void): void {
-    console.log('beforeRouteLeave');
-    next();
-  }
-}</code></pre>
-<h1 id="7-数据请求"><a href="#7-数据请求" class="headerlink" title="7 数据请求"></a>7 数据请求</h1><p>对返回值和入参做类型约束：</p>
-<pre><code>// global.d.ts 
-declare interface ResponseBody&lt;T&gt; {
-  data: T;
-  code: number;
-  total: number;
-}
-declare interface ResponseStatus {
-  loading: boolean;
-  error: boolean;
-}
-declare interface Response&lt;T&gt; extends ResponseStatus {
-  res: IResponseBody&lt;T&gt;;
-}
-declare interface ResponseNotPage&lt;T&gt; extends ResponseStatus {
-  data: T;
-}
-declare interface PageParams {
-  page: number;
-  pageSize: number;
-}
-declare interface RequsetParams extends PageParams {
-  search: string;
-}
-
-
-// src/service/demo.ts
-export const getInfo = (id: number) =&gt;
-  request&lt;ResponseBody&lt;{ id: number; address?: string; time?: string }&gt;&gt;(
-    Api.GET_LAST_TRACE_INFO,
-    {
-      router: { id }
-    }
-  );</code></pre>
-<h1 id="8-全局状态管理"><a href="#8-全局状态管理" class="headerlink" title="8 全局状态管理"></a>8 全局状态管理</h1><h2 id="8-1-开始使用"><a href="#8-1-开始使用" class="headerlink" title="8.1 开始使用"></a>8.1 开始使用</h2><p>安装依赖</p>
-<pre><code>npm install vuex-module-decorators --save-dev</code></pre>
-<p>如果想通过名字空间的形式来使用module, 需在@Module装饰器中添加额外的参数. 例如, 以下示例代码中添加一个namespaced为home的module</p>
-<pre><code>// src\store\module\home.ts
-import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators';
-import store from '@/store';
-
-@Module({ namespaced: true, dynamic: true, name: 'home', store })
-
-export default class Home extends VuexModule {
-  public name: string = '';
-  public message: string = '';
-
-  get getMessage() {
-    return `当前时间${new Date()}：${this.message}`;
-  }
-
-  @Mutation
-  private SET_NAME(newName: string): void {
-    this.name = newName;
-  }
-
-  @Mutation
-  private SET_MESSAGE(message: string) {
-    this.message = message;
-  }
-
-  @Action
-  public updateMessage(newName: string): void {
-    this.SET_NAME(newName);
-    this.SET_MESSAGE('欢迎您,');
-  }
-}
-
-export const HomeModule = getModule(Home);
-
-</code></pre>
-<p>与ts等效的js代码如下</p>
-<pre><code>const UserModule = {
-    state: {
-        name: '',
-        message: ''
-    },
-    getters: { 
-        getMessage: state =&gt; `当前时间${new Date()}：${state.user.message}`
-    },
-    mutations: { 
-        SET_NAME: (state, name) =&gt; {
-            state.name = name
-        },
-        SET_MESSAGE: (state, message) =&gt; {
-            state.message = message
-        }
-    },
-    actions: { 
-        updateMessage({commit}, newName){
-            commit("SET_NAME", newName);
-            commit("SET_MESSAGE", "欢迎您,");
-        }
-    },
-
-}
-</code></pre>
-<p>dynamic模式下的store</p>
-<pre><code>// \src\store\index.ts
-import Vue from 'vue';
-import Vuex from 'vuex';
-
-Vue.use(Vuex);
-
-// Declare empty store first, dynamically register all modules later.
-export default new Vuex.Store({});
-</code></pre>
-<p>组件中使用：</p>
-<pre><code>// \src\pages\home\Home.vue
-
-&lt;template&gt;
-  &lt;div class="home"&gt;
-    &lt;img alt="Vue logo" src="../../assets/logo.png" /&gt;
-    &lt;hello-world msg="vue.js" /&gt;
-    {{ $store.state.home.name }}
-    &lt;br/&gt;
-    {{ info }}
-    &lt;button @click="handleClick"&gt;点击&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script lang="ts"&gt;
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue';
-import { HomeModule } from '@/store/modules/home';
-
-@Component({
-  components: {
-    HelloWorld
-  }
-})
-export default class Home extends Vue {
-  get info() {
-    return HomeModule.getMessage;
-  }
-
-  private handleClick() {
-    HomeModule.updateMessage('liwu');
-  }
-}
-
-&lt;/script&gt;
-</code></pre>
+<p><img src="http://qj245iy9p.hn-bkt.clouddn.com/5.png" alt="image"></p>
+<p>这时候其实第二个元素有部分被浮动元素所覆盖，(但是文本信息不会被浮动元素所覆盖) 如果想避免元素被覆盖，可触第二个元素的 BFC 特性，在第二个元素中加入 overflow: hidden，就会变成：</p>
+<p><img src="http://qj245iy9p.hn-bkt.clouddn.com/6.png" alt="image"></p>
+<p>这个方法可以用来实现两列自适应布局，效果不错，这时候左边的宽度固定，右边的内容自适应宽度(去掉上面右边内容的宽度)。</p>
 
             </div>
             <hr/>
@@ -1310,7 +571,7 @@ export default class Home extends Vue {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/">https://leeycode.github.io/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/</a>
+                    <a href="https://leeycode.github.io/2020/08/30/bfc-yuan-li-ji-ying-yong/">https://leeycode.github.io/2020/08/30/bfc-yuan-li-ji-ying-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1348,8 +609,8 @@ export default class Home extends Vue {
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/vue/">
-                                    <span class="chip bg-color">vue</span>
+                                <a href="/tags/css/">
+                                    <span class="chip bg-color">css</span>
                                 </a>
                             
                         </div>
@@ -1521,54 +782,6 @@ export default class Home extends Vue {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/">
-                    <div class="card-image">
-                        
-                        <img src="http://qj245iy9p.hn-bkt.clouddn.com/Vue.js-cta-main.jpg" class="responsive-img" alt="vue项目性能优化方案">
-                        
-                        <span class="card-title">vue项目性能优化方案</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-30
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/" class="post-category">
-                                    新鲜技能
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
                 <a href="/2020/09/11/dang-cors-yu-dao-samesite-md/">
                     <div class="card-image">
                         
@@ -1585,9 +798,9 @@ export default class Home extends Vue {
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-11
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1605,6 +818,58 @@ export default class Home extends Vue {
                     
                     <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
                         <span class="chip bg-color">踩的坑</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/16/hooks-ru-men-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        <img src="http://qj245iy9p.hn-bkt.clouddn.com/1_yjH3SiDaVWtpBX0g_2q68g.png" class="responsive-img" alt="Hooks入门教程">
+                        
+                        <span class="card-title">Hooks入门教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/" class="post-category">
+                                    新鲜技能
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/react/">
+                        <span class="chip bg-color">react</span>
+                    </a>
+                    
+                    <a href="/tags/hooks/">
+                        <span class="chip bg-color">hooks</span>
                     </a>
                     
                 </div>
