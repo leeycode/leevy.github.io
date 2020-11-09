@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="简单的在线数据mock, 大脸猫">
+    <meta name="keywords" content="spread和rest操作符, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>简单的在线数据mock | 大脸猫</title>
+    <title>spread和rest操作符 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">简单的在线数据mock</h1>
+                    <h1 class="description center-align post-title">spread和rest操作符</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
-                                <span class="chip bg-color">项目总结</span>
+                            <a href="/tags/es/">
+                                <span class="chip bg-color">es</span>
                             </a>
                         
                     </div>
@@ -425,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                开发工具
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                前端基础
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-08-30
+                    2020-11-09
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    742
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -469,205 +469,150 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h1><p>在接口调试前，前端根据定义好的接口文档，模拟数据，发起请求，编写完整的页面逻辑，等真正开始调试的时候，将请求地址更换即可。</p>
-<p>本文只介绍在线 mock 数据的方式，在线 mock 跟本地 mock 比较，可以省去安装配置，运行服务，多人协作数据不通的多种问题。</p>
-<h1 id="一个简单的列子"><a href="#一个简单的列子" class="headerlink" title="一个简单的列子"></a>一个简单的列子</h1><p><img src="https://7.dusays.com/2020/11/02/98aaa2c403dd1.png"></p>
-<p>返回结果：</p>
-<p><img src="https://7.dusays.com/2020/11/02/a2df1d69cadcf.png"></p>
-<h1 id="Mock-语法简介"><a href="#Mock-语法简介" class="headerlink" title="Mock 语法简介"></a>Mock 语法简介</h1><h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><pre><code>{
-    "base": {
-    "range": "@range(3, 7)",
-    "string": "@string(7, 20)",
-    "character": "@character(\"abcde\")",
-    "float": "@float(60, 100)",
-    "integer": "@integer(60, 100)",
-    "natural": "@natural(60, 100)",
-    "boolean": "@boolean"
-  },
-}
-</code></pre>
-<p>预览：</p>
-<pre><code>"base": {
-    "range": [3,4,5,6],
-    "string": "qg3)zBWiLlbrsisX",
-    "character": "c",
-    "float": 66.87535733306,
-    "integer": 66,
-    "natural": 71,
-    "boolean": false
-  },</code></pre>
-<h2 id="date"><a href="#date" class="headerlink" title="date"></a>date</h2><pre><code>"date": {
-    "date": "@date",
-    "time": "@time",
-    "datetime": "@datetime",
-    "now": "@now"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"date": {
-    "date": "1971-10-18",
-    "time": "02:04:17",
-    "datetime": "1985-03-10 22:47:49",
-    "now": "2019-09-25 13:56:44"
-    }</code></pre>
-<h2 id="image"><a href="#image" class="headerlink" title="image"></a>image</h2><pre><code> "image": {
-    "image": "@image(\"200x200\", \"#50B347\", \"#FFF\", \"FastMock\")"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"image": {
-    "image": "http://dummyimage.com/200x200/50B347/FFF&amp;text=FastMock"
-  },</code></pre>
-<h2 id="text"><a href="#text" class="headerlink" title="text"></a>text</h2><pre><code>"text": {
-    "paragraph": "@paragraph(1, 3)",
-    "sentence": "@sentence(3, 5)",
-    "word": "@word(3, 5)",
-    "title": "@title(3, 5)",
-    "cparagraph": "@cparagraph(1, 3)",
-    "csentence": "@csentence(3, 5)",
-    "cword": "@cword(\"零一二三四五六七八九十\", 5, 7)",
-    "ctitle": "@ctitle(3, 5)"
-  },
-</code></pre>
-<p>预览：</p>
-<pre><code> "text": {
-    "paragraph": "Gifp ifnk hrreyi foajbgielv doijqrd ffaooi hlwstfcfw nrgsioum wtgashcoiy sintskl hnjk ebcsec. Bhlhghu embjvvs bckwkibqhs qgqz psu mjsodprwf exidxyqnq cdyqoatr xkezagaqu ijrcqrj vvxwdwgq ivv jxcpeybpus sojcn cscdlnmi kopzvuqfin.",
-    "sentence": "Xuqxp qvek ttgiq.",
-    "word": "ynug",
-    "title": "Cdnsxa Yjhrlbb Rmofrixln Jubgpxm Gjpdujgryi",
-    "cparagraph": "装增克体都月每手物即用周几想军点程。将角权响金华生候社根利情也龙。化必去边织众东位史回际平马至。",
-    "csentence": "存断实。",
-    "cword": "三七九六六",
-    "ctitle": "油眼采小"
-  },</code></pre>
-<h2 id="name"><a href="#name" class="headerlink" title="name"></a>name</h2><pre><code>"name": {
-    "first": "@first",
-    "last": "@last",
-    "name": "@name",
-    "cfirst": "@cfirst",
-    "clast": "@clast",
-    "cname": "@cname"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"name": {
-    "first": "Jennifer",
-    "last": "Anderson",
-    "name": "Laura Moore",
-    "cfirst": "胡",
-    "clast": "秀兰",
-    "cname": "姜敏"
-  },</code></pre>
-<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><pre><code>"web": {
-    "url": "@url",
-    "domain": "@domain",
-    "protocol": "@protocol",
-    "tld": "@tld",
-    "email": "@email",
-    "ip": "@ip"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"web": {
-    "url": "mid://nypjj.kr/mizdvfhl",
-    "domain": "jbgmh.cn",
-    "protocol": "ftp",
-    "tld": "fj",
-    "email": "r.bdwejkiuy@ltatgpp.an",
-    "ip": "175.52.62.226"
-  },</code></pre>
-<h2 id="address"><a href="#address" class="headerlink" title="address"></a>address</h2><pre><code>"address": {
-    "region": "@region",
-    "province": "@province",
-    "city": "@city(true)",
-    "county": "@county(true)",
-    "zip": "@zip"
-  },</code></pre>
-<p>预览：</p>
-<pre><code>"address": {
-    "region": "华中",
-    "province": "云南省",
-    "city": "天津 天津市",
-    "county": "台湾 金门县 金宁乡",
-    "zip": "539375"
-  },</code></pre>
-<h2 id="miscellaneous"><a href="#miscellaneous" class="headerlink" title="miscellaneous"></a>miscellaneous</h2><pre><code> "miscellaneous": {
-    "id": "@id",
-    "guid": "@guid",
-    "increment": "@increment(1000)"
-  }</code></pre>
-<p>预览：</p>
-<pre><code> "miscellaneous": {
-    "id": "370000201504299208",
-    "guid": "6E6155c0-f5b5-F3F6-5F0D-23EB44C21313",
-    "increment": 253109
-  }</code></pre>
-<h1 id="Mock-高阶用法"><a href="#Mock-高阶用法" class="headerlink" title="Mock 高阶用法"></a>Mock 高阶用法</h1><blockquote>
-<p>Mock 能支持 function，function 中不能用上面的@XX,用 Mock.mock(“@xxx”)替代。function 中还能获取全部请求头和参数。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>对象</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Mock</td>
-<td>Mock 对象</td>
-</tr>
-<tr>
-<td>_req.url</td>
-<td>获得请求 url 地址</td>
-</tr>
-<tr>
-<td>_req.method</td>
-<td>获取请求方法</td>
-</tr>
-<tr>
-<td>_req.params</td>
-<td>获取 url 参数对象</td>
-</tr>
-<tr>
-<td>_req.querystring</td>
-<td>获取查询参数字符串(url 中?后面的部分)，不包含 ?</td>
-</tr>
-<tr>
-<td>_req.query</td>
-<td>将查询参数字符串进行解析并以对象的形式返回，如果没有查询参数字字符串则返回一个空对象</td>
-</tr>
-<tr>
-<td>_req.body</td>
-<td>当 post 请求以 x-www-form-urlencoded 方式提交时，我们可以拿到请求的参数对象</td>
-</tr>
-</tbody></table>
-<h2 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h2><pre><code>{
-  code: function({
-    _req
-  }) {
-    const userName = _req.query.userName;
-    return userName ? 0 : -1;
-  },
-  data: function({
-    _req,
-    Mock
-  }) {
-    const userName = _req.query.userName;
-    return userName ? {
-      token: Mock.mock("@guid()"),
-      userId: Mock.mock("@id(5)"),
-      name: userName,
-      avatar: Mock.mock("@image(200x100, #FF6600)"),
-      message: "登录成功"
-    } : {
-      message: "登录失败"
-    }
-  }
-}</code></pre>
-<p>预览：</p>
-<p><img src="https://note.youdao.com/yws/public/resource/633e9bc706a3a274d9926f95b1806671/xmlnote/1C6017CB352F41DD9B758D064EBCFD4B/15016" alt="image"></p>
-<h1 id="常用的在线-mock-工具"><a href="#常用的在线-mock-工具" class="headerlink" title="常用的在线 mock 工具"></a>常用的在线 mock 工具</h1><ul>
-<li><p>💛 <a target="_blank" rel="noopener" href="https://www.fastmock.site/">fast-mock</a></p>
-</li>
-<li><p>💗 <a target="_blank" rel="noopener" href="https://easy-mock.com/">easy-mock</a></p>
-</li>
-</ul>
+                <h1 id="spread和rest的区别"><a href="#spread和rest的区别" class="headerlink" title="spread和rest的区别"></a>spread和rest的区别</h1><p>spread和rest运算符都是<code>...</code>+<code>变量/参数</code>的形式。是spread还是rest，要根据上下文情境来判断。</p>
+<h2 id="1-spread"><a href="#1-spread" class="headerlink" title="1.spread"></a>1.spread</h2><p>当被用于迭代器中时，它是 spread 操作符：</p>
+<pre class=" language-javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">// 1 2 3 4 5</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//[1,2,3,4,5]</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> numbers <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">38</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">add</span><span class="token punctuation">(</span><span class="token operator">...</span>numbers<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 42</span></code></pre>
+<p>spread主要形式是<code>...[Array]</code>，表示对数组的展开。</p>
+<h2 id="2-rest"><a href="#2-rest" class="headerlink" title="2.rest"></a>2.rest</h2><p>当被用于定义函数的参数时，是 rest 操作符：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">push</span><span class="token punctuation">(</span><span class="token operator">...</span>items<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>items<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token function">push</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//[4,1,2,3]</span></code></pre>
+<p>rest主要是将函数的多个参数转化成数组，<strong>而且只能放在函数参数的最后一个位置</strong>，否则，比如<code>（array,...items,other）</code>会报错。 </p>
+<p>而rest的出现，让已经不被推荐使用的<code>arguments</code>彻底寿终正寝了。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">...</span>arguments<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//spread形式的用法</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//>> 1,2,3</span>
+<span class="token comment" spellcheck="true">//>> 1,2,3</span></code></pre>
+<h1 id="用法示例"><a href="#用法示例" class="headerlink" title="用法示例"></a>用法示例</h1><h2 id="1-添加属性"><a href="#1-添加属性" class="headerlink" title="1.添加属性"></a>1.添加属性</h2><p>克隆一个对象，同时向(浅)拷贝对象添加附加属性。<br>在这个示例中，user 被(浅)拷贝，password 属性被添加到 userWithPass 中。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Howard Moon'</span><span class="token punctuation">}</span>
+<span class="token keyword">const</span> userWithPass <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">...</span>user<span class="token punctuation">,</span> password<span class="token punctuation">:</span> <span class="token string">'Password!'</span> <span class="token punctuation">}</span>
+
+user <span class="token comment" spellcheck="true">//>> { id: 100, name: 'Howard Moon' }</span>
+userWithPass <span class="token comment" spellcheck="true">//>> { id: 100, name: 'Howard Moon', password: 'Password!' }</span></code></pre>
+<h2 id="2-对象合并"><a href="#2-对象合并" class="headerlink" title="2.对象合并"></a>2.对象合并</h2><p>将两个对象合并到一个新对象中。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> part1 <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Howard Moon'</span> <span class="token punctuation">}</span>
+<span class="token keyword">const</span> part2 <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> password<span class="token punctuation">:</span> <span class="token string">'Password!'</span> <span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> user1 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">...</span>part1<span class="token punctuation">,</span> <span class="token operator">...</span>part2 <span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//>> { id: 100, name: 'Howard Moon', password: 'Password!' }</span></code></pre>
+<p>对象也可以使用以下语法合并：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> partial <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Howard Moon'</span> <span class="token punctuation">}</span>
+<span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">...</span>partial<span class="token punctuation">,</span> id<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> password<span class="token punctuation">:</span> <span class="token string">'Password!'</span> <span class="token punctuation">}</span>
+
+user <span class="token comment" spellcheck="true">//>> { id: 100, name: 'Howard Moon', password: 'Password!' }</span></code></pre>
+<h2 id="3-排除对象属性"><a href="#3-排除对象属性" class="headerlink" title="3.排除对象属性"></a>3.排除对象属性</h2><p>可以结合使用 rest 运算符删除属性。 在下面这个例子里，password 被删除 ，其余的属性作为 rest 返回。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> noPassword <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> password<span class="token punctuation">,</span> <span class="token operator">...</span>rest <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> rest
+<span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token punctuation">{</span>
+  id<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+  name<span class="token punctuation">:</span> <span class="token string">'coffe1891'</span><span class="token punctuation">,</span>
+  password<span class="token punctuation">:</span> <span class="token string">'Password!'</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">noPassword</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//>> { id: 100, name: 'coffe1891' }</span></code></pre>
+<h2 id="4-动态排除属性"><a href="#4-动态排除属性" class="headerlink" title="4.动态排除属性"></a>4.动态排除属性</h2><p>函数接受一个 prop 作为参数。使用计算对象属性名称，可以从克隆中动态地删除属性。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> user1 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  id<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+  name<span class="token punctuation">:</span> <span class="token string">'coffe1891'</span><span class="token punctuation">,</span>
+  password<span class="token punctuation">:</span> <span class="token string">'Password!'</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> removeProperty <span class="token operator">=</span> prop <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token punctuation">[</span>prop<span class="token punctuation">]</span><span class="token punctuation">:</span> _<span class="token punctuation">,</span> <span class="token operator">...</span>rest <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> rest
+<span class="token comment" spellcheck="true">//                     ----       ------</span>
+<span class="token comment" spellcheck="true">//                          \   /</span>
+<span class="token comment" spellcheck="true">//                dynamic destructuring</span>
+
+<span class="token keyword">const</span> removePassword <span class="token operator">=</span> <span class="token function">removeProperty</span><span class="token punctuation">(</span><span class="token string">'password'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> removeId <span class="token operator">=</span> <span class="token function">removeProperty</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span>
+
+<span class="token function">removePassword</span><span class="token punctuation">(</span>user1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//>> { id: 100, name: 'coffe1891' }</span>
+<span class="token function">removeId</span><span class="token punctuation">(</span>user1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//>> { name: 'coffe1891', password: 'Password!' }</span></code></pre>
+<h2 id="5-对属性进行排序"><a href="#5-对属性进行排序" class="headerlink" title="5.对属性进行排序"></a>5.对属性进行排序</h2><p>有时性质并不按照我们需要的顺序排列。 使用一些技巧，我们可以将属性推到列表的顶部，或者将它们移到底部。若要将 id 移动到第一个位置，在扩展对象之前将 <code>id: undefined</code> 添加到新的 Object 最前面。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> user3 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  password<span class="token punctuation">:</span> <span class="token string">'Password!'</span><span class="token punctuation">,</span>
+  name<span class="token punctuation">:</span> <span class="token string">'Naboo'</span><span class="token punctuation">,</span>
+  id<span class="token punctuation">:</span> <span class="token number">300</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> organize <span class="token operator">=</span> object <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token punctuation">{</span> id<span class="token punctuation">:</span> undefined<span class="token punctuation">,</span> <span class="token operator">...</span>object <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//                            -------------</span>
+<span class="token comment" spellcheck="true">//                          /</span>
+<span class="token comment" spellcheck="true">//  move id to the first property</span>
+
+<span class="token function">organize</span><span class="token punctuation">(</span>user3<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//>> { id: 300, password: 'Password!', name: 'Naboo' }</span></code></pre>
+<p>若要将 password 移到最后一个属性，请从对象中解构 password。然后在使用 Rest 操作符后重新设置 password 属性。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> user3 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  password<span class="token punctuation">:</span> <span class="token string">'Password!'</span><span class="token punctuation">,</span>
+  name<span class="token punctuation">:</span> <span class="token string">'Naboo'</span><span class="token punctuation">,</span>
+  id<span class="token punctuation">:</span> <span class="token number">300</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> organize <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> password<span class="token punctuation">,</span> <span class="token operator">...</span>object <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+  <span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span>object<span class="token punctuation">,</span> password <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//              --------</span>
+<span class="token comment" spellcheck="true">//             /</span>
+<span class="token comment" spellcheck="true">// move password to last property</span>
+
+<span class="token function">organize</span><span class="token punctuation">(</span>user3<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//>> { name: 'Naboo', id: 300, password: 'Password!' }</span></code></pre>
+<h2 id="6-默认属性"><a href="#6-默认属性" class="headerlink" title="6.默认属性"></a>6.默认属性</h2><p>默认属性是仅当它们不包含在原始对象中时才设置的值。<br>在本例中，user2 不包含 quotes 属性。 setdefaults 函数确保所有对象都设置了 quotes 属性，否则它将被设置为<code>[]</code>。<br>当调用 setDefaults (user2)时，返回值将包含 quotes 属性: <code>[]</code>。<br>在调用 setDefaults (user4)时，因为 user4 已经有了 quotes 属性，所以不会修改该属性。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> user2 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  id<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+  name<span class="token punctuation">:</span> <span class="token string">'Vince Noir'</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> user4 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  id<span class="token punctuation">:</span> <span class="token number">400</span><span class="token punctuation">,</span>
+  name<span class="token punctuation">:</span> <span class="token string">'Bollo'</span><span class="token punctuation">,</span>
+  quotes<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"I've got a bad feeling about this..."</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> setDefaults <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> quotes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">...</span>object<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+  <span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span>object<span class="token punctuation">,</span> quotes <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token function">setDefaults</span><span class="token punctuation">(</span>user2<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//>> { id: 200, name: 'Vince Noir', quotes: [] }</span>
+
+<span class="token function">setDefaults</span><span class="token punctuation">(</span>user4<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//>> {</span>
+<span class="token comment" spellcheck="true">//>>   id: 400,</span>
+<span class="token comment" spellcheck="true">//>>   name: 'Bollo',</span>
+<span class="token comment" spellcheck="true">//>>   quotes: ["I've got a bad feeling about this..."]</span>
+<span class="token comment" spellcheck="true">//>> }</span></code></pre>
+<p>如果你希望默认值先出现而不是后出现，也可以这样写：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> setDefaults <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">...</span>object<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token punctuation">{</span> quotes<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">...</span>object <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
+<h2 id="7-属性重命名"><a href="#7-属性重命名" class="headerlink" title="7.属性重命名"></a>7.属性重命名</h2><p>通过结合上面的技术，可以创建一个函数来重命名属性。假设有一些大写 ID 的对象属性名应该是小写的 id。 首先从对象解构 ID 然后在对象 Spread 时将其作为 id 添加回去。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> renamed <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> ID<span class="token punctuation">,</span> <span class="token operator">...</span>object <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token punctuation">{</span> id<span class="token punctuation">:</span> ID<span class="token punctuation">,</span> <span class="token operator">...</span>object <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token punctuation">{</span>
+  ID<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+  name<span class="token punctuation">:</span> <span class="token string">"Bob Fossil"</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">renamed</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//>> { id: 500, name: 'Bob Fossil' }</span></code></pre>
+<h2 id="8-添加条件属性"><a href="#8-添加条件属性" class="headerlink" title="8.添加条件属性"></a>8.添加条件属性</h2><p>在这个例子中，只有当 password 是真实的时候才会添加 password。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'Howard Moon'</span> <span class="token punctuation">}</span>
+<span class="token keyword">const</span> password <span class="token operator">=</span> <span class="token string">'Password!'</span>
+<span class="token keyword">const</span> userWithPassword <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>user<span class="token punctuation">,</span>
+  id<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span><span class="token punctuation">(</span>password <span class="token operator">&amp;&amp;</span> <span class="token punctuation">{</span> password <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+userWithPassword <span class="token comment" spellcheck="true">//>> { id: 100, name: 'Howard Moon', password: 'Password!' }</span></code></pre>
 
             </div>
             <hr/>
@@ -693,7 +638,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2019/08/30/jian-dan-de-zai-xian-shu-ju-mock/">https://leeycode.github.io/2019/08/30/jian-dan-de-zai-xian-shu-ju-mock/</a>
+                    <a href="https://leeycode.github.io/2020/11/09/spread-he-rest-cao-zuo-fu/">https://leeycode.github.io/2020/11/09/spread-he-rest-cao-zuo-fu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -731,8 +676,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
-                                    <span class="chip bg-color">项目总结</span>
+                                <a href="/tags/es/">
+                                    <span class="chip bg-color">es</span>
                                 </a>
                             
                         </div>
@@ -900,17 +845,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/09/16/hooks-ru-men-jiao-cheng/">
+                <a href="/2020/11/09/spread-he-rest-cao-zuo-fu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Hooks入门教程">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="spread和rest操作符">
                         
-                        <span class="card-title">Hooks入门教程</span>
+                        <span class="card-title">spread和rest操作符</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -920,9 +866,58 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-16
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    前端基础
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/es/">
+                        <span class="chip bg-color">es</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/">
+                    <div class="card-image">
+                        
+                        <img src="https://7.dusays.com/2020/11/02/382609aa8c82c.jpeg" class="responsive-img" alt="TypeScript在vue项目中的应用">
+                        
+                        <span class="card-title">TypeScript在vue项目中的应用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -938,65 +933,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/react/">
-                        <span class="chip bg-color">react</span>
-                    </a>
-                    
-                    <a href="/tags/hooks/">
-                        <span class="chip bg-color">hooks</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/08/13/vue-zu-jian-bian-ma-gui-fan/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Vue组件编码规范">
-                        
-                        <span class="card-title">Vue组件编码规范</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-13
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/" class="post-category">
-                                    前端规范
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/">
-                        <span class="chip bg-color">前端规范</span>
-                    </a>
-                    
                     <a href="/tags/vue/">
                         <span class="chip bg-color">vue</span>
+                    </a>
+                    
+                    <a href="/tags/TypeScript/">
+                        <span class="chip bg-color">TypeScript</span>
                     </a>
                     
                 </div>
