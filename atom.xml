@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2020-11-09T08:43:31.357Z</updated>
+  <updated>2020-11-11T02:43:07.904Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从es7到es12</title>
+    <link href="https://leeycode.github.io/2020/11/10/cong-es7-dao-es12/"/>
+    <id>https://leeycode.github.io/2020/11/10/cong-es7-dao-es12/</id>
+    <published>2020-11-10T08:08:18.000Z</published>
+    <updated>2020-11-11T02:43:07.904Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;本篇导读&quot;&gt;&lt;a href=&quot;#本篇导读&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="es" scheme="https://leeycode.github.io/tags/es/"/>
+    
+  </entry>
   
   <entry>
     <title>spread和rest操作符</title>
