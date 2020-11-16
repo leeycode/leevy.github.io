@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Vue组件编码规范, 大脸猫">
+    <meta name="keywords" content="执行上下文相关概念, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Vue组件编码规范 | 大脸猫</title>
+    <title>执行上下文相关概念 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Vue组件编码规范</h1>
+                    <h1 class="description center-align post-title">执行上下文相关概念</h1>
                 </div>
             </div>
         </div>
@@ -413,12 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/">
-                                <span class="chip bg-color">前端规范</span>
-                            </a>
-                        
-                            <a href="/tags/vue/">
-                                <span class="chip bg-color">vue</span>
+                            <a href="/tags/javaScript/">
+                                <span class="chip bg-color">javaScript</span>
                             </a>
                         
                     </div>
@@ -429,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/" class="post-category">
-                                前端规范
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                前端基础
                             </a>
                         
                     </div>
@@ -442,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-08-13
+                    2020-11-16
                 </div>
                 
 
@@ -451,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.1k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    9 分
                 </div>
                 
 
@@ -473,343 +469,122 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><blockquote>
-<p>本规范提供了一种统一的编码规范来编写 Vue.js 代码。这使得代码具有如下的特性：</p>
-</blockquote>
+                <h1 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>执行上下文就是当前 JavaScript 代码被解析和执行时所在的环境，也叫作执行环境。</p>
+<p>它是一个抽象概念，JavaScript 中运行任何的代码都是在执行上下文中运行，在该执行上下文的创建阶段，变量对象（Variable Object，本文接下来会详述）、作用域链、this指向会分别被确定。</p>
+<p><img src="https://7.dusays.com/2020/11/16/9349c5ea172d6.png"></p>
+<h2 id="执行上下文类型"><a href="#执行上下文类型" class="headerlink" title="执行上下文类型"></a>执行上下文类型</h2><p>执行上下文总共有三种类型：</p>
 <ul>
-<li>其它开发者或是团队成员更容易阅读和理解。</li>
-<li>IDEs 更容易理解代码，从而提供高亮、格式化等辅助功能</li>
-<li>更容易使用现有的工具</li>
-<li>更容易实现缓存以及代码包的分拆</li>
+<li><strong>全局执行上下文</strong>：这是默认的、最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文中。它做了两件事：</li>
 </ul>
-<h1 id="基于模块开发"><a href="#基于模块开发" class="headerlink" title="基于模块开发"></a>基于模块开发</h1><p>始终基于模块的方式来构建你的 app，每一个子模块只做一件事情。</p>
-<p>Vue.js 的设计初衷就是帮助开发者更好的开发界面模块。一个模块是应用程序中独立的一个部分。</p>
-<h2 id="怎么做？"><a href="#怎么做？" class="headerlink" title="怎么做？"></a>怎么做？</h2><blockquote>
-<p>每一个 Vue 组件（等同于模块）首先必须专注于解决一个单一的问题，独立的、可复用的、微小的 和 可测试的。</p>
-</blockquote>
-<p>如果你的组件做了太多的事或是变得臃肿，请将其拆分成更小的组件并保持单一的原则。一般来说，尽量保证每一个文件的代码行数不要超过 100 行。也请保证组件可独立的运行。</p>
-<h1 id="vue-组件命名"><a href="#vue-组件命名" class="headerlink" title="vue 组件命名"></a>vue 组件命名</h1><p>组件的命名需遵从以下原则：</p>
+<ol>
+<li>创建一个全局对象，在浏览器中这个全局对象就是 window 对象；</li>
+<li>将 this 指针指向这个全局对象。一个程序中只能存在一个全局执行上下文。</li>
+</ol>
 <ul>
-<li><p><strong>有意义的</strong>: 不过于具体，也不过于抽象</p>
-</li>
-<li><p><strong>简短</strong>: 2 到 3 个单词</p>
-</li>
-<li><p><strong>具有可读性</strong>: 以便于沟通交流<br>同时还需要注意：</p>
-</li>
-<li><p>必须符合<strong>自定义元素规范</strong>: 使用连字符分隔单词，切勿使用保留字。</p>
-</li>
-<li><p>app- 前缀作为命名空间:</p>
-</li>
+<li><strong>函数执行上下文</strong>：每次调用函数时，都会为该函数创建一个新的执行上下文。每个函数都拥有自己的执行上下文，但是只有在函数被调用的时候才会被创建。一个程序中可以存在任意数量的函数执行上下文。每当一个新的执行上下文被创建，它都会按照特定的顺序执行一系列步骤，具体过程将在本文后面讨论。</li>
+<li>eval执行上下文：运行在 eval 函数中的代码也获得了自己的执行上下文，ES6 之后不再推荐使用 eval 函数，所以本书出于面试实用考虑，不会深入讨论eval。</li>
 </ul>
-<p>如果非常通用的话可使用一个单词来命名，这样可以方便于其它项目里复用。</p>
-<h2 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h2><ul>
-<li>组件是通过组件名来调用的。所以组件名必须简短、富有含义并且具有可读性。</li>
+<h2 id="执行上下文的生命周期"><a href="#执行上下文的生命周期" class="headerlink" title="执行上下文的生命周期"></a>执行上下文的生命周期</h2><p>执行上下文的生命周期包括三个阶段：创建阶段 → 执行阶段 → 回收阶段，本文重点介绍创建阶段。</p>
+<h3 id="a-创建阶段"><a href="#a-创建阶段" class="headerlink" title="a. 创建阶段"></a>a. 创建阶段</h3><p>当函数被调用，但未执行任何其内部代码之前，会做以下三件事：</p>
+<ul>
+<li>创建变量对象：首先初始化函数的参数 arguments，提升函数声明和变量声明（变量的<strong>声明提前</strong>有赖于<code>var</code>关键字）。</li>
+<li>创建作用域链：在执行期上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，JavaScript 始终从代码嵌套的最内层开始，如果最内层没有找到变量，就会跳转到上一层父作用域中查找，直到找到该变量。</li>
+<li>确定 this 指向。</li>
 </ul>
-<h2 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h2><pre><code>!-- 推荐 --&gt;
-&lt;app-header&gt;&lt;/app-header&gt;
-&lt;user-list&gt;&lt;/user-list&gt;
-&lt;range-slider&gt;&lt;/range-slider&gt;
-
-&lt;!-- 避免 --&gt;
-&lt;btn-group&gt;&lt;/btn-group&gt; &lt;!-- 虽然简短但是可读性差. 使用 `button-group` 替代 --&gt;
-&lt;ui-slider&gt;&lt;/ui-slider&gt; &lt;!-- ui 前缀太过于宽泛，在这里意义不明确 --&gt;
-&lt;slider&gt;&lt;/slider&gt; &lt;!-- 与自定义元素规范不兼容 --&gt;</code></pre>
-<h1 id="组件表达式简单化"><a href="#组件表达式简单化" class="headerlink" title="组件表达式简单化"></a>组件表达式简单化</h1><p>Vue.js 的表达式是 100% 的 Javascript 表达式。这使得其功能性很强大，但也带来潜在的复杂性。因此，你应该尽量保持表达式的简单化。</p>
-<h2 id="为什么？-1"><a href="#为什么？-1" class="headerlink" title="为什么？"></a>为什么？</h2><ul>
-<li>复杂的行内表达式难以阅读。</li>
-<li>行内表达式是不能够通用的，这可能会导致重复编码的问题。</li>
-<li>IDE 基本上不能识别行内表达式语法，所以使用行内表达式 IDE 不能提供自动补全和语法校验功能。</li>
-</ul>
-<h2 id="怎么做？-1"><a href="#怎么做？-1" class="headerlink" title="怎么做？"></a>怎么做？</h2><p>如果你发现写了太多复杂并难以阅读的行内表达式，那么可以使用 method 或是 computed 属性来替代其功能。</p>
-<pre><code>&lt;!-- 推荐 --&gt;
-&lt;template&gt;
-  &lt;h1&gt;
-    {{ `${year}-${month}` }}
-  &lt;/h1&gt;
-&lt;/template&gt;
-&lt;script type="text/javascript"&gt;
-  export default {
-    computed: {
-      month() {
-        return this.twoDigits((new Date()).getUTCMonth() + 1);
-      },
-      year() {
-        return (new Date()).getUTCFullYear();
-      }
-    },
-    methods: {
-      twoDigits(num) {
-        return ('0' + num).slice(-2);
-      }
-    },
-  };
-&lt;/script&gt;
-
-&lt;!-- 避免 --&gt;
-&lt;template&gt;
-  &lt;h1&gt;
-    {{ `${(new Date()).getUTCFullYear()}-${('0' + ((new Date()).getUTCMonth()+1)).slice(-2)}` }}
-  &lt;/h1&gt;
-&lt;/template&gt;</code></pre>
-<h1 id="组件-props-原子化"><a href="#组件-props-原子化" class="headerlink" title="组件 props 原子化"></a>组件 props 原子化</h1><p>虽然 Vue.js 支持传递复杂的 JavaScript 对象通过 props 属性，但是你应该尽可能的使用原始类型的数据。尽量只使用 JavaScript 原始类型（字符串、数字、布尔值）和函数。尽量避免复杂的对象。</p>
-<h2 id="为什么？-2"><a href="#为什么？-2" class="headerlink" title="为什么？"></a>为什么？</h2><ul>
-<li>使得组件 API 清晰直观。</li>
-<li>只使用原始类型和函数作为 props 使得组件的 API 更接近于 HTML(5) 原生元素。</li>
-<li>其它开发者更好的理解每一个 prop 的含义、作用。</li>
-<li>传递过于复杂的对象使得我们不能够清楚的知道哪些属性或方法被自定义组件使用，这使得代码难以重构和维护。</li>
-</ul>
-<h2 id="怎么做？-2"><a href="#怎么做？-2" class="headerlink" title="怎么做？"></a>怎么做？</h2><p>组件的每一个属性单独使用一个 props，并且使用函数或是原始类型的值。</p>
-<pre><code>&lt;!-- 推荐 --&gt;
-&lt;range-slider
-  :values="[10, 20]"
-  :min="0"
-  :max="100"
-  :step="5"
-  @on-slide="updateInputs"
-  @on-end="updateResults"&gt;
-&lt;/range-slider&gt;
-
-&lt;!-- 避免 --&gt;
-&lt;range-slider :config="complexConfigObject"&gt;&lt;/range-slider&gt;</code></pre>
-<h1 id="验证组件的-props"><a href="#验证组件的-props" class="headerlink" title="验证组件的 props"></a>验证组件的 props</h1><p>在 Vue.js 中，组件的 props 即 API，一个稳定并可预测的 API 会使得你的组件更容易被其他开发者使用。</p>
-<p>组件 props 通过自定义标签的属性来传递。属性的值可以是 Vue.js 字符串(:attr=”value” 或 v-bind:attr=”value”)或是不传。你需要保证组件的 props 能应对不同的情况。</p>
-<h2 id="为什么？-3"><a href="#为什么？-3" class="headerlink" title="为什么？"></a>为什么？</h2><p>验证组件 props 可以保证你的组件永远是可用的（防御性编程）。即使其他开发者并未按照你预想的方法使用时也不会出错。</p>
-<h2 id="怎么做？-3"><a href="#怎么做？-3" class="headerlink" title="怎么做？"></a>怎么做？</h2><ul>
-<li>提供默认值。</li>
-<li>使用 type 属性校验类型。</li>
-<li>使用 props 之前先检查该 prop 是否存在。</li>
-</ul>
-<pre><code>&lt;template&gt;
-  &lt;input type="range" v-model="value" :max="max" :min="min"&gt;
-&lt;/template&gt;
-&lt;script type="text/javascript"&gt;
-  export default {
-    props: {
-      max: {
-        type: Number, // 这里添加了数字类型的校验
-        default() { return 10; },
-      },
-      min: {
-        type: Number,
-        default() { return 0; },
-      },
-      value: {
-        type: Number,
-        default() { return 4; },
-      },
-    },
-  };
-&lt;/script&gt;</code></pre>
-<h1 id="将-this-赋值给-component-变量"><a href="#将-this-赋值给-component-变量" class="headerlink" title="将 this 赋值给 component 变量"></a>将 this 赋值给 component 变量</h1><p>在 Vue.js 组件上下文中，this指向了组件实例。因此当你切换到了不同的上下文时，要确保 this 指向一个可用的 component 变量。</p>
-<p>换句话说，如果你正在使用 ES6 的话，就不要再编写 var self = this; 这样的代码了，您可以安全地使用 Vue 组件。</p>
-<h2 id="为什么？-4"><a href="#为什么？-4" class="headerlink" title="为什么？"></a>为什么？</h2><ul>
-<li>使用 ES6，就不再需要将 this 保存到一个变量中了。</li>
-<li>一般来说，当你使用箭头函数时，会保留 this 的作用域。（译者注：箭头函数没有它自己的 this 值，箭头函数内的 this 值继承自外围作用域。）</li>
-<li>如果你没有使用 ES6，当然也就不会使用 箭头函数 啦，那你必须将 “this” 保存到到某个变量中。这是唯一的例外。</li>
-</ul>
-<h2 id="怎么做？-4"><a href="#怎么做？-4" class="headerlink" title="怎么做？"></a>怎么做？</h2><pre><code>&lt;script type="text/javascript"&gt;
-export default {
-  methods: {
-    hello() {
-      return 'hello';
-    },
-    printHello() {
-      console.log(this.hello());
-    },
-  },
-};
-&lt;/script&gt;
-
-&lt;!-- 避免 --&gt;
-&lt;script type="text/javascript"&gt;
-export default {
-  methods: {
-    hello() {
-      return 'hello';
-    },
-    printHello() {
-      const self = this; // 没有必要
-      console.log(self.hello());
-    },
-  },
-};
-&lt;/script&gt;</code></pre>
-<h1 id="组件结构化"><a href="#组件结构化" class="headerlink" title="组件结构化"></a>组件结构化</h1><p>按照一定的结构组织，使得组件便于理解。</p>
-<h2 id="为什么？-5"><a href="#为什么？-5" class="headerlink" title="为什么？"></a>为什么？</h2><ul>
-<li>导出一个清晰、组织有序的组件，使得代码易于阅读和理解。同时也便于标准化。</li>
-<li>按首字母排序 properties、data、computed、watches 和 methods 使得这些对象内的属性便于查找。</li>
-<li>合理组织，使得组件易于阅读。（name; extends; props, data 和 computed; components; watch 和 methods; lifecycle methods 等）。</li>
-<li>使用 name 属性。借助于 vue devtools 可以让你更方便的测试。</li>
-<li>合理的 CSS 结构，如 BEM 或 rscss - 详情？。</li>
-<li>使用单文件 .vue 文件格式来组件代码。</li>
-</ul>
-<h2 id="怎么做？-5"><a href="#怎么做？-5" class="headerlink" title="怎么做？"></a>怎么做？</h2><p>组件结构化</p>
-<pre><code>&lt;template lang="html"&gt;
-  &lt;div class="Ranger__Wrapper"&gt;
-    &lt;!-- ... --&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script type="text/javascript"&gt;
-  export default {
-    // 不要忘记了 name 属性
-    name: 'RangeSlider',
-    // 使用组件 mixins 共享通用功能
-    mixins: [],
-    // 组成新的组件
-    extends: {},
-    // 组件属性、变量
-    props: {
-      bar: {}, // 按字母顺序
-      foo: {},
-      fooBar: {},
-    },
-    // 变量
-    data() {},
-    computed: {},
-    // 使用其它组件
-    components: {},
-    // 方法
-    watch: {},
-    methods: {},
-    // 生命周期函数
-    beforeCreate() {},
-    mounted() {},
-  };
-&lt;/script&gt;
-
-&lt;style scoped&gt;
-  .Ranger__Wrapper { /* ... */ }
-&lt;/style&gt;</code></pre>
-<h1 id="避免-this-parent"><a href="#避免-this-parent" class="headerlink" title="避免 this.$parent"></a>避免 this.$parent</h1><p>Vue.js 支持组件嵌套，并且子组件可访问父组件的上下文。访问组件之外的上下文违反了基于模块开发的第一原则。因此你应该尽量避免使用 this.$parent。</p>
-<h2 id="为什么？-6"><a href="#为什么？-6" class="headerlink" title="为什么？"></a>为什么？</h2><ul>
-<li>组件必须相互保持独立，Vue 组件也是。如果组件需要访问其父层的上下文就违反了该原则。</li>
-<li>如果一个组件需要访问其父组件的上下文，那么该组件将不能在其它上下文中复用。</li>
-</ul>
-<h2 id="怎么做？-6"><a href="#怎么做？-6" class="headerlink" title="怎么做？"></a>怎么做？</h2><ul>
-<li>通过 props 将值传递给子组件。</li>
-<li>通过 props 传递回调函数给子组件来达到调用父组件方法的目的。</li>
-<li>通过在子组件触发事件来通知父组件。</li>
-</ul>
-<h1 id="谨慎使用-this-refs"><a href="#谨慎使用-this-refs" class="headerlink" title="谨慎使用 this.$refs"></a>谨慎使用 this.$refs</h1><p>Vue.js 支持通过 ref 属性来访问其它组件和 HTML 元素。并通过 this.$refs 可以得到组件或 HTML 元素的上下文。在大多数情况下，通过 this.$refs来访问其它组件的上下文是可以避免的。在使用的的时候你需要注意避免调用了不恰当的组件 API，所以应该尽量避免使用 this.$refs。</p>
-<h2 id="为什么？-7"><a href="#为什么？-7" class="headerlink" title="为什么？"></a>为什么？</h2><ul>
-<li>组件必须是保持独立的，如果一个组件的 API 不能够提供所需的功能，那么这个组件在设计、实现上是有问题的。</li>
-<li>组件的属性和事件必须足够的给大多数的组件使用。</li>
-</ul>
-<h2 id="怎么做？-7"><a href="#怎么做？-7" class="headerlink" title="怎么做？"></a>怎么做？</h2><ul>
-<li>提供良好的组件 API。</li>
-<li>总是关注于组件本身的目的。</li>
-<li>拒绝定制代码。如果你在一个通用的组件内部编写特定需求的代码，那么代表这个组件的 API 不够通用，或者你可能需要一个新的组件来应对该需求。</li>
-<li>检查所有的 props 是否有缺失的，如果有提一个 issue 或是完善这个组件。</li>
-<li>检查所有的事件。子组件向父组件通信一般是通过事件来实现的，但是大多数的开发者更多的关注于 props 从忽视了这点。</li>
-<li>Props向下传递，事件向上传递！。以此为目标升级你的组件，提供良好的 API 和 独立性。</li>
-<li>当遇到 props 和 events 难以实现的功能时，通过 this.$refs来实现。</li>
-<li>当需要操作 DOM 无法通过指令来做的时候可使用 this.$ref 而不是 JQuery、document.getElement*、document.queryElement。</li>
-</ul>
-<pre><code>&lt;!-- 推荐，并未使用 this.$refs --&gt;
-&lt;range :max="max"
-  :min="min"
-  @current-value="currentValue"
-  :step="1"&gt;&lt;/range&gt;</code></pre>
-<pre><code>&lt;!-- 使用 this.$refs 的适用情况--&gt;
-&lt;modal ref="basicModal"&gt;
-  &lt;h4&gt;Basic Modal&lt;/h4&gt;
-  &lt;button class="primary" @click="$refs.basicModal.hide()"&gt;Close&lt;/button&gt;
-&lt;/modal&gt;
-&lt;button @click="$refs.basicModal.open()"&gt;Open modal&lt;/button&gt;
-
-&lt;!-- Modal component --&gt;
-&lt;template&gt;
-  &lt;div v-show="active"&gt;
-    &lt;!-- ... --&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-  export default {
-    // ...
-    data() {
-      return {
-        active: false,
-      };
-    },
-    methods: {
-      open() {
-        this.active = true;
-      },
-      hide() {
-        this.active = false;
-      },
-    },
-    // ...
-  };
-&lt;/script&gt;</code></pre>
-<pre><code>&lt;!-- 如果可通过 emited 来做则避免通过 this.$refs 直接访问 --&gt;
-&lt;template&gt;
-  &lt;range :max="max"
-    :min="min"
-    ref="range"
-    :step="1"&gt;&lt;/range&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-  export default {
-    // ...
-    methods: {
-      getRangeCurrentValue() {
-        return this.$refs.range.currentValue;
-      },
-    },
-    // ...
-  };
-&lt;/script&gt;</code></pre>
-<h1 id="使用组件名作为样式作用域空间"><a href="#使用组件名作为样式作用域空间" class="headerlink" title="使用组件名作为样式作用域空间"></a>使用组件名作为样式作用域空间</h1><p>Vue.js 的组件是自定义元素，这非常适合用来作为样式的根作用域空间。可以将组件名作为 CSS 类的命名空间。</p>
-<h2 id="为什么？-8"><a href="#为什么？-8" class="headerlink" title="为什么？"></a>为什么？</h2><ul>
-<li>给样式加上作用域空间可以避免组件样式影响外部的样式。</li>
-<li>保持模块名、目录名、样式根作用域名一样，可以很好的将其关联起来，便于开发者理解。</li>
-</ul>
-<h2 id="怎么做？-8"><a href="#怎么做？-8" class="headerlink" title="怎么做？"></a>怎么做？</h2><p>使用组件名作为样式命名的前缀，可基于 BEM 或 OOCSS 范式。同时给 style 标签加上 scoped 属性。加上 scoped 属性编译后会给组件的 class 自动加上唯一的前缀从而避免样式的冲突。</p>
-<pre><code>&lt;style scoped&gt;
-  /* 推荐 */
-  .MyExample { }
-  .MyExample li { }
-  .MyExample__item { }
-
-  /* 避免 */
-  .My-Example { } /* 没有用组件名或模块名限制作用域, 不符合 BEM 规范 */
-&lt;/style&gt;</code></pre>
-<h1 id="尽可能使用-mixins"><a href="#尽可能使用-mixins" class="headerlink" title="尽可能使用 mixins"></a>尽可能使用 mixins</h1><h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么?"></a>为什么?</h2><p>Mixins 封装可重用的代码，避免了重复。如果两个组件共享有相同的功能，则可以使用 mixin。通过 mixin，你可以专注于单个组件的任务和抽象的通用代码。这有助于更好地维护你的应用程序。</p>
-<h2 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做?"></a>怎么做?</h2><p>假设你有一个移动端和桌面端的菜单组件，它们共享一些功能。我们可以抽象出这两个组件的核心功能到一个 mixin 中，例如：</p>
-<pre><code>const MenuMixin = {
-  data () {
-    return {
-      language: 'EN'
-    }
-  },
-
-  methods: {
-    changeLanguage () {
-      if (this.language === 'DE') this.$set(this, 'language', 'EN')
-      if (this.language === 'EN') this.$set(this, 'language', 'DE')
-    }
-  }
-}
-
-export default MenuMixin</code></pre>
-<p>要使用 mixin，只需将其导入到两个组件中（我只展示移动组件）。</p>
-<pre><code>&lt;template&gt;
-  &lt;ul class="mobile"&gt;
-    &lt;li @click="changeLanguage"&gt;Change language&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-  import MenuMixin from './MenuMixin'
-
-  export default {
-    mixins: [MenuMixin]
-  }
-&lt;/script&gt;</code></pre>
+<h3 id="b-执行阶段"><a href="#b-执行阶段" class="headerlink" title="b. 执行阶段"></a>b. 执行阶段</h3><p>创建完成之后，就会开始执行代码，在这个阶段，会完成变量赋值、函数引用、以及执行其他代码。</p>
+<h3 id="c-回收阶段"><a href="#c-回收阶段" class="headerlink" title="c. 回收阶段"></a>c. 回收阶段</h3><p>函数调用完毕后，函数出栈，对应的执行上下文也出栈，等待垃圾回收器回收执行上下文。</p>
+<p><img src="https://7.dusays.com/2020/11/16/d7d64d01245e3.png"></p>
+<h2 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h2><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">"coffe"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//1.进入全局执行上下文</span>
+<span class="token keyword">function</span> <span class="token function">out</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token string">"18"</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> c <span class="token operator">=</span> <span class="token string">"91"</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token operator">+</span>b<span class="token operator">+</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//3.进入inner函数的执行上下文</span>
+<span class="token punctuation">}</span>
+<span class="token function">out</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//2.进入out函数的执行上下文</span></code></pre>
+<p> 在代码开始执行时，首先会产生一个<strong>全局执行上下文</strong>，调用函数时，会产生<strong>函数执行上下文</strong>，函数调用完成后，它的执行上下文以及其中的数据都会被销毁，重新回到全局执行环境，网页关闭后全局执行环境也会销毁。其实这是一个入栈出栈的过程，<strong>全局上下文永远在栈底，而当前正在函数执行上下文在栈顶</strong>。以上代码的执行会经历以下过程：</p>
+<ol>
+<li>当代码开始执行时就<strong>创建全局执行上下文，全局执行上下文入栈</strong>。</li>
+<li>全局执行上下文入栈后，其中的代码开始执行，进行赋值、函数调用等操作，执行到<code>out()</code>时，<strong>激活函数<code>out</code>创建自己的执行上下文，<code>out</code>函数执行上下文入栈</strong>。</li>
+<li><code>out</code>函数执行上下文入栈后，其中的代码开始执行，进行赋值、函数调用等操作，执行到<code>inner()</code>时，<strong>激活函数<code>inner</code>创建自己的执行上下文，<code>inner</code>函数执行上下文入栈</strong>。</li>
+<li><code>inner</code>函数上下文入栈后，其中的代码开始执行，进行赋值、函数调用、打印等操作，由于里面没有可以生成其他执行上下文的需要，所有代码执行完毕后，**<code>inner</code>函数上下文出栈**。</li>
+<li><code>inner</code>函数执行上下文出栈，又回到了<code>out</code>函数执行上下文环境，接着执行<code>out</code>函数中后面剩下的代码，由于后面没有可以生成其他执行上下文的需要，所有代码执行完毕后，**<code>out</code>函数执行上下文出栈**。</li>
+<li><code>out</code>函数执行上下文出栈后，又回到了全局执行上下文环境，直到浏览器窗口关闭，<strong>全局执行上下文出栈</strong>。</li>
+</ol>
+<p><img src="https://7.dusays.com/2020/11/16/55431837a2be8.png"></p>
+<p>我们可以发现：</p>
+<ol>
+<li>全局执行上下文在代码开始执行时就创建，有且只有一个，永远在执行上下文栈的栈底，浏览器窗口关闭时它才出栈。</li>
+<li>函数被调用的时候创建函数的执行上下文环境，并且入栈。</li>
+<li>只有栈顶的执行上下文才是处于活动状态的，也即只有栈顶的变量对象才会变成活动对象。</li>
+</ol>
+<h1 id="变量对象（Variable-Object，VO"><a href="#变量对象（Variable-Object，VO" class="headerlink" title="变量对象（Variable Object，VO)"></a>变量对象（Variable Object，VO)</h1><p>变量对象（VO）是一个类似于容器的对象，与作用域链、执行上下文息息相关。</p>
+<h2 id="变量对象的创建过程的三条规则："><a href="#变量对象的创建过程的三条规则：" class="headerlink" title="变量对象的创建过程的三条规则："></a>变量对象的创建过程的三条规则：</h2><ol>
+<li><strong>建立<code>arguments</code>对象</strong>。检查当前执行上下文中的参数，建立该对象下的属性与属性值。</li>
+<li><strong>检查当前执行上下文的函数声明，也就是使用<code>function</code>关键字声明的函数</strong>。在变量对象中以函数名建立一个属性，属性值为指向该函数所在内存地址的引用。如果该属性之前已经存在，那么该属性将会被新的引用所覆盖。</li>
+<li><strong>检查当前执行上下文中的变量声明，每找到一个变量声明，就在变量对象中以变量名建立一个属性，属性值为<code>undefined</code>**。</strong>如果该变量名的属性已经存在，为了防止同名的函数被修改为<code>undefined</code>，则会直接跳过，原属性值不会被修改**。</li>
+</ol>
+<p><img src="https://7.dusays.com/2020/11/16/7fad446d8076c.png"></p>
+<p>可以用以下伪代码来表示变量对象：</p>
+<pre class=" language-javascript"><code class="language-javascript">VO<span class="token operator">=</span><span class="token punctuation">{</span>
+    Arguments<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//实参</span>
+    Param_Variable<span class="token punctuation">:</span>具体值<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//形参</span>
+    Function<span class="token punctuation">:</span><span class="token operator">&lt;</span><span class="token keyword">function</span> reference<span class="token operator">></span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//函数的引用</span>
+    Variable<span class="token punctuation">:</span>undefined<span class="token comment" spellcheck="true">//其他变量</span>
+<span class="token punctuation">}</span></code></pre>
+<p>当执行上下文进入执行阶段后，变量对象会变为<strong>活动对象</strong>（Active Object，AO）。此时原先声明的变量会被赋值。<strong>变量对象和活动对象都是指同一个对象，只是处于执行上下文的不同阶段</strong>。</p>
+<p>我们可以通过以下伪代码来表示活动对象：</p>
+<pre class=" language-javascript"><code class="language-javascript">AO<span class="token operator">=</span><span class="token punctuation">{</span>
+    Arguments<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//实参</span>
+    Param_Variable<span class="token punctuation">:</span>具体值<span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">//形参</span>
+    Function<span class="token punctuation">:</span><span class="token operator">&lt;</span><span class="token keyword">function</span> reference<span class="token operator">></span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//函数的引用</span>
+    Variable<span class="token punctuation">:</span>具体值<span class="token comment" spellcheck="true">//注意，这里已经赋值了喔</span>
+<span class="token punctuation">}</span></code></pre>
+<p>未进入执行上下文的执行阶段之前，变量对象中的属性都不能访问。但是<strong>进入执行阶段之后，变量对象转变为了活动对象（被激活了）</strong>，里面的属性可以被访问了，然后开始进行执行阶段的操作。</p>
+<h2 id="全局执行上下文的变量对象"><a href="#全局执行上下文的变量对象" class="headerlink" title="全局执行上下文的变量对象"></a>全局执行上下文的变量对象</h2><p>全局执行上下文的变量对象是<code>window</code>对象，而这个特殊，在<code>this</code>指向上也同样适用，<code>this</code>也是指向<code>window</code>。</p>
+<p>除此之外，全局执行上下文的生命周期，与程序的生命周期一致，只要程序运行不结束（比如关掉浏览器窗口），全局执行上下文就会一直存在。其他所有的执行上下文，都能直接访问全局执行上下文里的内容。</p>
+<h2 id="再看一段代码，留意注释"><a href="#再看一段代码，留意注释" class="headerlink" title="再看一段代码，留意注释"></a>再看一段代码，留意注释</h2><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'function func'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> func <span class="token operator">=</span> <span class="token string">"coffe"</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//>> coffe</span>
+<span class="token comment" spellcheck="true">// 以上代码中，按三条规则，变量声明的 func 遇到函数声明的 func 应该会跳过，</span>
+<span class="token comment" spellcheck="true">// 可是为什么最后 func 的输出结果仍然是被覆盖了显示"coffe"呢？</span>
+<span class="token comment" spellcheck="true">// 那是因为三条规则仅仅适用于变量对象的创建阶段，也即执行上下文的创建阶段。</span>
+<span class="token comment" spellcheck="true">// 而 func="coffe" 是在执行上下文的执行阶段中运行的，输出结果自然会是"coffe"。</span></code></pre>
+<p>这种现象很容易让人费解，其实也是因为<code>var</code>声明的变量允许重名导致的，若使用关键字<code>let</code>来声明变量，就可以避免这种令人费解的情况发生。</p>
+<h1 id="作用域链（Scope-Chain）"><a href="#作用域链（Scope-Chain）" class="headerlink" title="作用域链（Scope Chain）"></a>作用域链（Scope Chain）</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p><strong>多个作用域对应的变量对象串联起来组成的链表就是作用域链，</strong>这个链表是以引用的形式保持对变量对象的访问<strong>。</strong>作用域链保证了当前执行上下文对符合访问权限的变量和函数的有序访问。</p>
+<p><img src="https://7.dusays.com/2020/11/16/867543641bca6.png" alt="作用域链的图示"></p>
+<p>作用域链的最顶端一定是当前作用域（local scope）对应的变量对象，最底端一定是全局作用域对应的变量对象（全局VO）。</p>
+<p>作用域链可以形象地比如为一个蒸笼。</p>
+<p><img src="https://7.dusays.com/2020/11/16/8dc21cd5da203.png" alt="蒸笼"></p>
+<p>最底下的一屉，相当于是全局作用域，它里面的蒸汽（变量和函数的可见性）可以渗透到整个蒸笼，底层之上的其他屉相当于局部作用域，这些上面屉的蒸汽只能影响更上面的屉。</p>
+<p>作用域链可以理解为下面这种伪代码格式：</p>
+<pre class=" language-text"><code class="language-text">{
+    Scope: [
+        { //当前作用域对应的VO
+            实参,
+            形参,
+            变量,
+            函数
+        }, 
+        { //第二个作用域对应的VO
+            实参,
+            形参,
+            变量,
+            函数
+        },
+        ... 
+        { //全局作用域对应的VO
+            变量,
+            函数
+        }
+    ]
+}</code></pre>
+<h2 id="变量-函数的查找机制"><a href="#变量-函数的查找机制" class="headerlink" title="变量/函数的查找机制"></a>变量/函数的查找机制</h2><p>  查找变量/函数时JS引擎是从里离它最近作用域开始的查找的，也即从离它最近的变量对象（VO）开始查找。</p>
+<p>如果在当前的变量对象里面找不到目标变量/函数，就在上一级作用域的变量对象里面查找。若这时找到了目标变量/函数，则停止查找；若找不到，一直回溯到全局作用域的变量对象里查找，若仍找不到目标变量/函数，停止查找。</p>
 
             </div>
             <hr/>
@@ -835,7 +610,7 @@ export default MenuMixin</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2019/08/13/vue-zu-jian-bian-ma-gui-fan/">https://leeycode.github.io/2019/08/13/vue-zu-jian-bian-ma-gui-fan/</a>
+                    <a href="https://leeycode.github.io/2020/11/16/zhi-xing-shang-xia-wen/">https://leeycode.github.io/2020/11/16/zhi-xing-shang-xia-wen/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -873,12 +648,8 @@ export default MenuMixin</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/">
-                                    <span class="chip bg-color">前端规范</span>
-                                </a>
-                            
-                                <a href="/tags/vue/">
-                                    <span class="chip bg-color">vue</span>
+                                <a href="/tags/javaScript/">
+                                    <span class="chip bg-color">javaScript</span>
                                 </a>
                             
                         </div>
@@ -1046,17 +817,18 @@ export default MenuMixin</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/08/30/jian-dan-de-zai-xian-shu-ju-mock/">
+                <a href="/2020/11/16/zhi-xing-shang-xia-wen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="简单的在线数据mock">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="执行上下文相关概念">
                         
-                        <span class="card-title">简单的在线数据mock</span>
+                        <span class="card-title">执行上下文相关概念</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1066,26 +838,27 @@ export default MenuMixin</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    开发工具
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    前端基础
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
-                        <span class="chip bg-color">项目总结</span>
+                    <a href="/tags/javaScript/">
+                        <span class="chip bg-color">javaScript</span>
                     </a>
                     
                 </div>
@@ -1099,13 +872,13 @@ export default MenuMixin</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/13/qian-duan-ming-ming-gui-fan/">
+                <a href="/2020/11/10/cong-es7-dao-es12/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="前端命名规范">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="从es7到es12">
                         
-                        <span class="card-title">前端命名规范</span>
+                        <span class="card-title">从es7到es12</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1116,14 +889,14 @@ export default MenuMixin</code></pre>
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/" class="post-category">
-                                    前端规范
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    前端基础
                                 </a>
                             
                             
@@ -1133,8 +906,8 @@ export default MenuMixin</code></pre>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/">
-                        <span class="chip bg-color">前端规范</span>
+                    <a href="/tags/es/">
+                        <span class="chip bg-color">es</span>
                     </a>
                     
                 </div>

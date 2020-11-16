@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2020-11-11T02:43:07.904Z</updated>
+  <updated>2020-11-16T09:09:15.256Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>执行上下文相关概念</title>
+    <link href="https://leeycode.github.io/2020/11/16/zhi-xing-shang-xia-wen/"/>
+    <id>https://leeycode.github.io/2020/11/16/zhi-xing-shang-xia-wen/</id>
+    <published>2020-11-16T08:22:19.000Z</published>
+    <updated>2020-11-16T09:09:15.256Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;执行上下文（Execution-Context）&quot;&gt;&lt;a href=&quot;#执行上下文（Execution-Context）&quot; class=&quot;headerlink&quot; title=&quot;执行上下文（Execution</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="javaScript" scheme="https://leeycode.github.io/tags/javaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>从es7到es12</title>
