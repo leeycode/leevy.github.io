@@ -695,9 +695,26 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </code></pre>
 <p>这里之所以对象a可以点出函数Fn里面的user是因为new关键字可以改变this的指向，将这个this指向对象a.调用这个函数Fn的是对象a，那么this指向的自然是对象a，那么为什么对象Fn中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份。</p>
 <h2 id="箭头函数的this"><a href="#箭头函数的this" class="headerlink" title="箭头函数的this"></a>箭头函数的this</h2><p>箭头函数内部的this是语法作用域，由上下文确定，有了箭头函数，可以修复this的指向，this总是指向语法作用域，也就是外层调用者。即箭头函数的this指向是<strong>根据函数定义时的作用域来决定 <code>this</code> 的指向</strong>。何谓“定义时的作用域”？就是你定义这个箭头函数的时候，该箭头函数在哪个函数里，那么箭头函数体内的this就是它父函数的this。</p>
-<p>```javascript<br>function func() {<br>  // 返回一个箭头函数<br>  return a =&gt; {<br>    //this 继承自 func()<br>    console.log(this.a);<br>  };<br>}<br>var obj1 = {<br>  a: 2<br>};<br>var obj2 = {<br>  a: 3<br>};</p>
-<p>var bar = func.call(obj1);<br>bar.call(obj2); //&gt;&gt; 2         不是 3 ！</p>
-<p>// func() 内部创建的箭头函数会捕获调用时 func() 的 this。<br>// 由于 func() 的 this 绑定到 obj1， bar（引用箭头函数）的 this 也会绑定到 obj1，<br>// this一旦被确定，就不可更改，所以箭头函数的绑定无法被修改。（new 也不行！）</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 返回一个箭头函数</span>
+  <span class="token keyword">return</span> a <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//this 继承自 func()</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span> <span class="token number">2</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> obj2 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span> <span class="token number">3</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> bar <span class="token operator">=</span> func<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bar<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//>> 2         不是 3 ！</span>
+
+<span class="token comment" spellcheck="true">// func() 内部创建的箭头函数会捕获调用时 func() 的 this。</span>
+<span class="token comment" spellcheck="true">// 由于 func() 的 this 绑定到 obj1， bar（引用箭头函数）的 this 也会绑定到 obj1，</span>
+<span class="token comment" spellcheck="true">// this一旦被确定，就不可更改，所以箭头函数的绑定无法被修改。（new 也不行！）</span></code></pre>
 
             </div>
             <hr/>
