@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -485,7 +485,7 @@
 <span class="token punctuation">}</span>
 
 <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h1 id="this的指向规则"><a href="#this的指向规则" class="headerlink" title="this的指向规则"></a>this的指向规则</h1><h2 id="默认指向"><a href="#默认指向" class="headerlink" title="默认指向"></a>默认指向</h2><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<h1 id="this的指向规则"><a href="#this的指向规则" class="headerlink" title="this的指向规则"></a>this的指向规则</h1><h2 id="默认指向"><a href="#默认指向" class="headerlink" title="默认指向"></a>默认指向</h2><h3 id="独立函数调用"><a href="#独立函数调用" class="headerlink" title="独立函数调用"></a>独立函数调用</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// this指向全局对象</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
@@ -510,7 +510,7 @@
   <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//>> 1891</span>
   <span class="token comment" spellcheck="true">//这里输出 1891 而不是报错，是因为严格模式下，this的指向与func的调用位置无关</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h2 id="SetTimeout或SetInterval中的this指向"><a href="#SetTimeout或SetInterval中的this指向" class="headerlink" title="SetTimeout或SetInterval中的this指向"></a>SetTimeout或SetInterval中的this指向</h2><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<h3 id="SetTimeout或SetInterval中的this指向"><a href="#SetTimeout或SetInterval中的this指向" class="headerlink" title="SetTimeout或SetInterval中的this指向"></a>SetTimeout或SetInterval中的this指向</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token keyword">class</span> <span class="token class-name">Obj</span> <span class="token punctuation">{</span>
     <span class="token function">constructor</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>num <span class="token operator">=</span> num<span class="token punctuation">;</span>
@@ -566,9 +566,27 @@ var o = {
 var j = o.b.fn;
 j();   //this指向window
 </code></pre>
-<p>这里this指向的是window,this永远指向的是最后调用它的对象</p>
-<h2 id="显式指向"><a href="#显式指向" class="headerlink" title="显式指向"></a>显式指向</h2><p>JavaScript内置对象<code>Function</code>的三个原型方法<code>call()</code>、<code>apply()</code>和<code>bind()</code>，它们的第一个参数是一个对象，它们会把这个对象绑定到<code>this</code>，接着在调用函数时让<code>this</code>指向这个对象。</p>
-<h3 id="call-apply-改变this的指向"><a href="#call-apply-改变this的指向" class="headerlink" title="call(),apply()改变this的指向"></a>call(),apply()改变this的指向</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">"makai"</span><span class="token punctuation">;</span>
+<p>这里this指向的是window,this永远指向的是最后调用它的对象。</p>
+<p><strong>隐式丢失最容易在赋值时发生</strong>；隐式丢失发生时，调用这个函数会应用<strong>默认指向规则</strong>。下面再举一段更具迷惑性的例子：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> func<span class="token punctuation">:</span> func <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> p <span class="token operator">=</span> <span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+o<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//>> 3</span>
+<span class="token punctuation">(</span>p<span class="token punctuation">.</span>func <span class="token operator">=</span> o<span class="token punctuation">.</span>func<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//>> 2</span>
+<span class="token comment" spellcheck="true">// 赋值表达式 p.func=o.func 的返回值是目标函数的引用，也就是 func 函数的引用</span>
+<span class="token comment" spellcheck="true">// 因此调用位置是 func() 而不是 p.func() 或者 o.func()</span>
+
+## 显式指向
+
+JavaScript内置对象<span class="token template-string"><span class="token string">`Function`</span></span>的三个原型方法<span class="token template-string"><span class="token string">`call()`</span></span>、<span class="token template-string"><span class="token string">`apply()`</span></span>和<span class="token template-string"><span class="token string">`bind()`</span></span>，它们的第一个参数是一个对象，它们会把这个对象绑定到<span class="token template-string"><span class="token string">`this`</span></span>，接着在调用函数时让<span class="token template-string"><span class="token string">`this`</span></span>指向这个对象。
+
+### <span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token punctuation">)</span>改变<span class="token keyword">this</span>的指向
+
+<span class="token template-string"><span class="token string">``</span></span>`javascript
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">"makai"</span><span class="token punctuation">;</span>
 
 <span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -668,7 +686,7 @@ obj<span class="token punctuation">.</span><span class="token function">func1</s
 obj<span class="token punctuation">.</span><span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//>> 1 1 1 1 ……　    输出的是obj.num</span>
 </code></pre>
 <p>总结：call和apply都是改变上下文中的this并立即执行这个函数，bind方法可以让对应的函数想什么时候调就什么时候调用，并且可以将参数在执行的时候添加，这是它们的区别，根据自己的实际情况来选择使用。</p>
-<h2 id="4-“new”操作符指向"><a href="#4-“new”操作符指向" class="headerlink" title="4. “new”操作符指向"></a>4. “new”操作符指向</h2><p>在JavaScript 中，<strong>构造函数</strong>只是一些<strong>使用<code>new</code>操作符时被调用的函数</strong>。它们并不会属于某个类，也不会实例化一个类。实际上，它们甚至都不能算是一种特殊的类型（class），它们<strong>只是被<code>new</code>操作符调用的普通函数而已</strong>。</p>
+<h2 id="“new”操作符指向"><a href="#“new”操作符指向" class="headerlink" title="“new”操作符指向"></a>“new”操作符指向</h2><p>在JavaScript 中，<strong>构造函数</strong>只是一些<strong>使用<code>new</code>操作符时被调用的函数</strong>。它们并不会属于某个类，也不会实例化一个类。实际上，它们甚至都不能算是一种特殊的类型（class），它们<strong>只是被<code>new</code>操作符调用的普通函数而已</strong>。</p>
 <p>使用<code>new</code> 来调用函数，或者说发生构造函数调用时，会自动执行下面的操作：</p>
 <ol>
 <li>创建（或者说构造）一个全新的对象；</li>
@@ -1216,7 +1234,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">28.7k</span>&nbsp;字
+                class="white-color">28.8k</span>&nbsp;字
             
             
             
