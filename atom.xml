@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2020-11-16T09:09:15.256Z</updated>
+  <updated>2020-11-26T02:40:11.782Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>this指向</title>
+    <link href="https://leeycode.github.io/2020/11/25/this-zhi-xiang/"/>
+    <id>https://leeycode.github.io/2020/11/25/this-zhi-xiang/</id>
+    <published>2020-11-25T07:00:56.000Z</published>
+    <updated>2020-11-26T02:40:11.782Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h1&gt;&lt;p&gt;&lt;code&gt;this&lt;/code&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="javaScript" scheme="https://leeycode.github.io/tags/javaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>执行上下文相关概念</title>
@@ -92,6 +117,32 @@
   </entry>
   
   <entry>
+    <title>vue项目性能优化方案</title>
+    <link href="https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/"/>
+    <id>https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/</id>
+    <published>2020-10-30T09:09:12.000Z</published>
+    <updated>2020-11-02T07:26:08.804Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://7.dusays.com/2020/11/02/3ce96e73d8ee0.jpg&quot; alt=&quot;vue.jpg&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;按需使用第三方库&quot;&gt;&lt;a href=&quot;#按需使用第三方库&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="新鲜技能" scheme="https://leeycode.github.io/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/"/>
+    
+    
+    <category term="vue" scheme="https://leeycode.github.io/tags/vue/"/>
+    
+  </entry>
+  
+  <entry>
     <title>TypeScript在vue项目中的应用</title>
     <link href="https://leeycode.github.io/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/"/>
     <id>https://leeycode.github.io/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/</id>
@@ -115,32 +166,6 @@
     <category term="vue" scheme="https://leeycode.github.io/tags/vue/"/>
     
     <category term="TypeScript" scheme="https://leeycode.github.io/tags/TypeScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vue项目性能优化方案</title>
-    <link href="https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/"/>
-    <id>https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/</id>
-    <published>2020-10-30T09:09:12.000Z</published>
-    <updated>2020-11-02T07:26:08.804Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://7.dusays.com/2020/11/02/3ce96e73d8ee0.jpg&quot; alt=&quot;vue.jpg&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;按需使用第三方库&quot;&gt;&lt;a href=&quot;#按需使用第三方库&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="新鲜技能" scheme="https://leeycode.github.io/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/"/>
-    
-    
-    <category term="vue" scheme="https://leeycode.github.io/tags/vue/"/>
     
   </entry>
   
