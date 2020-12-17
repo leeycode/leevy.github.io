@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="前端请求方式：xhr、ajax、axios与fetch的区别比较, 大脸猫">
+    <meta name="keywords" content="nginx超时设置, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>前端请求方式：xhr、ajax、axios与fetch的区别比较 | 大脸猫</title>
+    <title>nginx超时设置 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">前端请求方式：xhr、ajax、axios与fetch的区别比较</h1>
+                    <h1 class="description center-align post-title">nginx超时设置</h1>
                 </div>
             </div>
         </div>
@@ -413,12 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82/">
-                                <span class="chip bg-color">数据请求</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
-                                <span class="chip bg-color">前端基础</span>
+                            <a href="/tags/nginx/">
+                                <span class="chip bg-color">nginx</span>
                             </a>
                         
                     </div>
@@ -442,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2017-06-13
+                    2020-12-16
                 </div>
                 
 
@@ -451,7 +447,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    844
+                    1k
                 </div>
                 
 
@@ -473,190 +469,40 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这些都是异步请求数据的方法。在不重新刷新页面的情况下与服务器通信，交换数据，或更新页面。</p>
-<h1 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h1><p>优点：</p>
-<ul>
-<li>不重新加载页面的情况下更新网页</li>
-<li>在页面已加载后从服务器请求/接收数据</li>
-<li>在后台向服务器发送数据</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>使用起来也比较繁琐，需要设置很多值。</li>
-<li>早期的IE浏览器有自己的实现，这样需要写兼容代码。</li>
-</ul>
-<p>示例：</p>
-<pre><code>if (window.XMLHttpRequest) { // model browser
-  xhr = new XMLHttpRequest()
-} else if (window.ActiveXObject) { // IE 6 and older
-  xhr = new ActiveXObject('Microsoft.XMLHTTP')
-}
-xhr.open('POST', url, true)
-xhr.send(data)
-xhr.onreadystatechange = function () {
-if (request.readyState === 4) { // 成功完成
-        // 判断响应状态码
-        if (request.status === 200) {
-            // 成功，通过responseText拿到响应的文本:
-            return success(request.responseText);
-        } else {
-            // 失败，根据响应码判断失败原因:
-            return fail(request.status);
-        }
-    } else {
-        // HTTP请求还在继续...
-    }
+                <p>nginx访问出现504 Gateway Time-out，一般是由于程序执行时间过长导致响应超时，例如程序需要执行90秒，而nginx最大响应等待时间为30秒，这样就会出现超时。</p>
+<h2 id="导致超时的场景"><a href="#导致超时的场景" class="headerlink" title="导致超时的场景"></a>导致超时的场景</h2><ol>
+<li>程序在处理大量数据，导致等待超时。</li>
+<li>程序中调用外部请求，而外部请求响应超时。</li>
+<li>连接数据库失败而没有停止，死循环重新连。</li>
+</ol>
+<h2 id="nginx常用的超时配置说明"><a href="#nginx常用的超时配置说明" class="headerlink" title="nginx常用的超时配置说明"></a>nginx常用的超时配置说明</h2><h3 id="client-header-timeout"><a href="#client-header-timeout" class="headerlink" title="client_header_timeout"></a>client_header_timeout</h3><p>语法 client_header_timeout time<br>默认值 60s<br>上下文 http server<br>说明 指定等待client发送一个请求头的超时时间（例如：GET / HTTP/1.1）.仅当在一次read中，没有收到请求头，才会算成超时。如果在超时时间内，client没发送任何东西，nginx返回HTTP状态码408(“Request timed out”)</p>
+<h3 id="client-body-timeout"><a href="#client-body-timeout" class="headerlink" title="client_body_timeout"></a>client_body_timeout</h3><p>语法 client_body_timeout time<br>默认值 60s<br>上下文 http server location<br>说明 该指令设置请求体（request body）的读超时时间。仅当在一次readstep中，没有得到请求体，就会设为超时。超时后，nginx返回HTTP状态码408(“Request timed out”)</p>
+<h3 id="keepalive-timeout"><a href="#keepalive-timeout" class="headerlink" title="keepalive_timeout"></a>keepalive_timeout</h3><p>语法 keepalive_timeout timeout [ header_timeout ]<br>默认值 75s<br>上下文 http server location<br>说明 第一个参数指定了与client的keep-alive连接超时时间。服务器将会在这个时间后关闭连接。可选的第二个参数指定了在响应头Keep-Alive: timeout=time中的time值。这个头能够让一些浏览器主动关闭连接，这样服务器就不必要去关闭连接了。没有这个参数，nginx不会发送Keep-Alive响应头（尽管并不是由这个头来决定连接是否“keep-alive”）<br>两个参数的值可并不相同</p>
+<p>注意不同浏览器怎么处理“keep-alive”头<br>MSIE和Opera忽略掉”Keep-Alive: timeout=<n>“ header.<br>MSIE保持连接大约60-65秒，然后发送TCP RST<br>Opera永久保持长连接<br>Mozilla keeps the connection alive for N plus about 1-10 seconds.<br>Konqueror保持长连接N秒</n></p>
+<h3 id="lingering-timeout"><a href="#lingering-timeout" class="headerlink" title="lingering_timeout"></a>lingering_timeout</h3><p>语法 lingering_timeout time<br>默认值 5s<br>上下文 http server location<br>说明 lingering_close生效后，在关闭连接前，会检测是否有用户发送的数据到达服务器，如果超过lingering_timeout时间后还没有数据可读，就直接关闭连接；否则，必须在读取完连接缓冲区上的数据并丢弃掉后才会关闭连接。</p>
+<h3 id="resolver-timeout"><a href="#resolver-timeout" class="headerlink" title="resolver_timeout"></a>resolver_timeout</h3><p>语法 resolver_timeout time<br>默认值 30s<br>上下文 http server location<br>说明 该指令设置DNS解析超时时间</p>
+<h3 id="proxy-connect-timeout"><a href="#proxy-connect-timeout" class="headerlink" title="proxy_connect_timeout"></a>proxy_connect_timeout</h3><p>语法 proxy_connect_timeout time<br>默认值 60s<br>上下文 http server location<br>说明 该指令设置与upstream server的连接超时时间，有必要记住，这个超时不能超过75秒。<br>这个不是等待后端返回页面的时间，那是由proxy_read_timeout声明的。如果你的upstream服务器起来了，但是hanging住了（例如，没有足够的线程处理请求，所以把你的请求放到请求池里稍后处理），那么这个声明是没有用的，由于与upstream服务器的连接已经建立了。</p>
+<h3 id="proxy-read-timeout"><a href="#proxy-read-timeout" class="headerlink" title="proxy_read_timeout"></a>proxy_read_timeout</h3><p>语法 proxy_read_timeout time<br>默认值 60s<br>上下文 http server location<br>说明 该指令设置与代理服务器的读超时时间。它决定了nginx会等待多长时间来获得请求的响应。这个时间不是获得整个response的时间，而是两次reading操作的时间。</p>
+<h3 id="proxy-send-timeout"><a href="#proxy-send-timeout" class="headerlink" title="proxy_send_timeout"></a>proxy_send_timeout</h3><p>语法 proxy_send_timeout time<br>默认值 60s<br>上下文 http server location<br>说明 这个指定设置了发送请求给upstream服务器的超时时间。超时设置不是为了整个发送期间，而是在两次write操作期间。如果超时后，upstream没有收到新的数据，nginx会关闭连接</p>
+<h3 id="proxy-upstream-fail-timeout（fail-timeout）"><a href="#proxy-upstream-fail-timeout（fail-timeout）" class="headerlink" title="proxy_upstream_fail_timeout（fail_timeout）"></a>proxy_upstream_fail_timeout（fail_timeout）</h3><p>语法 server address [fail_timeout=30s]<br>默认值 10s<br>上下文 upstream<br>说明 Upstream模块下 server指令的参数，设置了某一个upstream后端失败了指定次数（max_fails）后，该后端不可操作的时间，默认为10秒</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="请求超时"><a href="#请求超时" class="headerlink" title="请求超时"></a>请求超时</h3><pre><code>http {
+    include       mime.types;
+    server_names_hash_bucket_size  512;     
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;  #保持
+    tcp_nodelay on;
+    client_header_timeout 15;
+    client_body_timeout 15;
+    send_timeout 25;
+    include vhosts/*.conf;
 }</code></pre>
-<h1 id="jQuery-ajax"><a href="#jQuery-ajax" class="headerlink" title="jQuery ajax"></a>jQuery ajax</h1><p>AJAX请求也兼容了各浏览器，对XMLHttpRequest对象的封装。</p>
-<p>优点：</p>
-<ul>
-<li>对原生XHR的封装，做了兼容处理，简化了使用。</li>
-<li>增加了对JSONP的支持，可以简单处理部分跨域。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>如果有多个请求，并且有依赖关系的话，容易形成回调地狱。</li>
-<li>本身是针对MVC的编程，不符合现在前端MVVM的浪潮。</li>
-<li>ajax是jQuery中的一个方法。如果只是要使用ajax却要引入整个jQuery非常的不合理。</li>
-</ul>
-<p>示例：</p>
-<pre><code>$.ajax({
-  type: 'POST',
-  url: url, 
-  data: data,
-  dataType: dataType,
-  success: function () {},
-  error: function () {}
-})</code></pre>
-<h1 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h1><p>Axios是一个基于promise的HTTP库，可以用在浏览器和 node.js 中。它本质也是对原生XMLHttpRequest的封装，只不过它是Promise的实现版本，符合最新的ES规范。</p>
-<p>优点：</p>
-<ul>
-<li>从浏览器中创建XMLHttpRequests</li>
-<li>从 node.js 创建 http 请求</li>
-<li>支持 Promise API</li>
-<li>拦截请求和响应</li>
-<li>转换请求数据和响应数据</li>
-<li>取消请求</li>
-<li>自动转换 JSON 数据</li>
-<li>客户端支持防御 XSRF</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>只持现代代浏览器。</li>
-</ul>
-<pre><code>axios({
-    method: 'post',
-    url: '/user/12345',
-    data: {
-      firstName: 'liu',
-      lastName: 'weiqin'
-    }
-  })
-  .then(res =&gt; console.log(res))
-  .catch(err =&gt; console.log(err))</code></pre>
-<h1 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h1><p>优点：</p>
-<ul>
-<li>语法简洁，更加语义化</li>
-<li>基于标准 Promise 实现，支持 async/await</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>Fetch 请求默认是不带 cookie 的，需要设置 fetch(url, {credentials: ‘include’})</li>
-<li>服务器返回 400，500 错误码时并不会 reject，只有网络错误这些导致请求不能完成时，fetch 才会被 reject。</li>
-</ul>
-<p>示例：</p>
-<pre><code>fetch('http://example.com/movies.json')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-    console.log(myJson);
-  });</code></pre>
-<p>ts对fetch简单封装下：</p>
-<pre><code>import _ from 'lodash';
-import 'whatwg-fetch';
-
-interface ReqInit extends RequestInit {
-  headers?: Record&lt;string, string&gt;;
-  /** eg. ?a=1 */
-  params?: { [key: string]: any };
-  /** eg. /:id/.. */
-  router?: { [key: string]: any };
-  /** 超时时间，默认3000 */
-  timeout?: number;
-}
-
-async function request&lt;T = any&gt;(path: string, init: ReqInit = {}): Promise&lt;T&gt; {
-  const mergeInit = {
-    ...request.default,
-    ...init,
-    headers: { ...request.default.headers, ...init.headers },
-  };
-  const { params, router, body, timeout, headers } = mergeInit;
-  let url = path;
-
-  if (router) {
-    url = path.replace(/:([A-Za-z]+)/g, (substring, p1: string) =&gt; router[p1]);
-  }
-  if (params) {
-    url += _(
-      _.reduce(params, (prev, val, key) =&gt; `${prev}${key}=${val}&amp;`, '?'),
-    ).trimEnd('&amp;');
-  }
-
-  if (!Reflect.get(headers, 'Content-Type')) {
-    if (typeof body === 'string') {
-      Reflect.set(headers, 'Content-Type', 'application/json');
-    }
-  }
-
-  try {
-    const response: Response = await Promise.race([
-      fetch(url, mergeInit),
-      new Promise&lt;any&gt;((resolve, reject) =&gt; {
-        setTimeout(
-          () =&gt; reject({ status: 408, statusText: 'TIME_OUT_ERR', url }),
-          timeout,
-        );
-      }),
-    ]);
-
-    if (response.ok) {
-      if (request.interceptors.response) {
-        return await request.interceptors.response(response);
-      }
-      return await response.json();
-    }
-    throw response;
-  } catch (error) {
-    if (request.interceptors.catch) {
-      request.interceptors.catch(error);
-    }
-
-    throw error;
-  }
-}
-
-request.default = {
-  method: 'GET',
-  headers: {
-    Accept: '*/*',
-  },
-  mode: 'cors',
-  timeout: 3000,
-  // credentials: 'include' // send cookies
-} as ReqInit;
-
-request.interceptors = {
-  response: null,
-  catch: null,
-} as {
-  response: ((response: Response) =&gt; Promise&lt;any&gt;) | null;
-  catch: ((error: Partial&lt;Response&gt;) =&gt; void) | null;
-};
-
-export default request;
-</code></pre>
+<h3 id="后端服务器处理请求的时间设置"><a href="#后端服务器处理请求的时间设置" class="headerlink" title="后端服务器处理请求的时间设置"></a>后端服务器处理请求的时间设置</h3><p>如果只集成了一台nginx机器不用设置</p>
+<pre><code>location / {
+        ...
+        proxy_read_timeout 150;  # 秒
+        ...
+    }</code></pre>
 
             </div>
             <hr/>
@@ -682,7 +528,7 @@ export default request;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/">https://leeycode.github.io/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/</a>
+                    <a href="https://leeycode.github.io/2020/12/16/nginx-chao-shi-she-zhi/">https://leeycode.github.io/2020/12/16/nginx-chao-shi-she-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -720,12 +566,8 @@ export default request;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82/">
-                                    <span class="chip bg-color">数据请求</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
-                                    <span class="chip bg-color">前端基础</span>
+                                <a href="/tags/nginx/">
+                                    <span class="chip bg-color">nginx</span>
                                 </a>
                             
                         </div>
@@ -939,70 +781,18 @@ export default request;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/08/13/css-bian-xie-gui-fan/">
+                <a href="/2020/12/16/nginx-chao-shi-she-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="css编写规范">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="nginx超时设置">
                         
-                        <span class="card-title">css编写规范</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-13
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/" class="post-category">
-                                    前端规范
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/css/">
-                        <span class="chip bg-color">css</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/">
-                        <span class="chip bg-color">前端规范</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="前端请求方式：xhr、ajax、axios与fetch的区别比较">
-                        
-                        <span class="card-title">前端请求方式：xhr、ajax、axios与fetch的区别比较</span>
+                        <span class="card-title">nginx超时设置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1013,7 +803,7 @@ export default request;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2017-06-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-16
                             </span>
                         <span class="publish-author">
                             
@@ -1031,12 +821,57 @@ export default request;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82/">
-                        <span class="chip bg-color">数据请求</span>
+                    <a href="/tags/nginx/">
+                        <span class="chip bg-color">nginx</span>
                     </a>
                     
-                    <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">前端基础</span>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/12/11/webpack-ji-chu-04-wen-jian-zhi-wen-ce-lue/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="webpack基础04-文件指纹策略">
+                        
+                        <span class="card-title">webpack基础04-文件指纹策略</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    前端基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/webpack/">
+                        <span class="chip bg-color">webpack</span>
                     </a>
                     
                 </div>

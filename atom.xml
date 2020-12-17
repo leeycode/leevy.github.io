@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2020-12-11T01:32:01.720Z</updated>
+  <updated>2020-12-17T02:50:01.384Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx超时设置</title>
+    <link href="https://leeycode.github.io/2020/12/16/nginx-chao-shi-she-zhi/"/>
+    <id>https://leeycode.github.io/2020/12/16/nginx-chao-shi-she-zhi/</id>
+    <published>2020-12-16T03:12:36.000Z</published>
+    <updated>2020-12-17T02:50:01.384Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;nginx访问出现504 Gateway Time-out，一般是由于程序执行时间过长导致响应超时，例如程序需要执行90秒，而nginx最大响应等待时间为30秒，这样就会出现超时。&lt;/p&gt;
+&lt;h2 id=&quot;导致超时的场景&quot;&gt;&lt;a href=&quot;#导致超时的场景&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webpack基础04-文件指纹策略</title>
+    <link href="https://leeycode.github.io/2020/12/11/webpack-ji-chu-04-wen-jian-zhi-wen-ce-lue/"/>
+    <id>https://leeycode.github.io/2020/12/11/webpack-ji-chu-04-wen-jian-zhi-wen-ce-lue/</id>
+    <published>2020-12-11T01:38:41.000Z</published>
+    <updated>2020-12-11T02:09:30.828Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
+    
+  </entry>
   
   <entry>
     <title>webpack基础03-文件监听</title>
@@ -43,32 +94,6 @@
   </entry>
   
   <entry>
-    <title>webpack基础01-核心概念</title>
-    <link href="https://leeycode.github.io/2020/12/10/webpack-ji-chu-01-he-xin-gai-nian/"/>
-    <id>https://leeycode.github.io/2020/12/10/webpack-ji-chu-01-he-xin-gai-nian/</id>
-    <published>2020-12-10T07:24:49.000Z</published>
-    <updated>2020-12-10T02:30:52.925Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;默认安装&quot;&gt;&lt;a href=&quot;#默认安装&quot; class=&quot;headerlink&quot; title=&quot;默认安装&quot;&gt;&lt;/a&gt;默认安装&lt;/h1&gt;&lt;p&gt;npm init -y&lt;/p&gt;
-&lt;h2 id=&quot;安装webpack相关&quot;&gt;&lt;a href=&quot;#安装webpack相关&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
-    
-  </entry>
-  
-  <entry>
     <title>webpack基础02-静态资源处理</title>
     <link href="https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/"/>
     <id>https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/</id>
@@ -84,6 +109,32 @@
 &lt;p&gt;本文主要讲述样式文件，图片和字体资源的解析&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&quot;解析css-sass-less&quot;&gt;&lt;a href=&quot;#解析css-sass-less&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webpack基础01-核心概念</title>
+    <link href="https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/"/>
+    <id>https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/</id>
+    <published>2020-12-06T07:24:49.000Z</published>
+    <updated>2020-12-11T07:11:39.015Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;默认安装&quot;&gt;&lt;a href=&quot;#默认安装&quot; class=&quot;headerlink&quot; title=&quot;默认安装&quot;&gt;&lt;/a&gt;默认安装&lt;/h1&gt;&lt;p&gt;npm init -y&lt;/p&gt;
+&lt;h2 id=&quot;安装webpack相关&quot;&gt;&lt;a href=&quot;#安装webpack相关&quot;</summary>
         
       
     
