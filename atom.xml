@@ -98,7 +98,7 @@
     <link href="https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/"/>
     <id>https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/</id>
     <published>2020-12-08T00:24:49.000Z</published>
-    <updated>2020-12-10T02:34:31.952Z</updated>
+    <updated>2020-12-24T13:21:24.172Z</updated>
     
     
       
@@ -106,9 +106,9 @@
         
         
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;本文主要讲述样式文件，图片和字体资源的解析&lt;/p&gt;
+&lt;p&gt;本文主要讲述样式文件，图片和字体资源的解析，html,css,js的压缩&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&quot;解析css-sass-less&quot;&gt;&lt;a href=&quot;#解析css-sass-less&quot; class=&quot;headerlink&quot;</summary>
+&lt;h2 id=&quot;解析css-sass-less&quot;&gt;&lt;a href=&quot;#解析css-sass-less&quot;</summary>
         
       
     
@@ -126,7 +126,7 @@
     <link href="https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/"/>
     <id>https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/</id>
     <published>2020-12-06T07:24:49.000Z</published>
-    <updated>2020-12-11T07:11:39.015Z</updated>
+    <updated>2020-12-22T12:53:40.609Z</updated>
     
     
       
