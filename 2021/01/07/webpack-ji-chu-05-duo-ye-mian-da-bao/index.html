@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="当CORS遇到SameSite, 大脸猫">
+    <meta name="keywords" content="webpack基础05-多页面打包的方案, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>当CORS遇到SameSite | 大脸猫</title>
+    <title>webpack基础05-多页面打包的方案 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">当CORS遇到SameSite</h1>
+                    <h1 class="description center-align post-title">webpack基础05-多页面打包的方案</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
-                                <span class="chip bg-color">踩的坑</span>
+                            <a href="/tags/webpack/">
+                                <span class="chip bg-color">webpack</span>
                             </a>
                         
                     </div>
@@ -425,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="post-category">
-                                项目总结
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                前端基础
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-09-11
+                    2021-01-07
                 </div>
                 
 
@@ -447,7 +447,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    409
+                    300
                 </div>
                 
 
@@ -469,15 +469,82 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><blockquote>
-<p>A cookie associated with a cross-site resource at <a target="_blank" rel="noopener" href="http://a.com/">http://a.com/</a> was set without the ‘SameSite’ attribute. A future release of Chrome will only deliver cookies with cross-site requests if they are set with ‘SameSite=None’ and ‘Secure’. You can review cookies in developer tools under Application&gt;Storage&gt;Cookies and see more details at <a target="_blank" rel="noopener" href="https://www.chromestatus.com/feature/5088147346030592">https://www.chromestatus.com/feature/5088147346030592</a> and <a target="_blank" rel="noopener" href="https://www.chromestatus.com/feature/5633521622188032">https://www.chromestatus.com/feature/5633521622188032</a>.</p>
+                <h1 id="多页面（MPA）应用打包方案"><a href="#多页面（MPA）应用打包方案" class="headerlink" title="多页面（MPA）应用打包方案"></a>多页面（MPA）应用打包方案</h1><blockquote>
+<p>每次页面跳转，服务器都会返回一个新的html文档，这中类型的网站就叫多页面应用。</p>
 </blockquote>
-<p>于是发现是 Chrome 升级 80 导致未设置 SameSite 的 Cookie 默认值是Lax。</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="1-紧急处理"><a href="#1-紧急处理" class="headerlink" title="1.紧急处理"></a>1.紧急处理</h2><p>其实是在服务方解决问题之前让用户先稍微兼容一下。方案很简单：</p>
-<p>换个浏览器<br>or</p>
-<p>打开 chrome://flags/#same-site-by-default-cookies，关掉 SameSite by default cookies 然后重启浏览器</p>
-<h2 id="2-方法一：跨域-Set-Cookie"><a href="#2-方法一：跨域-Set-Cookie" class="headerlink" title="2. 方法一：跨域 + Set-Cookie"></a>2. 方法一：跨域 + Set-Cookie</h2><p>首先就是报错信息里提到的，让服务端同学在 Set-Cookie 的时候加上 SameSite=None; Secure。但是我们的后台系统都是对内使用的，很多域名都没有申请证书。而 “Secure” 属性却表示 Cookie 只能随 HTTPS 请求发送。<br>这就很尴尬。<br>要不申请证书，要不换域名。<br>但是长远来看，https是大趋势，趁着这个机会升级成 HTTPS 也是可取的。<br>然而有些版本的浏览器并不识别 SameSite=None，需要特殊处理。</p>
-<h2 id="3-方法二：改成同域请求"><a href="#3-方法二：改成同域请求" class="headerlink" title="3. 方法二：改成同域请求"></a>3. 方法二：改成同域请求</h2><p>既然 SameSite=Lax 限制的是跨域 Cookie 携带，那么改成同域自然没有问题了。<br>但因为现在项目都是前后端分离部署的，所以请运维同学配了一下匹配到 ^/api/ 开头的请求都转发到服务端的地址。前端请求接口时直接用相对路径请求。<br>问题解决</p>
+<h2 id="多页面应用方案"><a href="#多页面应用方案" class="headerlink" title="多页面应用方案"></a>多页面应用方案</h2><p>在webpack里，每个页面对应一个 entry，一个html-webpack-plugin。<br>缺点：每次新增或删除页面都需要修改 webpack 配置。</p>
+<pre class=" language-javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        index<span class="token punctuation">:</span> <span class="token string">'./src/index.js'</span><span class="token punctuation">,</span>
+        search<span class="token punctuation">:</span> <span class="token string">'./src/search.js'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<ol>
+<li><p>解决方案1：动态获取 entry 和设置 html-webpack-plugin 数量</p>
+</li>
+<li><p>解决方案2：利用 glob.sync</p>
+</li>
+</ol>
+<p>glob库</p>
+<pre class=" language-javascript"><code class="language-javascript">
+entry<span class="token punctuation">:</span> glob<span class="token punctuation">.</span><span class="token function">sync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./src/*/index.js'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>这两个解决方案的前提是把入口文件放到 /src/*/index.js 下，所以的入口文件都叫index.js，通过二级目录来区分。</p>
+<pre class=" language-javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        index<span class="token punctuation">:</span> <span class="token string">'./src/index/index.js'</span><span class="token punctuation">,</span>
+        search<span class="token punctuation">:</span> <span class="token string">'./src/search/index.js'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>如果使用glob库的话，</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> setMPA <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> entry <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> htmlWebpackPlugins <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> entryFiles <span class="token operator">=</span> glob<span class="token punctuation">.</span><span class="token function">sync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./src/*/index.js'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>entryFiles<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> entryFile <span class="token operator">=</span> entryFiles<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// '/Users/cpselvis/my-project/src/index/index.js'</span>
+
+            <span class="token keyword">const</span> match <span class="token operator">=</span> entryFile<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token regex">/src\/(.*)\/index\.js/</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">const</span> pageName <span class="token operator">=</span> match <span class="token operator">&amp;&amp;</span> match<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+            entry<span class="token punctuation">[</span>pageName<span class="token punctuation">]</span> <span class="token operator">=</span> entryFile<span class="token punctuation">;</span>
+            htmlWebpackPlugins<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>
+                <span class="token keyword">new</span> <span class="token class-name">HtmlWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                    inlineSource<span class="token punctuation">:</span> <span class="token string">'.css$'</span><span class="token punctuation">,</span>
+                    template<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`src/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>pageName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/index.html`</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    filename<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>pageName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.html`</span></span><span class="token punctuation">,</span>
+                    chunks<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'vendors'</span><span class="token punctuation">,</span> pageName<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    inject<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    minify<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                        html5<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                        collapseWhitespace<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                        preserveLineBreaks<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                        minifyCSS<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                        minifyJS<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                        removeComments<span class="token punctuation">:</span> <span class="token boolean">false</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        entry<span class="token punctuation">,</span>
+        htmlWebpackPlugins
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span>entry <span class="token punctuation">,</span>htmlWebpackPlugins<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">setMPA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span><span class="token keyword">export</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+     entry<span class="token punctuation">:</span> entry<span class="token punctuation">,</span>
+     plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token keyword">new</span> <span class="token class-name">CleanWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>htmlWebpackPlugins<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+</code></pre>
 
             </div>
             <hr/>
@@ -503,7 +570,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2020/09/11/dang-cors-yu-dao-samesite-md/">https://leeycode.github.io/2020/09/11/dang-cors-yu-dao-samesite-md/</a>
+                    <a href="https://leeycode.github.io/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/">https://leeycode.github.io/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -541,8 +608,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
-                                    <span class="chip bg-color">踩的坑</span>
+                                <a href="/tags/webpack/">
+                                    <span class="chip bg-color">webpack</span>
                                 </a>
                             
                         </div>
@@ -756,69 +823,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/">
-                    <div class="card-image">
-                        
-                        <img src="https://7.dusays.com/2020/11/02/382609aa8c82c.jpeg" class="responsive-img" alt="TypeScript在vue项目中的应用">
-                        
-                        <span class="card-title">TypeScript在vue项目中的应用</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-30
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/" class="post-category">
-                                    新鲜技能
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
-                    </a>
-                    
-                    <a href="/tags/TypeScript/">
-                        <span class="chip bg-color">TypeScript</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2020/08/30/bfc-yuan-li-ji-ying-yong/">
+                <a href="/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="BFC原理及应用">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="webpack基础05-多页面打包的方案">
                         
-                        <span class="card-title">BFC原理及应用</span>
+                        <span class="card-title">webpack基础05-多页面打包的方案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -829,7 +845,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-07
                             </span>
                         <span class="publish-author">
                             
@@ -843,11 +859,61 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/css/">
-                        <span class="chip bg-color">css</span>
+                    <a href="/tags/webpack/">
+                        <span class="chip bg-color">webpack</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/01/05/qian-duan-quan-xian-guan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="前端权限管理">
+                        
+                        <span class="card-title">前端权限管理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            leevy
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/vue/">
+                        <span class="chip bg-color">vue</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">项目总结</span>
                     </a>
                     
                 </div>

@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2021-01-05T07:33:49.316Z</updated>
+  <updated>2021-01-07T09:21:22.328Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>webpack基础05-多页面打包的方案</title>
+    <link href="https://leeycode.github.io/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/"/>
+    <id>https://leeycode.github.io/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/</id>
+    <published>2021-01-07T03:14:15.000Z</published>
+    <updated>2021-01-07T09:21:22.328Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;多页面（MPA）应用打包方案&quot;&gt;&lt;a href=&quot;#多页面（MPA）应用打包方案&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
+    
+  </entry>
   
   <entry>
     <title>前端权限管理</title>
@@ -508,34 +533,6 @@
     <category term="css" scheme="https://leeycode.github.io/tags/css/"/>
     
     <category term="前端规范" scheme="https://leeycode.github.io/tags/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端请求方式：xhr、ajax、axios与fetch的区别比较</title>
-    <link href="https://leeycode.github.io/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/"/>
-    <id>https://leeycode.github.io/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/</id>
-    <published>2017-06-13T13:23:12.000Z</published>
-    <updated>2020-10-31T08:42:31.016Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;这些都是异步请求数据的方法。在不重新刷新页面的情况下与服务器通信，交换数据，或更新页面。&lt;/p&gt;
-&lt;h1 id=&quot;XMLHttpRequest对象&quot;&gt;&lt;a href=&quot;#XMLHttpRequest对象&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="数据请求" scheme="https://leeycode.github.io/tags/%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82/"/>
-    
-    <category term="前端基础" scheme="https://leeycode.github.io/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
