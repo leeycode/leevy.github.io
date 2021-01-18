@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2021-01-07T09:21:22.328Z</updated>
+  <updated>2021-01-18T01:55:10.557Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://leeycode.github.io/2021/01/14/webpack-ji-chu-06-gong-gong-zi-yuan-ti-qu/"/>
+    <id>https://leeycode.github.io/2021/01/14/webpack-ji-chu-06-gong-gong-zi-yuan-ti-qu/</id>
+    <published>2021-01-14T08:36:12.906Z</published>
+    <updated>2021-01-18T01:55:10.557Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;基础库分离：React示例&quot;&gt;&lt;a href=&quot;#基础库分离：React示例&quot; class=&quot;headerlink&quot; title=&quot;基础库分离：React示例&quot;&gt;&lt;/a&gt;基础库分离：React示例&lt;/h2&gt;&lt;p&gt;思路：将react、react-dom</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>webpack基础05-多页面打包的方案</title>
@@ -504,33 +525,6 @@
     
     <category term="前端规范" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/"/>
     
-    
-    <category term="前端规范" scheme="https://leeycode.github.io/tags/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>css编写规范</title>
-    <link href="https://leeycode.github.io/2019/08/13/css-bian-xie-gui-fan/"/>
-    <id>https://leeycode.github.io/2019/08/13/css-bian-xie-gui-fan/</id>
-    <published>2019-08-13T11:23:12.000Z</published>
-    <updated>2020-10-31T09:06:29.685Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;id和class的命名&quot;&gt;&lt;a href=&quot;#id和class的命名&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="前端规范" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/"/>
-    
-    
-    <category term="css" scheme="https://leeycode.github.io/tags/css/"/>
     
     <category term="前端规范" scheme="https://leeycode.github.io/tags/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/"/>
     
