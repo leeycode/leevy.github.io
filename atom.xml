@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2021-01-20T09:18:47.449Z</updated>
+  <updated>2021-01-20T09:19:46.648Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://leeycode.github.io/2021/01/20/nodejs-cong-ling-qi-fei-mo-kuai/"/>
     <id>https://leeycode.github.io/2021/01/20/nodejs-cong-ling-qi-fei-mo-kuai/</id>
     <published>2021-01-20T09:17:27.000Z</published>
-    <updated>2021-01-20T09:18:47.449Z</updated>
+    <updated>2021-01-20T09:19:46.648Z</updated>
     
     
       
@@ -34,6 +34,10 @@
     
     
     
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="nodejs" scheme="https://leeycode.github.io/tags/nodejs/"/>
     
   </entry>
   
