@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="前端请求方式：xhr、ajax、axios与fetch的区别比较, 大脸猫">
+    <meta name="keywords" content="前端缓存问题, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>前端请求方式：xhr、ajax、axios与fetch的区别比较 | 大脸猫</title>
+    <title>前端缓存问题 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">前端请求方式：xhr、ajax、axios与fetch的区别比较</h1>
+                    <h1 class="description center-align post-title">前端缓存问题</h1>
                 </div>
             </div>
         </div>
@@ -413,12 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82/">
-                                <span class="chip bg-color">数据请求</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
-                                <span class="chip bg-color">前端基础</span>
+                            <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
+                                <span class="chip bg-color">踩的坑</span>
                             </a>
                         
                     </div>
@@ -429,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
-                                前端基础
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="post-category">
+                                项目总结
                             </a>
                         
                     </div>
@@ -442,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2017-06-13
+                    2021-02-20
                 </div>
                 
 
@@ -451,7 +447,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    844
+                    895
                 </div>
                 
 
@@ -473,190 +469,48 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这些都是异步请求数据的方法。在不重新刷新页面的情况下与服务器通信，交换数据，或更新页面。</p>
-<h1 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h1><p>优点：</p>
-<ul>
-<li>不重新加载页面的情况下更新网页</li>
-<li>在页面已加载后从服务器请求/接收数据</li>
-<li>在后台向服务器发送数据</li>
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>彻底禁止缓存，这个需求是错误的。缓存是浏览器的功能特性，又不是 Bug。但是前端知道如何处理浏览器缓存，用户并不一定了解，特别是一些静态资源的缓存，让用户一脸懵逼，因此特意总结了下。</p>
+<h2 id="浏览器缓存的原理"><a href="#浏览器缓存的原理" class="headerlink" title="浏览器缓存的原理"></a>浏览器缓存的原理</h2><p>浏览器的缓存分为强制缓存和协商缓存。当二次打开网页时，浏览器会先对缓存发起http请求，只要请求的资源存在缓存并且该资源的请求头expires和cache-control中存在缓存的标志，那就默认读取缓存，如果缓存失效但缓存依然存在，这时有会对服务器发出http请求，通过last-modified和etag两个请求头验证是否存在协商缓存，存在协商缓存就让浏览器照样读取缓存。</p>
+<p>当然，如果你资源已经不存在了或者明确禁止缓存，那浏览器也不可能使用缓存，这也是解决缓存问题的办法</p>
+<p><img src="https://7.dusays.com/2021/02/20/898afaf48bed5.jpg" alt="v2-6b958faacd0b037298010b60885af016_720w.jpg"></p>
+<h3 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h3><p>设置强制缓存有两个属性expires和cache-control，cache-control优先级高于 expires,常用有5个值：</p>
+<ol>
+<li>public:所有内容都将被缓存（客户端和代理服务器都可缓存）</li>
+<li>private:所有内容只有客户端可以缓存</li>
+<li>no-cache: 客户端缓存内容，但是是否使用缓存则需要经过协商缓存来验证决定</li>
+<li>no-store：所有内容都不会被缓存，即不使用强制缓存，也不使用协商缓存 </li>
+<li>max-age=xxx (xxx is numeric)：缓存内容将在xxx秒后失效</li>
+</ol>
+<p><img src="https://7.dusays.com/2021/02/20/1d7e2e393d570.jpg" alt="v2-329276827c503588067c117ccb43e8fd_720w.jpg"></p>
+<p>强制缓存是否生效，可以查看控制台的network选项，下面的size属性，一般就是from memory cache或者from disk cache，一个是从内存中加载缓存，一个是硬盘中加载缓存，区别就是内存要快些，一般先是读取硬盘中的缓存，要是你刷新一下，就从内存中读取，不然刷新的时候怎么那么快</p>
+<p><img src="https://7.dusays.com/2021/02/20/fca4911cc39f4.jpg" alt="v2-5085ef15ec60935448a3d0e9141f3e2d_720w.jpg"></p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>当强制缓存失败，浏览器就请求服务器，如果服务器觉得用缓存没问题，资源又没有更新，那么，即使缓存设了到期时间，浏览器依然会读取，此时服务器返回304，如果资源更新了，就从服务器请求更新，返回200。如何判断资源是否更新，就是靠last-modified和etag两个请求头，这里我就不多讲了</p>
+<p>但是要注意，强制缓存要优先于协商缓存，所以嘛，就算你更新了，浏览器依旧会读取缓存，</p>
+<h2 id="前端解决缓存的办法"><a href="#前端解决缓存的办法" class="headerlink" title="前端解决缓存的办法"></a>前端解决缓存的办法</h2><h3 id="meta缓存头设置为禁止缓存"><a href="#meta缓存头设置为禁止缓存" class="headerlink" title="meta缓存头设置为禁止缓存"></a>meta缓存头设置为禁止缓存</h3><pre class=" language-js"><code class="language-js"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 在入口文件index<span class="token punctuation">.</span>html中，头部添加meta标签 <span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"Expires"</span> content<span class="token operator">=</span><span class="token string">"0"</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"Pragma"</span> content<span class="token operator">=</span><span class="token string">"no-cache"</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"Cache-control"</span> content<span class="token operator">=</span><span class="token string">"no-cache"</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"Cache"</span> content<span class="token operator">=</span><span class="token string">"no-cache"</span><span class="token operator">></span></code></pre>
+<h3 id="静态资源加上版本号"><a href="#静态资源加上版本号" class="headerlink" title="静态资源加上版本号"></a>静态资源加上版本号</h3><pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// webpack.prod.conf.js</span>
+<span class="token keyword">const</span> Version <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> config<span class="token punctuation">.</span>build<span class="token punctuation">.</span>assetsRoot<span class="token punctuation">,</span>
+    filename<span class="token punctuation">:</span> utils<span class="token punctuation">.</span><span class="token function">assetsPath</span><span class="token punctuation">(</span><span class="token string">'js/[name].[chunkhash].'</span><span class="token operator">+</span>_Version<span class="token operator">+</span><span class="token string">'js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    chunkFilename<span class="token punctuation">:</span> utils<span class="token punctuation">.</span><span class="token function">assetsPath</span><span class="token punctuation">(</span><span class="token string">'js/[id].[chunkhash].'</span><span class="token operator">+</span>_Version<span class="token operator">+</span><span class="token string">'js'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="服务端配置"><a href="#服务端配置" class="headerlink" title="服务端配置"></a>服务端配置</h3><pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// nginx端配置</span>
+location <span class="token operator">=</span> <span class="token operator">/</span>index<span class="token punctuation">.</span>html <span class="token punctuation">{</span>
+    add_header Cache<span class="token operator">-</span>Control <span class="token string">"no-cache, no-store"</span><span class="token punctuation">;</span>
+    # add_header Cache<span class="token operator">-</span>Control no<span class="token operator">-</span>store<span class="token punctuation">;</span>
+    # add_header Pragma no<span class="token operator">-</span>cache<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="快速清理浏览器缓存"><a href="#快速清理浏览器缓存" class="headerlink" title="快速清理浏览器缓存"></a>快速清理浏览器缓存</h2><ul>
+<li><p>Ctrl+shift+Del 清空浏览数据设置的快捷键，可以清除浏览数据呀，cookie呀，缓存呀，这是清除浏览器所有的缓存</p>
+</li>
+<li><p>控制台禁止缓存 这个隐藏在控制台network选项里的，对于开发人员很好用，默认禁止缓存</p>
+</li>
 </ul>
-<p>缺点：</p>
-<ul>
-<li>使用起来也比较繁琐，需要设置很多值。</li>
-<li>早期的IE浏览器有自己的实现，这样需要写兼容代码。</li>
-</ul>
-<p>示例：</p>
-<pre><code>if (window.XMLHttpRequest) { // model browser
-  xhr = new XMLHttpRequest()
-} else if (window.ActiveXObject) { // IE 6 and older
-  xhr = new ActiveXObject('Microsoft.XMLHTTP')
-}
-xhr.open('POST', url, true)
-xhr.send(data)
-xhr.onreadystatechange = function () {
-if (request.readyState === 4) { // 成功完成
-        // 判断响应状态码
-        if (request.status === 200) {
-            // 成功，通过responseText拿到响应的文本:
-            return success(request.responseText);
-        } else {
-            // 失败，根据响应码判断失败原因:
-            return fail(request.status);
-        }
-    } else {
-        // HTTP请求还在继续...
-    }
-}</code></pre>
-<h1 id="jQuery-ajax"><a href="#jQuery-ajax" class="headerlink" title="jQuery ajax"></a>jQuery ajax</h1><p>AJAX请求也兼容了各浏览器，对XMLHttpRequest对象的封装。</p>
-<p>优点：</p>
-<ul>
-<li>对原生XHR的封装，做了兼容处理，简化了使用。</li>
-<li>增加了对JSONP的支持，可以简单处理部分跨域。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>如果有多个请求，并且有依赖关系的话，容易形成回调地狱。</li>
-<li>本身是针对MVC的编程，不符合现在前端MVVM的浪潮。</li>
-<li>ajax是jQuery中的一个方法。如果只是要使用ajax却要引入整个jQuery非常的不合理。</li>
-</ul>
-<p>示例：</p>
-<pre><code>$.ajax({
-  type: 'POST',
-  url: url, 
-  data: data,
-  dataType: dataType,
-  success: function () {},
-  error: function () {}
-})</code></pre>
-<h1 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h1><p>Axios是一个基于promise的HTTP库，可以用在浏览器和 node.js 中。它本质也是对原生XMLHttpRequest的封装，只不过它是Promise的实现版本，符合最新的ES规范。</p>
-<p>优点：</p>
-<ul>
-<li>从浏览器中创建XMLHttpRequests</li>
-<li>从 node.js 创建 http 请求</li>
-<li>支持 Promise API</li>
-<li>拦截请求和响应</li>
-<li>转换请求数据和响应数据</li>
-<li>取消请求</li>
-<li>自动转换 JSON 数据</li>
-<li>客户端支持防御 XSRF</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>只持现代代浏览器。</li>
-</ul>
-<pre><code>axios({
-    method: 'post',
-    url: '/user/12345',
-    data: {
-      firstName: 'liu',
-      lastName: 'weiqin'
-    }
-  })
-  .then(res =&gt; console.log(res))
-  .catch(err =&gt; console.log(err))</code></pre>
-<h1 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h1><p>优点：</p>
-<ul>
-<li>语法简洁，更加语义化</li>
-<li>基于标准 Promise 实现，支持 async/await</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>Fetch 请求默认是不带 cookie 的，需要设置 fetch(url, {credentials: ‘include’})</li>
-<li>服务器返回 400，500 错误码时并不会 reject，只有网络错误这些导致请求不能完成时，fetch 才会被 reject。</li>
-</ul>
-<p>示例：</p>
-<pre><code>fetch('http://example.com/movies.json')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-    console.log(myJson);
-  });</code></pre>
-<p>ts对fetch简单封装下：</p>
-<pre><code>import _ from 'lodash';
-import 'whatwg-fetch';
-
-interface ReqInit extends RequestInit {
-  headers?: Record&lt;string, string&gt;;
-  /** eg. ?a=1 */
-  params?: { [key: string]: any };
-  /** eg. /:id/.. */
-  router?: { [key: string]: any };
-  /** 超时时间，默认3000 */
-  timeout?: number;
-}
-
-async function request&lt;T = any&gt;(path: string, init: ReqInit = {}): Promise&lt;T&gt; {
-  const mergeInit = {
-    ...request.default,
-    ...init,
-    headers: { ...request.default.headers, ...init.headers },
-  };
-  const { params, router, body, timeout, headers } = mergeInit;
-  let url = path;
-
-  if (router) {
-    url = path.replace(/:([A-Za-z]+)/g, (substring, p1: string) =&gt; router[p1]);
-  }
-  if (params) {
-    url += _(
-      _.reduce(params, (prev, val, key) =&gt; `${prev}${key}=${val}&amp;`, '?'),
-    ).trimEnd('&amp;');
-  }
-
-  if (!Reflect.get(headers, 'Content-Type')) {
-    if (typeof body === 'string') {
-      Reflect.set(headers, 'Content-Type', 'application/json');
-    }
-  }
-
-  try {
-    const response: Response = await Promise.race([
-      fetch(url, mergeInit),
-      new Promise&lt;any&gt;((resolve, reject) =&gt; {
-        setTimeout(
-          () =&gt; reject({ status: 408, statusText: 'TIME_OUT_ERR', url }),
-          timeout,
-        );
-      }),
-    ]);
-
-    if (response.ok) {
-      if (request.interceptors.response) {
-        return await request.interceptors.response(response);
-      }
-      return await response.json();
-    }
-    throw response;
-  } catch (error) {
-    if (request.interceptors.catch) {
-      request.interceptors.catch(error);
-    }
-
-    throw error;
-  }
-}
-
-request.default = {
-  method: 'GET',
-  headers: {
-    Accept: '*/*',
-  },
-  mode: 'cors',
-  timeout: 3000,
-  // credentials: 'include' // send cookies
-} as ReqInit;
-
-request.interceptors = {
-  response: null,
-  catch: null,
-} as {
-  response: ((response: Response) =&gt; Promise&lt;any&gt;) | null;
-  catch: ((error: Partial&lt;Response&gt;) =&gt; void) | null;
-};
-
-export default request;
-</code></pre>
 
             </div>
             <hr/>
@@ -682,7 +536,7 @@ export default request;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/">https://leeycode.github.io/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/</a>
+                    <a href="https://leeycode.github.io/2021/02/20/qian-duan-huan-cun-wen-ti/">https://leeycode.github.io/2021/02/20/qian-duan-huan-cun-wen-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -720,12 +574,8 @@ export default request;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82/">
-                                    <span class="chip bg-color">数据请求</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
-                                    <span class="chip bg-color">前端基础</span>
+                                <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
+                                    <span class="chip bg-color">踩的坑</span>
                                 </a>
                             
                         </div>
@@ -939,70 +789,18 @@ export default request;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/08/13/css-bian-xie-gui-fan/">
+                <a href="/2021/02/20/qian-duan-huan-cun-wen-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="css编写规范">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="前端缓存问题">
                         
-                        <span class="card-title">css编写规范</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-13
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/" class="post-category">
-                                    前端规范
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/css/">
-                        <span class="chip bg-color">css</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%89%8D%E7%AB%AF%E8%A7%84%E8%8C%83/">
-                        <span class="chip bg-color">前端规范</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2017/06/13/qian-duan-qing-qiu-fang-shi-xhr-ajax-axios-yu-fetch-de-qu-bie-bi-jiao/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="前端请求方式：xhr、ajax、axios与fetch的区别比较">
-                        
-                        <span class="card-title">前端请求方式：xhr、ajax、axios与fetch的区别比较</span>
+                        <span class="card-title">前端缓存问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1013,7 +811,57 @@ export default request;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2017-06-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="post-category">
+                                    项目总结
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
+                        <span class="chip bg-color">踩的坑</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/01/20/nodejs-cong-ling-qi-fei-mo-kuai/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="nodejs从零起飞-模块">
+                        
+                        <span class="card-title">nodejs从零起飞-模块</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-20
                             </span>
                         <span class="publish-author">
                             
@@ -1027,16 +875,11 @@ export default request;
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82/">
-                        <span class="chip bg-color">数据请求</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">前端基础</span>
+                    <a href="/tags/nodejs/">
+                        <span class="chip bg-color">nodejs</span>
                     </a>
                     
                 </div>
