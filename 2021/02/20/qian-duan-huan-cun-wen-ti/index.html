@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="大脸猫" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="大脸猫" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -472,7 +472,7 @@
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>彻底禁止缓存，这个需求是错误的。缓存是浏览器的功能特性，又不是 Bug。但是前端知道如何处理浏览器缓存，用户并不一定了解，特别是一些静态资源的缓存，让用户一脸懵逼，因此特意总结了下。</p>
 <h2 id="浏览器缓存的原理"><a href="#浏览器缓存的原理" class="headerlink" title="浏览器缓存的原理"></a>浏览器缓存的原理</h2><p>浏览器的缓存分为强制缓存和协商缓存。当二次打开网页时，浏览器会先对缓存发起http请求，只要请求的资源存在缓存并且该资源的请求头expires和cache-control中存在缓存的标志，那就默认读取缓存，如果缓存失效但缓存依然存在，这时有会对服务器发出http请求，通过last-modified和etag两个请求头验证是否存在协商缓存，存在协商缓存就让浏览器照样读取缓存。</p>
 <p>当然，如果你资源已经不存在了或者明确禁止缓存，那浏览器也不可能使用缓存，这也是解决缓存问题的办法</p>
-<p><img src="https://7.dusays.com/2021/02/20/898afaf48bed5.jpg"></p>
+<p><img src="https://7.dusays.com/2021/02/20/689c4e15f25a7.png" alt="第一次发起http请求"></p>
 <h3 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h3><p>设置强制缓存有两个属性expires和cache-control，cache-control优先级高于 expires,常用有5个值：</p>
 <ol>
 <li>public:所有内容都将被缓存（客户端和代理服务器都可缓存）</li>
@@ -481,9 +481,9 @@
 <li>no-store：所有内容都不会被缓存，即不使用强制缓存，也不使用协商缓存 </li>
 <li>max-age=xxx (xxx is numeric)：缓存内容将在xxx秒后失效</li>
 </ol>
-<p><img src="https://7.dusays.com/2021/02/20/1d7e2e393d570.jpg"></p>
+<p><img src="https://7.dusays.com/2021/02/20/0bbd461ec7cf5.png" alt="2.png"></p>
 <p>强制缓存是否生效，可以查看控制台的network选项，下面的size属性，一般就是from memory cache或者from disk cache，一个是从内存中加载缓存，一个是硬盘中加载缓存，区别就是内存要快些，一般先是读取硬盘中的缓存，要是你刷新一下，就从内存中读取，不然刷新的时候怎么那么快</p>
-<p><img src="https://7.dusays.com/2021/02/20/fca4911cc39f4.jpg"></p>
+<p><img src="https://7.dusays.com/2021/02/20/016d4a97ceaa7.png" alt="3.png"></p>
 <h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>当强制缓存失败，浏览器就请求服务器，如果服务器觉得用缓存没问题，资源又没有更新，那么，即使缓存设了到期时间，浏览器依然会读取，此时服务器返回304，如果资源更新了，就从服务器请求更新，返回200。如何判断资源是否更新，就是靠last-modified和etag两个请求头，这里我就不多讲了</p>
 <p>但是要注意，强制缓存要优先于协商缓存，所以嘛，就算你更新了，浏览器依旧会读取缓存，</p>
 <h2 id="前端解决缓存的办法"><a href="#前端解决缓存的办法" class="headerlink" title="前端解决缓存的办法"></a>前端解决缓存的办法</h2><h3 id="meta缓存头设置为禁止缓存"><a href="#meta缓存头设置为禁止缓存" class="headerlink" title="meta缓存头设置为禁止缓存"></a>meta缓存头设置为禁止缓存</h3><pre class=" language-js"><code class="language-js"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 在入口文件index<span class="token punctuation">.</span>html中，头部添加meta标签 <span class="token operator">--</span><span class="token operator">></span>
@@ -508,11 +508,11 @@ location <span class="token operator">=</span> <span class="token operator">/</s
 <h2 id="快速清理浏览器缓存"><a href="#快速清理浏览器缓存" class="headerlink" title="快速清理浏览器缓存"></a>快速清理浏览器缓存</h2><ul>
 <li>Ctrl+shift+Del 清空浏览数据设置的快捷键，可以清除浏览数据呀，cookie呀，缓存呀，这是清除浏览器所有的缓存</li>
 </ul>
-<p><img src="https://7.dusays.com/2021/02/20/55c9168e47f6e.jpg"></p>
+<p><img src="https://7.dusays.com/2021/02/20/7380544e1f4c1.png"></p>
 <ul>
 <li>控制台禁止缓存 这个隐藏在控制台network选项里的，对于开发人员很好用，默认禁止缓存</li>
 </ul>
-<p><img src="https://7.dusays.com/2021/02/20/617efb209492a.jpg"></p>
+<p><img src="https://7.dusays.com/2021/02/20/371f279c2667a.png"></p>
 
             </div>
             <hr/>
