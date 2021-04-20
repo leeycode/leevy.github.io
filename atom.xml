@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2021-02-22T08:32:43.009Z</updated>
+  <updated>2021-04-20T02:44:19.859Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx中的rewrite配置</title>
+    <link href="https://leeycode.github.io/2021/04/19/nginx-zhong-de-rewrite-pei-zhi/"/>
+    <id>https://leeycode.github.io/2021/04/19/nginx-zhong-de-rewrite-pei-zhi/</id>
+    <published>2021-04-19T13:00:38.000Z</published>
+    <updated>2021-04-20T02:44:19.859Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Rewrite-规则&quot;&gt;&lt;a href=&quot;#Rewrite-规则&quot; class=&quot;headerlink&quot; title=&quot;Rewrite 规则&quot;&gt;&lt;/a&gt;Rewrite 规则&lt;/h2&gt;&lt;p&gt;nginx 通过 ngx_http_rewrite_module 模块支持</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>outlook邮箱样式问题</title>
@@ -197,7 +222,7 @@
     <link href="https://leeycode.github.io/2020/12/11/webpack-ji-chu-04-wen-jian-zhi-wen-ce-lue/"/>
     <id>https://leeycode.github.io/2020/12/11/webpack-ji-chu-04-wen-jian-zhi-wen-ce-lue/</id>
     <published>2020-12-11T01:38:41.000Z</published>
-    <updated>2020-12-11T02:09:30.828Z</updated>
+    <updated>2021-03-03T02:55:34.591Z</updated>
     
     
       
@@ -222,7 +247,7 @@
     <link href="https://leeycode.github.io/2020/12/10/webpack-ji-chu-03-wen-jian-jian-ting/"/>
     <id>https://leeycode.github.io/2020/12/10/webpack-ji-chu-03-wen-jian-jian-ting/</id>
     <published>2020-12-10T07:24:49.000Z</published>
-    <updated>2020-12-11T01:32:01.720Z</updated>
+    <updated>2021-03-03T02:49:36.557Z</updated>
     
     
       
@@ -398,32 +423,6 @@
   </entry>
   
   <entry>
-    <title>vue项目性能优化方案</title>
-    <link href="https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/"/>
-    <id>https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/</id>
-    <published>2020-10-30T09:09:12.000Z</published>
-    <updated>2020-11-02T07:26:08.804Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://7.dusays.com/2020/11/02/3ce96e73d8ee0.jpg&quot; alt=&quot;vue.jpg&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;按需使用第三方库&quot;&gt;&lt;a href=&quot;#按需使用第三方库&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="新鲜技能" scheme="https://leeycode.github.io/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/"/>
-    
-    
-    <category term="vue" scheme="https://leeycode.github.io/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
     <title>TypeScript在vue项目中的应用</title>
     <link href="https://leeycode.github.io/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/"/>
     <id>https://leeycode.github.io/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/</id>
@@ -447,6 +446,32 @@
     <category term="vue" scheme="https://leeycode.github.io/tags/vue/"/>
     
     <category term="TypeScript" scheme="https://leeycode.github.io/tags/TypeScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vue项目性能优化方案</title>
+    <link href="https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/"/>
+    <id>https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/</id>
+    <published>2020-10-30T09:09:12.000Z</published>
+    <updated>2020-11-02T07:26:08.804Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://7.dusays.com/2020/11/02/3ce96e73d8ee0.jpg&quot; alt=&quot;vue.jpg&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;按需使用第三方库&quot;&gt;&lt;a href=&quot;#按需使用第三方库&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="新鲜技能" scheme="https://leeycode.github.io/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/"/>
+    
+    
+    <category term="vue" scheme="https://leeycode.github.io/tags/vue/"/>
     
   </entry>
   
@@ -499,34 +524,6 @@
     
     
     <category term="css" scheme="https://leeycode.github.io/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hooks入门教程</title>
-    <link href="https://leeycode.github.io/2019/09/16/hooks-ru-men-jiao-cheng/"/>
-    <id>https://leeycode.github.io/2019/09/16/hooks-ru-men-jiao-cheng/</id>
-    <published>2019-09-16T09:09:12.000Z</published>
-    <updated>2020-11-02T07:27:34.516Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://7.dusays.com/2020/11/02/d812bf44ed5ef.png&quot; alt=&quot;react&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Hooks的含义&quot;&gt;&lt;a href=&quot;#Hooks的含义&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="新鲜技能" scheme="https://leeycode.github.io/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/"/>
-    
-    
-    <category term="react" scheme="https://leeycode.github.io/tags/react/"/>
-    
-    <category term="hooks" scheme="https://leeycode.github.io/tags/hooks/"/>
     
   </entry>
   
