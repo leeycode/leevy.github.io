@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2021-04-20T02:44:19.859Z</updated>
+  <updated>2021-05-13T02:52:07.390Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx的localtion配置</title>
+    <link href="https://leeycode.github.io/2021/05/13/nginx-de-localtion-pei-zhi/"/>
+    <id>https://leeycode.github.io/2021/05/13/nginx-de-localtion-pei-zhi/</id>
+    <published>2021-05-13T02:13:35.000Z</published>
+    <updated>2021-05-13T02:52:07.390Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;location-的作用&quot;&gt;&lt;a href=&quot;#location-的作用&quot; class=&quot;headerlink&quot; title=&quot;location 的作用&quot;&gt;&lt;/a&gt;location 的作用&lt;/h2&gt;&lt;p&gt;location 指令的作用是根据用户请求 URI</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>nginx中的rewrite配置</title>
@@ -498,32 +523,6 @@
     
     
     <category term="踩的坑" scheme="https://leeycode.github.io/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BFC原理及应用</title>
-    <link href="https://leeycode.github.io/2020/08/30/bfc-yuan-li-ji-ying-yong/"/>
-    <id>https://leeycode.github.io/2020/08/30/bfc-yuan-li-ji-ying-yong/</id>
-    <published>2020-08-30T09:09:12.000Z</published>
-    <updated>2020-11-02T07:41:51.891Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/css.png&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;一、常见定位方案&quot;&gt;&lt;a href=&quot;#一、常见定位方案&quot; class=&quot;headerlink&quot; title=&quot;一、常见定位方案&quot;&gt;&lt;/a&gt;一、常见定位方案&lt;/h1&gt;&lt;p&gt;在讲 BFC</summary>
-        
-      
-    
-    
-    
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="css" scheme="https://leeycode.github.io/tags/css/"/>
     
   </entry>
   

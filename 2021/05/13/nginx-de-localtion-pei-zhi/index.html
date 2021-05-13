@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="BFC原理及应用, 大脸猫">
+    <meta name="keywords" content="nginx的localtion配置, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>BFC原理及应用 | 大脸猫</title>
+    <title>nginx的localtion配置 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">BFC原理及应用</h1>
+                    <h1 class="description center-align post-title">nginx的localtion配置</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/css/">
-                                <span class="chip bg-color">css</span>
+                            <a href="/tags/nginx/">
+                                <span class="chip bg-color">nginx</span>
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-08-30
+                    2021-05-13
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    447
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    1 分
                 </div>
                 
 
@@ -469,84 +469,102 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="/images/css.png"></p>
-<h1 id="一、常见定位方案"><a href="#一、常见定位方案" class="headerlink" title="一、常见定位方案"></a>一、常见定位方案</h1><p>在讲 BFC 之前，我们先来了解一下常见的定位方案，定位方案是控制元素的布局，有三种常见方案:</p>
-<ul>
-<li>普通流 (normal flow)<br>在普通流中，元素按照其在 HTML 中的先后位置至上而下布局，在这个过程中，行内元素水平排列，直到当行被占满然后换行，块级元素则会被渲染为完整的一个新行，除非另外指定，否则所有元素默认都是普通流定位，也可以说，普通流中元素的位置由该元素在 HTML 文档中的位置决定。</li>
-<li>浮动 (float)<br>在浮动布局中，元素首先按照普通流的位置出现，然后根据浮动的方向尽可能的向左边或右边偏移，其效果与印刷排版中的文本环绕相似。</li>
-<li>绝对定位 (absolute positioning)<br>在绝对定位布局中，元素会整体脱离普通流，因此绝对定位元素不会对其兄弟元素造成影响，而元素具体的位置由绝对定位的坐标决定。</li>
-</ul>
-<h1 id="二、BFC-概念"><a href="#二、BFC-概念" class="headerlink" title="二、BFC 概念"></a>二、BFC 概念</h1><blockquote>
-<p>Formatting context(格式化上下文) 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。</p>
-</blockquote>
-<p>那么 BFC 是什么呢？</p>
-<p>BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述定位方案的普通流。<br>具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。<br>通俗一点来讲，可以把 BFC 理解为一个封闭的大箱子，箱子内部的元素无论如何翻江倒海，都不会影响到外部。</p>
-<h1 id="三、触发-BFC"><a href="#三、触发-BFC" class="headerlink" title="三、触发 BFC"></a>三、触发 BFC</h1><p>只要元素满足下面任一条件即可触发 BFC 特性：</p>
-<ul>
-<li>body 根元素</li>
-<li>浮动元素：float 除 none 以外的值</li>
-<li>绝对定位元素：position (absolute、fixed)</li>
-<li>display 为 inline-block、table-cells、flex</li>
-<li>overflow 除了 visible 以外的值 (hidden、auto、scroll)</li>
-</ul>
-<h1 id="四、BFC-特性及应用"><a href="#四、BFC-特性及应用" class="headerlink" title="四、BFC 特性及应用"></a>四、BFC 特性及应用</h1><h2 id="1-同一个-BFC-下外边距会发生折叠"><a href="#1-同一个-BFC-下外边距会发生折叠" class="headerlink" title="1. 同一个 BFC 下外边距会发生折叠"></a>1. 同一个 BFC 下外边距会发生折叠</h2><pre><code>&lt;head&gt;
-div{
-    width: 100px;
-    height: 100px;
-    background: lightblue;
-    margin: 100px;
-}
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;/div&gt;
-&lt;/body&gt;
+                <h2 id="location-的作用"><a href="#location-的作用" class="headerlink" title="location 的作用"></a>location 的作用</h2><p>location 指令的作用是根据用户请求 URI 来执行不同的应用，location 会根据用户请求网站 URL 进行匹配定位到某个 location 区块。 如果匹配成功将会处理 location 块的规则。</p>
+<h2 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h2><pre class=" language-js"><code class="language-js">location  <span class="token operator">=</span>     <span class="token operator">/</span>uri
+   ┬      ┬       ┬
+   │      │       │
+   │      │       │
+   │      │       │
+   │      │       │
+   │      │       └─────────────── 前缀<span class="token operator">|</span>正则
+   │      └──────────────────── 可选的修饰符（用于匹配模式及优先级）
+   └───────────────────────── 必须
 </code></pre>
-<p>从效果上看，因为两个 div 元素都处于同一个 BFC 容器下 (这里指 body 元素) 所以第一个 div 的下边距和第二个 div 的上边距发生了重叠，所以两个盒子之间距离只有 100px，而不是 200px。<br><img src="https://7.dusays.com/2020/11/02/0afee71e5de5e.png"></p>
-<p>首先这不是 CSS 的 bug，我们可以理解为一种规范，如果想要避免外边距的重叠，可以将其放在不同的 BFC 容器中。</p>
-<pre><code>
-&lt;div class="container"&gt;
-    &lt;p&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="container"&gt;
-    &lt;p&gt;&lt;/p&gt;
-&lt;/div&gt;
+<h2 id="修饰符说明"><a href="#修饰符说明" class="headerlink" title="修饰符说明"></a>修饰符说明</h2><p>以下从上到下，第一个优先级最高</p>
+<pre class=" language-js"><code class="language-js"><span class="token operator">=</span>      <span class="token operator">|</span>   location <span class="token operator">=</span> <span class="token operator">/</span>uri
+<span class="token operator">^</span><span class="token operator">~</span>     <span class="token operator">|</span>   location <span class="token operator">^</span><span class="token operator">~</span> <span class="token operator">/</span>uri
+<span class="token operator">~</span>      <span class="token operator">|</span>   location <span class="token operator">~</span> pattern
+<span class="token operator">~</span><span class="token operator">*</span>     <span class="token operator">|</span>   location <span class="token operator">~</span><span class="token operator">*</span> pattern
+<span class="token operator">/</span>uri   <span class="token operator">|</span>   location <span class="token operator">/</span>uri
+@      <span class="token operator">|</span>   location @err</code></pre>
+<h2 id="优先级顺序"><a href="#优先级顺序" class="headerlink" title="优先级顺序"></a>优先级顺序</h2><p><em>优先级不分编辑 location 前后顺序</em></p>
+<ol>
+<li>= ，精确匹配，表示严格相等</li>
+</ol>
+<pre class=" language-js"><code class="language-js">location <span class="token operator">=</span> <span class="token operator">/</span><span class="token keyword">static</span> <span class="token punctuation">{</span>
+  default_type text<span class="token operator">/</span>html<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">200</span> <span class="token string">"hello world"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-.container {
-    overflow: hidden;
-}
-p {
-    width: 100px;
-    height: 100px;
-    background: lightblue;
-    margin: 100px;
-}
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span>   <span class="token punctuation">[</span>成功<span class="token punctuation">]</span>
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span>Static   <span class="token punctuation">[</span>失败<span class="token punctuation">]</span>
 </code></pre>
-<p>这时候，两个盒子边距就变成了 200px </p>
-<p><img src="https://7.dusays.com/2020/11/02/0e302d5bce868.png"></p>
-<h2 id="2-BFC-可以包含浮动的元素（清除浮动）"><a href="#2-BFC-可以包含浮动的元素（清除浮动）" class="headerlink" title="2. BFC 可以包含浮动的元素（清除浮动）"></a>2. BFC 可以包含浮动的元素（清除浮动）</h2><p>我们都知道，浮动的元素会脱离普通文档流，来看下下面一个例子</p>
-<pre><code>&lt;div style="border: 1px solid #000;"&gt;
-    &lt;div style="width: 100px;height: 100px;background: #eee;float: left;"&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p><img src="https://7.dusays.com/2020/11/02/f461d5e0dbd0f.png"></p>
-<p>由于容器内元素浮动，脱离了文档流，所以容器只剩下 2px 的边距高度。如果使触发容器的 BFC，那么容器将会包裹着浮动元素。</p>
-<pre><code>&lt;div style="border: 1px solid #000;overflow: hidden"&gt;
-    &lt;div style="width: 100px;height: 100px;background: #eee;float: left;"&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p>效果如图：</p>
-<p><img src="https://7.dusays.com/2020/11/02/b90051e64945c.png"></p>
-<h2 id="3-BFC-可以阻止元素被浮动元素覆盖"><a href="#3-BFC-可以阻止元素被浮动元素覆盖" class="headerlink" title="3. BFC 可以阻止元素被浮动元素覆盖"></a>3. BFC 可以阻止元素被浮动元素覆盖</h2><p>先来看一个文字环绕效果：</p>
-<pre><code>&lt;div style="height: 100px;width: 100px;float: left;background: lightblue"&gt;
-    我是一个左浮动的元素
-&lt;/div&gt;
-&lt;div style="width: 200px; height: 200px;background: #eee"&gt;
-    我是一个没有设置浮动, 也没有触发 BFC 元素, width: 200px; height:200px; background: #eee;
-&lt;/div&gt;
+<ol start="2">
+<li>^~ ，匹配以 URI 开头</li>
+</ol>
+<pre class=" language-js"><code class="language-js">
+location <span class="token operator">^</span><span class="token operator">~</span> <span class="token operator">/</span><span class="token keyword">static</span> <span class="token punctuation">{</span>
+  default_type text<span class="token operator">/</span>html<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">200</span> <span class="token string">"hello world"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span><span class="token number">1</span><span class="token punctuation">.</span>txt    <span class="token punctuation">[</span>成功<span class="token punctuation">]</span>
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">public</span><span class="token operator">/</span><span class="token number">1</span><span class="token punctuation">.</span>txt    <span class="token punctuation">[</span>失败<span class="token punctuation">]</span></code></pre>
+<ol start="3">
+<li>~ ，对大小写敏感, 使用正则 注意：某些操作系统对大小写敏感是不生效的，比如 windows 操作系统</li>
+</ol>
+<pre class=" language-js"><code class="language-js">location <span class="token operator">~</span> <span class="token operator">^</span><span class="token operator">/</span><span class="token keyword">static</span>$ <span class="token punctuation">{</span>
+  default_type text<span class="token operator">/</span>html<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">200</span> <span class="token string">"hello world"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span>         <span class="token punctuation">[</span>成功<span class="token punctuation">]</span>
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">?</span>v<span class="token operator">=</span><span class="token number">1</span>     <span class="token punctuation">[</span>成功<span class="token punctuation">]</span> 忽略查询字符串
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span>STATic         <span class="token punctuation">[</span>失败<span class="token punctuation">]</span>
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span>        <span class="token punctuation">[</span>失败<span class="token punctuation">]</span> 多了斜杠
 </code></pre>
-<p><img src="https://7.dusays.com/2020/11/02/aaf4c0ab57032.png"></p>
-<p>这时候其实第二个元素有部分被浮动元素所覆盖，(但是文本信息不会被浮动元素所覆盖) 如果想避免元素被覆盖，可触第二个元素的 BFC 特性，在第二个元素中加入 overflow: hidden，就会变成：</p>
-<p><img src="https://7.dusays.com/2020/11/02/4a7759227aae9.png"></p>
-<p>这个方法可以用来实现两列自适应布局，效果不错，这时候左边的宽度固定，右边的内容自适应宽度(去掉上面右边内容的宽度)。</p>
+<ol start="4">
+<li><del>* ，与</del>相反，忽略大小写敏感, 使用正则</li>
+</ol>
+<pre class=" language-js"><code class="language-js">location <span class="token operator">~</span><span class="token operator">*</span> <span class="token operator">^</span><span class="token operator">/</span><span class="token keyword">static</span>$ <span class="token punctuation">{</span>
+  default_type text<span class="token operator">/</span>html<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">200</span> <span class="token string">"hello world"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span>         <span class="token punctuation">[</span>成功<span class="token punctuation">]</span>
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">?</span>v<span class="token operator">=</span><span class="token number">1</span>     <span class="token punctuation">[</span>成功<span class="token punctuation">]</span> 忽略查询字符串
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span>STATic         <span class="token punctuation">[</span>成功<span class="token punctuation">]</span>
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span>        <span class="token punctuation">[</span>失败<span class="token punctuation">]</span> 多了斜杠
+</code></pre>
+<ol start="5">
+<li>/uri ，匹配以/uri 开头的地址</li>
+</ol>
+<pre class=" language-js"><code class="language-js">location  <span class="token operator">/</span><span class="token keyword">static</span> <span class="token punctuation">{</span>
+  default_type text<span class="token operator">/</span>html<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">200</span> <span class="token string">"hello world"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span>              <span class="token punctuation">[</span>成功<span class="token punctuation">]</span>
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span>STATIC<span class="token operator">?</span>v<span class="token operator">=</span><span class="token number">1</span>          <span class="token punctuation">[</span>成功<span class="token punctuation">]</span>
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span><span class="token number">1</span>            <span class="token punctuation">[</span>成功<span class="token punctuation">]</span>
+# http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token keyword">static</span><span class="token operator">/</span><span class="token number">1</span><span class="token punctuation">.</span>txt        <span class="token punctuation">[</span>成功<span class="token punctuation">]</span>
+</code></pre>
+<ol start="6">
+<li>@ 用于定义一个 Location 块，且该块不能被外部 Client 所访问，只能被 nginx 内部配置指令所访问，比如 try_files or error_page</li>
+</ol>
+<pre class=" language-js"><code class="language-js">location  <span class="token operator">/</span> <span class="token punctuation">{</span>
+  root   <span class="token regex">/root/</span><span class="token punctuation">;</span>
+  error_page <span class="token number">404</span> @err<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+location  @err <span class="token punctuation">{</span>
+  # 规则
+  default_type text<span class="token operator">/</span>html<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">200</span> <span class="token string">"err"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+# 如果 http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">/</span><span class="token number">1</span><span class="token punctuation">.</span>txt <span class="token number">404</span>，将会跳转到@err并输出err
+</code></pre>
 
             </div>
             <hr/>
@@ -572,7 +590,7 @@ p {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2020/08/30/bfc-yuan-li-ji-ying-yong/">https://leeycode.github.io/2020/08/30/bfc-yuan-li-ji-ying-yong/</a>
+                    <a href="https://leeycode.github.io/2021/05/13/nginx-de-localtion-pei-zhi/">https://leeycode.github.io/2021/05/13/nginx-de-localtion-pei-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -610,8 +628,8 @@ p {
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/css/">
-                                    <span class="chip bg-color">css</span>
+                                <a href="/tags/nginx/">
+                                    <span class="chip bg-color">nginx</span>
                                 </a>
                             
                         </div>
@@ -825,17 +843,18 @@ p {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/09/11/dang-cors-yu-dao-samesite-md/">
+                <a href="/2021/05/13/nginx-de-localtion-pei-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="当CORS遇到SameSite">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="nginx的localtion配置">
                         
-                        <span class="card-title">当CORS遇到SameSite</span>
+                        <span class="card-title">nginx的localtion配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -845,26 +864,27 @@ p {
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-11
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="post-category">
-                                    项目总结
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    前端基础
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
-                        <span class="chip bg-color">踩的坑</span>
+                    <a href="/tags/nginx/">
+                        <span class="chip bg-color">nginx</span>
                     </a>
                     
                 </div>
@@ -878,13 +898,13 @@ p {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/16/hooks-ru-men-jiao-cheng/">
+                <a href="/2021/04/19/nginx-zhong-de-rewrite-pei-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Hooks入门教程">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="nginx中的rewrite配置">
                         
-                        <span class="card-title">Hooks入门教程</span>
+                        <span class="card-title">nginx中的rewrite配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -895,14 +915,14 @@ p {
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-19
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%96%B0%E9%B2%9C%E6%8A%80%E8%83%BD/" class="post-category">
-                                    新鲜技能
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    前端基础
                                 </a>
                             
                             
@@ -912,12 +932,8 @@ p {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/react/">
-                        <span class="chip bg-color">react</span>
-                    </a>
-                    
-                    <a href="/tags/hooks/">
-                        <span class="chip bg-color">hooks</span>
+                    <a href="/tags/nginx/">
+                        <span class="chip bg-color">nginx</span>
                     </a>
                     
                 </div>
