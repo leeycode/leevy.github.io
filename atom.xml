@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2021-05-13T02:52:07.390Z</updated>
+  <updated>2021-05-13T03:06:36.520Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -21,14 +21,15 @@
     <link href="https://leeycode.github.io/2021/05/13/nginx-de-localtion-pei-zhi/"/>
     <id>https://leeycode.github.io/2021/05/13/nginx-de-localtion-pei-zhi/</id>
     <published>2021-05-13T02:13:35.000Z</published>
-    <updated>2021-05-13T02:52:07.390Z</updated>
+    <updated>2021-05-13T03:06:36.520Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;location-的作用&quot;&gt;&lt;a href=&quot;#location-的作用&quot; class=&quot;headerlink&quot; title=&quot;location 的作用&quot;&gt;&lt;/a&gt;location 的作用&lt;/h2&gt;&lt;p&gt;location 指令的作用是根据用户请求 URI</summary>
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://7.dusays.com/2021/05/13/1128409d75ed2.png&quot; alt=&quot;nginx&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;location-的作用&quot;&gt;&lt;a href=&quot;#location-的作用&quot;</summary>
         
       
     
