@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2021-05-13T03:06:36.520Z</updated>
+  <updated>2021-08-09T08:04:00.582Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx中root&amp;alias区别</title>
+    <link href="https://leeycode.github.io/2021/08/09/nginx-zhong-root-alias-qu-bie/"/>
+    <id>https://leeycode.github.io/2021/08/09/nginx-zhong-root-alias-qu-bie/</id>
+    <published>2021-08-09T08:01:19.000Z</published>
+    <updated>2021-08-09T08:04:00.582Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Nginx指定文件路径有两种方式root和alias，两种指令有不同的使用方法和作用域。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;root可以配置在http、server、location、if区块中&lt;/li&gt;
+&lt;li&gt;alias只能配置在location区块中。&lt;/li&gt;
+&lt;/ul&gt;
+</summary>
+        
+      
+    
+    
+    
+    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>nginx的localtion配置</title>
@@ -498,32 +528,6 @@
     <category term="vue" scheme="https://leeycode.github.io/tags/vue/"/>
     
     <category term="TypeScript" scheme="https://leeycode.github.io/tags/TypeScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>当CORS遇到SameSite</title>
-    <link href="https://leeycode.github.io/2020/09/11/dang-cors-yu-dao-samesite-md/"/>
-    <id>https://leeycode.github.io/2020/09/11/dang-cors-yu-dao-samesite-md/</id>
-    <published>2020-09-11T08:58:31.000Z</published>
-    <updated>2020-10-31T09:14:58.098Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;A cookie associated with a cross-site resource</summary>
-        
-      
-    
-    
-    
-    <category term="项目总结" scheme="https://leeycode.github.io/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
-    
-    
-    <category term="踩的坑" scheme="https://leeycode.github.io/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/"/>
     
   </entry>
   

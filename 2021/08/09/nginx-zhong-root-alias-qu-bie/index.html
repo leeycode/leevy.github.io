@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="webpack基础02-静态资源处理, 大脸猫">
+    <meta name="keywords" content="nginx中root&amp;alias区别, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>webpack基础02-静态资源处理 | 大脸猫</title>
+    <title>nginx中root&amp;alias区别 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">webpack基础02-静态资源处理</h1>
+                    <h1 class="description center-align post-title">nginx中root&amp;alias区别</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/webpack/">
-                                <span class="chip bg-color">webpack</span>
+                            <a href="/tags/nginx/">
+                                <span class="chip bg-color">nginx</span>
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-08
+                    2021-08-09
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    687
+                    211
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    1 分
                 </div>
                 
 
@@ -469,165 +469,23 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>本文主要讲述样式文件，图片和字体资源的解析，html,css,js的压缩</p>
-</blockquote>
-<h2 id="解析css-sass-less"><a href="#解析css-sass-less" class="headerlink" title="解析css,sass,less"></a>解析css,sass,less</h2><p>css-loader: 用于加载.css文件，并且转换成commomjs对象<br>style-loader: 将样式通过<style>标签插入到head中<br>less-loader:将less转换成css</p>
-<pre><code>module: &#123;
-        rules: [
-            &#123; 
-                test: /\.css$/, 
-                use: [
-                    &#39;style-loader&#39;,
-                    &#39;css-loader&#39;
-                ]
-            &#125;,
-            &#123; 
-                test: /\.less$/, 
-                use: [
-                    &#39;style-loader&#39;,
-                    &#39;css-loader&#39;,
-                    &#39;less-loader&#39;
-                ]
-            &#125;
-        ]
-    &#125;</code></pre>
-<h2 id="图片和字体资源解析"><a href="#图片和字体资源解析" class="headerlink" title="图片和字体资源解析"></a>图片和字体资源解析</h2><p>file-loader: 用于处理图片和字体</p>
-<pre><code>module: &#123;
-        rules: [
-            &#123; 
-                test: /\.(png|svg|jpg|gif)$/, 
-                use: [
-                    &#39;file-loader&#39;
-                ]
-            &#125;,
-            &#123; 
-                test: /\.(woff|woff2|eot|otf)$/, 
-                use: [
-                    &#39;file-loader&#39;
-                ]
-            &#125;
-        ]
-    &#125;</code></pre>
-<p>url-loader： 也可以处理图片和字体，可以设置较小资源自动base64。</p>
-<pre><code>module: &#123;
-        rules: [
-            &#123; 
-                test: /\.(png|svg|jpg|gif)$/, 
-                use: [&#123;
-                        loader: &#39;url-loader&#39;,
-                        options: &#123;
-                            limit: 10240
-                        &#125;
-                    &#125;]
-            &#125;
-        ]
-    &#125;</code></pre>
-<h2 id="html压缩"><a href="#html压缩" class="headerlink" title="html压缩"></a>html压缩</h2><p>html的压缩用’html-webpack-plugin’这个插件。</p>
-<pre><code>
-const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);
-module.exports = &#123;
-    ...
+                <p>Nginx指定文件路径有两种方式root和alias，两种指令有不同的使用方法和作用域。</p>
+<ul>
+<li>root可以配置在http、server、location、if区块中</li>
+<li>alias只能配置在location区块中。</li>
+</ul>
+<p>root与alias主要区别在于Nginx如何解释location后面的uri，这会使两者分别以不同的方式将请求映射到服务器文件上。</p>
+<p>root的处理结果是：root路径＋location路径</p>
+<pre class=" language-JS"><code class="language-JS">location ^~ /appImg/{
+    root /home/nginx;
+}</code></pre>
+<p>这个location相当于访问服务器上的文件路径： /home/nginx/appImg/abc.jpg</p>
+<p>alias的处理结果是：使用alias路径替换location路径</p>
+<pre class=" language-JS"><code class="language-JS">location ^~ /appImg/{
+    alias /home/nginx/;
+}</code></pre>
+<p>这个location相当于访问服务器上的文件目录：/home/nginx/abc.jpg(即alias不会使用location后面配置的路径)，而且如果alias 指定的是目录，后面一定要加上 /，否则会找不到文件。</p>
 
-    plugins: [
-        new HtmlWebpackPlugin(&#123;
-        title: &#39;Custom template&#39;,
-        template: &#39;./src/index.html&#39;, //指定要打包的html路径和文件名
-        filename:&#39;../index.html&#39; //指定输出路径和文件名
-      &#125;),
-    ]
-</code></pre>
-<h2 id="js文件压缩、"><a href="#js文件压缩、" class="headerlink" title="js文件压缩、"></a>js文件压缩、</h2><p>webpack 4之前的版本是通过webpack.optimize.CommonsChunkPlugin来压缩js，webpack 4版本之后被移除了，<br>webpack4内置了uglifyjs-webpack-plugin这个插件，所以默认打包后js已经压缩了。</p>
-<pre><code>
-var UglifyJsPlugin = require(&#39;uglifyjs-webpack-plugin&#39;)
-var OptimizeCssAssetsPlugin = require(&#39;optimize-css-assets-webpack-plugin&#39;)
-
-module.exports = &#123;
-  optimization: &#123;
-    minimizer: [
-      // 自定义js优化配置，将会覆盖默认配置
-      new UglifyJsPlugin(&#123;
-        exclude: /\.min\.js$/, // 过滤掉以&quot;.min.js&quot;结尾的文件，我们认为这个后缀本身就是已经压缩好的代码，没必要进行二次压缩
-        cache: true,
-        parallel: true, // 开启并行压缩，充分利用cpu
-        sourceMap: false,
-        extractComments: false, // 移除注释
-        uglifyOptions: &#123;
-          compress: &#123;
-            unused: true,
-            warnings: false,
-            drop_debugger: true
-          &#125;,
-          output: &#123;
-            comments: false
-          &#125;
-        &#125;
-      &#125;),
-      // 用于优化css文件
-      new OptimizeCssAssetsPlugin(&#123;
-        assetNameRegExp: /\.css$/g,
-        cssProcessorOptions: &#123;
-          safe: true,
-          autoprefixer: &#123; disable: true &#125;, 
-          discardComments: &#123;
-            removeAll: true // 移除注释
-          &#125;
-        &#125;,
-        canPrint: true
-      &#125;)
-    ]
-  &#125;
-&#125;
-</code></pre>
-<h2 id="css压缩"><a href="#css压缩" class="headerlink" title="css压缩"></a>css压缩</h2><p>css-loader在1.0以上版本没有了压缩配置，webpage4常用css压缩插件是’optimize-css-assets-webpack-plugin’，<br>需要配合安装css处理器’cssnano’。</p>
-<pre><code>const optimizeCss = require(&#39;optimize-css-assets-webpack-plugin&#39;);
-
-module.exports = &#123;
-
-    .....,
-    //
-    plugins: [
-        new optimizeCss(&#123;
-            assetNameRegExp: /\.style\.css$/g,
-            cssProcessor: require(&#39;cssnano&#39;),
-            cssProcessorOptions: &#123; discardComments: &#123; removeAll: true &#125; &#125;,
-            canPrint: true
-        &#125;),
-    ],
-&#125;</code></pre>
-<h2 id="补齐css3前缀"><a href="#补齐css3前缀" class="headerlink" title="补齐css3前缀"></a>补齐css3前缀</h2><p>利用postcss-loader和autoperfixer这两个插件</p>
-<pre><code>&#123;
-  test: /\.css$/,
-  use: [
-    &#39;style-loader&#39;,
-    &#39;css-loader&#39;,
-    &#123;
-      loader: &#39;postcss-loader&#39;,
-      options: &#123;
-        plugins: [
-          require(&#39;autoprefixer&#39;)
-        ]
-      &#125;
-    &#125;
-  ]
-&#125;</code></pre>
-<h2 id="移动端中rem转换"><a href="#移动端中rem转换" class="headerlink" title="移动端中rem转换"></a>移动端中rem转换</h2><p>使用px2rem-loader + lib-flexiable</p>
-<pre><code>&#123;
-  test: /\.css$/,
-  use: [
-    &#39;style-loader&#39;,
-    &#39;css-loader&#39;,
-    &#39;less-loader&#39;,
-    &#123;
-      loader: &#39;px2rem-loader&#39;,
-      options: &#123;
-        remUnit: 75,//这是rem适配的配置  注意： remUnit在这里要根据lib-flexible的规则来配制，如果您的设计稿是750px的，用75就刚刚好。
-        remPrecision: 8
-      &#125;
-    &#125;
-  ]
-&#125;</code></pre>
-</style></p>
             </div>
             <hr/>
 
@@ -652,7 +510,7 @@ module.exports = &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/">https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/</a>
+                    <a href="https://leeycode.github.io/2021/08/09/nginx-zhong-root-alias-qu-bie/">https://leeycode.github.io/2021/08/09/nginx-zhong-root-alias-qu-bie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -690,8 +548,8 @@ module.exports = &#123;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/webpack/">
-                                    <span class="chip bg-color">webpack</span>
+                                <a href="/tags/nginx/">
+                                    <span class="chip bg-color">nginx</span>
                                 </a>
                             
                         </div>
@@ -905,17 +763,18 @@ module.exports = &#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/12/10/webpack-ji-chu-03-wen-jian-jian-ting/">
+                <a href="/2021/08/09/nginx-zhong-root-alias-qu-bie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="webpack基础03-文件监听">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="nginx中root&amp;alias区别">
                         
-                        <span class="card-title">webpack基础03-文件监听</span>
+                        <span class="card-title">nginx中root&amp;alias区别</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -925,9 +784,9 @@ module.exports = &#123;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -940,11 +799,12 @@ module.exports = &#123;
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/webpack/">
-                        <span class="chip bg-color">webpack</span>
+                    <a href="/tags/nginx/">
+                        <span class="chip bg-color">nginx</span>
                     </a>
                     
                 </div>
@@ -958,13 +818,13 @@ module.exports = &#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/">
+                <a href="/2021/05/13/nginx-de-localtion-pei-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="webpack基础01-核心概念">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="nginx的localtion配置">
                         
-                        <span class="card-title">webpack基础01-核心概念</span>
+                        <span class="card-title">nginx的localtion配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -975,7 +835,7 @@ module.exports = &#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-13
                             </span>
                         <span class="publish-author">
                             
@@ -992,8 +852,8 @@ module.exports = &#123;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/webpack/">
-                        <span class="chip bg-color">webpack</span>
+                    <a href="/tags/nginx/">
+                        <span class="chip bg-color">nginx</span>
                     </a>
                     
                 </div>
