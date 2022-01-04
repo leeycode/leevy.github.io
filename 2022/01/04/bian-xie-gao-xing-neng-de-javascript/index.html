@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx超时设置, 大脸猫">
+    <meta name="keywords" content="编写高性能的JavaScript, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>nginx超时设置 | 大脸猫</title>
+    <title>编写高性能的JavaScript | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">nginx超时设置</h1>
+                    <h1 class="description center-align post-title">编写高性能的JavaScript</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nginx/">
-                                <span class="chip bg-color">nginx</span>
+                            <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                                <span class="chip bg-color">项目总结</span>
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-16
+                    2022-01-04
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    6 分
                 </div>
                 
 
@@ -469,40 +469,97 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>nginx访问出现504 Gateway Time-out，一般是由于程序执行时间过长导致响应超时，例如程序需要执行90秒，而nginx最大响应等待时间为30秒，这样就会出现超时。</p>
-<h2 id="导致超时的场景"><a href="#导致超时的场景" class="headerlink" title="导致超时的场景"></a>导致超时的场景</h2><ol>
-<li>程序在处理大量数据，导致等待超时。</li>
-<li>程序中调用外部请求，而外部请求响应超时。</li>
-<li>连接数据库失败而没有停止，死循环重新连。</li>
-</ol>
-<h2 id="nginx常用的超时配置说明"><a href="#nginx常用的超时配置说明" class="headerlink" title="nginx常用的超时配置说明"></a>nginx常用的超时配置说明</h2><h3 id="client-header-timeout"><a href="#client-header-timeout" class="headerlink" title="client_header_timeout"></a>client_header_timeout</h3><p>语法 client_header_timeout time<br>默认值 60s<br>上下文 http server<br>说明 指定等待client发送一个请求头的超时时间（例如：GET / HTTP/1.1）.仅当在一次read中，没有收到请求头，才会算成超时。如果在超时时间内，client没发送任何东西，nginx返回HTTP状态码408(“Request timed out”)</p>
-<h3 id="client-body-timeout"><a href="#client-body-timeout" class="headerlink" title="client_body_timeout"></a>client_body_timeout</h3><p>语法 client_body_timeout time<br>默认值 60s<br>上下文 http server location<br>说明 该指令设置请求体（request body）的读超时时间。仅当在一次readstep中，没有得到请求体，就会设为超时。超时后，nginx返回HTTP状态码408(“Request timed out”)</p>
-<h3 id="keepalive-timeout"><a href="#keepalive-timeout" class="headerlink" title="keepalive_timeout"></a>keepalive_timeout</h3><p>语法 keepalive_timeout timeout [ header_timeout ]<br>默认值 75s<br>上下文 http server location<br>说明 第一个参数指定了与client的keep-alive连接超时时间。服务器将会在这个时间后关闭连接。可选的第二个参数指定了在响应头Keep-Alive: timeout=time中的time值。这个头能够让一些浏览器主动关闭连接，这样服务器就不必要去关闭连接了。没有这个参数，nginx不会发送Keep-Alive响应头（尽管并不是由这个头来决定连接是否“keep-alive”）<br>两个参数的值可并不相同</p>
-<p>注意不同浏览器怎么处理“keep-alive”头<br>MSIE和Opera忽略掉”Keep-Alive: timeout=<n>“ header.<br>MSIE保持连接大约60-65秒，然后发送TCP RST<br>Opera永久保持长连接<br>Mozilla keeps the connection alive for N plus about 1-10 seconds.<br>Konqueror保持长连接N秒</n></p>
-<h3 id="lingering-timeout"><a href="#lingering-timeout" class="headerlink" title="lingering_timeout"></a>lingering_timeout</h3><p>语法 lingering_timeout time<br>默认值 5s<br>上下文 http server location<br>说明 lingering_close生效后，在关闭连接前，会检测是否有用户发送的数据到达服务器，如果超过lingering_timeout时间后还没有数据可读，就直接关闭连接；否则，必须在读取完连接缓冲区上的数据并丢弃掉后才会关闭连接。</p>
-<h3 id="resolver-timeout"><a href="#resolver-timeout" class="headerlink" title="resolver_timeout"></a>resolver_timeout</h3><p>语法 resolver_timeout time<br>默认值 30s<br>上下文 http server location<br>说明 该指令设置DNS解析超时时间</p>
-<h3 id="proxy-connect-timeout"><a href="#proxy-connect-timeout" class="headerlink" title="proxy_connect_timeout"></a>proxy_connect_timeout</h3><p>语法 proxy_connect_timeout time<br>默认值 60s<br>上下文 http server location<br>说明 该指令设置与upstream server的连接超时时间，有必要记住，这个超时不能超过75秒。<br>这个不是等待后端返回页面的时间，那是由proxy_read_timeout声明的。如果你的upstream服务器起来了，但是hanging住了（例如，没有足够的线程处理请求，所以把你的请求放到请求池里稍后处理），那么这个声明是没有用的，由于与upstream服务器的连接已经建立了。</p>
-<h3 id="proxy-read-timeout"><a href="#proxy-read-timeout" class="headerlink" title="proxy_read_timeout"></a>proxy_read_timeout</h3><p>语法 proxy_read_timeout time<br>默认值 60s<br>上下文 http server location<br>说明 该指令设置与代理服务器的读超时时间。它决定了nginx会等待多长时间来获得请求的响应。这个时间不是获得整个response的时间，而是两次reading操作的时间。</p>
-<h3 id="proxy-send-timeout"><a href="#proxy-send-timeout" class="headerlink" title="proxy_send_timeout"></a>proxy_send_timeout</h3><p>语法 proxy_send_timeout time<br>默认值 60s<br>上下文 http server location<br>说明 这个指定设置了发送请求给upstream服务器的超时时间。超时设置不是为了整个发送期间，而是在两次write操作期间。如果超时后，upstream没有收到新的数据，nginx会关闭连接</p>
-<h3 id="proxy-upstream-fail-timeout（fail-timeout）"><a href="#proxy-upstream-fail-timeout（fail-timeout）" class="headerlink" title="proxy_upstream_fail_timeout（fail_timeout）"></a>proxy_upstream_fail_timeout（fail_timeout）</h3><p>语法 server address [fail_timeout=30s]<br>默认值 10s<br>上下文 upstream<br>说明 Upstream模块下 server指令的参数，设置了某一个upstream后端失败了指定次数（max_fails）后，该后端不可操作的时间，默认为10秒</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="请求超时"><a href="#请求超时" class="headerlink" title="请求超时"></a>请求超时</h3><pre><code>http {
-    include       mime.types;
-    server_names_hash_bucket_size  512;     
-    default_type  application/octet-stream;
-    sendfile        on;
-    keepalive_timeout  65;  #保持
-    tcp_nodelay on;
-    client_header_timeout 15;
-    client_body_timeout 15;
-    send_timeout 25;
-    include vhosts/*.conf;
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>随着计算机硬件的不断升级，开发者越发觉得<code>Javascript</code>性能优化的好不好对网页的执行效率影响不明显，所以一些性能方面的知识被很多开发者忽视。但在某些情况下，不优化的<code>Javascript</code>代码必然会影响用户的体验。因此，即使在当前硬件性能已经大大提升的时代，在编写<code>Javascript</code>代码时，若能遵循<code>Javascript</code>规范和注意一些性能方面的知识，对于提升代码的可维护性和优化性能将大有好处。那么，接下来我们讨论几种能够提高<code>JavaScript性能</code>的方法。</p>
+<p><strong>如果喜欢或者有所启发，欢迎 Star~，对作者也是一种鼓励。</strong> </p>
+<h2 id="1、js文件加载和执行"><a href="#1、js文件加载和执行" class="headerlink" title="1、js文件加载和执行"></a>1、js文件加载和执行</h2><p>（1）将<code>&lt;script&gt;</code>标签放到<code>&lt;body&gt;</code>标签的底部</p>
+<p>（2）可以合并多个<code>js</code>文件，减少页面中<code>&lt;script&gt;</code>标签改善性能</p>
+<p>（3）使用 <code>defer</code> 属性，加载后续文档元素的过程将和<code>script.js</code>的加载并行进行，但是 <code>script.js</code> 的执行要在所有元素解析完成之后，<code>DOMContentLoaded </code>事件触发之前完成。</p>
+<p>（4）使用 <code>async</code> 属性，加载和渲染后续文档元素的过程将和<code>script.js</code>的加载与执行并行进行</p>
+<p>（5）动态加载脚本元素，无论在何时启动瞎子，文件的下载和执行过程都不会阻塞页面其它进程</p>
+<pre><code>var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = 'file.js';
+document.getElementsByTagName('head')[0].appendChild(script);</code></pre>
+<h2 id="2、标识符所在的作用域链的位置越深"><a href="#2、标识符所在的作用域链的位置越深" class="headerlink" title="2、标识符所在的作用域链的位置越深"></a>2、标识符所在的作用域链的位置越深</h2><p>标识符所在的作用域链的位置越深，那么它的标识符解析的性能就越慢。所以一个好的性能提升的经验法则是：如果某个跨作用域的值在函数中被引用一次以上，那么就把它存储到局部变量里。</p>
+<pre><code>function fun1() {  
+// 将全局变量的引用先存储在一个局部变量中，然后使用这个局部变量代替全局变量，从而提高         
+// 性能；不然每次(3次)都要遍历整个作用域链找到
+document  var doc = document;   
+ var bd = doc.body;  
+ var links = doc.getElementsByTagName('a');  
+ doc.getElementById('btn').onclick = function(){   
+ console.log('btn');  
+ }
 }</code></pre>
-<h3 id="后端服务器处理请求的时间设置"><a href="#后端服务器处理请求的时间设置" class="headerlink" title="后端服务器处理请求的时间设置"></a>后端服务器处理请求的时间设置</h3><p>如果只集成了一台nginx机器不用设置</p>
-<pre><code>location / {
-        ...
-        proxy_read_timeout 150;  # 秒
-        ...
-    }</code></pre>
+<h2 id="3、避免过长原型链继承"><a href="#3、避免过长原型链继承" class="headerlink" title="3、避免过长原型链继承"></a>3、避免过长原型链继承</h2><p>方法或属性在原型链中存在的位置越深，搜索它的性能也就越慢，所以要避免N多层原型链的写法。</p>
+<h2 id="4、对象成员嵌套过深"><a href="#4、对象成员嵌套过深" class="headerlink" title="4、对象成员嵌套过深"></a>4、对象成员嵌套过深</h2><p>对象的嵌套成员，对象成员嵌套越深，读取速度也就越慢。所以好的经验法则是：如果在函数中需要多次读取一个对象属性，最佳做法是将该属性值保存在局部变量中，避免多次查找带来的性能开销。</p>
+<pre><code>function f() { 
+ // 因为在以下函数中需要3次用到DOM对象属性，所以先将它存储在一个局部变量        
+ // 中，然后使用这个局部变量代替它进行后续操作，从而提高性能  
+var dom = YaHOO.util.Dom;  
+if(Dom.hasClass(element,'selected')){   
+  Dom.removeClass(elemet,'selected');  
+}else{   
+  Dom.addClass(elemet,'selected');  
+ }
+}</code></pre>
+<h2 id="5、DOM操作"><a href="#5、DOM操作" class="headerlink" title="5、DOM操作"></a>5、DOM操作</h2><p>用<code>js</code>访问和操作<code>DOM</code>都会带来性能损失，可通过以下几点来减少性能损失：</p>
+<p>（1）尽可能减少<code>DOM</code>访问次数；</p>
+<p>（2）如果需要多次访问某个<code>DOM</code>节点，请使用局部变量存储它的引用；</p>
+<p>（3）小心处理<code>HTML</code>集合，因为它实时连系着底层文档；我们可以把集合的长度缓存到一个变量中，并在迭代中使用它；</p>
+<p>（4）下述情况会发生重排：</p>
+<ul>
+<li>添加或删除可见的<code>DOM</code>元素；</li>
+<li>元素位置改变；</li>
+<li>元素尺寸改变（包括：外边距、内边距、边框厚度、宽度、高度等属性）；</li>
+<li>内容改变（例如：文本改变或图片被另一个不同尺寸的图片改变）；</li>
+<li>页面渲染器初始化；</li>
+<li>浏览器窗口尺寸改变</li>
+</ul>
+<p>可通过以下方式减少重排：</p>
+<ul>
+<li>留意上面会导致重排的操作，尽量避免；</li>
+<li>获取布局信息的操作会导致强制渲染队列重排，应该尽量避免使用以下获取布局信息的操作方法或属性或者缓存布局信息，例如：<code>offsetTop,offsetLeft,offsetWidthoffsetHeight,``scrollTop,scrollLeft,scrollWidth,scrollHeight,clientTop,clientLeft,clientWidth,clientHeight,getComputedStyle()</code>等;</li>
+<li>批量修改样式，例如使用：</li>
+</ul>
+<pre><code>function f() {  
+  // 推荐使用以下操作  
+  var el1 = document.getElementById('mydiv');  
+  el1.style.cssText = 'border:1px;padding:2px;margin:3px';  
+  // 不推荐使用以下操作  
+  var el2 = document.getElementById('mydiv');  
+  el2.style.border = '1px';  
+  el2.style.padding = '2px';  
+  el2.style.margin = '3px';
+}</code></pre>
+<ul>
+<li><p>当需要批量修改<code>DOM</code>时，可以通过以下步骤减少重绘和重排的次数：</p>
+</li>
+<li><ul>
+<li>使元素脱离文档流（隐藏元素、拷贝元素）</li>
+<li>对其应用多重改变；</li>
+<li>把元素带回文档中</li>
+</ul>
+</li>
+<li><p>使用事件委托（事件逐层冒泡并能被父级元素捕获，使用事件代理，只需给外层元素绑定一个处理器，就可以处理其子元素上触发的所用事件），因为给<code>DOM</code>元素绑定事件以及浏览器需要跟踪每个事件处理器都需要消耗性能。</p>
+</li>
+</ul>
+<h2 id="6、字符串连接"><a href="#6、字符串连接" class="headerlink" title="6、字符串连接"></a>6、字符串连接</h2><pre><code>str += 'one'+'two';
+str= str+'one'+'two';</code></pre>
+<p>后者方式会比前者少在内存中创建一个临时字符串，所以性能有相应的提升，所以，所以推荐后者的写法。</p>
+<h2 id="7、直接使用字面量"><a href="#7、直接使用字面量" class="headerlink" title="7、直接使用字面量"></a>7、直接使用字面量</h2><p>创建对象和数组推荐使用字面量，因为这不仅是性能最优也有助于节省代码量。</p>
+<pre><code>var obj = {   
+ name:'tom',    
+ age:15,    
+ sex:'男'
+}</code></pre>
+<p>​    </p>
+<h2 id="8、数组长度缓存"><a href="#8、数组长度缓存" class="headerlink" title="8、数组长度缓存"></a>8、数组长度缓存</h2><p>如果需要遍历数组，应该先缓存数组长度，将数组长度放入局部变量中，避免多次查询数组长度。</p>
+<h2 id="9、循环比较"><a href="#9、循环比较" class="headerlink" title="9、循环比较"></a>9、循环比较</h2><p><code>JS</code>提供了三种循环：<code>for(;;)、while()、for(in)</code>。在这三种循环中 <code>for(in)</code>的效率最差，因为它需要查询Hash键，因此应尽量少用<code>for(in)</code>循环，<code>for(;;)、while()</code>循环的性能基本持平。</p>
+<h2 id="10、少用eval"><a href="#10、少用eval" class="headerlink" title="10、少用eval"></a>10、少用eval</h2><p>尽量少使用<code>eval</code>，每次使用<code>eval</code>需要消耗大量时间，这时候使用<code>JS</code>所支持的闭包可以实现函数模板。</p>
+<h2 id="11、字符串转换"><a href="#11、字符串转换" class="headerlink" title="11、字符串转换"></a>11、字符串转换</h2><p>当需要将数字转换成字符时，采用如下方式：<code>"" + 1</code>。从性能上来看，将数字转换成字符时，有如下公式：<code>("" +) &gt; String() &gt; .toString() &gt; new String()</code>。<code>String()</code>属于内部函数，所以速度很快。而<code>.toString()</code>要查询原型中的函数，所以速度逊色一些，<code>new String()</code>需要重新创建一个字符串对象，速度最慢。</p>
+<h2 id="12、浮点数转换整形"><a href="#12、浮点数转换整形" class="headerlink" title="12、浮点数转换整形"></a>12、浮点数转换整形</h2><p>当需要将浮点数转换成整型时，应该使用<code>Math.floor()</code>或者<code>Math.round()</code>。而不是使用<code>parseInt()</code>,该方法用于将字符串转换成数字。而且<code>Math</code>是内部对象，所以<code>Math.floor()</code>其实并没有多少查询方法和调用时间，速度是最快的。</p>
+<p><strong>如果喜欢或者有所启发，欢迎 Star~，对作者也是一种鼓励。</strong> </p>
 
             </div>
             <hr/>
@@ -528,7 +585,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2020/12/16/nginx-chao-shi-she-zhi/">https://leeycode.github.io/2020/12/16/nginx-chao-shi-she-zhi/</a>
+                    <a href="https://leeycode.github.io/2022/01/04/bian-xie-gao-xing-neng-de-javascript/">https://leeycode.github.io/2022/01/04/bian-xie-gao-xing-neng-de-javascript/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -566,8 +623,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/nginx/">
-                                    <span class="chip bg-color">nginx</span>
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                                    <span class="chip bg-color">项目总结</span>
                                 </a>
                             
                         </div>
@@ -781,17 +838,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/01/05/qian-duan-quan-xian-guan-li/">
+                <a href="/2022/01/04/bian-xie-gao-xing-neng-de-javascript/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="前端权限管理">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="编写高性能的JavaScript">
                         
-                        <span class="card-title">前端权限管理</span>
+                        <span class="card-title">编写高性能的JavaScript</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -801,23 +859,24 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-04
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            leevy
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    前端基础
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
-                    </a>
                     
                     <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
                         <span class="chip bg-color">项目总结</span>
@@ -834,13 +893,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/12/11/webpack-ji-chu-04-wen-jian-zhi-wen-ce-lue/">
+                <a href="/2021/08/09/nginx-shi-xian-hui-du-fa-bu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="webpack基础04-文件指纹策略">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="nginx实现灰度发布">
                         
-                        <span class="card-title">webpack基础04-文件指纹策略</span>
+                        <span class="card-title">nginx实现灰度发布</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -851,7 +910,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-09
                             </span>
                         <span class="publish-author">
                             
@@ -868,8 +927,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/webpack/">
-                        <span class="chip bg-color">webpack</span>
+                    <a href="/tags/nginx/">
+                        <span class="chip bg-color">nginx</span>
                     </a>
                     
                 </div>
