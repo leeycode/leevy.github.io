@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2022-01-05T09:11:43.571Z</updated>
+  <updated>2022-01-05T09:25:23.365Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://leeycode.github.io/2022/01/05/qian-duan-chang-jian-de-dai-ma-wen-ti-hui-zong/"/>
     <id>https://leeycode.github.io/2022/01/05/qian-duan-chang-jian-de-dai-ma-wen-ti-hui-zong/</id>
     <published>2022-01-05T07:50:27.000Z</published>
-    <updated>2022-01-05T09:11:43.571Z</updated>
+    <updated>2022-01-05T09:25:23.365Z</updated>
     
     
       
@@ -35,7 +35,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="ES语法" scheme="https://leeycode.github.io/categories/ES%E8%AF%AD%E6%B3%95/"/>
     
     
     <category term="es" scheme="https://leeycode.github.io/tags/es/"/>
@@ -49,7 +49,7 @@
     <link href="https://leeycode.github.io/2022/01/04/bian-xie-gao-xing-neng-de-javascript/"/>
     <id>https://leeycode.github.io/2022/01/04/bian-xie-gao-xing-neng-de-javascript/</id>
     <published>2022-01-04T07:53:34.000Z</published>
-    <updated>2022-01-04T09:30:56.676Z</updated>
+    <updated>2022-01-05T09:25:20.020Z</updated>
     
     
       
@@ -62,7 +62,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="ES语法" scheme="https://leeycode.github.io/categories/ES%E8%AF%AD%E6%B3%95/"/>
     
     
     <category term="项目总结" scheme="https://leeycode.github.io/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
@@ -74,7 +74,7 @@
     <link href="https://leeycode.github.io/2021/08/09/nginx-shi-xian-hui-du-fa-bu/"/>
     <id>https://leeycode.github.io/2021/08/09/nginx-shi-xian-hui-du-fa-bu/</id>
     <published>2021-08-09T08:33:19.000Z</published>
-    <updated>2021-08-09T08:56:34.909Z</updated>
+    <updated>2022-01-05T09:29:14.028Z</updated>
     
     
       
@@ -88,7 +88,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="nginx专题" scheme="https://leeycode.github.io/categories/nginx%E4%B8%93%E9%A2%98/"/>
     
     
     <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
@@ -100,7 +100,7 @@
     <link href="https://leeycode.github.io/2021/08/09/nginx-zhong-root-alias-qu-bie/"/>
     <id>https://leeycode.github.io/2021/08/09/nginx-zhong-root-alias-qu-bie/</id>
     <published>2021-08-09T08:01:19.000Z</published>
-    <updated>2021-08-09T08:09:06.667Z</updated>
+    <updated>2022-01-05T09:29:23.382Z</updated>
     
     
       
@@ -118,7 +118,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="nginx专题" scheme="https://leeycode.github.io/categories/nginx%E4%B8%93%E9%A2%98/"/>
     
     
     <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
@@ -130,7 +130,7 @@
     <link href="https://leeycode.github.io/2021/05/13/nginx-de-localtion-pei-zhi/"/>
     <id>https://leeycode.github.io/2021/05/13/nginx-de-localtion-pei-zhi/</id>
     <published>2021-05-13T02:13:35.000Z</published>
-    <updated>2021-05-13T03:06:36.520Z</updated>
+    <updated>2022-01-05T09:29:11.610Z</updated>
     
     
       
@@ -144,7 +144,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="nginx专题" scheme="https://leeycode.github.io/categories/nginx%E4%B8%93%E9%A2%98/"/>
     
     
     <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
@@ -156,7 +156,7 @@
     <link href="https://leeycode.github.io/2021/04/19/nginx-zhong-de-rewrite-pei-zhi/"/>
     <id>https://leeycode.github.io/2021/04/19/nginx-zhong-de-rewrite-pei-zhi/</id>
     <published>2021-04-19T13:00:38.000Z</published>
-    <updated>2021-04-20T02:44:19.859Z</updated>
+    <updated>2022-01-05T09:29:17.168Z</updated>
     
     
       
@@ -169,7 +169,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="nginx专题" scheme="https://leeycode.github.io/categories/nginx%E4%B8%93%E9%A2%98/"/>
     
     
     <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
@@ -231,7 +231,7 @@
     <link href="https://leeycode.github.io/2021/01/20/nodejs-cong-ling-qi-fei-mo-kuai/"/>
     <id>https://leeycode.github.io/2021/01/20/nodejs-cong-ling-qi-fei-mo-kuai/</id>
     <published>2021-01-20T09:17:27.000Z</published>
-    <updated>2021-01-20T09:19:46.648Z</updated>
+    <updated>2022-01-05T09:29:43.173Z</updated>
     
     
       
@@ -244,7 +244,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="nodeJs专栏" scheme="https://leeycode.github.io/categories/nodeJs%E4%B8%93%E6%A0%8F/"/>
     
     
     <category term="nodejs" scheme="https://leeycode.github.io/tags/nodejs/"/>
@@ -256,7 +256,7 @@
     <link href="https://leeycode.github.io/2021/01/17/webpack-ji-chu-06-gong-gong-zi-yuan-ti-qu/"/>
     <id>https://leeycode.github.io/2021/01/17/webpack-ji-chu-06-gong-gong-zi-yuan-ti-qu/</id>
     <published>2021-01-17T03:14:15.000Z</published>
-    <updated>2021-01-18T09:38:52.845Z</updated>
+    <updated>2022-01-05T09:30:52.953Z</updated>
     
     
       
@@ -269,7 +269,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
     
     
     <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
@@ -281,7 +281,7 @@
     <link href="https://leeycode.github.io/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/"/>
     <id>https://leeycode.github.io/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/</id>
     <published>2021-01-07T03:14:15.000Z</published>
-    <updated>2021-01-07T09:21:22.328Z</updated>
+    <updated>2022-01-05T09:30:26.987Z</updated>
     
     
       
@@ -294,7 +294,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
     
     
     <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
@@ -331,7 +331,7 @@
     <link href="https://leeycode.github.io/2020/12/16/nginx-chao-shi-she-zhi/"/>
     <id>https://leeycode.github.io/2020/12/16/nginx-chao-shi-she-zhi/</id>
     <published>2020-12-16T03:12:36.000Z</published>
-    <updated>2020-12-17T02:50:01.384Z</updated>
+    <updated>2022-01-05T09:29:03.971Z</updated>
     
     
       
@@ -345,7 +345,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="nginx专题" scheme="https://leeycode.github.io/categories/nginx%E4%B8%93%E9%A2%98/"/>
     
     
     <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
@@ -357,7 +357,7 @@
     <link href="https://leeycode.github.io/2020/12/11/webpack-ji-chu-04-wen-jian-zhi-wen-ce-lue/"/>
     <id>https://leeycode.github.io/2020/12/11/webpack-ji-chu-04-wen-jian-zhi-wen-ce-lue/</id>
     <published>2020-12-11T01:38:41.000Z</published>
-    <updated>2021-03-03T02:55:34.591Z</updated>
+    <updated>2022-01-05T09:30:23.683Z</updated>
     
     
       
@@ -370,7 +370,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
     
     
     <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
@@ -382,7 +382,7 @@
     <link href="https://leeycode.github.io/2020/12/10/webpack-ji-chu-03-wen-jian-jian-ting/"/>
     <id>https://leeycode.github.io/2020/12/10/webpack-ji-chu-03-wen-jian-jian-ting/</id>
     <published>2020-12-10T07:24:49.000Z</published>
-    <updated>2021-03-03T02:49:36.557Z</updated>
+    <updated>2022-01-05T09:30:20.947Z</updated>
     
     
       
@@ -396,7 +396,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
     
     
     <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
@@ -408,7 +408,7 @@
     <link href="https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/"/>
     <id>https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/</id>
     <published>2020-12-08T00:24:49.000Z</published>
-    <updated>2020-12-25T02:50:02.456Z</updated>
+    <updated>2022-01-05T09:30:18.089Z</updated>
     
     
       
@@ -424,7 +424,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
     
     
     <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
@@ -436,7 +436,7 @@
     <link href="https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/"/>
     <id>https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/</id>
     <published>2020-12-06T07:24:49.000Z</published>
-    <updated>2020-12-22T12:53:40.609Z</updated>
+    <updated>2022-01-05T09:30:11.946Z</updated>
     
     
       
@@ -450,7 +450,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
     
     
     <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
@@ -462,7 +462,7 @@
     <link href="https://leeycode.github.io/2020/11/25/this-zhi-xiang/"/>
     <id>https://leeycode.github.io/2020/11/25/this-zhi-xiang/</id>
     <published>2020-11-25T07:00:56.000Z</published>
-    <updated>2020-11-26T03:18:53.355Z</updated>
+    <updated>2022-01-05T09:30:00.555Z</updated>
     
     
       
@@ -475,7 +475,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="ES语法" scheme="https://leeycode.github.io/categories/ES%E8%AF%AD%E6%B3%95/"/>
     
     
     <category term="javaScript" scheme="https://leeycode.github.io/tags/javaScript/"/>
@@ -487,7 +487,7 @@
     <link href="https://leeycode.github.io/2020/11/16/zhi-xing-shang-xia-wen/"/>
     <id>https://leeycode.github.io/2020/11/16/zhi-xing-shang-xia-wen/</id>
     <published>2020-11-16T08:22:19.000Z</published>
-    <updated>2020-11-16T09:09:15.256Z</updated>
+    <updated>2022-01-05T09:27:58.670Z</updated>
     
     
       
@@ -500,7 +500,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="ES语法" scheme="https://leeycode.github.io/categories/ES%E8%AF%AD%E6%B3%95/"/>
     
     
     <category term="javaScript" scheme="https://leeycode.github.io/tags/javaScript/"/>
@@ -512,7 +512,7 @@
     <link href="https://leeycode.github.io/2020/11/10/cong-es7-dao-es12/"/>
     <id>https://leeycode.github.io/2020/11/10/cong-es7-dao-es12/</id>
     <published>2020-11-10T08:08:18.000Z</published>
-    <updated>2020-11-11T02:43:07.904Z</updated>
+    <updated>2022-01-05T09:25:40.657Z</updated>
     
     
       
@@ -525,7 +525,7 @@
     
     
     
-    <category term="前端基础" scheme="https://leeycode.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+    <category term="ES语法" scheme="https://leeycode.github.io/categories/ES%E8%AF%AD%E6%B3%95/"/>
     
     
     <category term="es" scheme="https://leeycode.github.io/tags/es/"/>
