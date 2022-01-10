@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="webpack基础01-核心概念, 大脸猫">
+    <meta name="keywords" content="浮点数运算的精度问题, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>webpack基础01-核心概念 | 大脸猫</title>
+    <title>浮点数运算的精度问题 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">webpack基础01-核心概念</h1>
+                    <h1 class="description center-align post-title">浮点数运算的精度问题</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/webpack/">
-                                <span class="chip bg-color">webpack</span>
+                            <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                                <span class="chip bg-color">项目总结</span>
                             </a>
                         
                     </div>
@@ -425,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/webpack%E4%B8%93%E5%8C%BA/" class="post-category">
-                                webpack专区
+                            <a href="/categories/ES%E8%AF%AD%E6%B3%95/" class="post-category">
+                                ES语法
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-06
+                    2022-01-10
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    706
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    7 分
                 </div>
                 
 
@@ -469,141 +469,147 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="默认安装"><a href="#默认安装" class="headerlink" title="默认安装"></a>默认安装</h1><p>npm init -y</p>
-<h2 id="安装webpack相关"><a href="#安装webpack相关" class="headerlink" title="安装webpack相关"></a>安装webpack相关</h2><p>npm install webpack webpack-cli –save-dev</p>
-<h2 id="检查webpack版本-cd-node-modules-bin"><a href="#检查webpack版本-cd-node-modules-bin" class="headerlink" title="检查webpack版本 cd node_modules/.bin"></a>检查webpack版本 cd node_modules/.bin</h2><p>webpack -v</p>
-<h2 id="通过npm-stript运行webpack-否则只能在-bin下面执行"><a href="#通过npm-stript运行webpack-否则只能在-bin下面执行" class="headerlink" title="通过npm stript运行webpack,否则只能在.bin下面执行"></a>通过npm stript运行webpack,否则只能在.bin下面执行</h2><pre><code>package.json中添加 **build": "webpack"**</code></pre>
-<h1 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h1><h2 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h2><p>entry是webpack打包文件的入口。入口可以设置多个，比如多页面应用。两者的写法有差异，但入口接收一个字符串，多入口写成对象的形式。</p>
-<h3 id="单入口写法"><a href="#单入口写法" class="headerlink" title="单入口写法"></a>单入口写法</h3><pre><code>module.exports = {
-    entry: "./path/to/my/entry/file.js"
-}</code></pre>
-<h3 id="多入口写法"><a href="#多入口写法" class="headerlink" title="多入口写法"></a>多入口写法</h3><pre><code>module.exports = {
-    entry: {
-        app: './src/app.js',
-        adminApp: './src/adminApp.js'
-    }
-}
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在项目中涉及到商品价格的计算，经常会出现计算精度问题，引发意想不到的BUG。这是因为在 JavaScript 中整数和浮点数都属于 Number 数据类型，所有数字都是以 64 位浮点数形式储存，即便整数也是如此。 所以我们在打印 1.00 这样的浮点数的结果是 1 而非 1.00 。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><h2 id="浮点运算的问题"><a href="#浮点运算的问题" class="headerlink" title="浮点运算的问题"></a>浮点运算的问题</h2><p>在一些特殊的数值表示中，例如金额，这样看上去有点变扭，但是至少值是正确了。然而要命的是，当浮点数做数学运算的时候，你经常会发现一些问题，举几个例子：</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// 加法 =====================</span>
+<span class="token comment" spellcheck="true">// 0.1 + 0.2 = 0.30000000000000004</span>
+<span class="token comment" spellcheck="true">// 0.7 + 0.1 = 0.7999999999999999</span>
+<span class="token comment" spellcheck="true">// 0.2 + 0.4 = 0.6000000000000001</span>
+<span class="token comment" spellcheck="true">// 2.22 + 0.1 = 2.3200000000000003</span>
+
+<span class="token comment" spellcheck="true">// 减法 =====================</span>
+<span class="token comment" spellcheck="true">// 1.5 - 1.2 = 0.30000000000000004</span>
+<span class="token comment" spellcheck="true">// 0.3 - 0.2 = 0.09999999999999998</span>
+
+<span class="token comment" spellcheck="true">// 乘法 =====================</span>
+<span class="token comment" spellcheck="true">// 19.9 * 100 = 1989.9999999999998</span>
+<span class="token comment" spellcheck="true">// 19.9 * 10 * 10 = 1990</span>
+<span class="token comment" spellcheck="true">// 1306377.64 * 100 = 130637763.99999999</span>
+<span class="token comment" spellcheck="true">// 1306377.64 * 10 * 10 = 130637763.99999999</span>
+<span class="token comment" spellcheck="true">// 0.7 * 180 = 125.99999999999999</span>
+<span class="token comment" spellcheck="true">// 9.7 * 100 = 969.9999999999999</span>
+<span class="token comment" spellcheck="true">// 39.7 * 100 = 3970.0000000000005</span>
+
+<span class="token comment" spellcheck="true">// 除法 =====================</span>
+<span class="token comment" spellcheck="true">// 0.3 / 0.1 = 2.9999999999999996</span>
+<span class="token comment" spellcheck="true">// 0.69 / 10 = 0.06899999999999999</span></code></pre>
+<h2 id="整数的精度问题"><a href="#整数的精度问题" class="headerlink" title="整数的精度问题"></a>整数的精度问题</h2><p>在 Javascript 中，整数精度同样存在问题，先来看看问题：</p>
+<p>JavaScript 代码:</p>
+<pre class=" language-js"><code class="language-js">
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">19571992547450991</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//=> 19571992547450990</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">19571992547450991</span><span class="token operator">===</span><span class="token number">19571992547450992</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//=> true</span></code></pre>
+<p>同样的原因，在 JavaScript 中 Number类型统一按浮点数处理，整数是按最大54位来算最大(253 - 1，Number.MAX_SAFE_INTEGER,9007199254740991) 和最小(-(253 - 1)，Number.MIN_SAFE_INTEGER,-9007199254740991) 安全整数范围的。所以只要超过这个范围，就会存在被舍去的精度问题。</p>
+<p>当然这个问题并不只是在 Javascript 中才会出现，几乎所有的编程语言都采用了 IEEE-745 浮点数表示法，任何使用二进制浮点数的编程语言都会有这个问题，只不过在很多其他语言中已经封装好了方法来避免精度的问题，而 JavaScript 是一门弱类型的语言，从设计思想上就没有对浮点数有个严格的数据类型，所以精度误差的问题就显得格外突出。</p>
+<h2 id="toFixed的问题"><a href="#toFixed的问题" class="headerlink" title="toFixed的问题"></a>toFixed的问题</h2><pre class=" language-js"><code class="language-js"><span class="token number">1.35</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1.4 正确</span>
+<span class="token number">1.335</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1.33  错误</span>
+<span class="token number">1.3335</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1.333 错误</span>
+<span class="token number">1.33335</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1.3334 正确</span>
+<span class="token number">1.333335</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 1.33333 错误</span>
+<span class="token number">1.3333335</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1.333333 错误</span>
 </code></pre>
-<h2 id="output"><a href="#output" class="headerlink" title="output"></a>output</h2><p>output用来指定打包输出。多个文件的时候通过占位符做区分 ，比如[name]。</p>
-<pre><code>module.exports = {
-    output: {
-        filename: '[name].js',
-        path: __dirname + '/dist/
-    }
-}
+<h1 id="问题的原因"><a href="#问题的原因" class="headerlink" title="问题的原因"></a>问题的原因</h1><h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><p>JavaScript 里的数字是采用 IEEE 754 标准的 64 位双精度浮点数。该规范定义了浮点数的格式，对于64位的浮点数在内存中的表示，最高的1位是符号位，接着的11位是指数，剩下的52位为有效数字，具体：</p>
+<ul>
+<li>第0位：符号位， s 表示 ，0表示正数，1表示负数；</li>
+<li>第1位到第11位：储存指数部分， e 表示 ；</li>
+<li>第12位到第63位：储存小数部分（即有效数字），f 表示，</li>
+</ul>
+<p>如图：<br><img src="https://bu.dusays.com/2022/01/10/4108f12333606.jpg"></p>
+<p>符号位决定了一个数的正负，指数部分决定了数值的大小，小数部分决定了数值的精度。 IEEE 754规定，有效数字第一位默认总是1，不保存在64位浮点数之中。也就是说，有效数字总是1.xx…xx的形式，其中xx..xx的部分保存在64位浮点数之中，最长可能为52位。因此，JavaScript提供的有效数字最长为53个二进制位（64位浮点的后52位+有效数字第一位的1）。</p>
+<h2 id="计算过程"><a href="#计算过程" class="headerlink" title="计算过程"></a>计算过程</h2><p>比如在 JavaScript 中计算 0.1 + 0.2时，到底发生了什么呢？</p>
+<p>首先，十进制的0.1和0.2都会被转换成二进制，但由于浮点数用二进制表达时是无穷的，例如。</p>
+<p>JavaScript 代码:</p>
+<pre class=" language-js"><code class="language-js">
+<span class="token number">0.1</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token number">0.0001</span> <span class="token number">1001</span> <span class="token number">1001</span> <span class="token number">1001</span><span class="token operator">...</span><span class="token punctuation">(</span><span class="token number">1100</span>循环<span class="token punctuation">)</span>
+<span class="token number">0.2</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token number">0.0011</span> <span class="token number">0011</span> <span class="token number">0011</span> <span class="token number">0011</span><span class="token operator">...</span><span class="token punctuation">(</span><span class="token number">0011</span>循环<span class="token punctuation">)</span>
 </code></pre>
-<h2 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h2><p>webpack原生只支持js,json两种文件类型，通过loader去支持其他文件类型并把他们转化成有效的模块，并添加到依赖图中。</p>
-<p>本身是一个函数，接受源文件作为参数，返回转换的结果。</p>
-<h3 id="常见的loader"><a href="#常见的loader" class="headerlink" title="常见的loader"></a>常见的loader</h3><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>babel-loader</td>
-<td>转换ES6等新特性语法</td>
-</tr>
-<tr>
-<td>css-loader</td>
-<td>.css文件的加载和解析</td>
-</tr>
-<tr>
-<td>less-loader</td>
-<td>将less文件转为css</td>
-</tr>
-<tr>
-<td>ts-loader</td>
-<td>将TS转为js</td>
-</tr>
-<tr>
-<td>file-loader</td>
-<td>进行字体，图片的打包</td>
-</tr>
-<tr>
-<td>raw-loader</td>
-<td>将文件以字符串的形式导入</td>
-</tr>
-<tr>
-<td>thread-loader</td>
-<td>多线程打包css，js</td>
-</tr>
-</tbody></table>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>放在module中，test用来指定匹配规则，use指定使用的loader名称</p>
-<pre><code>module: {
-        rules: [
-            { test: /\.txt$/, use: 'raw-loader'}
-        ]
-    }</code></pre>
-<h2 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h2><p>插件用于bundle文件的优化，资源管理，环境变量的注入，作用于整个构建过程。loader没法做的事情，都是plugins来完成。</p>
-<h3 id="常见的plugins"><a href="#常见的plugins" class="headerlink" title="常见的plugins"></a>常见的plugins</h3><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>html-webpack-plugin</td>
-<td>创建html文件去承载输出的bundle</td>
-</tr>
-<tr>
-<td>clean-webpack-plugin</td>
-<td>用于在打包前清理上一次项目生成的 bundle 文件</td>
-</tr>
-<tr>
-<td>splitChunks</td>
-<td>提取被重复引入的文件，单独生成一个或多个文件，这样避免在多入口重复打包文件（替换CommonsChunkPlugin）</td>
-</tr>
-<tr>
-<td>copy-webpack-plugin</td>
-<td>将文件或文件夹拷贝到构建的输出目录</td>
-</tr>
-<tr>
-<td>extract-text-webpack-plugin</td>
-<td>抽离 css 样式,防止将样式打包在 js 中引起页面样式加载错乱的现象</td>
-</tr>
-<tr>
-<td>UglifyJsPlugin</td>
-<td>压缩js</td>
-</tr>
-<tr>
-<td>ZipWebpackPlugin</td>
-<td>将打包的出的资源生成一个zip包</td>
-</tr>
-<tr>
-<td>MiniCssExtractPlugin</td>
-<td>提取 JS 中引入的 CSS 打包到单独文件中，然后通过标签 <link>添加到头部</td>
-</tr>
-</tbody></table>
-<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><p>放在plugins数组中：</p>
-<pre><code>plugins: [
-        //moment这个库中，如果引用了./locale/目录的内容，就忽略掉，不会打包进去
-        new Webpack.IgnorePlugin(/\.\/locale/, /moment/),
-    ]
+<p> IEEE 754 标准的 64 位双精度浮点数的小数部分最多支持53位二进制位，所以两者相加之后得到二进制为：</p>
+<pre class=" language-js"><code class="language-js"><span class="token number">0.0100110011001100110011001100110011001100110011001100</span> 
 </code></pre>
-<h2 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h2><p>用来指定当前node的构建环境，有三种类型的值:production,development,none。(webpack4)<br>可用webpack内置函数来设置。</p>
-<h3 id="选项描述"><a href="#选项描述" class="headerlink" title="选项描述"></a>选项描述</h3><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>development</td>
-<td>会将 DefinePlugin 中 process.env.NODE_ENV 的值设置为 development。启用 NamedChunksPlugin 和 NamedModulesPlugin</td>
-</tr>
-<tr>
-<td>production</td>
-<td>会将 DefinePlugin 中 process.env.NODE_ENV 的值设置为 production。启用 FlagDependencyUsagePlugin, FlagIncludedChunksPlugin, ModuleConcatenationPlugin, NoEmitOnErrorsPlugin, OccurrenceOrderPlugin, SideEffectsFlagPlugin 和 TerserPlugin。</td>
-</tr>
-<tr>
-<td>none</td>
-<td>不开启任何优化选项</td>
-</tr>
-</tbody></table>
+<p>因浮点数小数位的限制而截断的二进制数字，再转换为十进制，就成了0.30000000000000004。所以在进行算术计算时会产生误差。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="类库"><a href="#类库" class="headerlink" title="类库"></a>类库</h2><p>通常这种对精度要求高的计算都应该交给后端去计算和存储，因为后端有成熟的库来解决这种计算问题。前端也有几个不错的类库：</p>
+<h3 id="Math-js"><a href="#Math-js" class="headerlink" title="Math.js"></a>Math.js</h3><p>Math.js 是专门为 JavaScript 和 Node.js 提供的一个广泛的数学库。它具有灵活的表达式解析器，支持符号计算，配有大量内置函数和常量，并提供集成解决方案来处理不同的数据类型<br>像数字，大数字(超出安全数的数字)，复数，分数，单位和矩阵。 功能强大，易于使用。</p>
+<p>官网：<a target="_blank" rel="noopener" href="http://mathjs.org/">http://mathjs.org/</a></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/josdejong/mathjs">https://github.com/josdejong/mathjs</a></p>
+<h3 id="decimal-js"><a href="#decimal-js" class="headerlink" title="decimal.js"></a>decimal.js</h3><p>为 JavaScript 提供十进制类型的任意精度数值。</p>
+<p>官网：<a target="_blank" rel="noopener" href="http://mikemcl.github.io/decimal.js/">http://mikemcl.github.io/decimal.js/</a></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/MikeMcl/decimal.js">https://github.com/MikeMcl/decimal.js</a></p>
+<h3 id="big-js"><a href="#big-js" class="headerlink" title="big.js"></a>big.js</h3><p>官网：<a target="_blank" rel="noopener" href="http://mikemcl.github.io/big.js">http://mikemcl.github.io/big.js</a></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/MikeMcl/big.js/">https://github.com/MikeMcl/big.js/</a></p>
+<p>这几个类库帮我们解决很多这类问题，不过通常我们前端做这类运算通常只用于表现层，应用并不是很多。所以很多时候，一个函数能解决的问题不需要引用一个类库来解决。</p>
+<h2 id="整数表示"><a href="#整数表示" class="headerlink" title="整数表示"></a>整数表示</h2><p>对于整数，我们可以通过用<strong>String</strong>类型的表示来取值或传值，否则会丧失精度。</p>
+<h2 id="格式化数字、金额、保留几位小数等"><a href="#格式化数字、金额、保留几位小数等" class="headerlink" title="格式化数字、金额、保留几位小数等"></a>格式化数字、金额、保留几位小数等</h2><h3 id="Numeral-js"><a href="#Numeral-js" class="headerlink" title="Numeral.js"></a>Numeral.js</h3><p>一个用于格式化和操作数字的JavaScript库。数字可以被格式化为货币，百分比，时间，几个小数位数，千分位等等。 您也可以随时创建自定义格式。</p>
+<p>官网及文档：<a target="_blank" rel="noopener" href="http://numeraljs.com/">http://numeraljs.com/</a></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/adamwdraper/Numeral-js">https://github.com/adamwdraper/Numeral-js</a></p>
+<h3 id="accounting-js"><a href="#accounting-js" class="headerlink" title="accounting.js"></a>accounting.js</h3><p>一个轻量级的JavaScript库，用于格式化数字，金额和货币等。</p>
+<p>官网及文档：<a target="_blank" rel="noopener" href="http://openexchangerates.github.io/accounting.js/">http://openexchangerates.github.io/accounting.js/</a></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/openexchangerates/accounting.js">https://github.com/openexchangerates/accounting.js</a></p>
+<h2 id="解决toFixed"><a href="#解决toFixed" class="headerlink" title="解决toFixed"></a>解决toFixed</h2><p>针对toFixed的兼容性问题，我们可以把toFix重写一下来解决，代码如下：</p>
+<pre class=" language-js"><code class="language-js">
+<span class="token comment" spellcheck="true">// toFixed兼容方法</span>
+Number<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>toFixed <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>len<span class="token operator">></span><span class="token number">20</span> <span class="token operator">||</span> len<span class="token operator">&lt;</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RangeError</span><span class="token punctuation">(</span><span class="token string">'toFixed() digits argument must be between 0 and 20'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// .123转为0.123</span>
+    <span class="token keyword">var</span> number <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isNaN</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span> <span class="token operator">||</span> number <span class="token operator">>=</span> Math<span class="token punctuation">.</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> number<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">(</span>len<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">'undefined'</span> <span class="token operator">||</span> len <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> result <span class="token operator">=</span> number<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        numberArr <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>numberArr<span class="token punctuation">.</span>length<span class="token operator">&lt;</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//整数的情况</span>
+        <span class="token keyword">return</span> <span class="token function">padNum</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> intNum <span class="token operator">=</span> numberArr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//整数部分</span>
+        deciNum <span class="token operator">=</span> numberArr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//小数部分</span>
+        lastNum <span class="token operator">=</span> deciNum<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>len<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//最后一个数字</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>deciNum<span class="token punctuation">.</span>length <span class="token operator">==</span> len<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//需要截取的长度等于当前长度</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>deciNum<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> len<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//需要截取的长度大于当前长度 1.3.toFixed(2)</span>
+        <span class="token keyword">return</span> <span class="token function">padNum</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//需要截取的长度小于当前长度，需要判断最后一位数字</span>
+    result <span class="token operator">=</span> intNum <span class="token operator">+</span> <span class="token string">'.'</span> <span class="token operator">+</span> deciNum<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">parseInt</span><span class="token punctuation">(</span>lastNum<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token operator">>=</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//最后一位数字大于5，要进位</span>
+        <span class="token keyword">var</span> times <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//需要放大的倍数</span>
+        <span class="token keyword">var</span> changedInt <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//截取后转为整数</span>
+        changedInt<span class="token operator">++</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//整数进位</span>
+        changedInt <span class="token operator">/</span><span class="token operator">=</span> times<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//整数转为小数，注：有可能还是整数</span>
+        result <span class="token operator">=</span> <span class="token function">padNum</span><span class="token punctuation">(</span>changedInt<span class="token operator">+</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//对数字末尾加0</span>
+    <span class="token keyword">function</span> <span class="token function">padNum</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> dotPos <span class="token operator">=</span> num<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>dotPos <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//整数的情况</span>
+            num <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'.'</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>len<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                num <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> num<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//小数的情况</span>
+            <span class="token keyword">var</span> need <span class="token operator">=</span> len <span class="token operator">-</span> <span class="token punctuation">(</span>num<span class="token punctuation">.</span>length <span class="token operator">-</span> dotPos <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span>need<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                num <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> num<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>我们通过判断最后一位是否大于等于5来决定需不需要进位，如果需要进位先把小数乘以倍数变为整数，加1之后，再除以倍数变为小数，这样就不用一位一位的进行判断。</p>
 
             </div>
             <hr/>
@@ -629,7 +635,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/">https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/</a>
+                    <a href="https://leeycode.github.io/2022/01/10/fu-dian-shu-yun-suan-de-jing-du-wen-ti/">https://leeycode.github.io/2022/01/10/fu-dian-shu-yun-suan-de-jing-du-wen-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -667,8 +673,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/webpack/">
-                                    <span class="chip bg-color">webpack</span>
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                                    <span class="chip bg-color">项目总结</span>
                                 </a>
                             
                         </div>
@@ -882,17 +888,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/">
+                <a href="/2022/01/10/fu-dian-shu-yun-suan-de-jing-du-wen-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="webpack基础02-静态资源处理">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="浮点数运算的精度问题">
                         
-                        <span class="card-title">webpack基础02-静态资源处理</span>
+                        <span class="card-title">浮点数运算的精度问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -902,26 +909,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/webpack%E4%B8%93%E5%8C%BA/" class="post-category">
-                                    webpack专区
+                            <a href="/categories/ES%E8%AF%AD%E6%B3%95/" class="post-category">
+                                    ES语法
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/webpack/">
-                        <span class="chip bg-color">webpack</span>
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">项目总结</span>
                     </a>
                     
                 </div>
@@ -935,13 +943,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/25/this-zhi-xiang/">
+                <a href="/2022/01/05/qian-duan-chang-jian-de-dai-ma-wen-ti-hui-zong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="this指向">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="前端常见的代码问题汇总">
                         
-                        <span class="card-title">this指向</span>
+                        <span class="card-title">前端常见的代码问题汇总</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -952,7 +960,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-05
                             </span>
                         <span class="publish-author">
                             
@@ -969,8 +977,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/javaScript/">
-                        <span class="chip bg-color">javaScript</span>
+                    <a href="/tags/es/">
+                        <span class="chip bg-color">es</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">项目总结</span>
                     </a>
                     
                 </div>
