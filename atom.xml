@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2022-01-10T08:52:30.133Z</updated>
+  <updated>2022-08-02T02:59:06.231Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>金字塔原理读后感</title>
+    <link href="https://leeycode.github.io/2022/08/02/du-shu-jin-zi-ta-yuan-li-du-hou-gan/"/>
+    <id>https://leeycode.github.io/2022/08/02/du-shu-jin-zi-ta-yuan-li-du-hou-gan/</id>
+    <published>2022-08-02T02:20:35.000Z</published>
+    <updated>2022-08-02T02:59:06.231Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;我们平时表达、思考、解决问题的时候，可能会无意识地用到金字塔原理。但有时候又会忘记使用金字塔原理去思考，主要原因是没有把思考流程标准化。金字塔原理这本书，就将表达、思考、解决问题的逻辑标准化了。仔细研读，收获颇丰。&lt;/p&gt;
+&lt;/blockquote</summary>
+        
+      
+    
+    
+    
+    <category term="读书笔记" scheme="https://leeycode.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="读书笔记" scheme="https://leeycode.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>浮点数运算的精度问题</title>
@@ -505,31 +532,6 @@
     
     
     <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>this指向</title>
-    <link href="https://leeycode.github.io/2020/11/25/this-zhi-xiang/"/>
-    <id>https://leeycode.github.io/2020/11/25/this-zhi-xiang/</id>
-    <published>2020-11-25T07:00:56.000Z</published>
-    <updated>2022-01-05T09:30:00.555Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h1&gt;&lt;p&gt;&lt;code&gt;this&lt;/code&gt;</summary>
-        
-      
-    
-    
-    
-    <category term="ES语法" scheme="https://leeycode.github.io/categories/ES%E8%AF%AD%E6%B3%95/"/>
-    
-    
-    <category term="javaScript" scheme="https://leeycode.github.io/tags/javaScript/"/>
     
   </entry>
   
