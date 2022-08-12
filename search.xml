@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>swiper在loop为true时click失效</title>
+      <link href="2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/"/>
+      <url>2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/</url>
+      
+        <content type="html"><![CDATA[<p>最近在项目中使用swiper插件，配置loop：true无限轮播的时候，会出现第一个slide和最后一个slide点击事件失效的bug，造成这种情况的原因是：swiper的无限轮播时会自动复制第一个和最后一个页面进行轮播。但由于只复制页面没有复制点击事件，此时我们用vue写的点击事件在页面循环一周回来遇到复制的页面时，点击事件就会失效。</p><blockquote><p>解决的方法：通过swiper自己的监听点击方法来实现</p></blockquote><p>核心代码如下：</p><pre class=" language-javascript"><code class="language-javascript"><span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"swiper-wraper"</span><span class="token operator">></span>    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"swiper-slide"</span> v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"(d,i) in dataList"</span> <span class="token punctuation">:</span>key<span class="token operator">=</span><span class="token string">"i"</span><span class="token operator">></span>        <span class="token operator">&lt;</span>a data<span class="token operator">-</span>info<span class="token operator">=</span><span class="token string">"d.info"</span><span class="token operator">></span>前往查看<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span></code></pre><p>使用swiper监听事件</p><pre class=" language-js"><code class="language-js"><span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span>    <span class="token keyword">this</span><span class="token punctuation">.</span>swiper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Swiper</span><span class="token punctuation">(</span><span class="token string">".swiper-container"</span><span class="token punctuation">,</span><span class="token punctuation">{</span>        loop<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>        onClick<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span>mouseEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>            <span class="token keyword">let</span> info <span class="token operator">=</span> mouseEvent<span class="token punctuation">.</span>target<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>info            that<span class="token punctuation">.</span><span class="token function">handleClick</span><span class="token punctuation">(</span>info<span class="token punctuation">)</span>        <span class="token punctuation">}</span>    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span></code></pre><p>通过以上方式，可以解决项目中使用swiper时点击事件失效的问题。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>金字塔原理读后感</title>
       <link href="2022/08/02/du-shu-jin-zi-ta-yuan-li-du-hou-gan/"/>
       <url>2022/08/02/du-shu-jin-zi-ta-yuan-li-du-hou-gan/</url>

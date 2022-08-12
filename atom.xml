@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2022-08-02T03:07:34.169Z</updated>
+  <updated>2022-08-12T02:33:40.255Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>swiper在loop为true时click失效</title>
+    <link href="https://leeycode.github.io/2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/"/>
+    <id>https://leeycode.github.io/2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/</id>
+    <published>2022-08-12T01:52:33.000Z</published>
+    <updated>2022-08-12T02:33:40.255Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;最近在项目中使用swiper插件，配置loop：true无限轮播的时候，会出现第一个slide和最后一个slide点击事件失效的bug，造成这种情况的原因是：swiper的无限轮播时会自动复制第一个和最后一个页面进行轮播。但由于只复制页面没有复制点击事件，此时我们用vue写</summary>
+        
+      
+    
+    
+    
+    <category term="项目总结" scheme="https://leeycode.github.io/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    
+    <category term="项目总结" scheme="https://leeycode.github.io/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>金字塔原理读后感</title>
@@ -497,32 +522,6 @@
 &lt;p&gt;本文主要讲述样式文件，图片和字体资源的解析，html,css,js的压缩&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;解析css-sass-less&quot;&gt;&lt;a href=&quot;#解析css-sass-less&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
-    
-    
-    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>webpack基础01-核心概念</title>
-    <link href="https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/"/>
-    <id>https://leeycode.github.io/2020/12/06/webpack-ji-chu-01-he-xin-gai-nian/</id>
-    <published>2020-12-06T07:24:49.000Z</published>
-    <updated>2022-01-05T09:30:11.946Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;默认安装&quot;&gt;&lt;a href=&quot;#默认安装&quot; class=&quot;headerlink&quot; title=&quot;默认安装&quot;&gt;&lt;/a&gt;默认安装&lt;/h1&gt;&lt;p&gt;npm init -y&lt;/p&gt;
-&lt;h2 id=&quot;安装webpack相关&quot;&gt;&lt;a href=&quot;#安装webpack相关&quot;</summary>
         
       
     

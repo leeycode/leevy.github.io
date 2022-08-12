@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="nodejs从零起飞-模块, 大脸猫">
+    <meta name="keywords" content="swiper在loop为true时click失效, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>nodejs从零起飞-模块 | 大脸猫</title>
+    <title>swiper在loop为true时click失效 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">nodejs从零起飞-模块</h1>
+                    <h1 class="description center-align post-title">swiper在loop为true时click失效</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nodejs/">
-                                <span class="chip bg-color">nodejs</span>
+                            <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                                <span class="chip bg-color">项目总结</span>
                             </a>
                         
                     </div>
@@ -425,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/nodeJs%E4%B8%93%E6%A0%8F/" class="post-category">
-                                nodeJs专栏
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="post-category">
+                                项目总结
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-01-20
+                    2022-08-12
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    717
+                    248
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -469,95 +469,29 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="nodejs和javascript的区别"><a href="#nodejs和javascript的区别" class="headerlink" title="nodejs和javascript的区别"></a>nodejs和javascript的区别</h2><p>W3C 是规定 web 标准的，如 html css js-web-api 等，和 nodejs 没关系。</p>
-<p>ECMA 是规范 js 语法的，例如变量，函数，class，if 语句等这些语法的，和具体 API 没关系。</p>
-<p>前端 js = ECMA + js-web-api</p>
-<p>nodejs = ECMA + node-api</p>
-<h2 id="commonjs"><a href="#commonjs" class="headerlink" title="commonjs"></a>commonjs</h2><p>commonjs是nodejs默认有的模块化规范,每个文件就是一个模块，有自己的作用域。在一个文件里面定义的变量、函数、类，都是私有的，对其他文件不可见。</p>
-<p>module,exports,require是关键词，下列示例中演示b.js引用a.js的方式，第三方库的引用方式。</p>
-<h3 id="module对象"><a href="#module对象" class="headerlink" title="module对象"></a>module对象</h3><p>Node内部提供一个Module构建函数。所有模块都是Module的实例。每个模块内部，都有一个module对象，代表当前模块。</p>
-<p>module.exports属性表示当前模块对外输出的接口，其他文件加载该模块，实际上就是读取module.exports变量。</p>
-<h3 id="require命令"><a href="#require命令" class="headerlink" title="require命令"></a>require命令</h3><p>Node使用CommonJS模块规范，内置的require命令用于加载模块文件。</p>
-<p>require命令的基本功能是，读入并执行一个JavaScript文件，然后返回该模块的exports对象。如果没有发现指定模块，会报错。</p>
-<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><p>a.js文件中</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> a <span class="token operator">+</span> b
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">mul</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> a <span class="token operator">*</span> b
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">// 单个导出</span>
-<span class="token comment" spellcheck="true">// module.exports.add = add</span>
-
-<span class="token comment" spellcheck="true">// 全部导出</span>
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-    add<span class="token punctuation">,</span>
-    mul
-<span class="token punctuation">}</span>
+                <p>最近在项目中使用swiper插件，配置loop：true无限轮播的时候，会出现第一个slide和最后一个slide点击事件失效的bug，造成这种情况的原因是：swiper的无限轮播时会自动复制第一个和最后一个页面进行轮播。但由于只复制页面没有复制点击事件，此时我们用vue写的点击事件在页面循环一周回来遇到复制的页面时，点击事件就会失效。</p>
+<blockquote>
+<p>解决的方法：通过swiper自己的监听点击方法来实现</p>
+</blockquote>
+<p>核心代码如下：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"swiper-wraper"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"swiper-slide"</span> v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"(d,i) in dataList"</span> <span class="token punctuation">:</span>key<span class="token operator">=</span><span class="token string">"i"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>a data<span class="token operator">-</span>info<span class="token operator">=</span><span class="token string">"d.info"</span><span class="token operator">></span>前往查看<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
 </code></pre>
-<p>b文件中</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// node 模块导出的都是对象，所以导入 node 模块就是对一个对象进行取值。</span>
-<span class="token keyword">const</span> <span class="token punctuation">{</span> add<span class="token punctuation">,</span> mul <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./a'</span><span class="token punctuation">)</span>
-<span class="token keyword">const</span> _ <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'lodash'</span><span class="token punctuation">)</span>
-
-<span class="token keyword">const</span> sum <span class="token operator">=</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span>
-<span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">mul</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
-
-<span class="token keyword">const</span> arr <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'arr...'</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span>
-</code></pre>
-<h2 id="CommonJS模块的特点"><a href="#CommonJS模块的特点" class="headerlink" title="CommonJS模块的特点"></a>CommonJS模块的特点</h2><ul>
-<li>所有代码都运行在模块作用域，不会污染全局作用域。</li>
-<li>模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存。</li>
-<li>模块加载的顺序，按照其在代码中出现的顺序。</li>
-</ul>
-<h2 id="ES-modules"><a href="#ES-modules" class="headerlink" title="ES modules"></a>ES modules</h2><p>Node.js从v13.2.0，宣布开始支持ES modules。在此之前，想要在node中使用ES modules，需要添加–experimental-module。<br>v13.2.0版本后，可以直接使用ES modules了。<strong>该特性依然是实验性的（Stability: 1），不建议在生产环境中使用该功能。</strong></p>
-<h3 id="在node中使用ES-modules"><a href="#在node中使用ES-modules" class="headerlink" title="在node中使用ES modules"></a>在node中使用ES modules</h3><p>想要在项目中使用ES modules，有以下两种方法：</p>
-<ol>
-<li>文件后缀名使用.mjs</li>
-</ol>
-<pre class=" language-js"><code class="language-js"><span class="token operator">|</span>____component
-<span class="token operator">|</span> <span class="token operator">|</span>____a<span class="token punctuation">.</span>mjs
-<span class="token operator">|</span>____index<span class="token punctuation">.</span>mjs
-</code></pre>
-<p>文件内容如下：</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// a.mjs</span>
-<span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token string">'Hello World'</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token keyword">default</span> a<span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// index.mjs</span>
-<span class="token keyword">import</span> a <span class="token keyword">from</span> <span class="token string">'./a.mjs'</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<ol start="2">
-<li>文件依然使用.js的后缀名，在项目的package.json中设置：type:module</li>
-</ol>
-<pre class=" language-js"><code class="language-js">
-<span class="token operator">|</span>____component
-<span class="token operator">|</span> <span class="token operator">|</span>____a<span class="token punctuation">.</span>js
-<span class="token operator">|</span>____package<span class="token punctuation">.</span>json
-<span class="token operator">|</span>____index<span class="token punctuation">.</span>js
-</code></pre>
-<p>各个文件内容如下：</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// component/a.js</span>
-<span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token string">'This is component a'</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token keyword">default</span> a<span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// index.js</span>
-<span class="token keyword">import</span> a <span class="token keyword">from</span> <span class="token string">'./component/a.mjs'</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// package.json</span>
-<span class="token punctuation">{</span>
-  <span class="token operator">...</span>
-  <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"module"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 必须要有这一行</span>
-  <span class="token operator">...</span>
+<p>使用swiper监听事件</p>
+<pre class=" language-js"><code class="language-js"><span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>swiper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Swiper</span><span class="token punctuation">(</span><span class="token string">".swiper-container"</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+        loop<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        onClick<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span>mouseEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">let</span> info <span class="token operator">=</span> mouseEvent<span class="token punctuation">.</span>target<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>info
+            that<span class="token punctuation">.</span><span class="token function">handleClick</span><span class="token punctuation">(</span>info<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span></code></pre>
+<p>通过以上方式，可以解决项目中使用swiper时点击事件失效的问题。</p>
 
             </div>
             <hr/>
@@ -583,7 +517,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2021/01/20/nodejs-cong-ling-qi-fei-mo-kuai/">https://leeycode.github.io/2021/01/20/nodejs-cong-ling-qi-fei-mo-kuai/</a>
+                    <a href="https://leeycode.github.io/2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/">https://leeycode.github.io/2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -621,8 +555,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/nodejs/">
-                                    <span class="chip bg-color">nodejs</span>
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                                    <span class="chip bg-color">项目总结</span>
                                 </a>
                             
                         </div>
@@ -836,17 +770,18 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/02/20/qian-duan-huan-cun-wen-ti/">
+                <a href="/2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="前端缓存问题">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="swiper在loop为true时click失效">
                         
-                        <span class="card-title">前端缓存问题</span>
+                        <span class="card-title">swiper在loop为true时click失效</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -856,9 +791,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -871,11 +806,12 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
-                        <span class="chip bg-color">踩的坑</span>
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">项目总结</span>
                     </a>
                     
                 </div>
@@ -889,13 +825,13 @@ console<span class="token punctuation">.</span><span class="token function">log<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/01/17/webpack-ji-chu-06-gong-gong-zi-yuan-ti-qu/">
+                <a href="/2022/08/02/du-shu-jin-zi-ta-yuan-li-du-hou-gan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="webpack基础06-公共资源提取">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="金字塔原理读后感">
                         
-                        <span class="card-title">webpack基础06-公共资源提取</span>
+                        <span class="card-title">金字塔原理读后感</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -906,14 +842,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-02
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/webpack%E4%B8%93%E5%8C%BA/" class="post-category">
-                                    webpack专区
+                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    读书笔记
                                 </a>
                             
                             
@@ -923,8 +859,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/webpack/">
-                        <span class="chip bg-color">webpack</span>
+                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">读书笔记</span>
                     </a>
                     
                 </div>
