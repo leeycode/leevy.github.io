@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2022-08-12T02:33:40.255Z</updated>
+  <updated>2022-09-10T02:24:03.789Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>基于 Qiankun 微前端实践-概念</title>
+    <link href="https://leeycode.github.io/2022/09/10/ji-yu-qiankun-wei-qian-duan-shi-jian-gai-nian/"/>
+    <id>https://leeycode.github.io/2022/09/10/ji-yu-qiankun-wei-qian-duan-shi-jian-gai-nian/</id>
+    <published>2022-09-10T01:48:40.000Z</published>
+    <updated>2022-09-10T02:24:03.789Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;微前端就是将不同的功能按照不同的维度拆分成多个子应用。通过主应用来加载这些子应用。微前端的核心在于拆，拆完后再合！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;为什么需要微前端&quot;&gt;&lt;a href=&quot;#为什么需要微前端&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="微前端" scheme="https://leeycode.github.io/categories/%E5%BE%AE%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="qiankun" scheme="https://leeycode.github.io/tags/qiankun/"/>
+    
+  </entry>
+  
+  <entry>
     <title>swiper在loop为true时click失效</title>
     <link href="https://leeycode.github.io/2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/"/>
     <id>https://leeycode.github.io/2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/</id>
     <published>2022-08-12T01:52:33.000Z</published>
-    <updated>2022-08-12T02:33:40.255Z</updated>
+    <updated>2022-08-12T02:39:54.297Z</updated>
     
     
       
@@ -494,34 +522,6 @@
         
     <summary type="html">&lt;p&gt;文件监听是指发现源码改变，自动重新构建出新的输出文件。&lt;/p&gt;
 &lt;h2 id=&quot;webpack文件监听方式&quot;&gt;&lt;a href=&quot;#webpack文件监听方式&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
-    
-    
-    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>webpack基础02-静态资源处理</title>
-    <link href="https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/"/>
-    <id>https://leeycode.github.io/2020/12/08/webpack-ji-chu-02-jing-tai-zi-yuan-chu-li/</id>
-    <published>2020-12-08T00:24:49.000Z</published>
-    <updated>2022-01-05T09:30:18.089Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;本文主要讲述样式文件，图片和字体资源的解析，html,css,js的压缩&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;解析css-sass-less&quot;&gt;&lt;a href=&quot;#解析css-sass-less&quot;</summary>
         
       
     

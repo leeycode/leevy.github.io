@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="outlook邮箱样式问题, 大脸猫">
+    <meta name="keywords" content="基于 Qiankun 微前端实践-概念, 大脸猫">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>outlook邮箱样式问题 | 大脸猫</title>
+    <title>基于 Qiankun 微前端实践-概念 | 大脸猫</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -296,7 +296,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">outlook邮箱样式问题</h1>
+                    <h1 class="description center-align post-title">基于 Qiankun 微前端实践-概念</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
-                                <span class="chip bg-color">踩的坑</span>
+                            <a href="/tags/qiankun/">
+                                <span class="chip bg-color">qiankun</span>
                             </a>
                         
                     </div>
@@ -425,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="post-category">
-                                项目总结
+                            <a href="/categories/%E5%BE%AE%E5%89%8D%E7%AB%AF/" class="post-category">
+                                微前端
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-02-22
+                    2022-09-10
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    4 分
                 </div>
                 
 
@@ -469,71 +469,109 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>最近项目中发送html格式的邮件到邮箱客户端，发现邮件样式千奇百怪，不堪入目。在google里面baidu了下,才发现问题严重了。因为安全原因，各大邮箱服务商及邮件客户端都会对邮件内容进行一定程度上的处理，不会按照你写的原本 HTML 展示，尤其是前端搅屎棍微软开发的OutLook，一向特立独行，使得outlook邮箱的样式成为最难写的样式。特意总结下，留给有缘人参考。</p>
-<h2 id="Doctype"><a href="#Doctype" class="headerlink" title="Doctype"></a>Doctype</h2><p>目前，兼容性最好的Doctype是XHTML 1.0 Strict，事实上Gmail和Hotmail会删掉你的Doctype，换上这个Doctype。使用这个Doctype，也就意味着，不能使用HTML5的语法。</p>
-<pre class=" language-js"><code class="language-js"><span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html PUBLIC <span class="token string">"-//W3C//DTD XHTML 1.0 Transitional//EN"</span> <span class="token string">"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"</span><span class="token operator">></span>
+                <blockquote>
+<p>微前端就是将不同的功能按照不同的维度拆分成多个子应用。通过主应用来加载这些子应用。微前端的核心在于拆，拆完后再合！</p>
+</blockquote>
+<h2 id="为什么需要微前端"><a href="#为什么需要微前端" class="headerlink" title="为什么需要微前端"></a>为什么需要微前端</h2><ol>
+<li>使用背景</li>
+</ol>
+<p>1)在同一个页面可以使用多个前端框架(React, AngularJS, Vue 等);</p>
+<p>2)用新框架编写新代码，无需重写已有的 app;</p>
+<p>3)代码的延迟加载可以缩减初次加载时长;</p>
+<ol start="2">
+<li>主要解决的问题：</li>
+</ol>
+<p>1)在一个 app 中不同的模块由不同的团队维护，而每个团队所用的技术栈可能不同，而且发版周期不同。</p>
+<p>2)所使用的前端框架升级负担，新版本可能存在不兼容的更新，升级后可能对已有的业务产生 bug，造成难以升级。限制了前端框架新版本的使用。</p>
+<ol start="3">
+<li>导图<br><img src="https://s3.bmp.ovh/imgs/2022/09/10/1f56765344a88594.png" alt="微前端导图"></li>
+</ol>
+<h2 id="什么是微前端"><a href="#什么是微前端" class="headerlink" title="什么是微前端"></a>什么是微前端</h2><p><img src="https://s3.bmp.ovh/imgs/2022/09/10/c0df382ee16dc37e.png"></p>
+<p>微前端就是将不同的功能按照不同的维度拆分成多个子应用。通过主应用来加载这些子应用。</p>
+<h3 id="微前端核心价值"><a href="#微前端核心价值" class="headerlink" title="微前端核心价值"></a>微前端核心价值</h3><p>微前端架构具备以下几个核心价值：(重要)(摘自 qiankun官方文档)</p>
+<p>1)技术栈无关</p>
+<p>主框架不限制接入应用的技术栈，微应用具备完全自主权;</p>
+<p>2)独立开发、独立部署</p>
+<p>微应用仓库独立，前后端可独立开发，部署完成后主框架自动完成同步更新;</p>
+<p>3)增量升级</p>
+<p>在面对各种复杂场景时，我们通常很难对一个已经存在的系统做全量的技术栈升级或重构，而微前端是一种非常好的实施渐进式重构的手段和策略;</p>
+<p>4)独立运行时</p>
+<p>每个微应用之间状态隔离，运行时状态不共享;</p>
+<h3 id="怎么落地微前端"><a href="#怎么落地微前端" class="headerlink" title="怎么落地微前端"></a>怎么落地微前端</h3><p><img src="https://s3.bmp.ovh/imgs/2022/09/10/20002f8f80cd926e.png"></p>
+<p>2018年 Single-SPA 诞生了，single-spa 是一个用于前端微服务化的 JavaScript 前端解决方案(本身没有处理样式隔离，js 执行隔离)实现了路由劫持和应用加载。</p>
+<p>说明：single-spa 解决了以应用为维度的路由，应用的注册，监听，最重要的是赋予了应用生命周期和生命周期相关事件。</p>
+<p>*Single-SPA 缺陷：不够灵活，不能动态加载js文件;样式不隔离，没有js沙箱的机制。</p>
+<p>2019年 qiankun 是微前端框架，提供了更加开箱即用的 API (single-spa + sandbox + import-html-entry)，它基于 single-spa，具备 js 沙箱、样式隔离、HTML Loader、预加载 等微前端系统所需的能力。qiakun 升级 2.0 后，支持多个微应用的同时加载，有了这个特性，我们基本可以像接入 iframe 一样方便的接入微应用。</p>
+<p>*总结：子应用可以独立构建，运行时动态加载，主子应用完全解耦，技术栈无关，靠的是协议接入(子应用必须导出 bootstrap，mount，unmount方法)</p>
+<h2 id="微前端核心功能实现"><a href="#微前端核心功能实现" class="headerlink" title="微前端核心功能实现"></a>微前端核心功能实现</h2><h3 id="css-隔离方案"><a href="#css-隔离方案" class="headerlink" title="css 隔离方案"></a>css 隔离方案</h3><p>子应用之间样式隔离：</p>
+<p>Dynamic Stylesheet 动态样式表，当应用切换时移除老应用样式，添加新应用样式;</p>
+<p>主应用和子应用之间的样式隔离：</p>
+<p>1)BEM(Block Element Modifier ) 约定项目前缀;</p>
+<p>2)css-Modules 打包时生成不冲突的选择器名;</p>
+<p>3)Shadow DOM 真正意义上的隔离;</p>
+<p>4)css-in-js</p>
+<h3 id="沙箱-shaowDom"><a href="#沙箱-shaowDom" class="headerlink" title="沙箱 shaowDom"></a>沙箱 shaowDom</h3><ol>
+<li>css 解决方法：</li>
+</ol>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// dom的api</span>
+<span class="token comment" spellcheck="true">// 外界无法访问 shadow dom</span>
+<span class="token keyword">let</span> shadowDOM <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'x'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attachShadow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>mode<span class="token punctuation">:</span> <span class="token string">'closed'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">let</span> pElm <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'p'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+pElm<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> styleElm <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'style'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+styleElm<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token template-string"><span class="token string">`
+ p{color: red}
+`</span></span>
+shadowDOM<span class="token punctuation">.</span><span class="token function">appendchild</span><span class="token punctuation">(</span>styleElm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+shadowDOM<span class="token punctuation">.</span><span class="token function">appendchild</span><span class="token punctuation">(</span>pElm<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<ol start="2">
+<li>JS 沙箱 proxy</li>
+</ol>
+<p>快照沙箱简单理解：1年前拍一张 在拍一张 (将区别保存起来) 在回到一年前</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">let</span> sandbox <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SnapshotSandbox</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token operator">&lt;</span>html xmlns<span class="token operator">=</span><span class="token string">"http://www.w3.org/1999/xhtml"</span><span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">SnapshotSandbox</span><span class="token punctuation">{</span>
+ <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">this</span><span class="token punctuation">.</span>proxy <span class="token operator">=</span> window<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// window属性</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>modifyPropsmap <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 记录在window上的修改</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">active</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">active</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 激活</span>
+   <span class="token keyword">this</span><span class="token punctuation">.</span>windowSnapshot <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//拍照</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> prop <span class="token keyword">in</span> window<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>prop<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>windowsnapshot<span class="token punctuation">[</span>prop<span class="token punctuation">]</span> <span class="token operator">=</span> window<span class="token punctuation">[</span>prop<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>modifyPropsMap<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>p<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+     window<span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>modifyPropsMap<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
 
-　<span class="token operator">&lt;</span>head<span class="token operator">></span>
+  <span class="token function">inactive</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 失活</span>
+   <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">const</span> prop <span class="token keyword">in</span> window<span class="token punctuation">)</span><span class="token punctuation">{</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>prop<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span>window<span class="token punctuation">[</span>prop<span class="token punctuation">]</span> <span class="token operator">!==</span> <span class="token keyword">this</span><span class="token punctuation">.</span>windowsnapshot<span class="token punctuation">[</span>prop<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+         <span class="token keyword">this</span><span class="token punctuation">.</span>modifyPropsMap<span class="token punctuation">[</span>prop<span class="token punctuation">]</span> <span class="token operator">=</span> window<span class="token punctuation">[</span>prop<span class="token punctuation">]</span><span class="token punctuation">;</span>
+          window<span class="token punctuation">[</span>prop<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>windowsnapshot<span class="token punctuation">[</span>prop<span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-　　<span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"Content-Type"</span> content<span class="token operator">=</span><span class="token string">"text/html; charset=UTF-8"</span> <span class="token operator">/</span><span class="token operator">></span>
-
-　　<span class="token operator">&lt;</span>title<span class="token operator">></span>HTML Email编写指南<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
-
-　　<span class="token operator">&lt;</span>meta name<span class="token operator">=</span><span class="token string">"viewport"</span> content<span class="token operator">=</span><span class="token string">"width=device-width, initial-scale=1.0"</span><span class="token operator">/</span><span class="token operator">></span>
-
-　<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">></span>
-
-<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">></span>
-</code></pre>
-<p>我们知道完整的 HTML 包括 DOCTYPE 声明、html 和 head 标签及其内容、body 标签，对于在一个 iframe 中显示邮件内容的邮箱还好，会保留上述结构，但是有些邮件（如 Gmail）都是在 div 中直接包含，这就对安全要求极为苛刻。安全原因邮箱会默认把上述结构做删除处理，所以写了几乎没有作用，在可能的情况下尽量把内容写到 body 内，甚至建议从 table 开写，直接放弃 DOCTYPE / html / head / body 标签。</p>
-<h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h2><p>页面布局必须使用table，因为各个邮箱对 div + css 这一套布局的解析问题很大（如 float / position 等 CSS 都会被过滤，甚至 margin: 0 auto; 都不起作用），基本各大邮箱都会解析混乱，这就意味着 HTML 邮件中几乎只有这几个元素——table / tr / td / span / img / a，尽量避免使用 div / p 或是其他标签。</p>
-<p>而且并不是所有邮箱都支持 colspan / rowspan 属性，所以所有布局都需要使用 table 嵌套解决。</p>
-<p>使用表格布局导致的最直接的问题就是会产生多余的空白像素，所以要养成习惯给每个 table 都加上边框 border，单元格内边距 cellpadding，单元格间距 cellspacing，边框合并属性 border-collapse 这些属性：</p>
-<pre class=" language-js"><code class="language-js"><span class="token operator">&lt;</span>table border<span class="token operator">=</span><span class="token string">"0"</span> cellpadding<span class="token operator">=</span><span class="token string">"0"</span> cellspacing<span class="token operator">=</span><span class="token string">"0"</span> style<span class="token operator">=</span><span class="token string">"border-collapse: collapse;"</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token operator">...</span> <span class="token operator">--</span><span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>table<span class="token operator">></span></code></pre>
-<h2 id="使用内联样式"><a href="#使用内联样式" class="headerlink" title="使用内联样式"></a>使用内联样式</h2><p>有些版本的邮箱解析的时候会将head里面的内容直接删了，导致样式失效。html邮件也不支持外联的css,这就意味着只有內联CSS是唯一可靠的编写样式途径。</p>
-<h2 id="属性优先"><a href="#属性优先" class="headerlink" title="属性优先"></a>属性优先</h2><p>并不是使用 style 属性就保险了，很多邮箱会对特定标签的属性做强制改造。</p>
-<p>比如在 OutLook 中，图片使用以下方式来设置宽高是无效的：</p>
-<pre class=" language-js"><code class="language-js"><span class="token operator">&lt;</span>img style<span class="token operator">=</span><span class="token string">"width: 10px; height: 10px;"</span> src<span class="token operator">=</span><span class="token string">"*.png"</span> <span class="token operator">/</span><span class="token operator">></span></code></pre>
-<p>正确的设置方法：</p>
-<pre class=" language-js"><code class="language-js">
-<span class="token operator">&lt;</span>img width<span class="token operator">=</span><span class="token string">"10"</span> height<span class="token operator">=</span><span class="token string">"10"</span> src<span class="token operator">=</span><span class="token string">"*.png"</span> <span class="token operator">/</span><span class="token operator">></span></code></pre>
-<p>所以在有属性能够实现样式效果的时候尽量使用属性，常见的可用属性有：</p>
-<pre class=" language-js"><code class="language-js">width
-height
-bgcolor
-align
-valign
-……
-</code></pre>
-<h2 id="样式继承"><a href="#样式继承" class="headerlink" title="样式继承"></a>样式继承</h2><p>html邮件中某些属性的继承可能失效，比如 font-family，OutLook 中若想改变字体，至少每个 table 中都要指定 font-family，而在 QQ 邮箱甚至必须每个 td 都设置 font-family 才能全部生效。因此，每个标签单独写样式是很有必要的。</p>
-<h2 id="背景图片"><a href="#背景图片" class="headerlink" title="背景图片"></a>背景图片</h2><p>style 内容里面 background 可以设置 color，但是 image 会被过滤，就是说不能通过 CSS 来设置背景图片了。但是有一个很有意思的元素属性，也叫 background，里面可以定义一个图片路径，但是功能有限，比如无法定位背景图片等。</p>
-<p>例如要给一个单元格加一个背景，必须这样写：</p>
-<pre class=" language-js"><code class="language-js"><span class="token operator">&lt;</span>td background<span class="token operator">=</span><span class="token string">"*.png"</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token operator">...</span> <span class="token operator">--</span><span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span></code></pre>
-<h2 id="字体相关"><a href="#字体相关" class="headerlink" title="字体相关"></a>字体相关</h2><p>在 HTML 邮件中，font-family 只支持系统字体，不支持自定义字体，也不支持 font 简写，color 尽可能也不要使用简写：</p>
-<pre class=" language-js"><code class="language-js">font<span class="token punctuation">:</span> 12px <span class="token operator">/</span> 14px Arial<span class="token punctuation">,</span> sans<span class="token operator">-</span>serif<span class="token punctuation">;</span> 
-color<span class="token punctuation">:</span> #<span class="token number">999</span><span class="token punctuation">;</span>
-</code></pre>
-<p>需要写成：</p>
-<pre class=" language-js"><code class="language-js">line<span class="token operator">-</span>height<span class="token punctuation">:</span> 14px<span class="token punctuation">;</span> 
-font<span class="token operator">-</span>size<span class="token punctuation">:</span> 12px<span class="token punctuation">;</span> 
-font<span class="token operator">-</span>family<span class="token punctuation">:</span> <span class="token string">"微软雅黑"</span><span class="token punctuation">,</span> Arial<span class="token punctuation">,</span> sans<span class="token operator">-</span>serif<span class="token punctuation">;</span> 
-color<span class="token punctuation">:</span> #<span class="token number">999999</span><span class="token punctuation">;</span>
-</code></pre>
-<p>对于加粗字体，我们可以使用 b 标签而不是 CSS 的 font-weight，前文说过，HTML 标签和属性能解决的样式决不使用 CSS 样式。</p>
-<h2 id="行高"><a href="#行高" class="headerlink" title="行高"></a>行高</h2><p>在 OutLook 中会有个默认的行高最小值，特别是当设置 font-family 为微软雅黑时，默认的行高差不多为 Word 中的两倍行距，如果 line-height 设置的值小于默认的行高，无论你设置的是多少，则始终使用默认值，在很多情况下这是不能忍的，好在有个神奇的 mso-line-height-rule，使用行高时添加 mso-line-height-rule:exactly; 就能使行高始终等于我们所设置的值。</p>
-<pre class=" language-js"><code class="language-js">
-<span class="token operator">&lt;</span>td style<span class="token operator">=</span><span class="token string">"mso-line-height-rule: exactly; line-height: 36px;"</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token operator">...</span> <span class="token operator">--</span><span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
-</code></pre>
-<p>这只是微软的 CSS 属性，对其他客户端没影响。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2013/06/html_email.html">HTML Email 编写指南</a></p>
+<span class="token comment" spellcheck="true">// 应用的运行 从开始到结束， 切换后不会影响全局</span>
+<span class="token punctuation">(</span><span class="token punctuation">(</span>window<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+ window<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  window<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>a<span class="token punctuation">,</span>window<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  sandbox<span class="token punctuation">.</span><span class="token function">inactive</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>a<span class="token punctuation">,</span>window<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  sandbox<span class="token punctuation">.</span><span class="token function">active</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>a<span class="token punctuation">,</span>window<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>sandbox<span class="token punctuation">.</span>proxy<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// sandbox.proxy 就是window</span>
+<span class="token comment" spellcheck="true">// 如果是多个子应用就不能使用这种方式了，es6的proxy</span>
+<span class="token comment" spellcheck="true">// 代理沙箱可以实现多应用沙箱。把不同的应用用不同的代理来处理</span></code></pre>
 
             </div>
             <hr/>
@@ -559,7 +597,7 @@ color<span class="token punctuation">:</span> #<span class="token number">999999
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2021/02/22/outlook-you-xiang-yang-shi-wen-ti/">https://leeycode.github.io/2021/02/22/outlook-you-xiang-yang-shi-wen-ti/</a>
+                    <a href="https://leeycode.github.io/2022/09/10/ji-yu-qiankun-wei-qian-duan-shi-jian-gai-nian/">https://leeycode.github.io/2022/09/10/ji-yu-qiankun-wei-qian-duan-shi-jian-gai-nian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -597,8 +635,8 @@ color<span class="token punctuation">:</span> #<span class="token number">999999
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
-                                    <span class="chip bg-color">踩的坑</span>
+                                <a href="/tags/qiankun/">
+                                    <span class="chip bg-color">qiankun</span>
                                 </a>
                             
                         </div>
@@ -812,17 +850,18 @@ color<span class="token punctuation">:</span> #<span class="token number">999999
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/04/19/nginx-zhong-de-rewrite-pei-zhi/">
+                <a href="/2022/09/10/ji-yu-qiankun-wei-qian-duan-shi-jian-gai-nian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="nginx中的rewrite配置">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="基于 Qiankun 微前端实践-概念">
                         
-                        <span class="card-title">nginx中的rewrite配置</span>
+                        <span class="card-title">基于 Qiankun 微前端实践-概念</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -832,26 +871,27 @@ color<span class="token punctuation">:</span> #<span class="token number">999999
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-19
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/nginx%E4%B8%93%E9%A2%98/" class="post-category">
-                                    nginx专题
+                            <a href="/categories/%E5%BE%AE%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    微前端
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/qiankun/">
+                        <span class="chip bg-color">qiankun</span>
                     </a>
                     
                 </div>
@@ -865,13 +905,13 @@ color<span class="token punctuation">:</span> #<span class="token number">999999
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/02/20/qian-duan-huan-cun-wen-ti/">
+                <a href="/2022/08/12/swiper-zai-loop-wei-true-shi-click-shi-xiao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="前端缓存问题">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="swiper在loop为true时click失效">
                         
-                        <span class="card-title">前端缓存问题</span>
+                        <span class="card-title">swiper在loop为true时click失效</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -882,7 +922,7 @@ color<span class="token punctuation">:</span> #<span class="token number">999999
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-12
                             </span>
                         <span class="publish-author">
                             
@@ -899,8 +939,8 @@ color<span class="token punctuation">:</span> #<span class="token number">999999
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
-                        <span class="chip bg-color">踩的坑</span>
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">项目总结</span>
                     </a>
                     
                 </div>
