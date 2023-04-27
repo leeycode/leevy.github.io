@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>缩放带来的echarts图表模糊问题总结</title>
+      <link href="2023/03/26/suo-fang-dai-lai-de-echarts-tu-biao-mo-hu-wen-ti-zong-jie/"/>
+      <url>2023/03/26/suo-fang-dai-lai-de-echarts-tu-biao-mo-hu-wen-ti-zong-jie/</url>
+      
+        <content type="html"><![CDATA[<p>s缩放网页或者使用了transform: scale(x,y)后致使echarts图表模糊的问题，有两个方案处理，亲测有效：</p><p>解决方法：针对于echarts不清楚模糊问题的解决办法：</p><ol><li>将canvas转换成svg; 在初始化时：</li></ol><pre><code>echarts.init(dom,null,{ renderer : 'svg' });  </code></pre><p>拉伸后图片依然清晰，但是有目前的 SVG 版中，富文本、材质功能尚未实现；（所以对于效果复杂的echarts图来说不太理想；<br>2. 使用devicePixelRixelRatio: 2 ；</p><p>虽然也不是很完美，但是当echarts的canvas使用的很复杂的时候，不影响属性效果的显示，使用设备像素比，是相当可以的；</p><pre><code>echarts.init(dom,null,{devicePixelRatio:2});</code></pre><p>简单记录下，以防忘记。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 踩的坑 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>基于 Qiankun 微前端实践-概念</title>
       <link href="2022/09/10/ji-yu-qiankun-wei-qian-duan-shi-jian-gai-nian/"/>
       <url>2022/09/10/ji-yu-qiankun-wei-qian-duan-shi-jian-gai-nian/</url>
