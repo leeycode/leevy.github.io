@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2023-05-16T10:03:19.917Z</updated>
+  <updated>2023-05-16T10:19:23.296Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AgentGPT部署教程</title>
+    <link href="https://leeycode.github.io/2023/04/21/agentgpt-bu-shu-jiao-cheng/"/>
+    <id>https://leeycode.github.io/2023/04/21/agentgpt-bu-shu-jiao-cheng/</id>
+    <published>2023-04-21T08:58:31.000Z</published>
+    <updated>2023-05-16T10:19:23.296Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="项目总结" scheme="https://leeycode.github.io/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    
+    <category term="项目总结" scheme="https://leeycode.github.io/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="chatgpt" scheme="https://leeycode.github.io/tags/chatgpt/"/>
+    
+  </entry>
   
   <entry>
     <title>缩放带来的echarts图表模糊问题总结</title>
@@ -507,31 +534,6 @@
     
     
     <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端权限管理</title>
-    <link href="https://leeycode.github.io/2021/01/05/qian-duan-quan-xian-guan-li/"/>
-    <id>https://leeycode.github.io/2021/01/05/qian-duan-quan-xian-guan-li/</id>
-    <published>2021-01-05T07:31:42.000Z</published>
-    <updated>2021-01-05T07:33:49.316Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;接口权限&quot;&gt;&lt;a href=&quot;#接口权限&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="vue" scheme="https://leeycode.github.io/tags/vue/"/>
-    
-    <category term="项目总结" scheme="https://leeycode.github.io/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   

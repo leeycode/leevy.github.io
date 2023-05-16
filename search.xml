@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>AgentGPT部署教程</title>
+      <link href="2023/04/21/agentgpt-bu-shu-jiao-cheng/"/>
+      <url>2023/04/21/agentgpt-bu-shu-jiao-cheng/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://s3.bmp.ovh/imgs/2023/05/16/ddf7306bca3ac7bd.png"></p><ol><li><p>首先你需要准备一台VPS</p></li><li><p>通过SSH连接工具连接进去以后，依次执行以下命令：</p></li></ol><pre><code>sudo apt install -y curl #Debian</code></pre><p>或者</p><pre><code> sudo yum install -y curl #CentOS</code></pre><ol start="3"><li>然后通过Docker一键安装脚本进行部署：</li></ol><pre><code>bash &lt;(curl -sSL https://cdn.jsdelivr.net/gh/SuperManito/LinuxMirrors@main/DockerInstallation.sh)</code></pre><p>里面选择DOCKER CE源渠道，有八个可以选择。</p><p>包括我们可以选择Docker Engine、Compose等，然后就自动一键安装。</p><ol start="4"><li>下载并安装AgentGPT开源程序：<br>先安装下Git：</li></ol><pre><code>sudo yum install git #Centos</code></pre><pre><code>sudo apt install git #Debian</code></pre><ol start="5"><li><p>下载 AgentGPT 源码：</p><pre><code>git clone https://github.com/reworkd/AgentGPT.git</code></pre></li><li><p>下载后执行下面安装命令即可:</p></li></ol><pre><code>cd AgentGPT./setup.sh --docker</code></pre><ol start="7"><li>将自己的Open AI 的密钥输入</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目总结 </tag>
+            
+            <tag> chatgpt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>缩放带来的echarts图表模糊问题总结</title>
       <link href="2023/03/26/suo-fang-dai-lai-de-echarts-tu-biao-mo-hu-wen-ti-zong-jie/"/>
       <url>2023/03/26/suo-fang-dai-lai-de-echarts-tu-biao-mo-hu-wen-ti-zong-jie/</url>
