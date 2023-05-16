@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="前端权限管理, leevy">
+    <meta name="keywords" content="异类-不一样的成功启示录, leevy">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>前端权限管理 | leevy</title>
+    <title>异类-不一样的成功启示录 | leevy</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">前端权限管理</h1>
+                    <h1 class="description center-align post-title">异类-不一样的成功启示录</h1>
                 </div>
             </div>
         </div>
@@ -413,18 +413,23 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/vue/">
-                                <span class="chip bg-color">vue</span>
-                            </a>
-                        
-                            <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
-                                <span class="chip bg-color">项目总结</span>
+                            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">读书笔记</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-category">
+                                读书笔记
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -433,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-01-05
+                    2022-09-25
                 </div>
                 
 
@@ -442,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    696
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    2 分
                 </div>
                 
 
@@ -464,291 +469,16 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="接口权限"><a href="#接口权限" class="headerlink" title="接口权限"></a>接口权限</h2><blockquote>
-<p>接口权限目前一般采用==jwt==的形式来验证，没有通过的话一般返回401，跳转到登录页面重新进行登录。</p>
+                <p><img src="https://note.youdao.com/yws/public/resource/01b0f2e5ecc42aa7b5c9426fbc171bed/xmlnote/D625A2DA75CB421ABE74F4E5C2626E1D/11901"></p>
+<p>书中以叶藏独白道出的经历，与作者本人的人生重合度之高，令这部作品也被冠以“自传体小说”之名。鉴于其“遗作”的特殊地位，本书可看作是太宰治本人对自己人生的某种“总结”，窥探其内心世界的最后机会。</p>
+<blockquote>
+<p>所谓“丑角精神”，就是在生活中与他人交往时，一味屈从对方的要求，为取悦他人不惜自己戴上“小丑”的面具，以刻意的出乖卖丑，耍宝搞笑来与他人同一化的行为趋向。</p>
 </blockquote>
-<p>登录完拿到token，将token存起来，通过axios请求拦截器进行拦截，每次请求的时候头部携带token。</p>
-<pre><code>axios.interceptors.request.use(config =&gt; {
-    config.headers['token'] = cookie.get('token')
-    return config
-})
-axios.interceptors.response.use(res=&gt;{},{response}=&gt;{
-    if (response.data.code === 40099 || response.data.code === 40098) { //token过期或者错误
-        router.push('/login')
-    }
-})</code></pre>
-<h2 id="路由权限控制"><a href="#路由权限控制" class="headerlink" title="路由权限控制"></a>路由权限控制</h2><blockquote>
-<p>用户登录后只能看到自己有权访问的导航菜单，也只能访问自己有权访问的路由地址，否则将跳转 4xx 提示页</p>
-</blockquote>
-<p>初始化即挂载全部路由，并且在路由上标记相应的权限信息，每次路由跳转前做校验。</p>
-<pre><code>const routerMap = [
-  {
-    path: '/permission',
-    component: Layout,
-    redirect: '/permission/index',
-    alwaysShow: true, // will always show the root menu
-    meta: {
-      title: 'permission',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [{
-      path: 'page',
-      component: () =&gt; import('@/views/permission/page'),
-      name: 'pagePermission',
-      meta: {
-        title: 'pagePermission',
-        roles: ['admin'] // or you can only set roles in sub nav
-      }
-    }, {
-      path: 'directive',
-      component: () =&gt; import('@/views/permission/directive'),
-      name: 'directivePermission',
-      meta: {
-        title: 'directivePermission'
-        // if do not set roles, means: this page does not require permission
-      }
-    }]
-  }]</code></pre>
-<p>登录后，获取用户的权限信息，然后筛选有权限访问的路由，在全局路由守卫里进行调用==addRoutes==添加路由</p>
-<pre><code>import router from './router'
-import store from './store'
-import { Message } from 'element-ui'
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css'// progress bar style
-import { getToken } from '@/utils/auth' // getToken from cookie
-
-NProgress.configure({ showSpinner: false })// NProgress Configuration
-
-// permission judge function
-function hasPermission(roles, permissionRoles) {
-  if (roles.indexOf('admin') &gt;= 0) return true // admin permission passed directly
-  if (!permissionRoles) return true
-  return roles.some(role =&gt; permissionRoles.indexOf(role) &gt;= 0)
-}
-
-const whiteList = ['/login', '/authredirect']// no redirect whitelist
-
-router.beforeEach((to, from, next) =&gt; {
-  NProgress.start() // start progress bar
-  if (getToken()) { // determine if there has token
-    /* has token*/
-    if (to.path === '/login') {
-      next({ path: '/' })
-      NProgress.done() // if current page is dashboard will not trigger afterEach hook, so manually handle it
-    } else {
-      if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
-        store.dispatch('GetUserInfo').then(res =&gt; { // 拉取user_info
-          const roles = res.data.roles // note: roles must be a array! such as: ['editor','develop']
-          store.dispatch('GenerateRoutes', { roles }).then(() =&gt; { // 根据roles权限生成可访问的路由表
-            router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
-            next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
-          })
-        }).catch((err) =&gt; {
-          store.dispatch('FedLogOut').then(() =&gt; {
-            Message.error(err || 'Verification failed, please login again')
-            next({ path: '/' })
-          })
-        })
-      } else {
-        // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
-        if (hasPermission(store.getters.roles, to.meta.roles)) {
-          next()//
-        } else {
-          next({ path: '/401', replace: true, query: { noGoBack: true }})
-        }
-        // 可删 ↑
-      }
-    }
-  } else {
-    /* has no token*/
-    if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
-      next()
-    } else {
-      next('/login') // 否则全部重定向到登录页
-      NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
-    }
-  }
-})
-
-router.afterEach(() =&gt; {
-  NProgress.done() // finish progress bar
-})
-</code></pre>
-<p>按需挂载，路由就需要知道用户的路由权限，也就是在用户登录进来的时候就要知道当前用户拥有哪些路由权限</p>
-<p>这种方式也存在了以下的缺点：</p>
-<ul>
-<li>全局路由守卫里，每次路由跳转都要做判断</li>
-<li>菜单信息写死在前端，要改个显示文字或权限信息，需要重新编译</li>
-<li>菜单跟路由耦合在一起，定义路由的时候还有添加菜单显示标题，图标之类的信息，而且路由不一定作为菜单显示，还要多加字段进行标识</li>
-</ul>
-<h2 id="菜单权限"><a href="#菜单权限" class="headerlink" title="菜单权限"></a>菜单权限</h2><p>菜单权限可以理解成将页面与路由进行解耦</p>
-<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>菜单与路由分离，菜单由后端返回<br>前端定义路由信息</p>
-<pre><code>{
-    name: "login",
-    path: "/login",
-    component: () =&gt; import("@/pages/Login.vue")
-}</code></pre>
-<p>name字段都不为空，需要根据此字段与后端返回菜单做关联，后端返回的菜单信息中必须要有name对应的字段，并且做唯一性校验</p>
-<p>全局路由守卫里做判断</p>
-<pre><code>function hasPermission(router, accessMenu) {
-  if (whiteList.indexOf(router.path) !== -1) {
-    return true;
-  }
-  let menu = Util.getMenuByName(router.name, accessMenu);
-  if (menu.name) {
-    return true;
-  }
-  return false;
-
-}
-
-Router.beforeEach(async (to, from, next) =&gt; {
-  if (getToken()) {
-    let userInfo = store.state.user.userInfo;
-    if (!userInfo.name) {
-      try {
-        await store.dispatch("GetUserInfo")
-        await store.dispatch('updateAccessMenu')
-        if (to.path === '/login') {
-          next({ name: 'home_index' })
-        } else {
-          //Util.toDefaultPage([...routers], to.name, router, next);
-          next({ ...to, replace: true })//菜单权限更新完成,重新进一次当前路由
-        }
-      }  
-      catch (e) {
-        if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
-          next()
-        } else {
-          next('/login')
-        }
-      }
-    } else {
-      if (to.path === '/login') {
-        next({ name: 'home_index' })
-      } else {
-        if (hasPermission(to, store.getters.accessMenu)) {
-          Util.toDefaultPage(store.getters.accessMenu,to, routes, next);
-        } else {
-          next({ path: '/403',replace:true })
-        }
-      }
-    }
-  } else {
-    if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
-      next()
-    } else {
-      next('/login')
-    }
-  }
-  let menu = Util.getMenuByName(to.name, store.getters.accessMenu);
-  Util.title(menu.title);
-});
-
-Router.afterEach((to) =&gt; {
-  window.scrollTo(0, 0);
-});</code></pre>
-<p>每次路由跳转的时候都要判断权限，这里的判断也很简单，因为菜单的name与路由的name是一一对应的，而后端返回的菜单就已经是经过权限过滤的。</p>
-<p>如果根据路由name找不到对应的菜单，就表示用户有没权限访问。</p>
-<p>如果路由很多，可以在应用初始化的时候，只挂载不需要权限控制的路由。取得后端返回的菜单后，根据菜单与路由的对应关系，筛选出可访问的路由，通过==addRoutes==动态挂载。</p>
-<p>这种方式的缺点：</p>
-<ul>
-<li>菜单需要与路由做一一对应，前端添加了新功能，需要通过菜单管理功能添加新的菜单，如果菜单配置的不对会导致应用不能正常使用</li>
-<li>全局路由守卫里，每次路由跳转都要做判断</li>
-</ul>
-<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>菜单和路由都由后端返回，<br>前端统一定义路由组件。</p>
-<pre><code>const Home = () =&gt; import("../pages/Home.vue");
-const UserInfo = () =&gt; import("../pages/UserInfo.vue");
-export default {
-    home: Home,
-    userInfo: UserInfo
-};</code></pre>
-<p>后端路由组件返回以下格式</p>
-<pre><code>[
-    {
-        name: "home",
-        path: "/",
-        component: "home"
-    },
-    {
-        name: "home",
-        path: "/userinfo",
-        component: "userInfo"
-    }
-]</code></pre>
-<p>在将后端返回路由通过addRoutes动态挂载之间，需要将数据处理一下，将component字段换为真正的组件<br>如果有嵌套路由，后端功能设计的时候，要注意添加相应的字段，前端拿到数据也要做相应的处理。</p>
-<p>这种方法也会存在缺点：</p>
-<ul>
-<li>全局路由守卫里，每次路由跳转都要做判断</li>
-<li>前后端的配合要求更高</li>
-</ul>
-<h2 id="按钮权限"><a href="#按钮权限" class="headerlink" title="按钮权限"></a>按钮权限</h2><h3 id="方案一-1"><a href="#方案一-1" class="headerlink" title="方案一"></a>方案一</h3><p>按钮权限也可以用v-if判断<br>但是如果页面过多，每个页面页面都要获取用户权限role和路由表里的meta.btnPermissions，然后再做判断<br>这种方式就不展开举例了</p>
-<h3 id="方案二-1"><a href="#方案二-1" class="headerlink" title="方案二"></a>方案二</h3><blockquote>
-<p>通过自定义指令进行按钮权限的判断</p>
-</blockquote>
-<p>首先配置路由</p>
-<pre><code>{
-    path: '/permission',
-    component: Layout,
-    name: '权限测试',
-    meta: {
-        btnPermissions: ['admin', 'supper', 'normal']
-    },
-    //页面需要的权限
-    children: [{
-        path: 'supper',
-        component: _import('system/supper'),
-        name: '权限测试页',
-        meta: {
-            btnPermissions: ['admin', 'supper']
-        } //页面需要的权限
-    },
-    {
-        path: 'normal',
-        component: _import('system/normal'),
-        name: '权限测试页',
-        meta: {
-            btnPermissions: ['admin']
-        } //页面需要的权限
-    }]
-}</code></pre>
-<p>自定义权限鉴定指令</p>
-<pre><code>import Vue from 'vue'
-/**权限指令**/
-const has = Vue.directive('has', {
-    bind: function (el, binding, vnode) {
-        // 获取页面按钮权限
-        let btnPermissionsArr = [];
-        if(binding.value){
-            // 如果指令传值，获取指令参数，根据指令参数和当前登录人按钮权限做比较。
-            btnPermissionsArr = Array.of(binding.value);
-        }else{
-            // 否则获取路由中的参数，根据路由的btnPermissionsArr和当前登录人按钮权限做比较。
-            btnPermissionsArr = vnode.context.$route.meta.btnPermissions;
-        }
-        if (!Vue.prototype.$_has(btnPermissionsArr)) {
-            el.parentNode.removeChild(el);
-        }
-    }
-});
-// 权限检查方法
-Vue.prototype.$_has = function (value) {
-    let isExist = false;
-    // 获取用户按钮权限
-    let btnPermissionsStr = sessionStorage.getItem("btnPermissions");
-    if (btnPermissionsStr == undefined || btnPermissionsStr == null) {
-        return false;
-    }
-    if (value.indexOf(btnPermissionsStr) &gt; -1) {
-        isExist = true;
-    }
-    return isExist;
-};
-export {has}</code></pre>
-<p>在使用的按钮中只需要引用v-has指令</p>
-<pre><code>&lt;el-button @click='editClick' type="primary" v-has&gt;编辑&lt;/el-button&gt;</code></pre>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>关于权限如何选择哪种合适的方案，可以根据自己项目的方案项目，如考虑路由与菜单是否分离<br>权限需要前后端结合，前端尽可能的去控制，更多的需要后台判断</p>
+<p>书中主角叶藏，从小时候起就懂得用假装的笑脸博得家人欢心，为讨好父亲而故意索取自己并不喜欢的礼物，学生时期在众人面前的搞笑表演，这些都可说是“丑角精神”的表现。仔细回想的话，也许我们在学生时代乃至当下的生活里，也曾遇到过类似行为的人，甚至我们自己，也曾多少扮演过“丑角”。</p>
+<p>这种行为背后蕴藏的心理机制是什么？一般而言，在过度趋同，即强调“社会人”的同一性的社会中，个体的自我个性会经历“同化”过程，即抹去自我中过度特异的部分而使其成为更“适应”社会的存在。</p>
+<p>鲁迅曾言：“皆灭人之自我，使之混然不敢自别异，泯于大群”，正是此意。乍看之下，“丑角精神”也是这种同一化的表现，然而其内在却大有不同，因为“丑角”本质上只是一层伪装，是从自我本体中分离出来的“人格面具”。其存在目的，不是消弭自我求得同化，而恰是隐藏那个与众人“相异”的自我。</p>
+<p>早在孩提时代，当其他孩子还在对世界予取予求的自我中心化阶段时，叶藏（或说太宰）就已经敏感地感知到了自己的与众不同，并对这种可能带来孤立和疏离的差异而深深焦虑不安，充满了对外界和他人的戒惧感。</p>
+<p>“对于人，我总是恐惧地颤抖”。是什么造成了这种过度的敏感和早熟？是身为贵族的父亲的过度严厉？是因为“纽带”作用的母亲的缺位？还是津岛家淡漠的人情？对此我们无从得知，但其结果却是一目了然的，那就是年幼的太宰就此学会了戴上“丑角”的面具，“将那份忧郁、神经质一股脑地隐藏起来，努力伪装出天真无邪的乐天，逐渐成为一个娱乐他人的怪胎。”</p>
 
             </div>
             <hr/>
@@ -774,7 +504,7 @@ export {has}</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2021/01/05/qian-duan-quan-xian-guan-li/">https://leeycode.github.io/2021/01/05/qian-duan-quan-xian-guan-li/</a>
+                    <a href="https://leeycode.github.io/2022/09/25/ren-jian-shi-ge/">https://leeycode.github.io/2022/09/25/ren-jian-shi-ge/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -812,12 +542,8 @@ export {has}</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/vue/">
-                                    <span class="chip bg-color">vue</span>
-                                </a>
-                            
-                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
-                                    <span class="chip bg-color">项目总结</span>
+                                <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">读书笔记</span>
                                 </a>
                             
                         </div>
@@ -1035,13 +761,13 @@ export {has}</code></pre>
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/">
+                <a href="/2022/10/05/yi-lei-bu-yi-yang-de-cheng-gong-qi-shi-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="webpack基础05-多页面打包的方案">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="异类-不一样的成功启示录">
                         
-                        <span class="card-title">webpack基础05-多页面打包的方案</span>
+                        <span class="card-title">异类-不一样的成功启示录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1052,14 +778,14 @@ export {has}</code></pre>
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-07
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-05
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/webpack%E4%B8%93%E5%8C%BA/" class="post-category">
-                                    webpack专区
+                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    读书笔记
                                 </a>
                             
                             
@@ -1069,8 +795,8 @@ export {has}</code></pre>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/webpack/">
-                        <span class="chip bg-color">webpack</span>
+                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">读书笔记</span>
                     </a>
                     
                 </div>
@@ -1084,13 +810,13 @@ export {has}</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/12/16/nginx-chao-shi-she-zhi/">
+                <a href="/2022/09/10/ji-yu-qiankun-wei-qian-duan-shi-jian-gai-nian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="nginx超时设置">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="基于 Qiankun 微前端实践-概念">
                         
-                        <span class="card-title">nginx超时设置</span>
+                        <span class="card-title">基于 Qiankun 微前端实践-概念</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1101,14 +827,14 @@ export {has}</code></pre>
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/nginx%E4%B8%93%E9%A2%98/" class="post-category">
-                                    nginx专题
+                            <a href="/categories/%E5%BE%AE%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    微前端
                                 </a>
                             
                             
@@ -1118,8 +844,8 @@ export {has}</code></pre>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/qiankun/">
+                        <span class="chip bg-color">qiankun</span>
                     </a>
                     
                 </div>
