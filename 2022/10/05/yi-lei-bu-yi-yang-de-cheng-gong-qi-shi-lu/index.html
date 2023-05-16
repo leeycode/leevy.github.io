@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="vue项目性能优化方案, leevy">
+    <meta name="keywords" content="异类-不一样的成功启示录, leevy">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>vue项目性能优化方案 | leevy</title>
+    <title>异类-不一样的成功启示录 | leevy</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">vue项目性能优化方案</h1>
+                    <h1 class="description center-align post-title">异类-不一样的成功启示录</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/vue/">
-                                <span class="chip bg-color">vue</span>
+                            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">读书笔记</span>
                             </a>
                         
                     </div>
@@ -425,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/VUE%E4%B8%93%E9%A2%98/" class="post-category">
-                                VUE专题
+                            <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-category">
+                                读书笔记
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-30
+                    2022-10-05
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    3.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    13 分
                 </div>
                 
 
@@ -469,175 +469,92 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://7.dusays.com/2020/11/02/3ce96e73d8ee0.jpg" alt="vue.jpg"></p>
-<h1 id="按需使用第三方库"><a href="#按需使用第三方库" class="headerlink" title="按需使用第三方库"></a>按需使用第三方库</h1><p>项目引入过多的第三方库会增大项目体积，带来性能问题<br>。以 Bootstrap 为例，如果你只是用一下它的响应式机制，还不如自己手写相关的 CSS，也不会太复杂，完全没有必要引入整个库。moment.js，Lodash.js这些库为了普适性，提供了尽可能多的功能，但你的项目可能只用了极少部分。我们不鼓励重复造轮子，但是要按需引入。现在很多库都提供了 ES 模块化的方式，也可以做到这一点。</p>
-<p>采用按需引入的方式引入第三方组件，减少在入口文件全局引入。</p>
-<h1 id="路由懒加载"><a href="#路由懒加载" class="headerlink" title="路由懒加载"></a>路由懒加载</h1><p>路由懒加载也可以提高入口页面的加载速度，因为很多路由页面在多数情况下并没有被访问，在打包的时候放到单独的文件里可以减少入口页的体积。路由懒加载是通过 webpack 的动态 import来实现的。</p>
-<pre><code>// in router.js
-import Home from '@/views/Home.vue'; // 静态 import
-const About = () =&gt; import('@/views/About.vue'); // 动态 import
-const router = new VueRouter({
-  routes: [
-    { path: '/', component: Home },
-    { path: '/about', component: About }
-  ]
-})
-</code></pre>
-<p>另外，这些懒加载的路由还可以分组，让相关性模块的多个路由页面打包到同一个 chunk，算是一种折中方案：既实现了按需加载，又不会过于碎片化。适用于子路由页面。</p>
-<pre><code>// in router.js
-import Home from '@/views/Home.vue'; // traditonal imports
-import User from '@/views/User.vue';
-const About = () =&gt;  import('@/views/About.vue'); // dynamic import
-const router = new VueRouter({
-  routes: [
-    { path: '/', component: Home },
-    { path: '/about', component: About },
-    { path: '/user/:id', component: User, 
-      children: [
-        {
-          path: '/settings',
-          component: () =&gt; import(/* webpackChunkName: "user" */ '@/views/UserSettings')
-        },
-        {
-          path: '/articles',
-          component: () =&gt; import(/* webpackChunkName: "user" */ '@/views/UserArticles')
-        }
-      ]
-    } 
-  ]
-})
-</code></pre>
-<p>这是通过 webpack 的注释语法/* webpackChunkName: “user” */实现的，webpackChunkName相同的路由会打进同一个 chunk文件。</p>
-<h1 id="只做展示用数据禁用响应式"><a href="#只做展示用数据禁用响应式" class="headerlink" title="只做展示用数据禁用响应式"></a>只做展示用数据禁用响应式</h1><p>默认情况下，定义在 Vue 组件data 里的数据都是响应式的，这种机制方便了数据绑定，当数据变化时界面得到自动更新。但有时候我们只是将数据显示到界面上，之后也不会改变它。这种情况下我们根本用不上响应式机制，而实现响应式是有性能代价的，特别是对于大对象和大列表。</p>
-<p>建议将data还有Vuex 里面只用于展示的数据通过Object.freeze()禁用对象的响应式特性。</p>
-<h1 id="资源释放"><a href="#资源释放" class="headerlink" title="资源释放"></a>资源释放</h1><ol>
-<li> 如果在mounted/created 钩子中使用了$on，需要在beforeDestroy 中做对应解绑($off)处理</li>
-<li> 如果在mounted/created 钩子中绑定了DOM/BOM 对象中的事件，需要在beforeDestroy 中做对应解绑处理</li>
-<li> 如果在mounted/created 钩子中使用了第三方库初始化，需要在beforeDestroy 中做对应销毁处理</li>
-<li> 如果使用setTimeout setInterval需要在beforeDestroy中做对应销毁处理，（最好不用）可以使用nextTick代替</li>
-<li> 模块形成的闭包内部变量使用完后没有置成null</li>
-<li> 全局变量没有回收</li>
-<li> 绑在EventBus的事件没有解绑，注册的总线事件（Bus）要在组件销毁时(beforeDestroy/destroyed)卸载</li>
-</ol>
-<h1 id="v-if-和-v-show-区分使用场景"><a href="#v-if-和-v-show-区分使用场景" class="headerlink" title="v-if 和 v-show 区分使用场景"></a>v-if 和 v-show 区分使用场景</h1><p>v-if&nbsp;是&nbsp;真正&nbsp;的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建；也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。</p>
-<p>v-show&nbsp;就简单得多， 不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 的 display 属性进行切换。</p>
-<p>所以，v-if 适用于在运行时很少改变条件，不需要频繁切换条件的场景；v-show 则适用于需要非常频繁切换条件的场景。</p>
-<h1 id="computed-和-watch-区分使用场景"><a href="#computed-和-watch-区分使用场景" class="headerlink" title="computed 和 watch &nbsp;区分使用场景"></a>computed 和 watch &nbsp;区分使用场景</h1><p>（1）computed：&nbsp;是计算属性，依赖其它属性值，并且 computed 的值有缓存，只有它依赖的属性值发生改变，下一次获取 computed 的值时才会重新计算 computed &nbsp;的值；</p>
-<p>（2） watch：&nbsp;更多的是「观察」的作用，类似于某些数据的监听回调 ，每当监听的数据变化时都会执行回调进行后续操作；</p>
-<p>运用场景：</p>
-<p>当我们需要进行数值计算，并且依赖于其它数据时，应该使用 computed，因为可以利用 computed 的缓存特性，避免每次获取值时，都要重新计算；</p>
-<p>当我们需要在数据变化时执行异步或开销较大的操作时，应该使用 watch，使用 watch 选项允许我们执行异步操作 ( 访问一个 API )，限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。这些都是计算属性无法做到的。</p>
-<h1 id="v-for-遍历必须为-item-添加-key，且避免同时使用-v-if"><a href="#v-for-遍历必须为-item-添加-key，且避免同时使用-v-if" class="headerlink" title="v-for 遍历必须为 item 添加 key，且避免同时使用 v-if"></a>v-for 遍历必须为 item 添加 key，且避免同时使用 v-if</h1><p>（1）v-for 遍历必须为 item 添加 key</p>
-<p>在列表数据进行遍历渲染时，需要为每一项 item 设置唯一 key 值，方便 Vue.js 内部机制精准找到该条列表数据。当 state 更新时，新的状态值和旧的状态值对比，较快地定位到 diff 。</p>
-<p>（2）v-for 遍历避免同时使用 v-if</p>
-<p>v-for 比 v-if 优先级高，如果每一次都需要遍历整个数组，将会影响速度，尤其是当之需要渲染很小一部分的时候，必要情况下应该替换成 computed 属性。</p>
-<pre><code>&lt;ul&gt;
-  &lt;li
-    v-for="user in activeUsers"
-    :key="user.id"&gt;
-    {{ user.name }}
-  &lt;/li&gt;
-&lt;/ul&gt;
-computed: {
-  activeUsers: function () {
-    return this.users.filter(function (user) {
-   return user.isActive
-    })
-  }
-}</code></pre>
-<h1 id="减少-ES6-转为-ES5-的冗余代码"><a href="#减少-ES6-转为-ES5-的冗余代码" class="headerlink" title="减少 ES6 转为 ES5 的冗余代码"></a>减少 ES6 转为 ES5 的冗余代码</h1><p>Babel 插件会在将 ES6 代码转换成 ES5 代码时会注入一些辅助函数，例如下面的 ES6 代码：</p>
-<pre><code>class HelloWebpack extends Component{...}</code></pre>
-<p>这段代码再被转换成能正常运行的 ES5 代码时需要以下两个辅助函数：</p>
-<pre><code>babel-runtime/helpers/createClass  // 用于实现 class 语法
-babel-runtime/helpers/inherits  // 用于实现 extends 语法</code></pre>
-<p>在默认情况下， Babel 会在每个输出文件中内嵌这些依赖的辅助函数代码，如果多个源代码文件都依赖这些辅助函数，那么这些辅助函数的代码将会出现很多次，造成代码冗余。为了不让这些辅助函数的代码重复出现，可以在依赖它们时通过&nbsp;require(‘babel-runtime/helpers/createClass’)&nbsp;的方式导入，这样就能做到只让它们出现一次。babel-plugin-transform-runtime&nbsp;插件就是用来实现这个作用的，将相关辅助函数进行替换成导入语句，从而减小 babel 编译出来的代码的文件大小。</p>
-<p>首先，安装 babel-plugin-transform-runtime ：</p>
-<pre><code>npm install babel-plugin-transform-runtime --save-dev</code></pre>
-<p>然后，修改 .babelrc  配置文件为：</p>
-<pre><code>"plugins": [
-    "transform-runtime"
-]</code></pre>
-<h1 id="开启gzip压缩"><a href="#开启gzip压缩" class="headerlink" title="开启gzip压缩"></a>开启gzip压缩</h1><p>首先，修改productionGzip 为true,<br>安装 compression-webpack-plugin ：</p>
-<pre><code> // 
-
- npm install --save-dev compression-webpack-plugin 
- //(此处有坑) 如果打包报错，应该是版本问题 ，先卸载之前安装的此插件 ，然后安装低版本 
-  npm install --save-dev compression-webpack-plugin@1.1.11</code></pre>
-<p>修改nginx的配置</p>
-<pre><code>http {  //在 http中配置如下代码，
-   gzip on;
-   gzip_disable "msie6"; 
-   gzip_vary on; 
-   gzip_proxied any;
-   gzip_comp_level 8; #压缩级别
-   gzip_buffers 16 8k;
-   #gzip_http_version 1.1;
-   gzip_min_length 100; #不压缩临界值
-   gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
- }</code></pre>
-<h1 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h1><p>如果应用里需要展示大量图片，通常的做法是懒加载图片。懒加载的基本原理是提前准备好图片 URL，当图片真正进入可视范围时才去加载。可以手动实现懒加载机制，不过更方便的是直接用现成的插件，比如 [vue-lazyload]<br>安装：</p>
-<pre><code>npm i vue-lazyload -S</code></pre>
-<p>引入：</p>
-<pre><code>import VueLazyload from 'vue-lazyload'
-Vue.use(VueLazyload)
-</code></pre>
-<p>使用：</p>
-<pre><code> &lt;ul&gt;
-    &lt;li v-for="img in list"&gt;
-      &lt;img v-lazy="img.src"&gt;
-    &lt;/li&gt;
-  &lt;/ul&gt;
-</code></pre>
-<h1 id="cdn加速"><a href="#cdn加速" class="headerlink" title="cdn加速"></a>cdn加速</h1><p>采用cdn加速去从别的服务器上加载第三方库而非自己的服务器，这样就会快很多.并且能节省自己服务器的带宽。</p>
-<p>首先，在index.html中 将你所需的第三方库的链接加载进来：</p>
-<pre><code>&lt;script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.0-beta.18/vue.cjs.js"&gt;&lt;/script&gt;</code></pre>
-<p>在webpack.base.conf 中添加 externals 来告诉webpack我们这些第三方库不需要打包</p>
-<pre><code>externals:{
-    // key表示第三方插件名称，value是暴露出的全局变量
-    'vue':'Vue'
-}</code></pre>
-<p>在 主文件main.js 或者其他 js 修改引用这些配置的第三方插件</p>
-<pre><code>// import Vue from 'vue';
-
-const Vue = require('vue');</code></pre>
-<h1 id="Webpack-对图片进行压缩"><a href="#Webpack-对图片进行压缩" class="headerlink" title="Webpack 对图片进行压缩"></a>Webpack 对图片进行压缩</h1><p>安装 image-webpack-loader ：</p>
-<pre><code>npm install image-webpack-loader --save-dev</code></pre>
-<p>然后，在 webpack.base.conf.js  中进行配置：</p>
-<pre><code>{
-  test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-  use:[
-     {
-      loader: 'url-loader',
-      options: {
-        limit: 10000 ,
-        name: '[path][name].[ext]?[hash:6]!./dir/file.png'
-      }
-    },
-    /*对图片进行压缩*/
-    {
-      loader: 'image-webpack-loader',
-      query: {
-        progressive: true,
-        optimizationLevel: 7,
-        interlaced: false,
-        pngquant: {
-          quality: '65-90',
-          speed: 4
-        }
-      }
-    }
-  ]
-}
-</code></pre>
-<h1 id="pax-ui框架相关"><a href="#pax-ui框架相关" class="headerlink" title="pax-ui框架相关"></a>pax-ui框架相关</h1><p>（1） 表单组件<br>pax组件的Form表单组件会对绑定数据监听，表单组件很多的情况下页面会卡顿，在pax-form上设置局部更新，会提升一部分性能。</p>
-<pre><code>&lt;pax-form :form="form" :selfUpdate="true"&gt;&lt;/pax-form&gt;</code></pre>
-<p>(2) select组件<br>select大数据量情况下，会造成页面元素较多，在ie上消耗更多的内存。建议采用虚拟滚动的方式：</p>
-<pre><code>import { RecycleScroller} from 'vue-virtual-scroller';
-
-// 在Select预留卡槽中使用
-详情见文档：IE浏览器select大数据问题造成输入不流畅分析处理</code></pre>
-<p>（3）tree组件<br>pax-tree在ie上问题严重,如果兼容ie，建议用@pa/vue-org-tree,使用方法参考ztree.js</p>
-<pre><code>npm install @pa/vue-org-tree --save-dev</code></pre>
+                <p>! <a target="_blank" rel="noopener" href="https://note.youdao.com/yws/public/resource/3063c598a87a0294966831a6333f62a7/xmlnote/WEBRESOURCE0b8675a04ce83cb749dd0692cd8e7f14/18746"></a></p>
+<pre><code>本书作者马尔科姆·格拉德威尔，被《快公司》誉为“二十一世纪的彼得·德鲁克”，还被《时代周刊》评为最有影响力的100位人物之一。</code></pre>
+<p>他很擅长写作，是《纽约客》的专职作家，以前还在《华盛顿邮报》做商务科学类的专栏作家。他的作品，像《引爆点》《异类》《眨眼之间》，都在图书市场上创造了销量神话。</p>
+<p>本书是格拉德威尔的代表作之一，带领我们找到了成功的根源，发现更深刻的成功契机，也为社会变革带来新的启示。</p>
+<h1 id="01、异类是如何产生的"><a href="#01、异类是如何产生的" class="headerlink" title="01、异类是如何产生的"></a>01、异类是如何产生的</h1><p>社会上那些最有才华、最顶级的人是怎么样产生？我们的传统认知认为，一个人之所以能够出人头地，在于他本身就是非常出类拔萃的。</p>
+<blockquote>
+<p>比如，巴菲特这种金融巨头，像比尔·盖茨这种商业奇才，像 Beatles 摇滚明星。</p>
+</blockquote>
+<p>这些名人他们成功的背后到底有什么规律呢？作者认为，是优势的积累、外部环境、时代机遇等因素的影响。</p>
+<h2 id="1、优势积累"><a href="#1、优势积累" class="headerlink" title="1、优势积累"></a>1、优势积累</h2><p>作者认为异类的产生是因为优势的积累，就是说人之所以成功，除了自身的能力以外，还需要外在因素的作用，形成指数及增长的变化。</p>
+<p>仅凭勤奋努力也很难成功，因为除了勤奋这个因素外，家庭环境、外部环境，甚至是历史条件都会极大地影响我们。</p>
+<p>举个例子：</p>
+<blockquote>
+<p>加拿大的冰球运动非常普及，是老百姓非常关注和热爱的一项运动，而要成为冰球职业运动员，尤其是还能打纪念杯赛的这种机会，花钱是没用的，也不是靠父母或者家族势力，只能靠自己的实力去争取。所以，你的住的再偏远也不要紧，只要你球打得好，就能够成为一流的球员。所以大多数人解释说，你看这个制度多公平，只要凭实力就能够取得成功。</p>
+</blockquote>
+<p>但是作者并不认同，怎么回事呢？他把几个最著名的冰球队花名册拿出来，查看球员资料，发现有一个特别奇怪的现象，那就是绝大多数球员的生日都是在1月、2月、3月。</p>
+<blockquote>
+<p>比如，老虎队，25个球员中就有17个人是在1月到3月出生的。有人解释说，这是和星座有关系，像魔羯呀、水瓶这样的星座，就比较适合冰球运动。</p>
+</blockquote>
+<p>作者说，并不是这样的。这是因为加拿大冰球队的队员是按年龄分组的，分组所依据的分界线是1月1日，即从1月1日到当年12月31日之间出生的球员将会被分在同一组。</p>
+<p>也就是说，一个1月1日出生的选手，是在跟许多年纪比他小的队友争夺晋级权—在青春期到来之前，由于有将近12个月的年龄差距，球员之间在生理成熟度上将会表现出巨大的差异。</p>
+<p>一旦进入同一个年龄组中，月份靠前的球员，因为生理发育得更早，所以他们在训练中就会有更好的表现，也就意味着有更多的上场机会，也就会带来更好的训练。</p>
+<p>而有更好的训练就会表现得更好，就能够被安排到更好的特训组，也意味着就会有更好的教练、更好的训练计划。</p>
+<p>结果，这些出生日期较早的球员，就占据了极大的优势，也就拉开了天才和非天才的距离。</p>
+<p>因此，成为顶级冰球运动员的重要因素是出生日期。如果你的生日是年底，或者是12月份左右，基本上你就没有什么机会能够成为最一流的冰球球员了。</p>
+<p>人们平日里认为，真正的天才不需要费力气就能把该做的事情做到最好，这样的说法其实是把问题简单化了。不错，能进入顶级球队的球员肯定比你我都更具备运动天赋。</p>
+<p>但是，那是因为他们起跑的时间比别人早得多，而这种领先优势，既不是他们理应得到的，也不是他们因为努力才得到的。然而最终，正是这种领先优势造就了天才们辉煌的成就。</p>
+<h2 id="2、外部环境"><a href="#2、外部环境" class="headerlink" title="2、外部环境"></a>2、外部环境</h2><p>作者还说，不只是勤奋就可以啦，还需要外部环境的作用。</p>
+<p>我们常说一万小时天才定律。作者说，你个人的努力也不是最核心的因素，要达到一万个小时，还必须有外部因素来帮助你。</p>
+<blockquote>
+<p>比如，冰球队当中，你必须是最好的那批球员，这样才能得到那么多专业的训练机会，才能让你积累一万个小时的速度更快。一旦过了最好的运动年龄期限，即使后面积累到一万个小时也没有用了。</p>
+</blockquote>
+<p>另一个关于10000小时的有趣现象是，10000小时的确是大量时间。人们在很年轻的时候的确很难依靠自己达到这一要求。你需要获得父母的鼓励与支持。</p>
+<p>而且你不能太贫穷，因为如果你必须依靠兼职维持生计的话，你根本没法在日常生活中获得足够时间做练习。</p>
+<p>事实上，人们要想获得如此大量的练习时间，就必须依靠参加某些特定形式的训练课程，或者获得某些特定机遇得以进行训练。</p>
+<p>出生的时机、有没有条件进行一万个小时的天才训练，甚至是家庭条件，这些因素都是彼此相互紧密联系的，这些优势积累起来，就像马太效应那样，穷者愈穷，富者愈富，会进一步拉开和其他人之间的差距。</p>
+<h2 id="3、时代机遇"><a href="#3、时代机遇" class="headerlink" title="3、时代机遇"></a>3、时代机遇</h2><p>除了优势的积累、外部环境因素的影响，还有一个就是时代变革机遇的影响。时代变革往往是看不见的因素。</p>
+<blockquote>
+<p>比如，二十世纪四五十年代，美国律师事务所是白人精英才能进入的行业。很多犹太移民即使学业再好，毕业的学校也非常著名，可是因为不是白人精英，也没办法进入最好的律所。他们要么只能自己创业，要么在二流的小律所，接一些像打官司、恶意收购等等这类的诉讼案件。</p>
+</blockquote>
+<p>这些案件是一流律所看不上的也根本不接的，他们只接像发行债券、公司股票这些案件。然而到了20世纪70年代，人们对诉讼的厌恶情绪日渐式微。</p>
+<p>联邦管制开始放松，企业借贷变得越来越容易，市场趋向国际化，这一切导致公司收购案件的数量和规模激增。</p>
+<p>而这个时候，过去做了几十年诉讼业务的犹太律师，立刻变得炽手可热。现在纽约很多著名律师事务所的开创者，竟然都是当初干诉讼案件起家的犹太人。</p>
+<p>这些不利因素时常变为机遇。有一个律师同行说，不是这帮犹太人比其他律师更聪明，而是因为他们苦逼磨炼了多年的专业技能，因为时局一变，突然变得极有价值。</p>
+<p>所以你看，其他律师难道不勤奋吗？他们当然也勤奋，可是同样的勤奋最后取得的成就差别却很大，这就是我们说的外部条件比努力重要。</p>
+<p>因此，作者说成功者的优势，有些是与生俱来的，比如出生的日期，有些是后天养成的，比如你很勤奋，很努力，通过刻苦训练可以去争取的，可是有些真的就只是运气。</p>
+<p>要成为一个异类，顶尖的人，就得积累这些优势。所以，对于最出类拔萃的人而言，与其说成功取决于天赋，不如说成功取决于各种优势的积累，这样的模式成就了异类。</p>
+<h1 id="02、文化传承"><a href="#02、文化传承" class="headerlink" title="02、文化传承"></a>02、文化传承</h1><p>文化传承想必大家很了解，作者认为一些成功人士除了前面我们说的这些因素以外还有另外因素，我们来看一下。</p>
+<h2 id="1、文化背景"><a href="#1、文化背景" class="headerlink" title="1、文化背景"></a>1、文化背景</h2><p>作者认为，文化背景决定了成就的高低。我们是受群体文化差异的影响。</p>
+<blockquote>
+<p>比如，在美国南部地区的人普遍有一种“荣誉文化”。所谓荣誉文化，是指为了声誉，愿意接受来自外界的任何挑战，哪怕是最轻微的挑战。</p>
+</blockquote>
+<p>也就是别人侮辱你的时候，哪怕是动手用暴力，也一定是要捍卫自己的荣誉和尊严。那为什么会产生这种文化呢？</p>
+<p>这些地区的住民来自世界上荣誉文化最根深蒂固的地区：他们是来自苏格兰南部低地、英格兰北部各郡以及北爱尔兰阿尔斯特地区的苏格兰–爱尔兰血统移民。</p>
+<p>这些牧民和种植庄稼的农民有很大的差别，农民的生存依靠社区与他人的合作，不用担心自己的庄稼会在某天晚上被偷完。</p>
+<p>而牧民往往是在山坡上生活，很难耕种，只能靠放羊、放牛，不用互相合作，更多的是靠自己，他们总是担心牲口会被人偷走，所以要保护自己的财产，他们养成好斗的性情。</p>
+<p>因为有这样的祖先，所以就会形成这样的文化特征。</p>
+<p>作者说，文化传承是事件背后更强大的力量，它植入人性，影响长存。经过数代传承，即便产生文化的经济、社会和人口等条件已经消失，这种文化也会一直完好无损留传下来。</p>
+<p>文化直接决定了我们看待世界的方法和行为模式，其作用如此巨大，以至于没有它，我们将无法认知世界。</p>
+<h2 id="2、“权力距离指数”"><a href="#2、“权力距离指数”" class="headerlink" title="2、“权力距离指数”"></a>2、“权力距离指数”</h2><p>在作者的研究当中，如果你是处于荣誉文化背景的人，当你的工作需要在复杂的人际关系环境下去沟通、协调、博弈、妥协各种利益时，可能这种文化背景就会限制你的发挥。这种看不见的影响，往往是在细微之处产生。</p>
+<p>举个例子：</p>
+<blockquote>
+<p>在20世纪90年代初期，韩国最大的航空公司大韩航空公司的飞机失事率特别高。大韩航空公司的飞机事故率是美国联合航空公司的17倍。当时韩国总统金大中就发表声明说，大韩航空的问题已经不仅仅是一个公司的问题了，已经成为韩国整个国家的问题了，国家信誉已经不堪一击了。随后，金大中总统把原来由大韩航空负责的总统专机转交给了大韩航空的竞争对手，韩亚航空公司。从那时起，大韩航空痛定思痛、励精图治，决心扭转自身形象。1999年以来，整个公司的安全记录是全优的，现在在安全性上，大韩航空和世界其他一流的航空公司相比都毫不逊色。</p>
+</blockquote>
+<p>为什么会产生这么严重的事故呢？他们针对针对空难进行一系列调查：听取飞机“黑匣子”录音；检查飞行记录；研究事故当时的天气状况、地面情况和机场条件；并将关岛空难和其他著名空难做比较，最后找到了原因。原来是因为韩国的文化。</p>
+<p>心理学有一个理论“权力距离指数”。权力距离是指人们对待比自己更高等级阶层的态度，特别是指对权威的重视和尊重程度。</p>
+<blockquote>
+<p>比如，美国人他们崇尚人人自由、平等，你就算是领导，我们俩也是平等的，只不过职权不一样。可是在亚洲国家，尤其像韩国，上飞机之前，所有机组成员听机长的指令。再比如，大韩航空的惯例是，在飞行中途逗留期间，副机长应该服侍机长，请机长吃饭或者给机长买些小礼物。</p>
+</blockquote>
+<p>这种情况下，即便副机长有问题也不敢提，如果机长决策错误，那么就只能玩完。</p>
+<p>所以，不同的文化深刻地影响着一个人的沟通交流方式、思考模式、行为模式。这种看不见的影响，也决定了我们在一些领域当中能不能取得成功。</p>
+<p>作者说，我们每个人都成长在一个文化环境之中，而文化环境又是集优点、弱点、素质和倾向等各种属性于一身的综合体。</p>
+<p>在你擅长的领域、适合的领域，它就能发挥作用，在不适合的领域，它就是一个限制作用。</p>
+<p>这也不是说这种文化的因素完全不能改变，韩国大韩航空从一个安全纪录糟糕的公司转变成世界上最好的航空公司，就是从文化入手扭转的。</p>
+<blockquote>
+<p>比如，改进机组成员之间的平等关系，让他们不用韩语用英语沟通，语言体系平等了，而且可以直呼其名等等。并且加上一系列的培训，把一些细微的文化因素改变了以后，大韩航空终于克服了飞行失事率高的问题。</p>
+</blockquote>
+<p>所以，文化背景也是决定我们在一个领域中能否成功，成为异类的一个重要因素。</p>
+<p>优势积累是我们通过努力、把握各种时机以后，可以往上提升的一个因素。而文化背景更像一个保障因素，就是说文化契合不代表你一定能成功，可是不契合就是一个负面的因素。</p>
+<h1 id="最后的话："><a href="#最后的话：" class="headerlink" title="最后的话："></a>最后的话：</h1><p>首先，作者告诉我们想要成功就必须具备天时、地利、人和。虽然有的因素我们无法控制，但这并不是说我们没有机会。</p>
+<blockquote>
+<p>比如，我们可以找一个高质量环境的梯队，只有在这种高质量的环境中，我们才有可能得到高质量的训练，这样会加速我们积累1万小时训练的速度。</p>
+</blockquote>
+<p>其次，我们要抓住时代的变革带给我们的红利。就像比尔盖茨那样，在大家还没有接触电脑编程的时候，人家就已经训练了1万小时了。</p>
+<p>换句话说，利用时代变革的红利时方向要对，在逆境中坚持训练1万小时。</p>
+<p>最后，等待时机，厚积薄发。机会是留给有准备之人的。</p>
 
             </div>
             <hr/>
@@ -663,7 +580,7 @@ const Vue = require('vue');</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/">https://leeycode.github.io/2020/10/30/vue-xiang-mu-xing-neng-you-hua-fang-an/</a>
+                    <a href="https://leeycode.github.io/2022/10/05/yi-lei-bu-yi-yang-de-cheng-gong-qi-shi-lu/">https://leeycode.github.io/2022/10/05/yi-lei-bu-yi-yang-de-cheng-gong-qi-shi-lu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -701,8 +618,8 @@ const Vue = require('vue');</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/vue/">
-                                    <span class="chip bg-color">vue</span>
+                                <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">读书笔记</span>
                                 </a>
                             
                         </div>
@@ -920,12 +837,13 @@ const Vue = require('vue');</code></pre>
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/10/30/ts-zai-vue-xiang-mu-zhong-de-ying-yong/">
+                <a href="/2023/03/26/suo-fang-dai-lai-de-echarts-tu-biao-mo-hu-wen-ti-zong-jie/">
                     <div class="card-image">
                         
-                        <img src="https://7.dusays.com/2020/11/02/382609aa8c82c.jpeg" class="responsive-img" alt="TypeScript在vue项目中的应用">
                         
-                        <span class="card-title">TypeScript在vue项目中的应用</span>
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="缩放带来的echarts图表模糊问题总结">
+                        
+                        <span class="card-title">缩放带来的echarts图表模糊问题总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -936,61 +854,8 @@ const Vue = require('vue');</code></pre>
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-30
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-26
                         </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/VUE%E4%B8%93%E9%A2%98/" class="post-category">
-                                    VUE专题
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
-                    </a>
-                    
-                    <a href="/tags/TypeScript/">
-                        <span class="chip bg-color">TypeScript</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/09/11/dang-cors-yu-dao-samesite-md/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="当CORS遇到SameSite">
-                        
-                        <span class="card-title">当CORS遇到SameSite</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-11
-                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1006,8 +871,57 @@ const Vue = require('vue');</code></pre>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
-                        <span class="chip bg-color">项目总结</span>
+                    <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
+                        <span class="chip bg-color">踩的坑</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/09/10/ji-yu-qiankun-wei-qian-duan-shi-jian-gai-nian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="基于 Qiankun 微前端实践-概念">
+                        
+                        <span class="card-title">基于 Qiankun 微前端实践-概念</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BE%AE%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    微前端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/qiankun/">
+                        <span class="chip bg-color">qiankun</span>
                     </a>
                     
                 </div>
