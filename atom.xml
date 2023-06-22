@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2023-05-16T10:19:23.296Z</updated>
+  <updated>2023-06-22T07:07:31.814Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Anaconda使用指南</title>
+    <link href="https://leeycode.github.io/2023/05/22/anaconda-shi-yong-zhi-nan/"/>
+    <id>https://leeycode.github.io/2023/05/22/anaconda-shi-yong-zhi-nan/</id>
+    <published>2023-05-22T06:58:31.000Z</published>
+    <updated>2023-06-22T07:07:31.814Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Anaconda简介&quot;&gt;&lt;a href=&quot;#Anaconda简介&quot; class=&quot;headerlink&quot; title=&quot;Anaconda简介&quot;&gt;&lt;/a&gt;Anaconda简介&lt;/h1&gt;&lt;p&gt;Anaconda</summary>
+        
+      
+    
+    
+    
+    <category term="项目总结" scheme="https://leeycode.github.io/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    
+    <category term="项目总结" scheme="https://leeycode.github.io/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Anaconda" scheme="https://leeycode.github.io/tags/Anaconda/"/>
+    
+  </entry>
   
   <entry>
     <title>AgentGPT部署教程</title>
@@ -500,31 +527,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;基础库分离：React示例&quot;&gt;&lt;a href=&quot;#基础库分离：React示例&quot; class=&quot;headerlink&quot; title=&quot;基础库分离：React示例&quot;&gt;&lt;/a&gt;基础库分离：React示例&lt;/h2&gt;&lt;p&gt;思路：将react、react-dom</summary>
-        
-      
-    
-    
-    
-    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
-    
-    
-    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>webpack基础05-多页面打包的方案</title>
-    <link href="https://leeycode.github.io/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/"/>
-    <id>https://leeycode.github.io/2021/01/07/webpack-ji-chu-05-duo-ye-mian-da-bao/</id>
-    <published>2021-01-07T03:14:15.000Z</published>
-    <updated>2022-01-05T09:30:26.987Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;多页面（MPA）应用打包方案&quot;&gt;&lt;a href=&quot;#多页面（MPA）应用打包方案&quot; class=&quot;headerlink&quot;</summary>
         
       
     

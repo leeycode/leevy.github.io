@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Anaconda使用指南</title>
+      <link href="2023/05/22/anaconda-shi-yong-zhi-nan/"/>
+      <url>2023/05/22/anaconda-shi-yong-zhi-nan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Anaconda简介"><a href="#Anaconda简介" class="headerlink" title="Anaconda简介"></a>Anaconda简介</h1><p>Anaconda 是一个开源的包、环境管理器，其包含了conda、Python等180多个科学包及其依赖项，可用于在同一个机器上安装不同版本的软件包及其依赖，并能在不同的环境之间切换。可以将Anaconda 看作是软件包管理工具，拥有安装、卸载、更新、查看、搜索等实用的功能，简单的鼠标操作就可以实现包管理，而不用我们来关心各种依赖和文件路径。</p><p>Anaconda包括Conda、Python以及一大堆安装好的工具包，比如：</p><ol><li>NumPy：科学运算包；</li><li>SciPy：在NumPy的基础上构建，功能更加强大的科学计算包；</li><li>Matplotlib：类似Matlab的绘图工具包；</li><li>Scikit-learn：经典机器学习工具包；</li><li>Pandas：数据处理和分析工具包。</li></ol><h1 id="安装说明"><a href="#安装说明" class="headerlink" title="安装说明"></a>安装说明</h1><p>Python编辑器的安装方式有很多：推荐Jupyter。</p><p>推荐理由：简单方便，省时省力！</p><ul><li>Jupyter是Anaconda-中自带的编辑器，所以我们只需要安装Anaconda即可，Anaconda可以理解为让你的电脑识别Python代码的转换器”。</li><li>Jupyter，简单理解就是编写Python的软件，举个栗子，你想写文章，需要个word软件；同理你想写Python代码，需要一个Jupyter软件。</li><li>Python的安装环境主要需要三个软件：Python解释器、软件包管理系统（pip）、编辑器（例如Jupyter）。</li></ul><p>Anconda软件安装时会自动帮你安装Python解释器和Pip，并自带编辑器（Jupyter）。综上所述，安装Anconda是个不错的选择。</p><h1 id="安装包下载"><a href="#安装包下载" class="headerlink" title="安装包下载"></a>安装包下载</h1><p>使用Anaconda清华镜像网址进行下载。<br><img src="https://repo.anaconda.com/archive/" alt="下载地址"></p><h1 id="Jupyter使用说明"><a href="#Jupyter使用说明" class="headerlink" title="Jupyter使用说明"></a>Jupyter使用说明</h1><ol><li><p>安装完成后，在开始菜单下找到Anaconda3（64-bit）文件夹，点击Jupyter Notebook的软件。</p></li><li><p>此时，页面运行Jupyter Notebook，如果顺利应该会在你的浏览器创建一个新的页面。<br>提示：如果弹出终端窗口，先不要关闭，否则会影响Jupyter使用。</p></li><li><p>为方便管理python文件，首先我们先建立一个文件夹（英文：Folder）,点击new——点击“Folder”。</p></li><li><p>为方便查找文件夹，勾选文件夹——点击Rename，进行重命名。</p></li><li><p>点击你的文件夹，继续点击右侧的New，点击下拉菜单中看见Python3，点击它，创建一个新的Python交互环境（即写代码的环境）。</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目总结 </tag>
+            
+            <tag> Anaconda </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AgentGPT部署教程</title>
       <link href="2023/04/21/agentgpt-bu-shu-jiao-cheng/"/>
       <url>2023/04/21/agentgpt-bu-shu-jiao-cheng/</url>
