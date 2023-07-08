@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>webpack基础07-treeshaking的使用和基本原理</title>
+      <link href="2023/06/17/webpack-ji-chu-07-treeshaking-de-shi-yong-he-ji-ben-yuan-li/"/>
+      <url>2023/06/17/webpack-ji-chu-07-treeshaking-de-shi-yong-he-ji-ben-yuan-li/</url>
+      
+        <content type="html"><![CDATA[<h2 id="tree-shaking-（摇树优化）"><a href="#tree-shaking-（摇树优化）" class="headerlink" title="tree-shaking （摇树优化）"></a>tree-shaking （摇树优化）</h2><blockquote><p>概念：1个模块可能有多个方法，只要其中的某个方法使用到了，则整个文件都会被打包到bundle 里面去，tree shaking 就是只把只用到的方法打入bundle，没用到的方法会在 ugligy 阶段被擦除掉</p></blockquote><p>使用：webpack 默认支持，在 .babelrc 里设置 modules:false 即可，mode=production 的情况下默认开启</p><p>要求：必须是 ES6 的语法，CJS（common js） 的方式不支持</p><p>DCE(Dead code elimination)原理 - tree-shaking 用到了DCE原理</p><ul><li>代码不会被执行，不可到达</li><li>代码执行的结果不会被用到</li><li>代码只会影响死变量（只写不读）</li></ul><pre class=" language-js"><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"这段代码永远不会被执行"</span><span class="token punctuation">)</span><span class="token punctuation">}</span></code></pre><h3 id="Tree-shaking-原理"><a href="#Tree-shaking-原理" class="headerlink" title="Tree-shaking 原理"></a>Tree-shaking 原理</h3><p>利用 ES6 模块的特点</p><ul><li>只能作为模块的顶层语句出现</li><li>import 的模块名只能是字符串常量</li><li>import binding 是 immutable<br>代码擦除：tree-shaking会对无用代码作比较，然后在 uglify 阶段删除无用代码。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> webpack专区 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webpack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Anaconda使用指南</title>
       <link href="2023/05/22/anaconda-shi-yong-zhi-nan/"/>
       <url>2023/05/22/anaconda-shi-yong-zhi-nan/</url>

@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2023-06-22T07:07:31.814Z</updated>
+  <updated>2023-07-08T03:12:44.358Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>webpack基础07-treeshaking的使用和基本原理</title>
+    <link href="https://leeycode.github.io/2023/06/17/webpack-ji-chu-07-treeshaking-de-shi-yong-he-ji-ben-yuan-li/"/>
+    <id>https://leeycode.github.io/2023/06/17/webpack-ji-chu-07-treeshaking-de-shi-yong-he-ji-ben-yuan-li/</id>
+    <published>2023-06-17T03:14:15.000Z</published>
+    <updated>2023-07-08T03:12:44.358Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;tree-shaking-（摇树优化）&quot;&gt;&lt;a href=&quot;#tree-shaking-（摇树优化）&quot; class=&quot;headerlink&quot; title=&quot;tree-shaking （摇树优化）&quot;&gt;&lt;/a&gt;tree-shaking</summary>
+        
+      
+    
+    
+    
+    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
+    
+    
+    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
+    
+  </entry>
   
   <entry>
     <title>Anaconda使用指南</title>
@@ -511,31 +536,6 @@
     
     
     <category term="nodejs" scheme="https://leeycode.github.io/tags/nodejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>webpack基础06-公共资源提取</title>
-    <link href="https://leeycode.github.io/2021/01/17/webpack-ji-chu-06-gong-gong-zi-yuan-ti-qu/"/>
-    <id>https://leeycode.github.io/2021/01/17/webpack-ji-chu-06-gong-gong-zi-yuan-ti-qu/</id>
-    <published>2021-01-17T03:14:15.000Z</published>
-    <updated>2022-01-05T09:30:52.953Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;基础库分离：React示例&quot;&gt;&lt;a href=&quot;#基础库分离：React示例&quot; class=&quot;headerlink&quot; title=&quot;基础库分离：React示例&quot;&gt;&lt;/a&gt;基础库分离：React示例&lt;/h2&gt;&lt;p&gt;思路：将react、react-dom</summary>
-        
-      
-    
-    
-    
-    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
-    
-    
-    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
     
   </entry>
   

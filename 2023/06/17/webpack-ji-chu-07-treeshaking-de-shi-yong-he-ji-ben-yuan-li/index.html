@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx中的rewrite配置, leevy">
+    <meta name="keywords" content="webpack基础07-treeshaking的使用和基本原理, leevy">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>nginx中的rewrite配置 | leevy</title>
+    <title>webpack基础07-treeshaking的使用和基本原理 | leevy</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -291,12 +291,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">nginx中的rewrite配置</h1>
+                    <h1 class="description center-align post-title">webpack基础07-treeshaking的使用和基本原理</h1>
                 </div>
             </div>
         </div>
@@ -413,8 +413,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nginx/">
-                                <span class="chip bg-color">nginx</span>
+                            <a href="/tags/webpack/">
+                                <span class="chip bg-color">webpack</span>
                             </a>
                         
                     </div>
@@ -425,8 +425,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/nginx%E4%B8%93%E9%A2%98/" class="post-category">
-                                nginx专题
+                            <a href="/categories/webpack%E4%B8%93%E5%8C%BA/" class="post-category">
+                                webpack专区
                             </a>
                         
                     </div>
@@ -438,7 +438,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-19
+                    2023-06-17
                 </div>
                 
 
@@ -447,14 +447,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    255
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    1 分
                 </div>
                 
 
@@ -469,128 +469,26 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Rewrite-规则"><a href="#Rewrite-规则" class="headerlink" title="Rewrite 规则"></a>Rewrite 规则</h2><p>nginx 通过 ngx_http_rewrite_module 模块支持 URI 重写、支持 if 条件判断，但不支持 else，使用 nginx 提供的全局变量或自己设置的变量，结合正则表达式和标志位实现 url 重写以及重定向。</p>
-<p>rewrite 只能放在 *server{},location{},if{}*中，并且只能对域名后边的除去传递的参数外的字符串起作用，例如 <a target="_blank" rel="noopener" href="http://seanlook.com/a/we/index.php?id=1&amp;u=str">http://seanlook.com/a/we/index.php?id=1&amp;u=str</a> 只对/a/we/index.php 重写。</p>
-<blockquote>
-<p>语法: rewrite regex replacement [flag];</p>
+                <h2 id="tree-shaking-（摇树优化）"><a href="#tree-shaking-（摇树优化）" class="headerlink" title="tree-shaking （摇树优化）"></a>tree-shaking （摇树优化）</h2><blockquote>
+<p>概念：1个模块可能有多个方法，只要其中的某个方法使用到了，则整个文件都会被打包到bundle 里面去，tree shaking 就是只把只用到的方法打入bundle，没用到的方法会在 ugligy 阶段被擦除掉</p>
 </blockquote>
-<p>如果相对域名或参数字符串起作用，可以使用全局变量匹配，也可以使用 proxy_pass 反向代理。</p>
-<h2 id="指令执行顺序"><a href="#指令执行顺序" class="headerlink" title="指令执行顺序"></a>指令执行顺序</h2><p>表明看 rewrite 和 location 功能有点像，都能实现跳转，主要区别在于 rewrite 是在同一域名内更改获取资源的路径，而 location 是对一类路径做控制访问或反向代理，可以 proxy_pass 到其他机器。很多情况下 rewrite 也会写在 location 里，它们的执行顺序是：</p>
-<ol>
-<li>执行 server 块的 rewrite 指令</li>
-<li>执行 location 匹配</li>
-<li>执行选定的 location 中的 rewrite 指令</li>
-</ol>
-<p>如果其中某步 URI 被重写，则重新循环执行 1-3，直到找到真实存在的文件；循环超过 10 次，则返回 500 Internal Server Error 错误。</p>
-<h2 id="flag-标志位"><a href="#flag-标志位" class="headerlink" title="flag 标志位"></a>flag 标志位</h2><ul>
-<li>last : 相当于 Apache 的[L]标记，表示完成 rewrite</li>
-<li>break : 停止执行当前虚拟主机的后续 rewrite 指令集</li>
-<li>redirect : 返回 302 临时重定向，地址栏会显示跳转后的地址</li>
-<li>permanent : 返回 301 永久重定向，地址栏会显示跳转后的地址</li>
-</ul>
-<p>因为 301 和 302 不能简单的只返回状态码，还必须有重定向的 URL，这就是 return 指令无法返回 301,302 的原因了。这里 last 和 break 区别有点难以理解：</p>
-<ol>
-<li>last 一般写在 server 和 if 中，而 break 一般使用在 location 中</li>
-<li>last 不终止重写后的 url 匹配，即新的 url 会再从 server 走一遍匹配流程，而 break 终止重写后的匹配</li>
-<li>break 和 last 都能组织继续执行后面的 rewrite 指令</li>
-</ol>
-<p>例子：</p>
-<pre class=" language-js"><code class="language-js">
-rewrite <span class="token operator">^</span><span class="token operator">/</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">)</span> http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>baidu<span class="token punctuation">.</span>com<span class="token operator">/</span>$<span class="token number">1</span> permanent<span class="token punctuation">;</span></code></pre>
-<p>说明：</p>
+<p>使用：webpack 默认支持，在 .babelrc 里设置 modules:false 即可，mode=production 的情况下默认开启</p>
+<p>要求：必须是 ES6 的语法，CJS（common js） 的方式不支持</p>
+<p>DCE(Dead code elimination)原理 - tree-shaking 用到了DCE原理</p>
 <ul>
-<li>rewrite 为固定关键字，表示开始进行 rewrite 匹配规则。</li>
-<li>regex 为 ^/(.*)。 这是一个正则表达式，匹配完整的域名和后面的路径地址。</li>
-<li>replacement 就是 <a target="_blank" rel="noopener" href="http://www.baidu.com/1%E8%BF%99%E5%9D%97%E4%BA%86%EF%BC%8C%E5%85%B6%E4%B8%AD1%E6%98%AF%E5%8F%96regex%E9%83%A8%E5%88%86()%E9%87%8C%E9%9D%A2%E7%9A%84%E5%86%85%E5%AE%B9%E3%80%82%E5%A6%82%E6%9E%9C%E5%8C%B9%E9%85%8D%E6%88%90%E5%8A%9F%E5%90%8E%E8%B7%B3%E8%BD%AC%E5%88%B0%E7%9A%84URL">http://www.baidu.com/1这块了，其中1是取regex部分()里面的内容。如果匹配成功后跳转到的URL</a>。</li>
-<li>flag 就是 permanent，代表永久重定向的含义，即跳转到 <a target="_blank" rel="noopener" href="http://www.baidu.com/$1">http://www.baidu.com/$1</a> 地址上。</li>
+<li>代码不会被执行，不可到达</li>
+<li>代码执行的结果不会被用到</li>
+<li>代码只会影响死变量（只写不读）</li>
 </ul>
-<h2 id="理解-if-指令"><a href="#理解-if-指令" class="headerlink" title="理解 if 指令"></a>理解 if 指令</h2><p>该指令用来支持条件判断的，并且根据条件判断结果来选择不同的 nginx 的配置，我们可以在 server 块或 location 块中配置该指令，它的语法结构为：</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span>condition<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// ....</span>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"这段代码永远不会被执行"</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span></code></pre>
-<p>比如如果用户代理是手机访问的话，直接跳转到某个页面去，也可以使用 if 判断。比如如下：</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span> $http_user_agent <span class="token operator">~</span><span class="token operator">*</span> <span class="token string">"(Android)|(iPhone)|(Mobile)|(WAP)|(UCWEB)"</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-  rewrite <span class="token operator">^</span><span class="token operator">/</span>$  http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>cnblogs<span class="token punctuation">.</span>com  permanent；
-<span class="token punctuation">}</span></code></pre>
-<p>Rewrite 指令可用的全局变量如下：</p>
-<ol>
-<li>$args: 该变量中存放了请求 URL 中的请求指令。比如 <a target="_blank" rel="noopener" href="http://127.0.0.1:3001/?arg1=value1&amp;arg2=value2">http://127.0.0.1:3001?arg1=value1&amp;arg2=value2</a> 中的<br>“arg1=value1&amp;arg2=value2”。</li>
-<li>$content_length: 该变量中存放了请求头中的 Content-length 字段。</li>
-<li>$content_type: 该变量中存放了请求头中的 Content-type 字段。</li>
-<li>$document_root: 该变量中存放了针对当前请求的根路径。</li>
-<li>$document_uri: 该变量中存放了请求的当前 URI, 但是不包括请求指令。比如 <a target="_blank" rel="noopener" href="http://xxx.abc.com/home/1?arg1=value1">http://xxx.abc.com/home/1?arg1=value1</a>&amp;<br>arg2=value2; 中的 “/home/1”</li>
-<li>$host: 变量中存放了请求的 URL 中的主机部分字段，比如<a target="_blank" rel="noopener" href="http://xxx.abc.com:8080/home">http://xxx.abc.com:8080/home</a>中的 xxx.abc.com.</li>
-<li>$http_host: 该变量与$host 唯一区别带有端口号：比如上面的是 xxx.abc.com:8080</li>
-<li>$http_user_agent: 变量中存放客户端的代理信息。</li>
-<li>$http_cookie, 该变量中存放客户端的 cookie 信息。</li>
-<li>$remote_addr 该变量中存放客户端的地址。</li>
-<li>$remote_port 该变量中存放了客户端与服务器建立连接的端口号。</li>
-<li>$remote_user 变量中存放客户端的用户名。</li>
-<li>$request_body_file 变量中存放了发给后端服务器的本地文件资源的名称</li>
-<li>$request_method 变量中存放了客户端的请求方式，比如 ‘GET’、’POST’等。</li>
-<li>$request_filename 变量中存放了当前请求的资源文件的路径名。</li>
-<li>$request_uri 变量中存放了当前请求的 URI，并且带请求指令。</li>
-<li>$query_string 和变量$args 含义一样。</li>
-<li>$scheme 变量中存放了客户端请求使用的协议，比如 ‘http’, ‘https’等。</li>
-<li>$server_protocol 变量中存放了客户端请求协议的版本, 比如 ‘HTTP/1.0’、’HTTP/1.1’ 等。</li>
-</ol>
-<pre class=" language-js"><code class="language-js">例：http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token punctuation">:</span><span class="token number">88</span><span class="token operator">/</span>test1<span class="token operator">/</span>test2<span class="token operator">/</span>test<span class="token punctuation">.</span>php
-$host：localhost
-$server_port：<span class="token number">88</span>
-$request_uri：http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token punctuation">:</span><span class="token number">88</span><span class="token operator">/</span>test1<span class="token operator">/</span>test2<span class="token operator">/</span>test<span class="token punctuation">.</span>php
-$document_uri：<span class="token operator">/</span>test1<span class="token operator">/</span>test2<span class="token operator">/</span>test<span class="token punctuation">.</span>php
-$document_root：<span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>www<span class="token operator">/</span>html
-$request_filename：<span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>www<span class="token operator">/</span>html<span class="token operator">/</span>test1<span class="token operator">/</span>test2<span class="token operator">/</span>test<span class="token punctuation">.</span>php</code></pre>
-<p>现在我们使用if指令来对nginx加一些判断；比如说我们访问<a target="_blank" rel="noopener" href="http://xxx.abc.com:8080/home%E6%97%B6%E5%80%99%EF%BC%8C%E5%A6%82%E6%9E%9C$host">http://xxx.abc.com:8080/home时候，如果$host</a> = ‘xxx.abc.com’ 的时候，就做重定向跳转，nginx配置代码如下：</p>
-<pre class=" language-js"><code class="language-js">server <span class="token punctuation">{</span>
-  listen <span class="token number">8088</span><span class="token punctuation">;</span>
-  server_name xxx<span class="token punctuation">.</span>abc<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
-  location <span class="token operator">/</span> <span class="token punctuation">{</span>
-    proxy_pass http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span><span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token punctuation">:</span><span class="token number">3001</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>$host <span class="token operator">=</span> <span class="token string">'xxx.abc.com'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      rewrite <span class="token operator">^</span><span class="token operator">/</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">)</span> http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>baidu<span class="token punctuation">.</span>com redirect<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-<h2 id="常用正则"><a href="#常用正则" class="headerlink" title="常用正则"></a>常用正则</h2><ul>
-<li><p>. ： 匹配除换行符以外的任意字符</p>
-</li>
-<li><p>? ： 重复 0 次或 1 次</p>
-</li>
-<li><p>+ ： 重复 1 次或更多次</p>
-</li>
-<li><p>* ： 重复 0 次或更多次</p>
-</li>
-<li><p>\d ：匹配数字</p>
-</li>
-<li><p>^ ： 匹配字符串的开始</p>
-</li>
-<li><p>$ ： 匹配字符串的介绍</p>
-</li>
-<li><p>{n} ： 重复 n 次</p>
-</li>
-<li><p>{n,} ： 重复 n 次或更多次</p>
-</li>
-<li><p>[c] ： 匹配单个字符 c</p>
-</li>
-<li><p>[a-z] ： 匹配 a-z 小写字母的任意一个</p>
-<p>小括号()之间匹配的内容，可以在后面通过$1 来引用，$2 表示的是前面第二个()里的内容。正则里面容易让人困惑的是\转义特殊字符。</p>
-</li>
+<h3 id="Tree-shaking-原理"><a href="#Tree-shaking-原理" class="headerlink" title="Tree-shaking 原理"></a>Tree-shaking 原理</h3><p>利用 ES6 模块的特点</p>
+<ul>
+<li>只能作为模块的顶层语句出现</li>
+<li>import 的模块名只能是字符串常量</li>
+<li>import binding 是 immutable<br>代码擦除：tree-shaking会对无用代码作比较，然后在 uglify 阶段删除无用代码。</li>
 </ul>
-<h3 id="对变量进行匹配"><a href="#对变量进行匹配" class="headerlink" title="对变量进行匹配"></a>对变量进行匹配</h3><p>‘<del>‘ 表示匹配过程中对大小写敏感。<br>‘</del><em>‘ 表示匹配过程中对大小写不敏感。<br>‘!<del>‘ 如果 ‘</del>‘ 匹配失败时，那么该条件就为true。<br>‘!~</em>‘ 如果 ‘~*’ 匹配失败时，那么该条件就为true。</p>
-<p>比如如果用户代理是手机访问的话，直接跳转到某个页面去，也可以使用 if 判断。比如如下：</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span> $http_user_agent <span class="token operator">~</span><span class="token operator">*</span> <span class="token string">"(Android)|(iPhone)|(Mobile)|(WAP)|(UCWEB)"</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-  rewrite <span class="token operator">^</span><span class="token operator">/</span>$  http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>cnblogs<span class="token punctuation">.</span>com  permanent；
-<span class="token punctuation">}</span></code></pre>
-<h3 id="判断请求的文件是否存在"><a href="#判断请求的文件是否存在" class="headerlink" title="判断请求的文件是否存在"></a>判断请求的文件是否存在</h3><p>-f’ 如果请求的文件存在，那么该条件为true。<br>‘!-f’ 如果该文件的目录存在，该文件不存在，那么返回true。如果该文件和目录都不存在，则为false。<br>如果请求的目录不存在，请求的文件存在，也为false。</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">-</span>f $request_filename<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// 判断请求的文件是否存在</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token operator">-</span>f $request_filename<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// 判断请求的文件是否不存在</span>
-<span class="token punctuation">}</span></code></pre>
-<h3 id="判断请求的目录是否存"><a href="#判断请求的目录是否存" class="headerlink" title="判断请求的目录是否存"></a>判断请求的目录是否存</h3><p>使用 ‘-d’，如果请求的目录存在，则返回true。否则返回false。<br>使用 ‘!-d’, 如果请求的目录不存在，但是该请求的上级目录存在，则返回true。如果该上级目录不存在，则返回false…. 等等其他一些语法，不多介绍。</p>
 
             </div>
             <hr/>
@@ -616,7 +514,7 @@ $request_filename：<span class="token operator">/</span><span class="token keyw
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leeycode.github.io/2021/04/19/nginx-zhong-de-rewrite-pei-zhi/">https://leeycode.github.io/2021/04/19/nginx-zhong-de-rewrite-pei-zhi/</a>
+                    <a href="https://leeycode.github.io/2023/06/17/webpack-ji-chu-07-treeshaking-de-shi-yong-he-ji-ben-yuan-li/">https://leeycode.github.io/2023/06/17/webpack-ji-chu-07-treeshaking-de-shi-yong-he-ji-ben-yuan-li/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -654,8 +552,8 @@ $request_filename：<span class="token operator">/</span><span class="token keyw
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/nginx/">
-                                    <span class="chip bg-color">nginx</span>
+                                <a href="/tags/webpack/">
+                                    <span class="chip bg-color">webpack</span>
                                 </a>
                             
                         </div>
@@ -869,17 +767,18 @@ $request_filename：<span class="token operator">/</span><span class="token keyw
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/05/13/nginx-de-localtion-pei-zhi/">
+                <a href="/2023/06/17/webpack-ji-chu-07-treeshaking-de-shi-yong-he-ji-ben-yuan-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="nginx的localtion配置">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="webpack基础07-treeshaking的使用和基本原理">
                         
-                        <span class="card-title">nginx的localtion配置</span>
+                        <span class="card-title">webpack基础07-treeshaking的使用和基本原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -889,26 +788,27 @@ $request_filename：<span class="token operator">/</span><span class="token keyw
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-17
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/nginx%E4%B8%93%E9%A2%98/" class="post-category">
-                                    nginx专题
+                            <a href="/categories/webpack%E4%B8%93%E5%8C%BA/" class="post-category">
+                                    webpack专区
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/webpack/">
+                        <span class="chip bg-color">webpack</span>
                     </a>
                     
                 </div>
@@ -922,13 +822,13 @@ $request_filename：<span class="token operator">/</span><span class="token keyw
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/02/22/outlook-you-xiang-yang-shi-wen-ti/">
+                <a href="/2023/05/22/anaconda-shi-yong-zhi-nan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="outlook邮箱样式问题">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Anaconda使用指南">
                         
-                        <span class="card-title">outlook邮箱样式问题</span>
+                        <span class="card-title">Anaconda使用指南</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -939,7 +839,7 @@ $request_filename：<span class="token operator">/</span><span class="token keyw
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-22
                             </span>
                         <span class="publish-author">
                             
@@ -956,8 +856,12 @@ $request_filename：<span class="token operator">/</span><span class="token keyw
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/">
-                        <span class="chip bg-color">踩的坑</span>
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">项目总结</span>
+                    </a>
+                    
+                    <a href="/tags/Anaconda/">
+                        <span class="chip bg-color">Anaconda</span>
                     </a>
                     
                 </div>
