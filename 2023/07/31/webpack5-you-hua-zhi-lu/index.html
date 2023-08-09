@@ -1,0 +1,1671 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="webpack5优化之路, leevy">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>webpack5优化之路 | leevy</title>
+    <link rel="icon" type="image/png" href="/medias/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="leevy" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">leevy</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">leevy</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/leeycode" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #4160f9;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/leeycode" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">webpack5优化之路</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #5564e7;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #4160f9;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/webpack/">
+                                <span class="chip bg-color">webpack</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/webpack%E4%B8%93%E5%8C%BA/" class="post-category">
+                                webpack专区
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-07-31
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    14 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>本篇将从优化开发体验、加快编译速度、减小打包体积、加快加载速度 4 个角度出发，介绍如何对 webpack 项目进行优化。</p>
+<h1 id="优化效率工具"><a href="#优化效率工具" class="headerlink" title="优化效率工具"></a>优化效率工具</h1><p>安装以下 webpack 插件，帮助我们分析优化效率：</p>
+<ul>
+<li>progress-bar-webpack-plugin：查看编译进度；</li>
+<li>speed-measure-webpack-plugin：查看编译速度；</li>
+<li>webpack-bundle-analyzer：打包体积分析。</li>
+</ul>
+<h2 id="1-编译进度条"><a href="#1-编译进度条" class="headerlink" title="1. 编译进度条"></a>1. 编译进度条</h2><p>一般来说，中型项目的首次编译时间为 5-20s，没个进度条等得多着急，通过 progress-bar-webpack-plugin 插件查看编译进度，方便我们掌握编译情况。</p>
+<p>安装：</p>
+<pre><code>npm i -D progress-bar-webpack-plugin</code></pre>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>const chalk = require('chalk')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+module.exports = {
+  plugins: [
+    // 进度条 贴心的为进度百分比添加了加粗和绿色高亮态样式。
+    new ProgressBarPlugin({
+        format: `  :msg [:bar] ${chalk.green.bold(':percent')} (:elapsed s)`
+      })
+  ],
+}
+</code></pre>
+<h2 id="2-编译速度分析"><a href="#2-编译速度分析" class="headerlink" title="2. 编译速度分析"></a>2. 编译速度分析</h2><p>优化 webpack 构建速度，首先需要知道是哪些插件、哪些 loader 耗时长，方便我们针对性的优化。<br>通过 speed-measure-webpack-plugin 插件进行构建速度分析，可以看到各个 loader、plugin 的构建时长，后续可针对耗时 loader、plugin 进行优化。</p>
+<p>安装：</p>
+<pre><code>npm i -D speed-measure-webpack-plugin</code></pre>
+<p>webpack.dev.js 配置方式如下：</p>
+<pre><code>
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
+module.exports = smp.wrap({
+  // ...webpack config...
+})
+</code></pre>
+<h2 id="3-打包体积分析"><a href="#3-打包体积分析" class="headerlink" title="3. 打包体积分析"></a>3. 打包体积分析</h2><p>使用 webpack-bundle-analyzer 查看打包后生成的 bundle 体积分析，将 bundle 内容展示为一个便捷的、交互式、可缩放的树状图形式。帮助我们分析输出结果来检查模块在何处结束。</p>
+<p>安装：</p>
+<pre><code>npm i -D webpack-bundle-analyzer</code></pre>
+<p>webpack.prod.js 配置方式如下：</p>
+<pre><code>
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+module.exports = {
+  plugins: [
+    // 打包体积分析
+    new BundleAnalyzerPlugin()
+  ],
+}
+</code></pre>
+<h1 id="优化开发体验"><a href="#优化开发体验" class="headerlink" title="优化开发体验"></a>优化开发体验</h1><h2 id="1-自动更新"><a href="#1-自动更新" class="headerlink" title="1. 自动更新"></a>1. 自动更新</h2><p>自动更新 指的是，在开发过程中，修改代码后，无需手动再次编译，可以自动编译代码更新编译后代码的功能。<br>webpack 提供了以下几种可选方式，实现自动更新功能：</p>
+<ul>
+<li>webpack’s&nbsp;Watch Mode</li>
+<li>webpack-dev-server</li>
+<li>webpack-dev-middleware</li>
+</ul>
+<h2 id="2-热更新"><a href="#2-热更新" class="headerlink" title="2. 热更新"></a>2. 热更新</h2><p>热更新 指的是，在开发过程中，修改代码后，仅更新修改部分的内容，无需刷新整个页面。</p>
+<p>使用 webpack 内置的 HMR 插件，更新 webpack-dev-server 配置。</p>
+<p>webpack.dev.js 配置方式如下：</p>
+<pre><code>module.export = {
+    devServer: {
+        contentBase: './dist',
+        hot: true, // 热更新
+      },
+}
+</code></pre>
+<h1 id="加快构建速度"><a href="#加快构建速度" class="headerlink" title="加快构建速度"></a>加快构建速度</h1><h2 id="1-更新版本"><a href="#1-更新版本" class="headerlink" title="1. 更新版本"></a>1. 更新版本</h2><ul>
+<li><p>webpack 版本<br>使用最新的 webpack 版本，通过 webpack 自身的迭代优化，来加快构建速度。这一点是非常有效的，如 webpack5 较于 webpack4，新增了持久化缓存、改进缓存算法等优化。</p>
+</li>
+<li><p>包管理工具版本</p>
+</li>
+</ul>
+<p>将 Node.js 、package 管理工具（例如 npm 或者 yarn）更新到最新版本，也有助于提高性能。较新的版本能够建立更高效的模块树以及提高解析速度。</p>
+<h2 id="2-缓存"><a href="#2-缓存" class="headerlink" title="2. 缓存"></a>2. 缓存</h2><ul>
+<li>cache<br>通过配置 webpack 持久化缓存 cache: filesystem，来缓存生成的 webpack 模块和 chunk，改善构建速度。<br>简单来说，通过 cache: filesystem 可以将构建过程的 webpack 模板进行缓存，大幅提升二次构建速度、打包速度，当构建突然中断，二次进行构建时，可以直接从缓存中拉取，可提速 90% 左右。</li>
+</ul>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>module.exports = {
+    cache: {
+      type: 'filesystem', // 使用文件缓存
+    },
+}
+</code></pre>
+<ul>
+<li>dll动态链接库</li>
+</ul>
+<p>使用 DllPlugin 为更改不频繁的代码生成单独的编译结果。这可以提高应用程序的编译速度，尽管它增加了构建过程的复杂度。<br>但是用上webpage4版本，DLL优化效率有限， webpack5 开箱即用的持久缓存是比 dll 更优的解决方案。</p>
+<h2 id="减少-loader、plugins"><a href="#减少-loader、plugins" class="headerlink" title="减少 loader、plugins"></a>减少 loader、plugins</h2><p>每个的 loader、plugin 都有其启动时间。尽量少地使用工具，将非必须的 loader、plugins 删除。</p>
+<ul>
+<li>指定 include<br>为 loader 指定 include，减少 loader 应用范围，仅应用于最少数量的必要模块，</li>
+</ul>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>module.exports = {
+    rules: [
+        {
+            test: /\.(js|ts|jsx|tsx)$/,
+            include: paths.appSrc,
+            use: [
+              {
+                loader: 'esbuild-loader',
+                options: {
+                  loader: 'tsx',
+                  target: 'es2015',
+                },
+              }
+            ]
+         }
+    ]
+}
+</code></pre>
+<p>定义 loader 的 include 后，构建时间将减少 12%。</p>
+<ul>
+<li>管理资源</li>
+</ul>
+<p>使用 webpack 资源模块 (asset module) 代替旧的 assets loader（如 file-loader/url-loader/raw-loader 等），减少 loader 配置数量。</p>
+<pre><code>module.exports = {
+    rules: [
+       {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        include: [
+          paths.appSrc,
+        ],
+        type: 'asset/resource',
+      },
+    ]
+}
+</code></pre>
+<p>引入资源模块后，构建时间将减少 7%。</p>
+<h2 id="优化-resolve-配置"><a href="#优化-resolve-配置" class="headerlink" title="优化 resolve 配置"></a>优化 resolve 配置</h2><ul>
+<li>alias</li>
+</ul>
+<p>alias 可以创建 import 或 require 的别名，用来简化模块引入。</p>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>module.exports = {
+    resolve: {
+        alias: {
+          '@': paths.appSrc, // @ 代表 src 路径
+        },
+    }
+}
+
+</code></pre>
+<ul>
+<li>extensions</li>
+</ul>
+<p>extensions 表示需要解析的文件类型列表。<br>根据项目中的文件类型，定义 extensions，以覆盖 webpack 默认的 extensions，加快解析速度。<br>由于 webpack 的解析顺序是从左到右，因此要将使用频率高的文件类型放在左侧，如下我将 tsx 放在最左侧。</p>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>module.exports = {
+    resolve: {
+        extensions: ['.tsx', '.js'], // 因为我的项目只有这两种类型的文件，如果有其他类型，需要添加进去。
+    }
+}
+</code></pre>
+<ul>
+<li>modules</li>
+</ul>
+<p>modules 表示 webpack 解析模块时需要解析的目录。</p>
+<p>指定目录可缩小 webpack 解析范围，加快构建速度。</p>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>module.exports = {
+    modules: [
+      'node_modules',
+       paths.appSrc,
+    ]
+}
+</code></pre>
+<ul>
+<li>symlinks</li>
+</ul>
+<p>如果项目不使用 symlinks（例如 npm link 或者 yarn link），可以设置 resolve.symlinks: false，减少解析工作量。</p>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>module.exports = {
+    resolve: {
+        symlinks: false,
+    },
+}
+</code></pre>
+<p>优化 resolve 配置后，构建时间将减少 1.5%</p>
+<h2 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h2><p>可以通过多进程来实现，比如将 sass-loader 放在一个独立的 worker 池中运行，就不会阻碍其他 loader 的构建了，可以大大加快构建速度。</p>
+<ul>
+<li>thread-loader</li>
+</ul>
+<pre><code>npm i -D thread-loader</code></pre>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>module.exports = {
+    rules: [
+        {
+        test: /\.module\.(scss|sass)$/,
+        include: paths.appSrc,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                  ],
+                ],
+              },
+            },
+          },
+          {
+            loader: 'thread-loader',
+            options: {
+              workerParallelJobs: 2
+            }
+          },
+          'sass-loader',
+        ].filter(Boolean),
+      },
+    ]
+}
+</code></pre>
+<h1 id="减小打包体积"><a href="#减小打包体积" class="headerlink" title="减小打包体积"></a>减小打包体积</h1><h2 id="1-代码压缩"><a href="#1-代码压缩" class="headerlink" title="1. 代码压缩"></a>1. 代码压缩</h2><p>体积优化第一步是压缩代码，通过 webpack 插件，将 JS、CSS 等文件进行压缩。</p>
+<ul>
+<li>JS 压缩</li>
+</ul>
+<p>webpack5 自带最新的&nbsp;terser-webpack-plugin，无需手动安装。<br>terser-webpack-plugin 默认开启了 parallel: true 配置，并发运行的默认数量：&nbsp;os.cpus().length - 1&nbsp;，本文配置的 parallel 数量为 4，使用多进程并发运行压缩以提高构建速度。</p>
+<p>webpack.prod.js 配置方式如下：</p>
+<pre><code>const TerserPlugin = require('terser-webpack-plugin');
+module.exports = {
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+              parallel: 4,
+              terserOptions: {
+                parse: {
+                  ecma: 8,
+                },
+                compress: {
+                  ecma: 5,
+                  warnings: false,
+                  comparisons: false,
+                  inline: 2,
+                },
+                mangle: {
+                  safari10: true,
+                },
+                output: {
+                  ecma: 5,
+                  comments: false,
+                  ascii_only: true,
+                },
+              },
+            }),
+        ]
+    }
+}
+
+</code></pre>
+<ul>
+<li>CSS 压缩<br>使用 CssMinimizerWebpackPlugin 压缩 CSS 文件。</li>
+</ul>
+<p>安装：</p>
+<pre><code>npm install -D css-minimizer-webpack-plugin
+</code></pre>
+<p>webpack.prod.js 配置方式如下：</p>
+<pre><code>const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+module.exports = {
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin({
+          parallel: 4,
+        }),
+    ],
+  }
+}
+</code></pre>
+<h2 id="2-代码分离"><a href="#2-代码分离" class="headerlink" title="2. 代码分离"></a>2. 代码分离</h2><p>代码分离能够把代码分离到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码分离可以用于获取更小的 bundle，以及控制资源加载优先级，可以缩短页面加载时间。</p>
+<ul>
+<li>抽离重复代码</li>
+</ul>
+<p>SplitChunksPlugin&nbsp;插件开箱即用，可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk。<br>webpack 将根据以下条件自动拆分 chunks：</p>
+<ol>
+<li>新的 chunk 可以被共享，或者模块来自于&nbsp;node_modules&nbsp;文件夹；</li>
+<li>新的 chunk 体积大于 20kb（在进行 min+gz 之前的体积）；</li>
+<li>当按需加载 chunks 时，并行请求的最大数量小于或等于 30；</li>
+<li>当加载初始化页面时，并发请求的最大数量小于或等于 30；通过 splitChunks 把 react 等公共库抽离出来，不重复引入占用体积。</li>
+</ol>
+<blockquote>
+<p>注意：切记不要为 cacheGroups 定义固定的 name，因为 cacheGroups.name 指定字符串或始终返回相同字符串的函数时，会将所有常见模块和 vendor 合并为一个 chunk。这会导致更大的初始下载量并减慢页面加载速度。</p>
+</blockquote>
+<p>webpack.prod.js 配置方式如下：</p>
+<pre><code>module.exports = {
+    splitChunks: {
+      // include all types of chunks
+      chunks: 'all',
+      // 重复打包问题
+      cacheGroups:{
+        vendors:{ // node_modules里的代码
+          test: /[\\/]node_modules[\\/]/,
+          chunks: "all",
+          // name: 'vendors', 一定不要定义固定的name
+          priority: 10, // 优先级
+          enforce: true 
+        }
+      }
+    },
+}
+</code></pre>
+<ul>
+<li> CSS 文件分离</li>
+</ul>
+<p>MiniCssExtractPlugin 插件将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMaps 的按需加载。</p>
+<p>安装：</p>
+<pre><code>npm install -D mini-css-extract-plugin
+</code></pre>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+  plugins: [new MiniCssExtractPlugin()],
+  module: {
+    rules: [
+        {
+        test: /\.module\.(scss|sass)$/,
+        include: paths.appSrc,
+        use: [
+          'style-loader',
+          isEnvProduction &amp;&amp; MiniCssExtractPlugin.loader, // 仅生产环境
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                  ],
+                ],
+              },
+            },
+          },
+          {
+            loader: 'thread-loader',
+            options: {
+              workerParallelJobs: 2
+            }
+          },
+          'sass-loader',
+        ].filter(Boolean),
+      },
+    ]
+  },
+};
+</code></pre>
+<blockquote>
+<p>注意：MiniCssExtractPlugin.loader 要放在 style-loader 后面。</p>
+</blockquote>
+<ul>
+<li>最小化 entry chunk</li>
+</ul>
+<p>通过配置 optimization.runtimeChunk = true，为运行时代码创建一个额外的 chunk，减少 entry chunk 体积，提高性能。</p>
+<p>webpack.prod.js 配置方式如下：</p>
+<pre><code>module.exports = {
+    optimization: {
+        runtimeChunk: true,
+      },
+    };
+}
+</code></pre>
+<h2 id="Tree-Shaking（摇树）"><a href="#Tree-Shaking（摇树）" class="headerlink" title="Tree Shaking（摇树）"></a>Tree Shaking（摇树）</h2><p>摇树，顾名思义，就是将枯黄的落叶摇下来，只留下树上活的叶子。枯黄的落叶代表项目中未引用的无用代码，活的树叶代表项目中实际用到的源</p>
+<h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><p>JS Tree Shaking 将 JavaScript 上下文中的未引用代码（Dead Code）移除，通过&nbsp;package.json&nbsp;的&nbsp;“sideEffects”&nbsp;属性作为标记，向 compiler 提供提示，表明项目中的哪些文件是 “pure(纯正 ES2015 模块)”，由此可以安全地删除文件中未使用的部分。<br>Dead Code 一般具有以下几个特征：</p>
+<ol>
+<li>代码不会被执行，不可到达；</li>
+<li>代码执行的结果不会被用到；</li>
+<li>代码只会影响死变量（只写不读）。</li>
+</ol>
+<ul>
+<li>webpack5 sideEffects<br>通过 package.json 的 “sideEffects” 属性，来实现这种方式。</li>
+</ul>
+<pre><code>{
+  "name": "your-project",
+  "sideEffects": false
+}
+</code></pre>
+<p>需注意的是，当代码有副作用时，需要将 sideEffects 改为提供一个数组，添加有副作用代码的文件路径：</p>
+<pre><code>{
+  "name": "your-project",
+  "sideEffects": ["./src/some-side-effectful-file.js"]
+}
+</code></pre>
+<p>添加 TreeShaking 后，未引用的代码，将不会被打包。</p>
+<ul>
+<li>对组件库引用的优化</li>
+</ul>
+<p>webpack5 sideEffects 只能清除无副作用的引用，而有副作用的引用则只能通过优化引用方式来进行 Tree Shaking。</p>
+<ol>
+<li>lodash<br>类似 import { throttle } from ‘lodash’ 就属于有副作用的引用，会将整个 lodash 文件进行打包。<br>优化方式是使用 import { throttle } from ‘lodash-es’ 代替 import { throttle } from ‘lodash’，lodash-es 将 Lodash 库导出为 ES 模块，支持基于 ES modules 的 tree shaking，实现按需引入。</li>
+<li>ant-design<br>ant-design 默认支持基于 ES modules 的 tree shaking，对于 js 部分，直接引入&nbsp;import { Button } from ‘antd’&nbsp;就会有按需加载的效果。<br>假如项目中仅引入少部分组件，import { Button } from ‘antd’ 也属于有副作用，webpack不能把其他组件进行tree-shaking。这时可以缩小引用范围，将引入方式修改为 import { Button } from ‘antd/lib/button’ 来进一步优化。</li>
+</ol>
+<h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><p>上述对 JS 代码做了 Tree Shaking 操作，同样，CSS 代码也需要摇摇树，打包时把没有用的 CSS 代码摇走，可以大幅减少打包后的 CSS 文件大小。<br>使用 purgecss-webpack-plugin 对 CSS Tree Shaking。</p>
+<p>安装：</p>
+<pre><code>npm i purgecss-webpack-plugin -D
+</code></pre>
+<p>因为打包时 CSS 默认放在 JS 文件内，因此要结合 webpack 分离 CSS 文件插件 mini-css-extract-plugin 一起使用，先将 CSS 文件分离，再进行 CSS Tree Shaking。<br>webpack.prod.js 配置方式如下：</p>
+<pre><code>const glob = require('glob')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const PurgeCSSPlugin = require('purgecss-webpack-plugin')
+const paths = require('paths')
+
+module.exports = {
+  plugins: [
+    // 打包体积分析
+    new BundleAnalyzerPlugin(),
+    // 提取 CSS
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
+    // CSS Tree Shaking
+    new PurgeCSSPlugin({
+      paths: glob.sync(`${paths.appSrc}/**/*`,  { nodir: true }),
+    }),
+  ]
+}
+</code></pre>
+<h3 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h3><p>上述是对 webpack 配置的优化，另一方面还可以通过 CDN 来减小打包体积。</p>
+<ol>
+<li>字体：压缩并上传至 CDN；</li>
+<li>图片：压缩并上传至 CDN。</li>
+</ol>
+<h1 id="加快加载速度"><a href="#加快加载速度" class="headerlink" title="加快加载速度"></a>加快加载速度</h1><h2 id="按需加载"><a href="#按需加载" class="headerlink" title="按需加载"></a>按需加载</h2><p>通过 webpack 提供的 import() 语法 动态导入 功能进行代码分离，通过按需加载，大大提升网页加载速度。</p>
+<p>使用方式如下：</p>
+<pre><code>export default function App () {
+    return (
+        &lt;div&gt;
+            hello react 111
+            &lt;Hello /&gt;
+            &lt;button onClick={() =&gt; import('lodash')}&gt;加载lodash&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+<h2 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h2><p>浏览器缓存，就是进入某个网站后，加载的静态资源被浏览器缓存，再次进入该网站后，将直接拉取缓存资源，加快加载速度。<br>webpack 支持根据资源内容，创建 hash id，当资源内容发生变化时，将会创建新的 hash id。<br>配置 JS bundle hash，webpack.common.js 配置方式如下：</p>
+<pre><code>module.exports = {
+  // 输出
+  output: {
+    // 仅在生产环境添加 hash
+    filename: ctx.isEnvProduction ? '[name].[contenthash].bundle.js' : '[name].bundle.js',
+  },
+}
+</code></pre>
+<p>配置 CSS bundle hash，webpack.prod.js 配置方式如下：</p>
+<pre><code>module.exports = {
+  plugins: [
+    // 提取 CSS
+    new MiniCssExtractPlugin({
+      filename: "[hash].[name].css",
+    }),
+  ],
+}
+</code></pre>
+<p>配置 optimization.moduleIds，让公共包 splitChunks 的 hash 不因为新的依赖而改变，减少非必要的 hash 变动，webpack.prod.js 配置方式如下：</p>
+<pre><code>module.exports = {
+  optimization: {
+    moduleIds: 'deterministic',
+  }
+}
+</code></pre>
+<p>通过配置 contenthash/hash，浏览器缓存了未改动的文件，仅重新加载有改动的文件，大大加快加载速度。</p>
+<h2 id="CDN-1"><a href="#CDN-1" class="headerlink" title="CDN"></a>CDN</h2><p>将所有的静态资源，上传至 CDN，通过 CDN 加速来提升加载速度。</p>
+<p>webpack.common.js 配置方式如下：</p>
+<pre><code>export.modules = {
+output: {
+    publicPath: ctx.isEnvProduction ? 'https://xxx.com' : '', // CDN 域名
+  },
+}
+</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li>在小型项目中，添加过多的优化配置，作用不大，反而会因为额外的 loader、plugin 增加构建时间。</li>
+<li>在加快构建时间方面，作用最大的是配置 cache，可大大加快二次构建速度。</li>
+<li>在减小打包体积方面，作用最大的是压缩代码、分离重复代码、Tree Shaking，可最大幅度减小打包体积。</li>
+<li>在加快加载速度方面，按需加载、浏览器缓存、CDN 效果都很显著。</li>
+</ol>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">leevy</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://leeycode.github.io/2023/07/31/webpack5-you-hua-zhi-lu/">https://leeycode.github.io/2023/07/31/webpack5-you-hua-zhi-lu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">leevy</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/webpack/">
+                                    <span class="chip bg-color">webpack</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">打赏大脸猫一杯奶茶吧</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .mvaline-card {
+        margin: 1.5rem auto;
+    }
+
+    .mvaline-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+</style>
+
+<div class="card mvaline-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="mvcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/minivaline/MiniValine.js"></script>
+<script>
+    new MiniValine({
+        el: '#mvcomments',
+        appId: '74ifz5C8hB48Gimga7ClEAue-MdYXbMMI',
+        appKey: 'xGmuKiOQmeFHgL5R0xYLHqOY',
+        mode: 'DesertsP',
+        placeholder: '有什么想对大脸猫说的吗',
+        pathname: window.location.pathname,
+        lang: '',
+        adminEmailMd5: 'de8a7aa53d07e6b6bceb45c64027763d',
+        tagMeta: ["管理员", "小伙伴", "访客"],
+        master: ["de8a7aa53d07e6b6bceb45c64027763d"],
+        friends: ["b5bd5d836c7a0091aa8473e79ed4c25e", "adb7d1cd192658a55c0ad22a3309cecf", "3ce1e6c77b4910f1871106cb30dc62b0", "cfce8dc43725cc14ffcd9fb4892d5bfc"],
+        math: false,
+        md: true,
+        enableQQ: false,
+        NoRecordIP: false,
+        visitor: true,
+        maxNest: 6,
+        pageSize: 6,
+        serverURLs: '',
+        emoticonUrl: ["https://cdn.jsdelivr.net/npm/alus@latest", "https://cdn.jsdelivr.net/gh/MiniValine/qq@latest", "https://cdn.jsdelivr.net/gh/MiniValine/Bilibilis@latest", "https://cdn.jsdelivr.net/gh/MiniValine/tieba@latest", "https://cdn.jsdelivr.net/gh/MiniValine/twemoji@latest", "https://cdn.jsdelivr.net/gh/MiniValine/weibo@latest"],
+    });
+</script>
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/07/31/webpack5-you-hua-zhi-lu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="webpack5优化之路">
+                        
+                        <span class="card-title">webpack5优化之路</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/webpack%E4%B8%93%E5%8C%BA/" class="post-category">
+                                    webpack专区
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/webpack/">
+                        <span class="chip bg-color">webpack</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/07/11/vue-shi-yong-ji-qiao-zong-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="vue使用小技巧总结">
+                        
+                        <span class="card-title">vue使用小技巧总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/VUE%E4%B8%93%E9%A2%98/" class="post-category">
+                                    VUE专题
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/vue/">
+                        <span class="chip bg-color">vue</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">leevy</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            <!-- |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> -->
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">62.3k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/leeycode" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:liwu360@126.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=349623647" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 349623647" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
