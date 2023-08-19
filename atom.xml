@@ -6,7 +6,7 @@
   <link href="https://leeycode.github.io/atom.xml" rel="self"/>
   
   <link href="https://leeycode.github.io/"/>
-  <updated>2023-08-09T02:15:25.259Z</updated>
+  <updated>2023-08-19T07:10:29.095Z</updated>
   <id>https://leeycode.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从零开始搭建一个vue2+webpack5模板</title>
+    <link href="https://leeycode.github.io/2023/08/19/cong-ling-kai-shi-da-jian-yi-ge-vue2-webpack5-mo-ban/"/>
+    <id>https://leeycode.github.io/2023/08/19/cong-ling-kai-shi-da-jian-yi-ge-vue2-webpack5-mo-ban/</id>
+    <published>2023-08-19T06:52:44.000Z</published>
+    <updated>2023-08-19T07:10:29.095Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;实现思路&quot;&gt;&lt;a href=&quot;#实现思路&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="webpack专区" scheme="https://leeycode.github.io/categories/webpack%E4%B8%93%E5%8C%BA/"/>
+    
+    
+    <category term="vue" scheme="https://leeycode.github.io/tags/vue/"/>
+    
+    <category term="webpack" scheme="https://leeycode.github.io/tags/webpack/"/>
+    
+  </entry>
   
   <entry>
     <title>webpack5优化之路</title>
@@ -512,31 +539,6 @@
     
     
     <category term="nginx" scheme="https://leeycode.github.io/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>outlook邮箱样式问题</title>
-    <link href="https://leeycode.github.io/2021/02/22/outlook-you-xiang-yang-shi-wen-ti/"/>
-    <id>https://leeycode.github.io/2021/02/22/outlook-you-xiang-yang-shi-wen-ti/</id>
-    <published>2021-02-22T07:13:48.000Z</published>
-    <updated>2021-02-22T08:32:43.009Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;最近项目中发送html格式的邮件到邮箱客户端，发现邮件样式千奇百怪，不堪入目。在google里面baidu了下,才发现问题严重了。因为安全原因，各大邮箱服务商及邮件客户端都会对邮件内容进行一定程度上的处理，不会按照你写的原本 HTML</summary>
-        
-      
-    
-    
-    
-    <category term="项目总结" scheme="https://leeycode.github.io/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
-    
-    
-    <category term="踩的坑" scheme="https://leeycode.github.io/tags/%E8%B8%A9%E7%9A%84%E5%9D%91/"/>
     
   </entry>
   
